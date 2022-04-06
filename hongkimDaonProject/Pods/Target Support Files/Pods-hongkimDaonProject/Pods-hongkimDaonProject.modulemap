@@ -1,0 +1,6 @@
+framework module Pods_hongkimDaonProject {
+  umbrella header "Pods-hongkimDaonProject-umbrella.h"
+
+  export *
+  module * { export * }
+}
