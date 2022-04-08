@@ -14,6 +14,7 @@
 		5153FF2D27FD7BE00096AE7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2C27FD7BE00096AE7A /* Assets.xcassets */; };
 		5153FF3027FD7BE00096AE7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2E27FD7BE00096AE7A /* LaunchScreen.storyboard */; };
 		5153FF3A27FD7CF10096AE7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF3927FD7CF10096AE7A /* GoogleService-Info.plist */; };
+		5169444C2800050B00462016 /* JejuMyeongjoOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 5169444B2800047F00462016 /* JejuMyeongjoOTF.otf */; };
 		51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 51795E3927FD8BA700D5C696 /* .swiftlint.yml */; };
 		CC6576549A2D44437F8B7E24 /* Pods_hongkimDaonProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */; };
 /* End PBXBuildFile section */
@@ -28,6 +29,7 @@
 		5153FF2F27FD7BE00096AE7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5153FF3127FD7BE00096AE7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5153FF3927FD7CF10096AE7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		5169444B2800047F00462016 /* JejuMyeongjoOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = JejuMyeongjoOTF.otf; path = ../../../../../../../Downloads/otf/JejuMyeongjoOTF.otf; sourceTree = "<group>"; };
 		51795E3927FD8BA700D5C696 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7F7D6921C9B889176CDFE59F /* Pods-hongkimDaonProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.debug.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.debug.xcconfig"; sourceTree = "<group>"; };
 		95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hongkimDaonProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +78,10 @@
 		5153FF2227FD7BE00096AE7A /* hongkimDaonProject */ = {
 			isa = PBXGroup;
 			children = (
+				516944492800046C00462016 /* Resources */,
+				516944482800046300462016 /* Model */,
+				516944472800045D00462016 /* Controller */,
+				516944462800045500462016 /* View */,
 				5153FF3927FD7CF10096AE7A /* GoogleService-Info.plist */,
 				5153FF2327FD7BE00096AE7A /* AppDelegate.swift */,
 				5153FF2527FD7BE00096AE7A /* SceneDelegate.swift */,
@@ -86,6 +92,43 @@
 				5153FF3127FD7BE00096AE7A /* Info.plist */,
 			);
 			path = hongkimDaonProject;
+			sourceTree = "<group>";
+		};
+		516944462800045500462016 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		516944472800045D00462016 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		516944482800046300462016 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		516944492800046C00462016 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5169444A2800047200462016 /* Fonts */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5169444A2800047200462016 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				5169444B2800047F00462016 /* JejuMyeongjoOTF.otf */,
+			);
+			path = Fonts;
 			sourceTree = "<group>";
 		};
 		9A1881279FCA213A835AFC8F /* Pods */ = {
@@ -105,11 +148,11 @@
 			buildConfigurationList = 5153FF3427FD7BE00096AE7A /* Build configuration list for PBXNativeTarget "hongkimDaonProject" */;
 			buildPhases = (
 				2EE1C9504942936C2199DB42 /* [CP] Check Pods Manifest.lock */,
+				51795E3627FD896900D5C696 /* SwiftLint Script */,
 				5153FF1C27FD7BE00096AE7A /* Sources */,
 				5153FF1D27FD7BE00096AE7A /* Frameworks */,
 				5153FF1E27FD7BE00096AE7A /* Resources */,
 				4BE70DF9EFFD94FC004EF977 /* [CP] Embed Pods Frameworks */,
-				51795E3627FD896900D5C696 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -158,6 +201,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5169444C2800050B00462016 /* JejuMyeongjoOTF.otf in Resources */,
 				51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */,
 				5153FF3027FD7BE00096AE7A /* LaunchScreen.storyboard in Resources */,
 				5153FF3A27FD7CF10096AE7A /* GoogleService-Info.plist in Resources */,
@@ -208,7 +252,7 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		51795E3627FD896900D5C696 /* ShellScript */ = {
+		51795E3627FD896900D5C696 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -217,6 +261,7 @@
 			);
 			inputPaths = (
 			);
+			name = "SwiftLint Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
