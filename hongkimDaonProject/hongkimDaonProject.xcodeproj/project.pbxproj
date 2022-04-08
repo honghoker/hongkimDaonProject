@@ -85,8 +85,6 @@
 				5153FF3927FD7CF10096AE7A /* GoogleService-Info.plist */,
 				5153FF2327FD7BE00096AE7A /* AppDelegate.swift */,
 				5153FF2527FD7BE00096AE7A /* SceneDelegate.swift */,
-				5153FF2727FD7BE00096AE7A /* ViewController.swift */,
-				5153FF2927FD7BE00096AE7A /* Main.storyboard */,
 				5153FF2C27FD7BE00096AE7A /* Assets.xcassets */,
 				5153FF2E27FD7BE00096AE7A /* LaunchScreen.storyboard */,
 				5153FF3127FD7BE00096AE7A /* Info.plist */,
@@ -97,6 +95,7 @@
 		516944462800045500462016 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5153FF2927FD7BE00096AE7A /* Main.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -104,6 +103,7 @@
 		516944472800045D00462016 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				5153FF2727FD7BE00096AE7A /* ViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
