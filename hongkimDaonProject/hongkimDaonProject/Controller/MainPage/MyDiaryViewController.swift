@@ -24,14 +24,6 @@ class MyDiaryViewController: UIViewController {
     }
     @objc
     func tapFloatingBtn(_ gesture: UITapGestureRecognizer) {
-        print("@@@@@ float tap")
-//        let firebaseAuth = Auth.auth()
-//        do {
-//            try firebaseAuth.signOut()
-//            self.navigationController?.popToRootViewController(animated: true)
-//        } catch let signOutError as NSError {
-//            print("ERROR: signOutError \(signOutError.localizedDescription)")
-//        }
         let storyboard: UIStoryboard = UIStoryboard(name: "WriteDiaryPageView", bundle: nil)
         let inputNickNameVC = storyboard.instantiateViewController(withIdentifier: "WriteDiaryPageViewController")
         inputNickNameVC.modalPresentationStyle = .fullScreen

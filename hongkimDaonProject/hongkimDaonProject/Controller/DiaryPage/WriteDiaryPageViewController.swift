@@ -11,6 +11,7 @@ class WriteDiaryPageViewController: UIViewController {
     @IBOutlet weak var imageButton: UIButton!
     @IBOutlet weak var diaryTextField: UITextField!
     @IBOutlet weak var diaryTextView: UITextView!
+    @IBOutlet weak var backBtn: UILabel!
     let placeholderText = "내용을 입력해주세요."
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,9 @@ class WriteDiaryPageViewController: UIViewController {
         diaryTextView.autocapitalizationType = .none
         let imgButtonClicked: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(navigate(_:)))
         imageButton.addGestureRecognizer(imgButtonClicked)
+        let backBtnClicked: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(back(_:)))
+        backBtn.isUserInteractionEnabled = true
+        backBtn.addGestureRecognizer(backBtnClicked)
     }
     override func viewDidLayoutSubviews() {
         let bottomLine = CALayer()
@@ -32,7 +36,13 @@ class WriteDiaryPageViewController: UIViewController {
         diaryTextView.textContainer.lineFragmentPadding = 0
     }
     @objc
+    func back(_ gesture: UITapGestureRecognizer) {
+        print("@@@@@@@@ back")
+        self.presentingViewController?.dismiss(animated: true)
+    }
+    @objc
     func navigate(_ gesture: UITapGestureRecognizer) {
+        print("@@@@@@@@ navigate")
 //        let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
 //        let inputNickNameVC = storyboard.instantiateViewController(withIdentifier: "MainPageViewController")
 //        inputNickNameVC.modalPresentationStyle = .fullScreen

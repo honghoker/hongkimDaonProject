@@ -87,6 +87,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backBtn" destination="p6k-mX-hUN" id="Zd9-L6-EWL"/>
                         <outlet property="diaryTextField" destination="iAj-y0-cau" id="9Z9-de-0hh"/>
                         <outlet property="diaryTextView" destination="KJ0-kX-VUW" id="aCf-tZ-eo6"/>
                         <outlet property="imageButton" destination="Au4-Ez-yj7" id="AwV-3E-B1G"/>
