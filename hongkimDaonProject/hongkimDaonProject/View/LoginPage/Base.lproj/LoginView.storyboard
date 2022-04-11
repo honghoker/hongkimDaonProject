@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="JejuMyeongjoOTF.otf">
+            <string>JejuMyeongjoOTF</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Input Nick Name View Controller-->
+        <scene sceneID="x0V-MH-Ji9">
+            <objects>
+                <viewController storyboardIdentifier="InputNickNameViewController" id="M8W-U4-Jc6" customClass="InputNickNameViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cxf-xU-faM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="좋은 일이 다 오는," textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oSp-5i-wcj">
+                                <rect key="frame" x="32" y="108" width="227" height="30"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다온" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PjL-iP-ZLA">
+                                <rect key="frame" x="32" y="146" width="56" height="30"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="30"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ky-uQ-xY2">
+                                <rect key="frame" x="32" y="224" width="39" height="15"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MkB-YM-wxa">
+                                <rect key="frame" x="32" y="317" width="350" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="7IM-e6-noZ"/>
+                                </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="가입완료">
+                                    <fontDescription key="titleFontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                </buttonConfiguration>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="닉네임" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kEw-dG-suZ">
+                                <rect key="frame" x="32" y="261" width="350" height="16"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="중복확인" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EHT-bG-A0L">
+                                <rect key="frame" x="330" y="261" width="52" height="15"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="b82-3a-KLC"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kEw-dG-suZ" firstAttribute="leading" secondItem="b82-3a-KLC" secondAttribute="leading" constant="32" id="3gm-gf-BSh"/>
+                            <constraint firstItem="kEw-dG-suZ" firstAttribute="top" secondItem="1Ky-uQ-xY2" secondAttribute="bottom" constant="22" id="EDv-he-JB3"/>
+                            <constraint firstItem="b82-3a-KLC" firstAttribute="trailing" secondItem="MkB-YM-wxa" secondAttribute="trailing" constant="32" id="ENY-vK-xIe"/>
+                            <constraint firstItem="oSp-5i-wcj" firstAttribute="leading" secondItem="b82-3a-KLC" secondAttribute="leading" constant="32" id="Q7b-Mw-jDJ"/>
+                            <constraint firstItem="1Ky-uQ-xY2" firstAttribute="top" secondItem="PjL-iP-ZLA" secondAttribute="bottom" constant="48" id="UQW-cp-DhI"/>
+                            <constraint firstItem="b82-3a-KLC" firstAttribute="trailing" secondItem="kEw-dG-suZ" secondAttribute="trailing" constant="32" id="cdc-St-Qdv"/>
+                            <constraint firstItem="MkB-YM-wxa" firstAttribute="top" secondItem="kEw-dG-suZ" secondAttribute="bottom" constant="40" id="g2g-T0-6aa"/>
+                            <constraint firstItem="PjL-iP-ZLA" firstAttribute="top" secondItem="oSp-5i-wcj" secondAttribute="bottom" constant="8" symbolic="YES" id="gpZ-iD-1BD"/>
+                            <constraint firstItem="1Ky-uQ-xY2" firstAttribute="leading" secondItem="b82-3a-KLC" secondAttribute="leading" constant="32" id="tFl-kF-YQa"/>
+                            <constraint firstItem="PjL-iP-ZLA" firstAttribute="leading" secondItem="b82-3a-KLC" secondAttribute="leading" constant="32" id="woT-7T-3a7"/>
+                            <constraint firstItem="oSp-5i-wcj" firstAttribute="top" secondItem="b82-3a-KLC" secondAttribute="top" constant="64" id="xE4-AJ-om9"/>
+                            <constraint firstItem="MkB-YM-wxa" firstAttribute="leading" secondItem="b82-3a-KLC" secondAttribute="leading" constant="32" id="xHy-IN-tje"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="confirmBtn" destination="MkB-YM-wxa" id="J2B-DA-fPA"/>
+                        <outlet property="nickNameTextField" destination="kEw-dG-suZ" id="sSr-Ma-tky"/>
+                        <outlet property="overlapText" destination="EHT-bG-A0L" id="HAW-28-QOn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="GGx-H7-mmA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-200.00000000000003" y="-125.22321428571428"/>
+        </scene>
+        <!--Login View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아이콘" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EdE-av-siB">
+                                <rect key="frame" x="152" y="184" width="110.5" height="40"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다온" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fha-bv-Mvh">
+                                <rect key="frame" x="188.5" y="228" width="37" height="20"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="20"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="좋은 일이 다 오는 다온입니다" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9o4-kt-nxv">
+                                <rect key="frame" x="134" y="268" width="146" height="12"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dps-SX-E9C">
+                                <rect key="frame" x="36" y="445.5" width="125.5" height="1"/>
+                                <color key="backgroundColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="LcW-d9-CXc"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SNS 로그인" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GZ-Re-pDT">
+                                <rect key="frame" x="177.5" y="440" width="59.5" height="12"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2Y-VE-JeX">
+                                <rect key="frame" x="253" y="445.5" width="125" height="1"/>
+                                <color key="backgroundColor" systemColor="labelColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="ZOX-b2-IcC"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="695-PK-dRc">
+                                <rect key="frame" x="135" y="492" width="144" height="48"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z4O-9c-gFI">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                        <color key="backgroundColor" systemColor="labelColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="48" id="IrV-Bd-lRv"/>
+                                            <constraint firstAttribute="height" constant="48" id="xlg-Ko-f1n"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="H2f-gf-3uI">
+                                        <rect key="frame" x="96" y="0.0" width="48" height="48"/>
+                                        <color key="backgroundColor" systemColor="labelColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="48" id="49n-dQ-Qgx"/>
+                                            <constraint firstAttribute="width" constant="48" id="apy-SG-7ra"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="fha-bv-Mvh" firstAttribute="centerX" secondItem="EdE-av-siB" secondAttribute="centerX" id="2Mm-6B-TSL"/>
+                            <constraint firstItem="9o4-kt-nxv" firstAttribute="centerX" secondItem="fha-bv-Mvh" secondAttribute="centerX" id="3CT-QJ-Ce9"/>
+                            <constraint firstItem="F2Y-VE-JeX" firstAttribute="leading" secondItem="0GZ-Re-pDT" secondAttribute="trailing" constant="16" id="6kK-8k-iac"/>
+                            <constraint firstItem="EdE-av-siB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="140" id="Aen-ry-BP6"/>
+                            <constraint firstItem="dps-SX-E9C" firstAttribute="centerY" secondItem="0GZ-Re-pDT" secondAttribute="centerY" id="CR8-Am-oYO"/>
+                            <constraint firstItem="fha-bv-Mvh" firstAttribute="top" secondItem="EdE-av-siB" secondAttribute="bottom" constant="4" id="DyL-gM-KXM"/>
+                            <constraint firstItem="695-PK-dRc" firstAttribute="top" secondItem="0GZ-Re-pDT" secondAttribute="bottom" constant="40" id="E2V-dA-6QZ"/>
+                            <constraint firstItem="F2Y-VE-JeX" firstAttribute="centerY" secondItem="0GZ-Re-pDT" secondAttribute="centerY" id="Kw9-hd-fVr"/>
+                            <constraint firstItem="0GZ-Re-pDT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Nwc-b7-0RX"/>
+                            <constraint firstItem="695-PK-dRc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Shi-Jk-qvg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="F2Y-VE-JeX" secondAttribute="trailing" constant="16" id="U6S-Zh-dbd"/>
+                            <constraint firstItem="dps-SX-E9C" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="VN5-R8-rHv"/>
+                            <constraint firstItem="0GZ-Re-pDT" firstAttribute="leading" secondItem="dps-SX-E9C" secondAttribute="trailing" constant="16" id="Vx0-mJ-djI"/>
+                            <constraint firstItem="EdE-av-siB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="aEd-pc-9tm"/>
+                            <constraint firstItem="9o4-kt-nxv" firstAttribute="top" secondItem="fha-bv-Mvh" secondAttribute="bottom" constant="20" id="ey4-Jf-ccm"/>
+                            <constraint firstItem="0GZ-Re-pDT" firstAttribute="top" secondItem="9o4-kt-nxv" secondAttribute="bottom" constant="160" id="gTL-wd-uHX"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="appleLoginBtn" destination="H2f-gf-3uI" id="f9D-jI-Pio"/>
+                        <outlet property="googleLoginBtn" destination="Z4O-9c-gFI" id="fOg-80-cWe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1028.985507246377" y="-125.22321428571428"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

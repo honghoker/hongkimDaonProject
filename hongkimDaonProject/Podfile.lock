@@ -429,13 +429,21 @@ PODS:
     - nanopb/encode (= 2.30908.0)
   - nanopb/decode (2.30908.0)
   - nanopb/encode (2.30908.0)
+  - Pageboy (3.6.2)
   - PromisesObjC (2.0.0)
+  - SideMenu (6.5.0)
+  - SnapKit (5.0.1)
   - SwiftLint (0.47.0)
+  - Tabman (2.12.0):
+    - Pageboy (~> 3.6.0)
 
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Firestore
+  - SideMenu
+  - SnapKit (~> 5.0.0)
   - SwiftLint
+  - Tabman (~> 2.9)
 
 SPEC REPOS:
   trunk:
@@ -453,8 +461,12 @@ SPEC REPOS:
     - GTMSessionFetcher
     - leveldb-library
     - nanopb
+    - Pageboy
     - PromisesObjC
+    - SideMenu
+    - SnapKit
     - SwiftLint
+    - Tabman
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
@@ -471,9 +483,13 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 4577a4cc914a5a07c40a8a0ad0acc22080418c2d
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
+  Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
+  SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SwiftLint: d41cc46a2ae58ac6d9f26954bc89f1d72e71fdef
+  Tabman: 447a50447ed2869c39ab3b1a779327e43e067c4e
 
-PODFILE CHECKSUM: 64f7100e0ffbe79b2ff1d0044a3080dd8b00759b
+PODFILE CHECKSUM: 907ade9cf931b6253da2243237188639ba74584b
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.11.2

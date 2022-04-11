@@ -10,4 +10,7 @@ target 'hongkimDaonProject' do
   pod 'SwiftLint'
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'SideMenu'
+  pod 'Tabman', '~> 2.9'
+  pod 'SnapKit', '~> 5.0.0'
 end
