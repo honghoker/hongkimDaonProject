@@ -31,12 +31,11 @@ class WriteDiaryPageViewController: UIViewController {
     }
     @objc
     func navigate(_ gesture: UITapGestureRecognizer) {
-        let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
-        //        let inputNickNameVC = storyboard.instantiateViewController(withIdentifier: "MainPageViewController")
-        let inputNickNameVC = storyboard.instantiateViewController(withIdentifier: "MainPageViewController")
-        inputNickNameVC.modalPresentationStyle = .fullScreen
-        inputNickNameVC.modalTransitionStyle = .crossDissolve
-        self.present(inputNickNameVC, animated: true, completion: nil)
+//        let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
+//        let inputNickNameVC = storyboard.instantiateViewController(withIdentifier: "MainPageViewController")
+//        inputNickNameVC.modalPresentationStyle = .fullScreen
+//        inputNickNameVC.modalTransitionStyle = .crossDissolve
+//        self.present(inputNickNameVC, animated: true, completion: nil)
     }
 }
 

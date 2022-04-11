@@ -6,9 +6,9 @@ class MainPageViewController: TabmanViewController {
     private var viewControllers: Array<UIViewController> = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        let myDairyViewController = storyboard?.instantiateViewController(withIdentifier: "MyDairyViewController") as! MyDairyViewController
+        let myDiaryViewController = storyboard?.instantiateViewController(withIdentifier: "MyDiaryViewController") as! MyDiaryViewController
         let myStorageViewController = storyboard?.instantiateViewController(withIdentifier: "MyStorageViewController") as! MyStorageViewController
-        viewControllers.append(myDairyViewController)
+        viewControllers.append(myDiaryViewController)
         viewControllers.append(myStorageViewController)
         self.dataSource = self
         let tabBar = TMBar.ButtonBar()

@@ -1,6 +1,6 @@
 import UIKit
 
-class MyDairyCell: UITableViewCell {
+class MyDiaryCell: UITableViewCell {
 
     @IBOutlet weak var time: UILabel!
     @IBOutlet weak var content: UILabel!

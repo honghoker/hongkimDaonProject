@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
         // 같은 스토리보드 내에서 페이지이동
 //        let inputNickNameVC = self.storyboard?.instantiateViewController(withIdentifier: "InputNickNameViewController")
         // 다른 스토리보드 페이지이동
-        let storyboard: UIStoryboard = UIStoryboard(name: "MainPage", bundle: nil)
+        let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
         let inputNickNameVC = storyboard.instantiateViewController(withIdentifier: "MainPageContainerViewController")
         inputNickNameVC.modalPresentationStyle = .fullScreen
         inputNickNameVC.modalTransitionStyle = .crossDissolve

@@ -1,18 +1,18 @@
 import UIKit
 
-class MyDairyViewController: UIViewController {
+class MyDiaryViewController: UIViewController {
 
-    @IBOutlet weak var dairyTableView: UITableView!
+    @IBOutlet weak var diaryTableView: UITableView!
     @IBOutlet weak var floatingBtn: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let dairyTableViewCellNib = UINib(nibName: String(describing: MyDairyCell.self), bundle: nil)
-        self.dairyTableView.register(dairyTableViewCellNib, forCellReuseIdentifier: "myDairyCellId")
-        self.dairyTableView.rowHeight = UITableView.automaticDimension
-//        self.dairyTableView.estimatedRowHeight = 120
-        self.dairyTableView.separatorStyle = .none
-        self.dairyTableView.delegate = self
-        self.dairyTableView.dataSource = self
+        let diaryTableViewCellNib = UINib(nibName: String(describing: MyDiaryCell.self), bundle: nil)
+        self.diaryTableView.register(diaryTableViewCellNib, forCellReuseIdentifier: "myDiaryCellId")
+        self.diaryTableView.rowHeight = UITableView.automaticDimension
+//        self.diaryTableView.estimatedRowHeight = 120
+        self.diaryTableView.separatorStyle = .none
+        self.diaryTableView.delegate = self
+        self.diaryTableView.dataSource = self
     }
     override func viewWillLayoutSubviews() {
         floatingBtn.layer.backgroundColor = UIColor.white.cgColor
@@ -25,14 +25,19 @@ class MyDairyViewController: UIViewController {
     @objc
     func tapFloatingBtn(_ gesture: UITapGestureRecognizer) {
         print("float tap")
+        let storyboard: UIStoryboard = UIStoryboard(name: "WriteDiaryPageView", bundle: nil)
+        let inputNickNameVC = storyboard.instantiateViewController(withIdentifier: "WriteDiaryPageViewController")
+        inputNickNameVC.modalPresentationStyle = .fullScreen
+        inputNickNameVC.modalTransitionStyle = .crossDissolve
+        self.present(inputNickNameVC, animated: true, completion: nil)
     }
 
 }
 
-extension MyDairyViewController: UITableViewDelegate {
+extension MyDiaryViewController: UITableViewDelegate {
 }
 
-extension MyDairyViewController: UITableViewDataSource {
+extension MyDiaryViewController: UITableViewDataSource {
     // 테이블 뷰 셀의 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
@@ -40,7 +45,7 @@ extension MyDairyViewController: UITableViewDataSource {
     }
     // 각 셀에 대한 설정
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = dairyTableView.dequeueReusableCell(withIdentifier: "myDairyCellId", for: indexPath) as! MyDairyCell
+        let cell = diaryTableView.dequeueReusableCell(withIdentifier: "myDiaryCellId", for: indexPath) as! MyDiaryCell
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
 //        cell.layer.borderWidth = 0.5
 //        cell.separatorInset = UIEdgeInsets.zero
