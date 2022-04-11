@@ -138,14 +138,6 @@
 			path = DiaryPage;
 			sourceTree = "<group>";
 		};
-		5117C9E7280400600072B9B2 /* LoginPage */ = {
-			isa = PBXGroup;
-			children = (
-				5153FF2927FD7BE00096AE7A /* LoginView.storyboard */,
-			);
-			path = LoginPage;
-			sourceTree = "<group>";
-		};
 		5153FF1727FD7BE00096AE7A = {
 			isa = PBXGroup;
 			children = (
@@ -185,7 +177,6 @@
 		516944462800045500462016 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5117C9E7280400600072B9B2 /* LoginPage */,
 				5117C9E52803FF190072B9B2 /* DiaryPage */,
 				5117C9D52803F38F0072B9B2 /* SettingPage */,
 				BCA9C4DA2803FF170017EC87 /* DairyPage */,
