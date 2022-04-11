@@ -19,7 +19,9 @@ extension MyStorageViewController: UITableViewDelegate {
 
 extension MyStorageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = storageTableView.dequeueReusableCell(withIdentifier: "myStorageCellId", for: indexPath) as! MyStorageCell
+        guard let cell = storageTableView.dequeueReusableCell(withIdentifier: "myStorageCellId", for: indexPath) as? MyStorageCell else {
+            return UITableViewCell()
+        }
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell
     }

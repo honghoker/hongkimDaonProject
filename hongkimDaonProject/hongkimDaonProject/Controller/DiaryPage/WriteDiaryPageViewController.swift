@@ -17,8 +17,10 @@ class WriteDiaryPageViewController: UIViewController {
         diaryTextView.text = placeholderText
         diaryTextView.textColor = .lightGray
         diaryTextView.delegate = self
-        let googleLoginClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(navigate(_:)))
-        imageButton.addGestureRecognizer(googleLoginClick)
+        diaryTextField.autocapitalizationType = .none
+        diaryTextView.autocapitalizationType = .none
+        let imgButtonClicked: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(navigate(_:)))
+        imageButton.addGestureRecognizer(imgButtonClicked)
     }
     override func viewDidLayoutSubviews() {
         let bottomLine = CALayer()

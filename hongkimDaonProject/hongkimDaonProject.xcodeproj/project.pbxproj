@@ -53,6 +53,7 @@
 		5153FF3927FD7CF10096AE7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		516944502800142600462016 /* JejuMyeongjoOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JejuMyeongjoOTF.otf; sourceTree = "<group>"; };
 		51795E3927FD8BA700D5C696 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		51FB5EBF2804355600C016A2 /* hongkimDaonProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = hongkimDaonProject.entitlements; sourceTree = "<group>"; };
 		7F7D6921C9B889176CDFE59F /* Pods-hongkimDaonProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.debug.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.debug.xcconfig"; sourceTree = "<group>"; };
 		95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hongkimDaonProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB26D9613EEAC686E23807B9 /* Pods-hongkimDaonProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.release.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -162,6 +163,7 @@
 		5153FF2227FD7BE00096AE7A /* hongkimDaonProject */ = {
 			isa = PBXGroup;
 			children = (
+				51FB5EBF2804355600C016A2 /* hongkimDaonProject.entitlements */,
 				516944492800046C00462016 /* Resources */,
 				516944482800046300462016 /* Model */,
 				516944472800045D00462016 /* Controller */,
@@ -437,11 +439,9 @@
 				5117C9CE28008AD90072B9B2 /* ImageUploader.swift in Sources */,
 				5153FF2827FD7BE00096AE7A /* LoginViewController.swift in Sources */,
 				BC69DD5F2802FE5900A6A9F6 /* MainPageContainerViewController.swift in Sources */,
-				5153FF2427FD7BE00096AE7A /* AppDelegate.swift in Sources */,
 				BCA9C4D02803E6BC0017EC87 /* MyStorageCell.swift in Sources */,
 				BC69DD4E28017DA200A6A9F6 /* MainPageViewController.swift in Sources */,
 				BC69DD5D2802DBE000A6A9F6 /* MyDiaryCell.swift in Sources */,
-				5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */,
 				BCD0D7C3280033B400E862D7 /* InputNickNameViewController.swift in Sources */,
 				BC69DD572801905400A6A9F6 /* MyStorageViewController.swift in Sources */,
 				BC69DD542801903E00A6A9F6 /* MyDiaryViewController.swift in Sources */,
@@ -591,6 +591,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = hongkimDaonProject/hongkimDaonProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -619,6 +620,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = hongkimDaonProject/hongkimDaonProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
