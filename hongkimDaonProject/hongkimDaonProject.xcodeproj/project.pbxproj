@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5117C9CE28008AD90072B9B2 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9CD28008AD90072B9B2 /* ImageUploader.swift */; };
+		5117C9D92803F4500072B9B2 /* SettingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9D82803F4500072B9B2 /* SettingPageViewController.swift */; };
+		5117C9DB2803F4820072B9B2 /* SettingPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5117C9DA2803F4820072B9B2 /* SettingPageView.storyboard */; };
+		5117C9E12803FE830072B9B2 /* WriteDiaryPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5117C9E02803FE830072B9B2 /* WriteDiaryPageView.storyboard */; };
+		5117C9E42803FF070072B9B2 /* WriteDiaryPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9E32803FF070072B9B2 /* WriteDiaryPageViewController.swift */; };
 		5153FF2427FD7BE00096AE7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153FF2327FD7BE00096AE7A /* AppDelegate.swift */; };
 		5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153FF2527FD7BE00096AE7A /* SceneDelegate.swift */; };
-		5153FF2827FD7BE00096AE7A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153FF2727FD7BE00096AE7A /* ViewController.swift */; };
 		5153FF2B27FD7BE00096AE7A /* LoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2927FD7BE00096AE7A /* LoginView.storyboard */; };
 		5153FF2D27FD7BE00096AE7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2C27FD7BE00096AE7A /* Assets.xcassets */; };
 		5153FF3027FD7BE00096AE7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2E27FD7BE00096AE7A /* LaunchScreen.storyboard */; };
@@ -20,10 +24,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5117C9CD28008AD90072B9B2 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
+		5117C9D82803F4500072B9B2 /* SettingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPageViewController.swift; sourceTree = "<group>"; };
+		5117C9DA2803F4820072B9B2 /* SettingPageView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingPageView.storyboard; sourceTree = "<group>"; };
+		5117C9E02803FE830072B9B2 /* WriteDiaryPageView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WriteDiaryPageView.storyboard; sourceTree = "<group>"; };
+		5117C9E32803FF070072B9B2 /* WriteDiaryPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDiaryPageViewController.swift; sourceTree = "<group>"; };
 		5153FF2027FD7BE00096AE7A /* hongkimDaonProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hongkimDaonProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5153FF2327FD7BE00096AE7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5153FF2527FD7BE00096AE7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		5153FF2727FD7BE00096AE7A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		5153FF2A27FD7BE00096AE7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LoginView.storyboard; sourceTree = "<group>"; };
 		5153FF2C27FD7BE00096AE7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5153FF2F27FD7BE00096AE7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -56,6 +64,62 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5117C9CC28008AC20072B9B2 /* Api */ = {
+			isa = PBXGroup;
+			children = (
+				5117C9DC2803FD5A0072B9B2 /* firebase */,
+			);
+			path = Api;
+			sourceTree = "<group>";
+		};
+		5117C9D52803F38F0072B9B2 /* SettingPage */ = {
+			isa = PBXGroup;
+			children = (
+				5117C9DA2803F4820072B9B2 /* SettingPageView.storyboard */,
+			);
+			path = SettingPage;
+			sourceTree = "<group>";
+		};
+		5117C9DC2803FD5A0072B9B2 /* firebase */ = {
+			isa = PBXGroup;
+			children = (
+				5117C9CD28008AD90072B9B2 /* ImageUploader.swift */,
+			);
+			path = firebase;
+			sourceTree = "<group>";
+		};
+		5117C9DD2803FDF10072B9B2 /* SettingPage */ = {
+			isa = PBXGroup;
+			children = (
+				5117C9D82803F4500072B9B2 /* SettingPageViewController.swift */,
+			);
+			path = SettingPage;
+			sourceTree = "<group>";
+		};
+		5117C9E22803FEB20072B9B2 /* DiaryPage */ = {
+			isa = PBXGroup;
+			children = (
+				5117C9E32803FF070072B9B2 /* WriteDiaryPageViewController.swift */,
+			);
+			path = DiaryPage;
+			sourceTree = "<group>";
+		};
+		5117C9E52803FF190072B9B2 /* DiaryPage */ = {
+			isa = PBXGroup;
+			children = (
+				5117C9E02803FE830072B9B2 /* WriteDiaryPageView.storyboard */,
+			);
+			path = DiaryPage;
+			sourceTree = "<group>";
+		};
+		5117C9E7280400600072B9B2 /* LoginPage */ = {
+			isa = PBXGroup;
+			children = (
+				5153FF2927FD7BE00096AE7A /* LoginView.storyboard */,
+			);
+			path = LoginPage;
+			sourceTree = "<group>";
+		};
 		5153FF1727FD7BE00096AE7A = {
 			isa = PBXGroup;
 			children = (
@@ -85,7 +149,6 @@
 				5153FF3927FD7CF10096AE7A /* GoogleService-Info.plist */,
 				5153FF2327FD7BE00096AE7A /* AppDelegate.swift */,
 				5153FF2527FD7BE00096AE7A /* SceneDelegate.swift */,
-				5153FF2927FD7BE00096AE7A /* LoginView.storyboard */,
 				5153FF2C27FD7BE00096AE7A /* Assets.xcassets */,
 				5153FF2E27FD7BE00096AE7A /* LaunchScreen.storyboard */,
 				5153FF3127FD7BE00096AE7A /* Info.plist */,
@@ -96,6 +159,9 @@
 		516944462800045500462016 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				5117C9E7280400600072B9B2 /* LoginPage */,
+				5117C9E52803FF190072B9B2 /* DiaryPage */,
+				5117C9D52803F38F0072B9B2 /* SettingPage */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -103,7 +169,8 @@
 		516944472800045D00462016 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				5153FF2727FD7BE00096AE7A /* ViewController.swift */,
+				5117C9E22803FEB20072B9B2 /* DiaryPage */,
+				5117C9DD2803FDF10072B9B2 /* SettingPage */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -118,6 +185,7 @@
 		516944492800046C00462016 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5117C9CC28008AC20072B9B2 /* Api */,
 				5169444A2800047200462016 /* Fonts */,
 			);
 			path = Resources;
@@ -201,12 +269,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5117C9E12803FE830072B9B2 /* WriteDiaryPageView.storyboard in Resources */,
 				516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */,
 				51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */,
 				5153FF3027FD7BE00096AE7A /* LaunchScreen.storyboard in Resources */,
 				5153FF3A27FD7CF10096AE7A /* GoogleService-Info.plist in Resources */,
 				5153FF2D27FD7BE00096AE7A /* Assets.xcassets in Resources */,
 				5153FF2B27FD7BE00096AE7A /* LoginView.storyboard in Resources */,
+				5117C9DB2803F4820072B9B2 /* SettingPageView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,9 +347,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5153FF2827FD7BE00096AE7A /* ViewController.swift in Sources */,
+				5117C9E42803FF070072B9B2 /* WriteDiaryPageViewController.swift in Sources */,
 				5153FF2427FD7BE00096AE7A /* AppDelegate.swift in Sources */,
+				5117C9D92803F4500072B9B2 /* SettingPageViewController.swift in Sources */,
 				5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */,
+				5117C9CE28008AD90072B9B2 /* ImageUploader.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -431,7 +503,7 @@
 				INFOPLIST_FILE = hongkimDaonProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = LoginView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -459,7 +531,7 @@
 				INFOPLIST_FILE = hongkimDaonProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = LoginView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
