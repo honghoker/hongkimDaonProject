@@ -6,10 +6,12 @@ class MainPageViewController: TabmanViewController {
     private var viewControllers: Array<UIViewController> = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        let myDiaryViewController = storyboard?.instantiateViewController(withIdentifier: "MyDiaryViewController") as! MyDiaryViewController
-        let myStorageViewController = storyboard?.instantiateViewController(withIdentifier: "MyStorageViewController") as! MyStorageViewController
-        viewControllers.append(myDiaryViewController)
-        viewControllers.append(myStorageViewController)
+        if let myDiaryViewController = storyboard?.instantiateViewController(withIdentifier: "MyDiaryViewController") as? MyDiaryViewController {
+            viewControllers.append(myDiaryViewController)
+        }
+        if let myStorageViewController = storyboard?.instantiateViewController(withIdentifier: "MyStorageViewController") as? MyStorageViewController {
+            viewControllers.append(myStorageViewController)
+        }
         self.dataSource = self
         let tabBar = TMBar.ButtonBar()
         tabBar.backgroundView.style = .blur(style: .regular)

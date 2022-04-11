@@ -9,6 +9,7 @@ target 'hongkimDaonProject' do
   # Pods for hongkimDaonProject
   pod 'SwiftLint'
   pod 'Firebase/Auth'
+  pod 'GoogleSignIn'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
   pod 'SideMenu'
