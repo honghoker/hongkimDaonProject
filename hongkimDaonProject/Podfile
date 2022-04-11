@@ -11,4 +11,7 @@ target 'hongkimDaonProject' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  pod 'SideMenu'
+  pod 'Tabman', '~> 2.9'
+  pod 'SnapKit', '~> 5.0.0'
 end
