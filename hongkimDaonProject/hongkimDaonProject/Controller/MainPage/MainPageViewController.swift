@@ -1,49 +1,50 @@
-//
-//  MainPageViewController.swift
-//  hongkimDaonProject
-//
-//  Created by 홍은표 on 2022/04/08.
-//
-
 import UIKit
+import Tabman
+import Pageboy
 
-class MainPageViewController: UIViewController {
-    @IBOutlet weak var myTableView: UITableView!
-    let imageArray = [UUID(), UUID(), UUID()]
-
+class MainPageViewController: TabmanViewController {
+    private var viewControllers: Array<UIViewController> = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        // 셀 리소스 파일 가져오기
-        let myTableViewCellNib = UINib(nibName: String(describing: MainPageViewCell.self), bundle: nil)
-        // 셀에 리소스 등록
-        self.myTableView.register(myTableViewCellNib, forCellReuseIdentifier: "myTableViewCell")
-        self.myTableView.rowHeight = UITableView.automaticDimension
-        self.myTableView.estimatedRowHeight = 120
-        // delegate 설정
-        self.myTableView.delegate = self
-        self.myTableView.dataSource = self
+        let myDairyViewController = storyboard?.instantiateViewController(withIdentifier: "MyDairyViewController") as! MyDairyViewController
+        let myStorageViewController = storyboard?.instantiateViewController(withIdentifier: "MyStorageViewController") as! MyStorageViewController
+        viewControllers.append(myDairyViewController)
+        viewControllers.append(myStorageViewController)
+        self.dataSource = self
+        let tabBar = TMBar.ButtonBar()
+        tabBar.backgroundView.style = .blur(style: .regular)
+        tabBar.buttons.customize { (button) in
+            button.tintColor = .gray
+            button.selectedTintColor = .black
+            button.font = UIFont(name: "JejuMyeongjoOTF", size: 14) ?? UIFont.systemFont(ofSize: 14)
+        }
+        tabBar.layout.transitionStyle = .snap
+        tabBar.layout.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
+        tabBar.layout.interButtonSpacing = 12
+        tabBar.indicator.weight = .custom(value: 1)
+        tabBar.indicator.tintColor = .black
+        tabBar.indicator.overscrollBehavior = .bounce
+        addBar(tabBar, dataSource: self, at: .top)
     }
 }
 
-extension MainPageViewController: UITableViewDelegate{}
-
-extension MainPageViewController: UITableViewDataSource {
-
-    // 테이블 뷰 셀의 갯수
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.imageArray.count
+extension MainPageViewController: PageboyViewControllerDataSource, TMBarDataSource {
+    func barItem(for testBar: TMBar, at index: Int) -> TMBarItemable {
+        let item = TMBarItem(title: "")
+        let title: String = index == 0 ? "나의 일기" : "나의 보관함"
+        item.title = title
+        return item
+    }
+    func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
+        return viewControllers.count
     }
 
-    // 각 셀에 대한 설정
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = myTableView.dequeueReusableCell(withIdentifier: "myTableViewCell", for: indexPath) as! MainPageViewCell
-        cell.testBtn.addTarget(self, action: #selector(onTestBtnClicked(sender:)), for: .touchUpInside)
-//        guard let cell = myTableView.dequeueReusableCell(withIdentifier: "myTableViewCell", for: indexPath) as? MainPageViewCell else { return }
-//        cell.userContentLabel.text = imageArray[indexPath.row]
-        return cell
+    func viewController(for pageboyViewController: PageboyViewController,
+                        at index: PageboyViewController.PageIndex) -> UIViewController? {
+        return viewControllers[index]
     }
-    @objc fileprivate func onTestBtnClicked(sender: UIButton) {
-        print("@@@@@@@@@@@ onTestBtnClicked")
-        ImageUploader.uploadImage(image: UIImage(named: "duck")!)
+
+    func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
+        return .at(index: 0)
     }
 }

@@ -14,12 +14,25 @@
 		5117C9E42803FF070072B9B2 /* WriteDiaryPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9E32803FF070072B9B2 /* WriteDiaryPageViewController.swift */; };
 		5153FF2427FD7BE00096AE7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153FF2327FD7BE00096AE7A /* AppDelegate.swift */; };
 		5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153FF2527FD7BE00096AE7A /* SceneDelegate.swift */; };
+		5153FF2827FD7BE00096AE7A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153FF2727FD7BE00096AE7A /* LoginViewController.swift */; };
 		5153FF2B27FD7BE00096AE7A /* LoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2927FD7BE00096AE7A /* LoginView.storyboard */; };
 		5153FF2D27FD7BE00096AE7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2C27FD7BE00096AE7A /* Assets.xcassets */; };
 		5153FF3027FD7BE00096AE7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2E27FD7BE00096AE7A /* LaunchScreen.storyboard */; };
 		5153FF3A27FD7CF10096AE7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF3927FD7CF10096AE7A /* GoogleService-Info.plist */; };
 		516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 516944502800142600462016 /* JejuMyeongjoOTF.otf */; };
 		51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 51795E3927FD8BA700D5C696 /* .swiftlint.yml */; };
+		BC69DD4C28017D7D00A6A9F6 /* MainView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC69DD4B28017D7D00A6A9F6 /* MainView.storyboard */; };
+		BC69DD4E28017DA200A6A9F6 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD4D28017DA200A6A9F6 /* MainPageViewController.swift */; };
+		BC69DD542801903E00A6A9F6 /* MyDairyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD532801903E00A6A9F6 /* MyDairyViewController.swift */; };
+		BC69DD572801905400A6A9F6 /* MyStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD562801905400A6A9F6 /* MyStorageViewController.swift */; };
+		BC69DD5B2802D94D00A6A9F6 /* MyDairyCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC69DD5A2802D94D00A6A9F6 /* MyDairyCell.xib */; };
+		BC69DD5D2802DBE000A6A9F6 /* MyDairyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD5C2802DBE000A6A9F6 /* MyDairyCell.swift */; };
+		BC69DD5F2802FE5900A6A9F6 /* MainPageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD5E2802FE5900A6A9F6 /* MainPageContainerViewController.swift */; };
+		BCA9C4D02803E6BC0017EC87 /* MyStorageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9C4CF2803E6BC0017EC87 /* MyStorageCell.swift */; };
+		BCA9C4D22803E84C0017EC87 /* MyStorageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */; };
+		BCA9C4D42803F03F0017EC87 /* DetailDairyView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCA9C4D32803F03F0017EC87 /* DetailDairyView.storyboard */; };
+		BCA9C4D62803F06A0017EC87 /* DetailDairyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9C4D52803F06A0017EC87 /* DetailDairyViewController.swift */; };
+		BCD0D7C3280033B400E862D7 /* InputNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD0D7C2280033B400E862D7 /* InputNickNameViewController.swift */; };
 		CC6576549A2D44437F8B7E24 /* Pods_hongkimDaonProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -32,6 +45,7 @@
 		5153FF2027FD7BE00096AE7A /* hongkimDaonProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hongkimDaonProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5153FF2327FD7BE00096AE7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5153FF2527FD7BE00096AE7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		5153FF2727FD7BE00096AE7A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5153FF2A27FD7BE00096AE7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LoginView.storyboard; sourceTree = "<group>"; };
 		5153FF2C27FD7BE00096AE7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5153FF2F27FD7BE00096AE7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -42,6 +56,18 @@
 		7F7D6921C9B889176CDFE59F /* Pods-hongkimDaonProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.debug.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.debug.xcconfig"; sourceTree = "<group>"; };
 		95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hongkimDaonProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB26D9613EEAC686E23807B9 /* Pods-hongkimDaonProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.release.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.release.xcconfig"; sourceTree = "<group>"; };
+		BC69DD4B28017D7D00A6A9F6 /* MainView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainView.storyboard; sourceTree = "<group>"; };
+		BC69DD4D28017DA200A6A9F6 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
+		BC69DD532801903E00A6A9F6 /* MyDairyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDairyViewController.swift; sourceTree = "<group>"; };
+		BC69DD562801905400A6A9F6 /* MyStorageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageViewController.swift; sourceTree = "<group>"; };
+		BC69DD5A2802D94D00A6A9F6 /* MyDairyCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyDairyCell.xib; sourceTree = "<group>"; };
+		BC69DD5C2802DBE000A6A9F6 /* MyDairyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDairyCell.swift; sourceTree = "<group>"; };
+		BC69DD5E2802FE5900A6A9F6 /* MainPageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageContainerViewController.swift; sourceTree = "<group>"; };
+		BCA9C4CF2803E6BC0017EC87 /* MyStorageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageCell.swift; sourceTree = "<group>"; };
+		BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyStorageCell.xib; sourceTree = "<group>"; };
+		BCA9C4D32803F03F0017EC87 /* DetailDairyView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailDairyView.storyboard; sourceTree = "<group>"; };
+		BCA9C4D52803F06A0017EC87 /* DetailDairyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDairyViewController.swift; sourceTree = "<group>"; };
+		BCD0D7C2280033B400E862D7 /* InputNickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputNickNameViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +188,9 @@
 				5117C9E7280400600072B9B2 /* LoginPage */,
 				5117C9E52803FF190072B9B2 /* DiaryPage */,
 				5117C9D52803F38F0072B9B2 /* SettingPage */,
+				BCA9C4DA2803FF170017EC87 /* DairyPage */,
+				BCA9C4D82803FEA20017EC87 /* LoginPage */,
+				BCA9C4D72803FE8E0017EC87 /* MainPage */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -171,6 +200,9 @@
 			children = (
 				5117C9E22803FEB20072B9B2 /* DiaryPage */,
 				5117C9DD2803FDF10072B9B2 /* SettingPage */,
+				BCA9C4DD2803FF5B0017EC87 /* LoginPage */,
+				BCA9C4DC2803FF550017EC87 /* DairyPage */,
+				BCA9C4DB2803FF3E0017EC87 /* MainPage */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -206,6 +238,78 @@
 				BB26D9613EEAC686E23807B9 /* Pods-hongkimDaonProject.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		BCA9C4D72803FE8E0017EC87 /* MainPage */ = {
+			isa = PBXGroup;
+			children = (
+				BCA9C4D92803FEB10017EC87 /* Cells */,
+				BC69DD4B28017D7D00A6A9F6 /* MainView.storyboard */,
+			);
+			path = MainPage;
+			sourceTree = "<group>";
+		};
+		BCA9C4D82803FEA20017EC87 /* LoginPage */ = {
+			isa = PBXGroup;
+			children = (
+				5153FF2927FD7BE00096AE7A /* LoginView.storyboard */,
+			);
+			path = LoginPage;
+			sourceTree = "<group>";
+		};
+		BCA9C4D92803FEB10017EC87 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BC69DD5A2802D94D00A6A9F6 /* MyDairyCell.xib */,
+				BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		BCA9C4DA2803FF170017EC87 /* DairyPage */ = {
+			isa = PBXGroup;
+			children = (
+				BCA9C4D32803F03F0017EC87 /* DetailDairyView.storyboard */,
+			);
+			path = DairyPage;
+			sourceTree = "<group>";
+		};
+		BCA9C4DB2803FF3E0017EC87 /* MainPage */ = {
+			isa = PBXGroup;
+			children = (
+				BCA9C4DE2803FF900017EC87 /* Cells */,
+				BC69DD562801905400A6A9F6 /* MyStorageViewController.swift */,
+				BC69DD5E2802FE5900A6A9F6 /* MainPageContainerViewController.swift */,
+				BC69DD4D28017DA200A6A9F6 /* MainPageViewController.swift */,
+				BC69DD532801903E00A6A9F6 /* MyDairyViewController.swift */,
+			);
+			path = MainPage;
+			sourceTree = "<group>";
+		};
+		BCA9C4DC2803FF550017EC87 /* DairyPage */ = {
+			isa = PBXGroup;
+			children = (
+				BCA9C4D52803F06A0017EC87 /* DetailDairyViewController.swift */,
+			);
+			path = DairyPage;
+			sourceTree = "<group>";
+		};
+		BCA9C4DD2803FF5B0017EC87 /* LoginPage */ = {
+			isa = PBXGroup;
+			children = (
+				5153FF2727FD7BE00096AE7A /* LoginViewController.swift */,
+				BCD0D7C2280033B400E862D7 /* InputNickNameViewController.swift */,
+			);
+			path = LoginPage;
+			sourceTree = "<group>";
+		};
+		BCA9C4DE2803FF900017EC87 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BC69DD5C2802DBE000A6A9F6 /* MyDairyCell.swift */,
+				BCA9C4CF2803E6BC0017EC87 /* MyStorageCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,13 +374,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				5117C9E12803FE830072B9B2 /* WriteDiaryPageView.storyboard in Resources */,
+				BCA9C4D42803F03F0017EC87 /* DetailDairyView.storyboard in Resources */,
 				516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */,
 				51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */,
 				5153FF3027FD7BE00096AE7A /* LaunchScreen.storyboard in Resources */,
 				5153FF3A27FD7CF10096AE7A /* GoogleService-Info.plist in Resources */,
+				BC69DD4C28017D7D00A6A9F6 /* MainView.storyboard in Resources */,
 				5153FF2D27FD7BE00096AE7A /* Assets.xcassets in Resources */,
+				BCA9C4D22803E84C0017EC87 /* MyStorageCell.xib in Resources */,
 				5153FF2B27FD7BE00096AE7A /* LoginView.storyboard in Resources */,
 				5117C9DB2803F4820072B9B2 /* SettingPageView.storyboard in Resources */,
+				BC69DD5B2802D94D00A6A9F6 /* MyDairyCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +460,17 @@
 				5117C9D92803F4500072B9B2 /* SettingPageViewController.swift in Sources */,
 				5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */,
 				5117C9CE28008AD90072B9B2 /* ImageUploader.swift in Sources */,
+				5153FF2827FD7BE00096AE7A /* LoginViewController.swift in Sources */,
+				BC69DD5F2802FE5900A6A9F6 /* MainPageContainerViewController.swift in Sources */,
+				5153FF2427FD7BE00096AE7A /* AppDelegate.swift in Sources */,
+				BCA9C4D02803E6BC0017EC87 /* MyStorageCell.swift in Sources */,
+				BC69DD4E28017DA200A6A9F6 /* MainPageViewController.swift in Sources */,
+				BC69DD5D2802DBE000A6A9F6 /* MyDairyCell.swift in Sources */,
+				5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */,
+				BCD0D7C3280033B400E862D7 /* InputNickNameViewController.swift in Sources */,
+				BC69DD572801905400A6A9F6 /* MyStorageViewController.swift in Sources */,
+				BC69DD542801903E00A6A9F6 /* MyDairyViewController.swift in Sources */,
+				BCA9C4D62803F06A0017EC87 /* DetailDairyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Main Page Container View Controller-->
+        <scene sceneID="8oV-2M-90T">
+            <objects>
+                <viewController storyboardIdentifier="MainPageContainerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="AzR-Gy-LGx" customClass="MainPageContainerViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="E8N-wk-vv2">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r9X-Dg-F0q">
+                                <rect key="frame" x="351" y="76" width="47" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="text.justify.trailing" catalog="system"/>
+                            </button>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MsC-Ym-M3L">
+                                <rect key="frame" x="16" y="139" width="382" height="723"/>
+                                <connections>
+                                    <segue destination="mnF-Bu-MDr" kind="embed" id="2He-5e-Sa9"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="spB-E1-Hqf"/>
+                        <color key="backgroundColor" red="0.99323421720000005" green="0.99323421720000005" blue="0.99323421720000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="spB-E1-Hqf" firstAttribute="trailing" secondItem="MsC-Ym-M3L" secondAttribute="trailing" constant="16" id="1VO-9M-DTF"/>
+                            <constraint firstItem="spB-E1-Hqf" firstAttribute="trailing" secondItem="r9X-Dg-F0q" secondAttribute="trailing" constant="16" id="4rP-CS-TMx"/>
+                            <constraint firstItem="MsC-Ym-M3L" firstAttribute="leading" secondItem="spB-E1-Hqf" secondAttribute="leading" constant="16" id="9Qq-Dd-xp7"/>
+                            <constraint firstItem="MsC-Ym-M3L" firstAttribute="top" secondItem="r9X-Dg-F0q" secondAttribute="bottom" constant="32" id="Sgx-eT-h3f"/>
+                            <constraint firstItem="r9X-Dg-F0q" firstAttribute="top" secondItem="spB-E1-Hqf" secondAttribute="top" constant="32" id="gB9-ah-kft"/>
+                            <constraint firstItem="spB-E1-Hqf" firstAttribute="bottom" secondItem="MsC-Ym-M3L" secondAttribute="bottom" id="woM-cX-J7y"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="setBtn" destination="r9X-Dg-F0q" id="9vj-r1-2Y9"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xMm-yx-eVi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3733.3333333333335" y="232.36607142857142"/>
+        </scene>
+        <!--My Dairy View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="MyDairyViewController" id="Y6W-OH-hqX" customClass="MyDairyViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="brZ-UJ-sgY">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wm9-KT-EZ6">
+                                <rect key="frame" x="334" y="766" width="64" height="64"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="64" id="l7V-i1-AGo"/>
+                                    <constraint firstAttribute="width" constant="64" id="zg7-Og-XPs"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="brZ-UJ-sgY" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" id="0K1-Tv-4IZ"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="wm9-KT-EZ6" secondAttribute="trailing" constant="16" id="F1z-yf-fW6"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="wm9-KT-EZ6" secondAttribute="bottom" constant="32" id="bO9-Ng-iVG"/>
+                            <constraint firstItem="brZ-UJ-sgY" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="lbT-xB-oUW"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="brZ-UJ-sgY" secondAttribute="trailing" id="p5P-iF-gF2"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="brZ-UJ-sgY" secondAttribute="bottom" id="zwg-At-VUO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="dairyTableView" destination="brZ-UJ-sgY" id="zva-QU-8jg"/>
+                        <outlet property="floatingBtn" destination="wm9-KT-EZ6" id="cJz-3m-SVe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2157" y="274"/>
+        </scene>
+        <!--My Storage View Controller-->
+        <scene sceneID="Fh5-Wn-HwI">
+            <objects>
+                <viewController storyboardIdentifier="MyStorageViewController" id="HyX-2M-tWM" customClass="MyStorageViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="L3P-5a-33l">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zll-V3-fsW">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Gng-Nb-hPA"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="zll-V3-fsW" firstAttribute="top" secondItem="Gng-Nb-hPA" secondAttribute="top" id="8gx-fs-RJY"/>
+                            <constraint firstItem="Gng-Nb-hPA" firstAttribute="bottom" secondItem="zll-V3-fsW" secondAttribute="bottom" id="PYK-4Q-6tL"/>
+                            <constraint firstItem="Gng-Nb-hPA" firstAttribute="trailing" secondItem="zll-V3-fsW" secondAttribute="trailing" id="Xbi-UU-4VJ"/>
+                            <constraint firstItem="zll-V3-fsW" firstAttribute="leading" secondItem="Gng-Nb-hPA" secondAttribute="leading" id="pnx-TL-3Nn"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="storageTableView" destination="zll-V3-fsW" id="7tu-f6-9JJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Ki-e2-V9O" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1465" y="273"/>
+        </scene>
+        <!--Main Page View Controller-->
+        <scene sceneID="RIf-LT-QDm">
+            <objects>
+                <viewController storyboardIdentifier="MainPageViewController" id="mnF-Bu-MDr" customClass="MainPageViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9xn-Qx-PZW">
+                        <rect key="frame" x="0.0" y="0.0" width="382" height="723"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="9Y0-kL-K8h"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="L32-bQ-Nr1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2936" y="333"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="text.justify.trailing" catalog="system" width="128" height="100"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
