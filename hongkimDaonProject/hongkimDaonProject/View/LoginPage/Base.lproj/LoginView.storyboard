@@ -41,7 +41,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MkB-YM-wxa">
-                                <rect key="frame" x="32" y="317" width="350" height="50"/>
+                                <rect key="frame" x="32" y="352" width="350" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="7IM-e6-noZ"/>
                                 </constraints>
@@ -63,6 +63,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임이 중복입니다" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tb8-G8-gw8">
+                                <rect key="frame" x="32" y="297" width="350" height="15"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                <color key="textColor" systemColor="systemRedColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="b82-3a-KLC"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -70,12 +76,15 @@
                             <constraint firstItem="kEw-dG-suZ" firstAttribute="leading" secondItem="b82-3a-KLC" secondAttribute="leading" constant="32" id="3gm-gf-BSh"/>
                             <constraint firstItem="kEw-dG-suZ" firstAttribute="top" secondItem="1Ky-uQ-xY2" secondAttribute="bottom" constant="22" id="EDv-he-JB3"/>
                             <constraint firstItem="b82-3a-KLC" firstAttribute="trailing" secondItem="MkB-YM-wxa" secondAttribute="trailing" constant="32" id="ENY-vK-xIe"/>
+                            <constraint firstItem="MkB-YM-wxa" firstAttribute="top" secondItem="Tb8-G8-gw8" secondAttribute="bottom" constant="40" id="Nsw-Ge-4sn"/>
                             <constraint firstItem="oSp-5i-wcj" firstAttribute="leading" secondItem="b82-3a-KLC" secondAttribute="leading" constant="32" id="Q7b-Mw-jDJ"/>
                             <constraint firstItem="1Ky-uQ-xY2" firstAttribute="top" secondItem="PjL-iP-ZLA" secondAttribute="bottom" constant="48" id="UQW-cp-DhI"/>
+                            <constraint firstItem="Tb8-G8-gw8" firstAttribute="top" secondItem="kEw-dG-suZ" secondAttribute="bottom" constant="20" id="YGb-Wk-RA5"/>
                             <constraint firstItem="b82-3a-KLC" firstAttribute="trailing" secondItem="kEw-dG-suZ" secondAttribute="trailing" constant="32" id="cdc-St-Qdv"/>
-                            <constraint firstItem="MkB-YM-wxa" firstAttribute="top" secondItem="kEw-dG-suZ" secondAttribute="bottom" constant="40" id="g2g-T0-6aa"/>
+                            <constraint firstItem="Tb8-G8-gw8" firstAttribute="leading" secondItem="b82-3a-KLC" secondAttribute="leading" constant="32" id="eQ4-2t-raY"/>
                             <constraint firstItem="PjL-iP-ZLA" firstAttribute="top" secondItem="oSp-5i-wcj" secondAttribute="bottom" constant="8" symbolic="YES" id="gpZ-iD-1BD"/>
                             <constraint firstItem="1Ky-uQ-xY2" firstAttribute="leading" secondItem="b82-3a-KLC" secondAttribute="leading" constant="32" id="tFl-kF-YQa"/>
+                            <constraint firstItem="b82-3a-KLC" firstAttribute="trailing" secondItem="Tb8-G8-gw8" secondAttribute="trailing" constant="32" id="vAE-oM-6Xc"/>
                             <constraint firstItem="PjL-iP-ZLA" firstAttribute="leading" secondItem="b82-3a-KLC" secondAttribute="leading" constant="32" id="woT-7T-3a7"/>
                             <constraint firstItem="oSp-5i-wcj" firstAttribute="top" secondItem="b82-3a-KLC" secondAttribute="top" constant="64" id="xE4-AJ-om9"/>
                             <constraint firstItem="MkB-YM-wxa" firstAttribute="leading" secondItem="b82-3a-KLC" secondAttribute="leading" constant="32" id="xHy-IN-tje"/>
@@ -85,6 +94,7 @@
                         <outlet property="confirmBtn" destination="MkB-YM-wxa" id="J2B-DA-fPA"/>
                         <outlet property="nickNameTextField" destination="kEw-dG-suZ" id="sSr-Ma-tky"/>
                         <outlet property="overlapText" destination="EHT-bG-A0L" id="HAW-28-QOn"/>
+                        <outlet property="warningOverLapText" destination="Tb8-G8-gw8" id="OcM-LQ-Edl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GGx-H7-mmA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -196,6 +206,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

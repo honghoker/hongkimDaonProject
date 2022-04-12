@@ -18,9 +18,9 @@
 		5153FF2B27FD7BE00096AE7A /* LoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2927FD7BE00096AE7A /* LoginView.storyboard */; };
 		5153FF2D27FD7BE00096AE7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2C27FD7BE00096AE7A /* Assets.xcassets */; };
 		5153FF3027FD7BE00096AE7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2E27FD7BE00096AE7A /* LaunchScreen.storyboard */; };
-		5153FF3A27FD7CF10096AE7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF3927FD7CF10096AE7A /* GoogleService-Info.plist */; };
 		516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 516944502800142600462016 /* JejuMyeongjoOTF.otf */; };
 		51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 51795E3927FD8BA700D5C696 /* .swiftlint.yml */; };
+		BC07019A280449ED00139415 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC070199280449ED00139415 /* GoogleService-Info.plist */; };
 		BC69DD4C28017D7D00A6A9F6 /* MainPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC69DD4B28017D7D00A6A9F6 /* MainPageView.storyboard */; };
 		BC69DD4E28017DA200A6A9F6 /* MainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD4D28017DA200A6A9F6 /* MainPageViewController.swift */; };
 		BC69DD542801903E00A6A9F6 /* MyDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD532801903E00A6A9F6 /* MyDiaryViewController.swift */; };
@@ -28,6 +28,7 @@
 		BC69DD5B2802D94D00A6A9F6 /* MyDiaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC69DD5A2802D94D00A6A9F6 /* MyDiaryCell.xib */; };
 		BC69DD5D2802DBE000A6A9F6 /* MyDiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD5C2802DBE000A6A9F6 /* MyDiaryCell.swift */; };
 		BC69DD5F2802FE5900A6A9F6 /* MainPageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD5E2802FE5900A6A9F6 /* MainPageContainerViewController.swift */; };
+		BC7C9CBA28055D4300FF28E1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7C9CB928055D4300FF28E1 /* User.swift */; };
 		BCA9C4D02803E6BC0017EC87 /* MyStorageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9C4CF2803E6BC0017EC87 /* MyStorageCell.swift */; };
 		BCA9C4D22803E84C0017EC87 /* MyStorageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */; };
 		BCA9C4D42803F03F0017EC87 /* DetailDiaryView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCA9C4D32803F03F0017EC87 /* DetailDiaryView.storyboard */; };
@@ -50,13 +51,13 @@
 		5153FF2C27FD7BE00096AE7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5153FF2F27FD7BE00096AE7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5153FF3127FD7BE00096AE7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		5153FF3927FD7CF10096AE7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		516944502800142600462016 /* JejuMyeongjoOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JejuMyeongjoOTF.otf; sourceTree = "<group>"; };
 		51795E3927FD8BA700D5C696 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		51FB5EBF2804355600C016A2 /* hongkimDaonProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = hongkimDaonProject.entitlements; sourceTree = "<group>"; };
 		7F7D6921C9B889176CDFE59F /* Pods-hongkimDaonProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.debug.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.debug.xcconfig"; sourceTree = "<group>"; };
 		95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hongkimDaonProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB26D9613EEAC686E23807B9 /* Pods-hongkimDaonProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.release.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.release.xcconfig"; sourceTree = "<group>"; };
+		BC070199280449ED00139415 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BC69DD4B28017D7D00A6A9F6 /* MainPageView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainPageView.storyboard; sourceTree = "<group>"; };
 		BC69DD4D28017DA200A6A9F6 /* MainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewController.swift; sourceTree = "<group>"; };
 		BC69DD532801903E00A6A9F6 /* MyDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDiaryViewController.swift; sourceTree = "<group>"; };
@@ -64,6 +65,7 @@
 		BC69DD5A2802D94D00A6A9F6 /* MyDiaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyDiaryCell.xib; sourceTree = "<group>"; };
 		BC69DD5C2802DBE000A6A9F6 /* MyDiaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDiaryCell.swift; sourceTree = "<group>"; };
 		BC69DD5E2802FE5900A6A9F6 /* MainPageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageContainerViewController.swift; sourceTree = "<group>"; };
+		BC7C9CB928055D4300FF28E1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = SOURCE_ROOT; };
 		BCA9C4CF2803E6BC0017EC87 /* MyStorageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageCell.swift; sourceTree = "<group>"; };
 		BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyStorageCell.xib; sourceTree = "<group>"; };
 		BCA9C4D32803F03F0017EC87 /* DetailDiaryView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailDiaryView.storyboard; sourceTree = "<group>"; };
@@ -168,8 +170,8 @@
 				516944482800046300462016 /* Model */,
 				516944472800045D00462016 /* Controller */,
 				516944462800045500462016 /* View */,
-				5153FF3927FD7CF10096AE7A /* GoogleService-Info.plist */,
 				5153FF2327FD7BE00096AE7A /* AppDelegate.swift */,
+				BC070199280449ED00139415 /* GoogleService-Info.plist */,
 				5153FF2527FD7BE00096AE7A /* SceneDelegate.swift */,
 				5153FF2C27FD7BE00096AE7A /* Assets.xcassets */,
 				5153FF2E27FD7BE00096AE7A /* LaunchScreen.storyboard */,
@@ -203,6 +205,7 @@
 		516944482800046300462016 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BC7C9CB928055D4300FF28E1 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -355,7 +358,7 @@
 				516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */,
 				51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */,
 				5153FF3027FD7BE00096AE7A /* LaunchScreen.storyboard in Resources */,
-				5153FF3A27FD7CF10096AE7A /* GoogleService-Info.plist in Resources */,
+				BC07019A280449ED00139415 /* GoogleService-Info.plist in Resources */,
 				BC69DD4C28017D7D00A6A9F6 /* MainPageView.storyboard in Resources */,
 				5153FF2D27FD7BE00096AE7A /* Assets.xcassets in Resources */,
 				BCA9C4D22803E84C0017EC87 /* MyStorageCell.xib in Resources */,
@@ -440,6 +443,7 @@
 				5153FF2827FD7BE00096AE7A /* LoginViewController.swift in Sources */,
 				BC69DD5F2802FE5900A6A9F6 /* MainPageContainerViewController.swift in Sources */,
 				BCA9C4D02803E6BC0017EC87 /* MyStorageCell.swift in Sources */,
+				BC7C9CBA28055D4300FF28E1 /* User.swift in Sources */,
 				BC69DD4E28017DA200A6A9F6 /* MainPageViewController.swift in Sources */,
 				BC69DD5D2802DBE000A6A9F6 /* MyDiaryCell.swift in Sources */,
 				BCD0D7C3280033B400E862D7 /* InputNickNameViewController.swift in Sources */,
@@ -594,6 +598,7 @@
 				CODE_SIGN_ENTITLEMENTS = hongkimDaonProject/hongkimDaonProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F92UQYH2RA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = hongkimDaonProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -623,6 +628,7 @@
 				CODE_SIGN_ENTITLEMENTS = hongkimDaonProject/hongkimDaonProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = F92UQYH2RA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = hongkimDaonProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
