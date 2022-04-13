@@ -94,8 +94,7 @@ extension MyDiaryViewController: UITableViewDataSource {
         cell.title.text = "성훈 제목"
         cell.content.text = "성훈 내용"
         cell.time.text = "성훈 시간"
-        // clipsToBounds -> 이거 뭐지 ?
-        //        cell.clipsToBounds = true
+        //        cell.clipsToBounds = true -> 이거 뭐지 ?
         //        cell.contentLabel.text = contentArray[indexPath.row]
         return cell
     }

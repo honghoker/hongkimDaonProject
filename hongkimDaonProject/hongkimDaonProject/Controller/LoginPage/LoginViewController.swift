@@ -31,7 +31,9 @@ class LoginViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         if let user = Auth.auth().currentUser {
-            let docRef = self.database.document("diary/\(user.uid)")
+            let docRef = self.database.document("user/\(user.uid)")
+            guard let platFormCheck = user.email?.contains("gmail") else { return }
+            let platForm = platFormCheck == true ? "google" : "apple"
             docRef.getDocument { snapshot, error in
                 if let error = error {
                     print("DEBUG: \(error.localizedDescription)")
@@ -41,7 +43,7 @@ class LoginViewController: UIViewController {
                 if exist == true {
                     self.showMainViewController()
                 } else {
-                    self.showInputNickNameViewController()
+                    self.showInputNickNameViewController(userUid: user.uid, platForm: platForm)
                 }
             }
         }
@@ -49,19 +51,28 @@ class LoginViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
     }
-    private func showMainViewController() {
+}
+
+// MARK: Navigator
+extension LoginViewController {
+    func showMainViewController() {
         let storyboard = UIStoryboard(name: "MainPageView", bundle: Bundle.main)
         let mainViewController = storyboard.instantiateViewController(identifier: "MainPageContainerViewController")
         mainViewController.modalPresentationStyle = .fullScreen
         UIApplication.shared.windows.first?.rootViewController?.show(mainViewController, sender: nil)
     }
-    private func showInputNickNameViewController() {
-        let storyboard = UIStoryboard(name: "LoginView", bundle: Bundle.main)
-        let inputNickNameController = storyboard.instantiateViewController(identifier: "InputNickNameViewController")
-        inputNickNameController.modalPresentationStyle = .fullScreen
-        UIApplication.shared.windows.first?.rootViewController?.show(inputNickNameController, sender: nil)
+    func showInputNickNameViewController(userUid: String, platForm: String) {
+        if let inputNickNameController = self.storyboard?.instantiateViewController(withIdentifier: "InputNickNameViewController") as? InputNickNameViewController {
+            print("before userUid \(userUid)")
+            print("before platForm \(platForm)")
+            inputNickNameController.userUid = userUid
+            inputNickNameController.platForm = platForm
+            inputNickNameController.modalPresentationStyle = .fullScreen
+            UIApplication.shared.windows.first?.rootViewController?.show(inputNickNameController, sender: nil)
+        }
     }
 }
+
 // MARK: Google, Apple Login
 extension LoginViewController {
     @objc
@@ -78,7 +89,9 @@ extension LoginViewController {
                 // token을 넘겨주면, 성공했는지 안했는지에 대한 result값과 error값을 넘겨줌
                 if let user = Auth.auth().currentUser {
                     print("user : \(user.uid)")
-                    let docRef = self.database.document("diary/\(user.uid)")
+                    guard let platFormCheck = user.email?.contains("gmail") else { return }
+                    let platForm = platFormCheck == true ? "google" : "apple"
+                    let docRef = self.database.document("user/\(user.uid)")
                     docRef.getDocument { snapshot, error in
                         if let error = error {
                             print("DEBUG: \(error.localizedDescription)")
@@ -89,7 +102,7 @@ extension LoginViewController {
                         if exist == true {
                             self.showMainViewController()
                         } else {
-                            self.showInputNickNameViewController()
+                            self.showInputNickNameViewController(userUid: user.uid, platForm: platForm)
                             //                            self.showMainViewController()
                         }
                     }
@@ -147,7 +160,6 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
             FirebaseAuth.Auth.auth().signIn(with: credential) { (authDataResult, error) in
-                // 인증 결과에서 Firebase 사용자를 검색하고 사용자 정보를 표시할 수 있다.
                 if let user = authDataResult?.user {
                     print("애플 로그인 성공", user.uid, user.email ?? "-")
                     self.showMainViewController()
@@ -199,4 +211,3 @@ extension LoginViewController {
         return result
     }
 }
-
