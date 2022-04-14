@@ -57,7 +57,7 @@ class LoginViewController: UIViewController {
 extension LoginViewController {
     func showMainViewController() {
         let storyboard = UIStoryboard(name: "MainPageView", bundle: Bundle.main)
-        let mainViewController = storyboard.instantiateViewController(identifier: "MainPageContainerViewController")
+        let mainViewController = storyboard.instantiateViewController(identifier: "FirstMainPageContainerViewController")
         mainViewController.modalPresentationStyle = .fullScreen
         UIApplication.shared.windows.first?.rootViewController?.show(mainViewController, sender: nil)
     }

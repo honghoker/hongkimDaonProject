@@ -2,26 +2,26 @@ import UIKit
 import Tabman
 import Pageboy
 
-class MainPageViewController: TabmanViewController {
+class AlphaMainPageViewController: TabmanViewController {
     private var viewControllers: Array<UIViewController> = []
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let myDiaryViewController = storyboard?.instantiateViewController(withIdentifier: "MyDiaryViewController") as? MyDiaryViewController {
-            viewControllers.append(myDiaryViewController)
+        if let allWordingPageViewController = storyboard?.instantiateViewController(withIdentifier: "AllWordingPageViewController") as? AllWordingPageViewController {
+            viewControllers.append(allWordingPageViewController)
         }
-        if let myStorageViewController = storyboard?.instantiateViewController(withIdentifier: "MyStorageViewController") as? MyStorageViewController {
-            viewControllers.append(myStorageViewController)
+        if let alphaTodayWordingPageViewController = storyboard?.instantiateViewController(withIdentifier: "AlphaTodayWordingPageViewController") as? AlphaTodayWordingPageViewController {
+            viewControllers.append(alphaTodayWordingPageViewController)
         }
         self.dataSource = self
         let tabBar = TMBar.ButtonBar()
-        tabBar.backgroundView.style = .blur(style: .regular)
+        tabBar.backgroundView.style = .clear
         tabBar.buttons.customize { (button) in
             button.tintColor = .gray
             button.selectedTintColor = .black
             button.font = UIFont(name: "JejuMyeongjoOTF", size: 14) ?? UIFont.systemFont(ofSize: 14)
         }
         tabBar.layout.transitionStyle = .snap
-        tabBar.layout.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
+        tabBar.layout.alignment = .centerDistributed
         tabBar.layout.interButtonSpacing = 12
         tabBar.indicator.weight = .custom(value: 1)
         tabBar.indicator.tintColor = .black
@@ -30,23 +30,21 @@ class MainPageViewController: TabmanViewController {
     }
 }
 
-extension MainPageViewController: PageboyViewControllerDataSource, TMBarDataSource {
+extension AlphaMainPageViewController: PageboyViewControllerDataSource, TMBarDataSource {
     func barItem(for testBar: TMBar, at index: Int) -> TMBarItemable {
         let item = TMBarItem(title: "")
-        let title: String = index == 0 ? "나의 일기" : "나의 보관함"
+        let title: String = index == 0 ? "전체" : "오늘"
         item.title = title
         return item
     }
     func numberOfViewControllers(in pageboyViewController: PageboyViewController) -> Int {
         return viewControllers.count
     }
-
     func viewController(for pageboyViewController: PageboyViewController,
                         at index: PageboyViewController.PageIndex) -> UIViewController? {
         return viewControllers[index]
     }
-
     func defaultPage(for pageboyViewController: PageboyViewController) -> PageboyViewController.Page? {
-        return .at(index: 0)
+        return .at(index: 1)
     }
 }

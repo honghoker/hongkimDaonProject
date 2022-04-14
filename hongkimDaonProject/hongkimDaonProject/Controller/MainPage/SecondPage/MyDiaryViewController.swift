@@ -28,7 +28,6 @@ class MyDiaryViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
     }
-
 }
 
 extension MyDiaryViewController {
@@ -68,10 +67,10 @@ extension MyDiaryViewController {
             print("title title \(title)")
         }
     }
-//    func writeData(text: String) {
-//        let docRef = database.document("diary/1")
-//        docRef.setData(["text": text])
-//    }
+    //    func writeData(text: String) {
+    //        let docRef = database.document("diary/1")
+    //        docRef.setData(["text": text])
+    //    }
 }
 
 extension MyDiaryViewController: UITableViewDelegate {
@@ -80,8 +79,8 @@ extension MyDiaryViewController: UITableViewDelegate {
 extension MyDiaryViewController: UITableViewDataSource {
     // 테이블 뷰 셀의 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //        return 5
-        return self.diaryCount
+        return 5
+        //        return self.diaryCount
     }
     // 각 셀에 대한 설정
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

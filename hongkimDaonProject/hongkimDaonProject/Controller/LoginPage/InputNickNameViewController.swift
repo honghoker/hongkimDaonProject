@@ -49,7 +49,7 @@ extension InputNickNameViewController {
         //        logout()
         if self.overLapCheck == true {
             print("가입성공")
-            let demmyUserData: User = User(uid: self.userUid, nickName: self.nickNameTextField.text!, joinTime: 1, platForm: self.platForm, notification: true, notificationTime: 22)
+            let demmyUserData: User = User(uid: self.userUid, nickName: self.nickNameTextField.text!, joinTime: Date.currentTimeInMilli(), platForm: self.platForm, notification: true, notificationTime: Date.currentTimeInMilli())
             writeUserData(userData: demmyUserData)
         } else {
             print("가입실패")
@@ -71,6 +71,7 @@ extension InputNickNameViewController {
         if let text = nickNameTextField.text {
             if text.isEmpty == true {
                 overLapValue = true
+                self.changeState(overLapValue: overLapValue)
             } else {
                 let docRef = database.collection("user")
                 docRef.getDocuments(completion: { snapshot, error in
@@ -84,29 +85,21 @@ extension InputNickNameViewController {
                             if String(describing: nickName) == text {
                                 overLapValue = true
                             }
+                            self.changeState(overLapValue: overLapValue)
                         }
                     }
                 })
             }
         }
-        // 이거 위에 if 절 끝나고 돌아야하는데 if 끝나기 전에 밑에께 돌아버림 동기 비동기 처리해야함
-        if overLapValue {
-            // 닉네임 중복 o
-            self.warningOverLapText.isHidden = false
-            self.warningOverLapText.text = "닉네임이 중복입니다"
-            self.warningOverLapText.textColor = UIColor.systemRed
-            self.nickNameTextField.addRedUnderLine()
-            self.nickNameTextField.setNeedsLayout()
-            self.overLapCheck = false
-        } else {
-            // 닉네임 중복 x
-            self.overLapCheck = true
-            self.warningOverLapText.isHidden = false
-            self.warningOverLapText.text = "사용가능한 닉네임입니다"
-            self.warningOverLapText.textColor = UIColor.systemGreen
-            self.nickNameTextField.addUnderLine()
-            self.nickNameTextField.setNeedsLayout()
-        }
+    }
+    func changeState(overLapValue: Bool) {
+        print("overLapValue \(overLapValue)")
+        self.overLapCheck = !overLapValue
+        self.warningOverLapText.isHidden = !overLapValue
+        self.warningOverLapText.text = overLapValue ? "닉네임이 중복입니다" : "사용가능한. 닉네임입니다"
+        self.warningOverLapText.textColor = overLapValue ? UIColor.systemRed : UIColor.systemGreen
+        overLapValue ? self.nickNameTextField.addRedUnderLine() : self.nickNameTextField.addUnderLine()
+        self.nickNameTextField.setNeedsLayout()
     }
     // 추후 삭제
     @objc
@@ -151,5 +144,23 @@ extension InputNickNameViewController: UITextFieldDelegate {
         }
         guard textField.text!.count < 8 else { return false }
         return true
+    }
+}
+
+extension Date {
+    /**
+     # currentTimeInMilli
+     - Note: 현재 시간의 밀리초 반환
+    */
+    public static func currentTimeInMilli() -> Int {
+        return Date().timeInMilli()
+    }
+
+    /**
+     # timeInMilli
+     - Note: timeIntervalSince1970의 밀리초 반환
+    */
+    public func timeInMilli() -> Int {
+        return Int(self.timeIntervalSince1970 / 1000.0)
     }
 }
