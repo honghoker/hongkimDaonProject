@@ -1,7 +1,7 @@
 import UIKit
 import Firebase
 
-class MainPageContainerViewController: UIViewController {
+class SecondMainPageContainerViewController: UIViewController {
     @IBOutlet weak var setBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
