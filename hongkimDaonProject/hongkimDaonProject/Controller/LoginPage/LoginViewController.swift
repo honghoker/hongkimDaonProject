@@ -25,7 +25,10 @@ class LoginViewController: UIViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         if let user = Auth.auth().currentUser {
-            print("@@@@@@@@@ 로그인 성공 user : \(user.uid)")
+            print("@@@@@@@@@ 로그인 성공 user : \(user.uid)")            
+            // db check
+            // 신규유저라면 닉네임 설정페이지 이동
+            // 기존유저라면 메인페이지 이동
             showMainViewController()
         }
     }
