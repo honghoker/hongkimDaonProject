@@ -10,9 +10,12 @@ target 'hongkimDaonProject' do
   pod 'SwiftLint'
   pod 'Firebase/Auth'
   pod 'GoogleSignIn'
+  pod 'Firebase/Core'
   pod 'Firebase/Firestore'
   pod 'Firebase/Storage'
+  pod 'FirebaseFirestoreSwift', '> 8.14.0-beta'
   pod 'SideMenu'
   pod 'Tabman', '~> 2.9'
   pod 'SnapKit', '~> 5.0.0'
+  pod 'FMPhotoPicker', '~> 1.3.0'
 end

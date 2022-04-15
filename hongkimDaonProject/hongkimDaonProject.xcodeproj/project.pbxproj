@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5117C9CE28008AD90072B9B2 /* ImageUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9CD28008AD90072B9B2 /* ImageUploader.swift */; };
+		5117C9CE28008AD90072B9B2 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9CD28008AD90072B9B2 /* StorageManager.swift */; };
 		5117C9D92803F4500072B9B2 /* SettingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9D82803F4500072B9B2 /* SettingPageViewController.swift */; };
 		5117C9DB2803F4820072B9B2 /* SettingPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5117C9DA2803F4820072B9B2 /* SettingPageView.storyboard */; };
 		5117C9E12803FE830072B9B2 /* WriteDiaryPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5117C9E02803FE830072B9B2 /* WriteDiaryPageView.storyboard */; };
@@ -19,6 +19,8 @@
 		5153FF2D27FD7BE00096AE7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2C27FD7BE00096AE7A /* Assets.xcassets */; };
 		5153FF3027FD7BE00096AE7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2E27FD7BE00096AE7A /* LaunchScreen.storyboard */; };
 		516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 516944502800142600462016 /* JejuMyeongjoOTF.otf */; };
+		5174FEA82808167400A844CD /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5174FEA72808167400A844CD /* Diary.swift */; };
+		5174FEAA2808DFD800A844CD /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5174FEA92808DFD800A844CD /* DatabaseManager.swift */; };
 		51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 51795E3927FD8BA700D5C696 /* .swiftlint.yml */; };
 		BC07019A280449ED00139415 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC070199280449ED00139415 /* GoogleService-Info.plist */; };
 		BC4BC7C82809236C00C755BF /* AllWordingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC4BC7C72809236C00C755BF /* AllWordingCell.xib */; };
@@ -48,7 +50,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5117C9CD28008AD90072B9B2 /* ImageUploader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageUploader.swift; sourceTree = "<group>"; };
+		5117C9CD28008AD90072B9B2 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		5117C9D82803F4500072B9B2 /* SettingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPageViewController.swift; sourceTree = "<group>"; };
 		5117C9DA2803F4820072B9B2 /* SettingPageView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingPageView.storyboard; sourceTree = "<group>"; };
 		5117C9E02803FE830072B9B2 /* WriteDiaryPageView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WriteDiaryPageView.storyboard; sourceTree = "<group>"; };
@@ -62,8 +64,9 @@
 		5153FF2F27FD7BE00096AE7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5153FF3127FD7BE00096AE7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		516944502800142600462016 /* JejuMyeongjoOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JejuMyeongjoOTF.otf; sourceTree = "<group>"; };
+		5174FEA72808167400A844CD /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
+		5174FEA92808DFD800A844CD /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		51795E3927FD8BA700D5C696 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
-		51FB5EBF2804355600C016A2 /* hongkimDaonProject.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = hongkimDaonProject.entitlements; sourceTree = "<group>"; };
 		7F7D6921C9B889176CDFE59F /* Pods-hongkimDaonProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.debug.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.debug.xcconfig"; sourceTree = "<group>"; };
 		95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hongkimDaonProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB26D9613EEAC686E23807B9 /* Pods-hongkimDaonProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.release.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -132,7 +135,8 @@
 		5117C9DC2803FD5A0072B9B2 /* firebase */ = {
 			isa = PBXGroup;
 			children = (
-				5117C9CD28008AD90072B9B2 /* ImageUploader.swift */,
+				5117C9CD28008AD90072B9B2 /* StorageManager.swift */,
+				5174FEA92808DFD800A844CD /* DatabaseManager.swift */,
 			);
 			path = firebase;
 			sourceTree = "<group>";
@@ -185,7 +189,6 @@
 		5153FF2227FD7BE00096AE7A /* hongkimDaonProject */ = {
 			isa = PBXGroup;
 			children = (
-				51FB5EBF2804355600C016A2 /* hongkimDaonProject.entitlements */,
 				516944492800046C00462016 /* Resources */,
 				516944482800046300462016 /* Model */,
 				516944472800045D00462016 /* Controller */,
@@ -226,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				BC7C9CB928055D4300FF28E1 /* User.swift */,
+				5174FEA72808167400A844CD /* Diary.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -500,12 +504,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC5777482807DE0700B4E664 /* TodayWordingPageViewController.swift in Sources */,
+				5174FEAA2808DFD800A844CD /* DatabaseManager.swift in Sources */,
 				5117C9E42803FF070072B9B2 /* WriteDiaryPageViewController.swift in Sources */,
 				5153FF2427FD7BE00096AE7A /* AppDelegate.swift in Sources */,
 				5117C9D92803F4500072B9B2 /* SettingPageViewController.swift in Sources */,
 				5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */,
 				BC4BC7CB280923EC00C755BF /* AllWordingCell.swift in Sources */,
 				5117C9CE28008AD90072B9B2 /* ImageUploader.swift in Sources */,
+				5117C9CE28008AD90072B9B2 /* StorageManager.swift in Sources */,
 				5153FF2827FD7BE00096AE7A /* LoginViewController.swift in Sources */,
 				BC69DD5F2802FE5900A6A9F6 /* SecondMainPageContainerViewController.swift in Sources */,
 				BCA9C4D02803E6BC0017EC87 /* MyStorageCell.swift in Sources */,
@@ -515,6 +521,7 @@
 				BC69DD4E28017DA200A6A9F6 /* SecondMainPageViewController.swift in Sources */,
 				BC69DD5D2802DBE000A6A9F6 /* MyDiaryCell.swift in Sources */,
 				BCD0D7C3280033B400E862D7 /* InputNickNameViewController.swift in Sources */,
+				5174FEA82808167400A844CD /* Diary.swift in Sources */,
 				BC69DD572801905400A6A9F6 /* MyStorageViewController.swift in Sources */,
 				BC57775328082CDD00B4E664 /* AllWordingPageViewController.swift in Sources */,
 				BC69DD542801903E00A6A9F6 /* MyDiaryViewController.swift in Sources */,
@@ -671,6 +678,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F92UQYH2RA;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = hongkimDaonProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -701,6 +709,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = F92UQYH2RA;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = hongkimDaonProject/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

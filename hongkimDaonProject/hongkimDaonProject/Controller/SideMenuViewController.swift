@@ -5,5 +5,3 @@ class SideMenuViewController: UIViewController {
         super.viewDidLoad()
     }
 }
-
-

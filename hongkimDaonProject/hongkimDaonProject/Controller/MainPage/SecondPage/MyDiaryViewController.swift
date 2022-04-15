@@ -93,8 +93,14 @@ extension MyDiaryViewController: UITableViewDataSource {
         cell.title.text = "성훈 제목"
         cell.content.text = "성훈 내용"
         cell.time.text = "성훈 시간"
-        //        cell.clipsToBounds = true -> 이거 뭐지 ?
+//        let cellClicked: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(cellClicked(index: indexPath.row, _:)))
+//        cell.addGestureRecognizer(cellClicked)
+        // clipsToBounds -> 이거 뭐지 ?
+        //        cell.clipsToBounds = true
         //        cell.contentLabel.text = contentArray[indexPath.row]
         return cell
     }
+//    func cellClicked(index: Int, _ gesture: UITapGestureRecognizer) {
+//        
+//    }
 }
