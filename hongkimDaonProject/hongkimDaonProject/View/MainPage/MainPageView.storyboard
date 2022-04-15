@@ -293,7 +293,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKf-zc-jhr">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                             </imageView>
-                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x5P-5j-Q0r">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="x5P-5j-Q0r">
                                 <rect key="frame" x="240.5" y="808" width="157.5" height="38"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0B9-rS-kMy">
@@ -344,6 +344,7 @@
                         <outlet property="imageView" destination="rKf-zc-jhr" id="itx-3c-lRk"/>
                         <outlet property="saveBtn" destination="hXg-Sg-Kwz" id="BkQ-2Z-6Z2"/>
                         <outlet property="shareBtn" destination="0B9-rS-kMy" id="XHW-L1-geM"/>
+                        <outlet property="stackView" destination="x5P-5j-Q0r" id="seR-Jg-hc7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iey-EI-a79" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -358,27 +359,30 @@
                         <viewControllerLayoutGuide type="top" id="ha7-iW-MGE"/>
                         <viewControllerLayoutGuide type="bottom" id="cs1-jW-WjV"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="5ab-p0-NDX">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5ab-p0-NDX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체보기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AoN-zv-acF">
-                                <rect key="frame" x="177.5" y="437.5" width="59" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KI9-rR-kLe">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="AoN-zv-acF" firstAttribute="centerX" secondItem="5ab-p0-NDX" secondAttribute="centerX" id="6rq-DT-201"/>
-                            <constraint firstItem="AoN-zv-acF" firstAttribute="centerY" secondItem="5ab-p0-NDX" secondAttribute="centerY" id="hqg-8Q-Iqe"/>
+                            <constraint firstItem="KI9-rR-kLe" firstAttribute="leading" secondItem="5ab-p0-NDX" secondAttribute="leading" id="8C4-HB-o3S"/>
+                            <constraint firstAttribute="bottom" secondItem="KI9-rR-kLe" secondAttribute="bottom" id="H9y-Hw-Glv"/>
+                            <constraint firstItem="KI9-rR-kLe" firstAttribute="top" secondItem="5ab-p0-NDX" secondAttribute="top" id="Wq5-pT-acL"/>
+                            <constraint firstAttribute="trailing" secondItem="KI9-rR-kLe" secondAttribute="trailing" id="sOn-bY-txE"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="KI9-rR-kLe" id="frh-qP-xrv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NC4-xI-2GO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3790" y="2389"/>
+            <point key="canvasLocation" x="-3470" y="2388"/>
         </scene>
     </scenes>
     <resources>

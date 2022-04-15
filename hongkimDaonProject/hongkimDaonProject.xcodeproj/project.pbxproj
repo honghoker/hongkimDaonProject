@@ -21,6 +21,8 @@
 		516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 516944502800142600462016 /* JejuMyeongjoOTF.otf */; };
 		51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 51795E3927FD8BA700D5C696 /* .swiftlint.yml */; };
 		BC07019A280449ED00139415 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC070199280449ED00139415 /* GoogleService-Info.plist */; };
+		BC4BC7C82809236C00C755BF /* AllWordingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC4BC7C72809236C00C755BF /* AllWordingCell.xib */; };
+		BC4BC7CB280923EC00C755BF /* AllWordingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4BC7CA280923EC00C755BF /* AllWordingCell.swift */; };
 		BC5777442807D81C00B4E664 /* FirstMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5777432807D81C00B4E664 /* FirstMainPageViewController.swift */; };
 		BC5777462807DAD100B4E664 /* FirstMainPageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5777452807DAD100B4E664 /* FirstMainPageContainerViewController.swift */; };
 		BC5777482807DE0700B4E664 /* TodayWordingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5777472807DE0700B4E664 /* TodayWordingPageViewController.swift */; };
@@ -66,6 +68,8 @@
 		95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hongkimDaonProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB26D9613EEAC686E23807B9 /* Pods-hongkimDaonProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.release.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.release.xcconfig"; sourceTree = "<group>"; };
 		BC070199280449ED00139415 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BC4BC7C72809236C00C755BF /* AllWordingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllWordingCell.xib; sourceTree = "<group>"; };
+		BC4BC7CA280923EC00C755BF /* AllWordingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWordingCell.swift; sourceTree = "<group>"; };
 		BC5777432807D81C00B4E664 /* FirstMainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMainPageViewController.swift; sourceTree = "<group>"; };
 		BC5777452807DAD100B4E664 /* FirstMainPageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMainPageContainerViewController.swift; sourceTree = "<group>"; };
 		BC5777472807DE0700B4E664 /* TodayWordingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWordingPageViewController.swift; sourceTree = "<group>"; };
@@ -252,6 +256,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		BC4BC7C9280923CD00C755BF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				BC4BC7CA280923EC00C755BF /* AllWordingCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		BC5777402807C2DF00B4E664 /* FirstPage */ = {
 			isa = PBXGroup;
 			children = (
@@ -279,6 +291,7 @@
 		BC57774B2808262500B4E664 /* AlphaPage */ = {
 			isa = PBXGroup;
 			children = (
+				BC4BC7C9280923CD00C755BF /* Cells */,
 				BC57774C2808267900B4E664 /* AlphaMainPageViewController.swift */,
 				BC57774E2808268F00B4E664 /* AlphaMainPageContainerViewController.swift */,
 				BC57775028082CB600B4E664 /* AlphaTodayWordingPageViewController.swift */,
@@ -309,6 +322,7 @@
 			children = (
 				BC69DD5A2802D94D00A6A9F6 /* MyDiaryCell.xib */,
 				BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */,
+				BC4BC7C72809236C00C755BF /* AllWordingCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -403,6 +417,7 @@
 			files = (
 				5117C9E12803FE830072B9B2 /* WriteDiaryPageView.storyboard in Resources */,
 				BC57774A2807E5F300B4E664 /* testPage.png in Resources */,
+				BC4BC7C82809236C00C755BF /* AllWordingCell.xib in Resources */,
 				BCA9C4D42803F03F0017EC87 /* DetailDiaryView.storyboard in Resources */,
 				516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */,
 				51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */,
@@ -489,6 +504,7 @@
 				5153FF2427FD7BE00096AE7A /* AppDelegate.swift in Sources */,
 				5117C9D92803F4500072B9B2 /* SettingPageViewController.swift in Sources */,
 				5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */,
+				BC4BC7CB280923EC00C755BF /* AllWordingCell.swift in Sources */,
 				5117C9CE28008AD90072B9B2 /* ImageUploader.swift in Sources */,
 				5153FF2827FD7BE00096AE7A /* LoginViewController.swift in Sources */,
 				BC69DD5F2802FE5900A6A9F6 /* SecondMainPageContainerViewController.swift in Sources */,

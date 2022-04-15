@@ -1,10 +1,12 @@
 import UIKit
+import SnapKit
 
 class AlphaTodayWordingPageViewController: UIViewController {
     @IBOutlet weak var downloadBtn: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
     @IBOutlet weak var shareBtn: UIButton!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var stackView: UIStackView!
     override func viewDidLoad() {
         super.viewDidLoad()
         let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
@@ -15,6 +17,26 @@ class AlphaTodayWordingPageViewController: UIViewController {
         saveBtn.titleLabel?.text = ""
         downloadBtn.titleLabel?.text = ""
     }
+    override func viewWillLayoutSubviews() {
+        shareBtn.titleLabel?.text = ""
+        saveBtn.titleLabel?.text = ""
+        downloadBtn.titleLabel?.text = ""
+    }
+//    override func viewDidLayoutSubviews() {
+//        shareBtn.titleLabel?.text = ""
+//        saveBtn.titleLabel?.text = ""
+//        downloadBtn.titleLabel?.text = ""
+//    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        shareBtn.titleLabel?.text = ""
+//        saveBtn.titleLabel?.text = ""
+//        downloadBtn.titleLabel?.text = ""
+//    }
+//    override func viewDidDisappear(_ animated: Bool) {
+//        shareBtn.titleLabel?.text = ""
+//        saveBtn.titleLabel?.text = ""
+//        downloadBtn.titleLabel?.text = ""
+//    }
 }
 
 extension AlphaTodayWordingPageViewController {

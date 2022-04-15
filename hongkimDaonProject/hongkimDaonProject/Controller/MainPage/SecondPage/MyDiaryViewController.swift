@@ -33,7 +33,7 @@ class MyDiaryViewController: UIViewController {
 extension MyDiaryViewController {
     @objc
     func tapFloatingBtn(_ gesture: UITapGestureRecognizer) {
-        //                loadData()
+//                        loadData()
         let storyboard: UIStoryboard = UIStoryboard(name: "WriteDiaryPageView", bundle: nil)
         let inputNickNameVC = storyboard.instantiateViewController(withIdentifier: "WriteDiaryPageViewController")
         inputNickNameVC.modalPresentationStyle = .fullScreen
@@ -51,21 +51,21 @@ extension MyDiaryViewController {
             print("documents.count \(documents.count)")
             self.diaryCount = documents.count
             self.diaryTableView.layoutIfNeeded()
-            //            documents.forEach { snapshot in
-            //                print("snapshot \(snapshot["title"])")
-            //            }
+            documents.forEach { snapshot in
+                print("snapshot \(String(describing: snapshot["title"]))")
+            }
         })
-        let docRef = database.document("diary/fOSHl6jdkmYpc9WH4q5p")
-        docRef.getDocument { snapshot, error in
-            guard let data = snapshot?.data(), error == nil else {
-                return
-            }
-            guard let title = data["title"] as? String else {
-                return
-            }
-            print("data data \(data)")
-            print("title title \(title)")
-        }
+        //        let docRef = database.document("diary/fOSHl6jdkmYpc9WH4q5p")
+        //        docRef.getDocument { snapshot, error in
+        //            guard let data = snapshot?.data(), error == nil else {
+        //                return
+        //            }
+        //            guard let title = data["title"] as? String else {
+        //                return
+        //            }
+        //            print("data data \(data)")
+        //            print("title title \(title)")
+        //        }
     }
     //    func writeData(text: String) {
     //        let docRef = database.document("diary/1")
