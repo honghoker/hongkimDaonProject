@@ -1,5 +1,6 @@
 import UIKit
 import SnapKit
+import FirebaseStorage
 
 class AlphaTodayWordingPageViewController: UIViewController {
     @IBOutlet weak var downloadBtn: UIButton!
@@ -10,33 +11,32 @@ class AlphaTodayWordingPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+//        StorageManager.shared.downloadURL(for: "today/2022/04/testPage.png") { [weak self] result in
+//            switch result {
+//            case .success(let url):
+//                var image: UIImage?
+//                DispatchQueue.global().async {
+//                    print("main dispatchqueue")
+//                    let data = try? Data(contentsOf: url)
+//                    DispatchQueue.main.async {
+//                        image = UIImage(data: data!)
+//                        self?.imageView.image = image?.withAlpha(0.5)
+//                        self?.imageView.isUserInteractionEnabled = true
+//                    }
+//                }
+//            case .failure(let error):
+//                print("Failed to get download url:\(error)")
+//            }
+//        }
         imageView.image = UIImage(named: "testPage")?.withAlpha(0.5)
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(imageClick)
-        shareBtn.titleLabel?.text = ""
-        saveBtn.titleLabel?.text = ""
-        downloadBtn.titleLabel?.text = ""
     }
     override func viewWillLayoutSubviews() {
         shareBtn.titleLabel?.text = ""
         saveBtn.titleLabel?.text = ""
         downloadBtn.titleLabel?.text = ""
     }
-//    override func viewDidLayoutSubviews() {
-//        shareBtn.titleLabel?.text = ""
-//        saveBtn.titleLabel?.text = ""
-//        downloadBtn.titleLabel?.text = ""
-//    }
-//    override func viewDidAppear(_ animated: Bool) {
-//        shareBtn.titleLabel?.text = ""
-//        saveBtn.titleLabel?.text = ""
-//        downloadBtn.titleLabel?.text = ""
-//    }
-//    override func viewDidDisappear(_ animated: Bool) {
-//        shareBtn.titleLabel?.text = ""
-//        saveBtn.titleLabel?.text = ""
-//        downloadBtn.titleLabel?.text = ""
-//    }
 }
 
 extension AlphaTodayWordingPageViewController {

@@ -495,6 +495,7 @@ PODS:
     - AppAuth/Core (~> 1.4)
     - GTMSessionFetcher/Core (~> 1.5)
   - GTMSessionFetcher/Core (1.7.1)
+  - Kingfisher (7.2.1)
   - leveldb-library (1.22.1)
   - nanopb (2.30908.0):
     - nanopb/decode (= 2.30908.0)
@@ -517,6 +518,7 @@ DEPENDENCIES:
   - FirebaseFirestoreSwift (> 8.14.0-beta)
   - FMPhotoPicker (~> 1.3.0)
   - GoogleSignIn
+  - Kingfisher (~> 7.0)
   - SideMenu
   - SnapKit (~> 5.0.0)
   - SwiftLint
@@ -545,6 +547,7 @@ SPEC REPOS:
     - gRPC-Core
     - GTMAppAuth
     - GTMSessionFetcher
+    - Kingfisher
     - leveldb-library
     - nanopb
     - Pageboy
@@ -576,6 +579,7 @@ SPEC CHECKSUMS:
   gRPC-Core: 4afa11bfbedf7cdecd04de535a9e046893404ed5
   GTMAppAuth: 987526d41b07efb1bedda5e936fe0cb718a03113
   GTMSessionFetcher: 4577a4cc914a5a07c40a8a0ad0acc22080418c2d
+  Kingfisher: 7c084bebf7d548c623ad41bcf765fb200efed369
   leveldb-library: 50c7b45cbd7bf543c81a468fe557a16ae3db8729
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   Pageboy: cf121b9dd48c63f3f281b2a9ec93d02e0f23879b
@@ -585,6 +589,6 @@ SPEC CHECKSUMS:
   SwiftLint: d41cc46a2ae58ac6d9f26954bc89f1d72e71fdef
   Tabman: 447a50447ed2869c39ab3b1a779327e43e067c4e
 
-PODFILE CHECKSUM: 0bb0f51d110bb3239ac1152f24153c1678a58960
+PODFILE CHECKSUM: 257a5fc4a20e786f6a7fd0165daf3dfd74100f05
 
 COCOAPODS: 1.11.3
