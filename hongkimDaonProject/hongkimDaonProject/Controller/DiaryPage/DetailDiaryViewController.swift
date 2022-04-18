@@ -3,16 +3,15 @@ import FirebaseFirestore
 
 class DetailDiaryViewController: UIViewController {
     var docId: String?
+    @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var diaryTitle: UILabel!
     @IBOutlet weak var writeTime: UILabel!
     @IBOutlet weak var diaryImage: UIImageView!
     @IBOutlet weak var diaryContent: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let width = self.view.frame.width
-        let navigationBar: UINavigationBar = UINavigationBar(frame: CGRect(x: 0, y: 0, width: width, height: 44))
-        navigationBar.barTintColor = .blue
-        self.view.addSubview(navigationBar)
+//        let width = self.view.frame.width
+        backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
         Firestore.firestore().collection("diary").document(docId!).addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else {
                 print("Error fetching document: \(error!)")
@@ -24,13 +23,17 @@ class DetailDiaryViewController: UIViewController {
             }
             do {
                 let diary: Diary = try document.data(as: Diary.self)
-                let url = URL(string: diary.imageUrl)
-                var image: UIImage?
-                DispatchQueue.global().async {
-                    let data = try? Data(contentsOf: url!)
-                    DispatchQueue.main.async {
-                        image = UIImage(data: data!)
-                        self.diaryImage.image = image
+                if diary.imageUrl == "" {
+                    // MARK: 이미지 뷰 크기 0으로 조절
+                } else {
+                    let url = URL(string: diary.imageUrl)
+                    var image: UIImage?
+                    DispatchQueue.global().async {
+                        let data = try? Data(contentsOf: url!)
+                        DispatchQueue.main.async {
+                            image = UIImage(data: data!)
+                            self.diaryImage.image = image
+                        }
                     }
                 }
                 self.diaryTitle.text = diary.title
@@ -43,5 +46,12 @@ class DetailDiaryViewController: UIViewController {
             } catch {
             }
         }
+    }
+}
+
+extension DetailDiaryViewController {
+    @objc
+    func back() {
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }

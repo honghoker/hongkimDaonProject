@@ -8,6 +8,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
+import Accelerate
 
 final class DatabaseManager {
     static let shared = DatabaseManager()
@@ -63,6 +64,18 @@ final class DatabaseManager {
     }
     public func deleteDiray(diary: Diary) {
     }
+    public func daonStorageSave(docId: String, completion: @escaping (Result<String, Error>) -> Void) {
+        let user = Auth.auth().currentUser
+        guard let uid = user?.uid else { return }
+        let nowTime = Int64(Date().millisecondsSince1970)
+        db.collection("daon").document(docId).updateData(["storageUser.\(uid)": nowTime ], completion: {error in
+            guard error == nil else {
+                completion(.failure(DaonErros.failedToSave))
+                return
+            }
+            completion(.success(""))
+        })
+    }
     public enum DiaryErros: Error {
         case failedToGet
         case failedToDecoded
@@ -70,6 +83,9 @@ final class DatabaseManager {
         case failedToUpdate
         case failedToUpdateImageUrl
         case failedToDelete
+    }
+    public enum DaonErros: Error {
+        case failedToSave
     }
     func removeListener() {
         diaryDocumentListener?.remove()

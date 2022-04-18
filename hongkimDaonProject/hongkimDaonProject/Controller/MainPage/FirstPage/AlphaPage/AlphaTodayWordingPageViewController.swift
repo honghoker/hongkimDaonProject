@@ -1,5 +1,7 @@
 import UIKit
 import SnapKit
+import FirebaseAuth
+import FirebaseFirestore
 import FirebaseStorage
 import Kingfisher
 
@@ -29,6 +31,25 @@ class AlphaTodayWordingPageViewController: UIViewController {
         shareBtn.titleLabel?.text = ""
         saveBtn.titleLabel?.text = ""
         downloadBtn.titleLabel?.text = ""
+    }
+    @objc
+    func testDaonUpload() {
+        let nowTime = Date().millisecondsSince1970
+        Firestore.firestore().collection("daon").document("\(nowTime)").setData(["imageUrl": "https://firebasestorage.googleapis.com:443/v0/b/hongkimdaonproject.appspot.com/o/diary%2F1649996407571?alt=media&token=0d53a2ef-7ae8-4b3c-aa6b-286fd1b486b3", "uploadTime": nowTime, "storageUser": [String: String]() ])
+    }
+    @objc
+    func daonStorageSave() {
+        // MARK: 성훈 내부 db 추가 필요
+        // 1. 터치 시 내부 db에 있으면 이미 저장된거라고 토스트 띄우기
+        // 2. 터치 시 내부 db에 없으면 추가
+        DatabaseManager.shared.daonStorageSave(docId: "1650313640244") { result in
+            switch result {
+            case .success(let success):
+                print("@@@@@@@ 저장됐다는 토스트 : \(success)")
+            case .failure(let error):
+                print("@@@@@@@ 저장 실패했다는 토스트 : \(error)")
+            }
+        }
     }
 }
 

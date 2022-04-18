@@ -26,6 +26,7 @@
 		51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 51795E3927FD8BA700D5C696 /* .swiftlint.yml */; };
 		51F363C2280D221B003452F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 51F363C1280D221B003452F4 /* Realm */; };
 		51F363C4280D221B003452F4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 51F363C3280D221B003452F4 /* RealmSwift */; };
+		51F363C6280E01A7003452F4 /* Daon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F363C5280E01A6003452F4 /* Daon.swift */; };
 		BC07019A280449ED00139415 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC070199280449ED00139415 /* GoogleService-Info.plist */; };
 		BC12E5FC280D470A0011D261 /* Today.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC12E5FB280D470A0011D261 /* Today.swift */; };
 		BC4BC7C82809236C00C755BF /* AllWordingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC4BC7C72809236C00C755BF /* AllWordingCell.xib */; };
@@ -74,6 +75,7 @@
 		5174FEAD280C3A2900A844CD /* TestDiaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestDiaryCell.xib; sourceTree = "<group>"; };
 		5174FEAF280C3B2400A844CD /* TestDiaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDiaryCell.swift; sourceTree = "<group>"; };
 		51795E3927FD8BA700D5C696 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		51F363C5280E01A6003452F4 /* Daon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daon.swift; sourceTree = "<group>"; };
 		7F7D6921C9B889176CDFE59F /* Pods-hongkimDaonProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.debug.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.debug.xcconfig"; sourceTree = "<group>"; };
 		95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hongkimDaonProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB26D9613EEAC686E23807B9 /* Pods-hongkimDaonProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.release.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -240,6 +242,7 @@
 			children = (
 				BC7C9CB928055D4300FF28E1 /* User.swift */,
 				5174FEA72808167400A844CD /* Diary.swift */,
+				51F363C5280E01A6003452F4 /* Daon.swift */,
 				BC12E5FB280D470A0011D261 /* Today.swift */,
 			);
 			path = Model;
@@ -527,6 +530,7 @@
 				BC5777482807DE0700B4E664 /* TodayWordingPageViewController.swift in Sources */,
 				5174FEAA2808DFD800A844CD /* DatabaseManager.swift in Sources */,
 				5117C9E42803FF070072B9B2 /* WriteDiaryPageViewController.swift in Sources */,
+				51F363C6280E01A7003452F4 /* Daon.swift in Sources */,
 				5153FF2427FD7BE00096AE7A /* AppDelegate.swift in Sources */,
 				5117C9D92803F4500072B9B2 /* SettingPageViewController.swift in Sources */,
 				5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */,

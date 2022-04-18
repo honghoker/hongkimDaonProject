@@ -12,14 +12,17 @@ import FirebaseFirestoreSwift
 import FMPhotoPicker
 
 class WriteDiaryPageViewController: UIViewController {
+    @IBOutlet weak var backBtn: UILabel!
+    @IBOutlet weak var completeBtn: UILabel!
     @IBOutlet weak var imageButton: UIButton!
     @IBOutlet weak var diaryTitleTextField: UITextField!
     @IBOutlet weak var diaryContentTextView: UITextView!
-    @IBOutlet weak var backBtn: UILabel!
-    @IBOutlet weak var completeBtn: UILabel!
+    @IBOutlet weak var scrollView: UIScrollView!
     let placeholderText = "내용을 입력해주세요."
+    private let titleMaxLength: Int = 50
     override func viewDidLoad() {
         super.viewDidLoad()
+        diaryTitleTextField.delegate = self
         diaryContentTextView.text = placeholderText
         diaryContentTextView.textColor = .lightGray
         diaryContentTextView.delegate = self
@@ -59,7 +62,6 @@ extension Date {
 extension WriteDiaryPageViewController {
     @objc
     func back(_ gesture: UITapGestureRecognizer) {
-        print("@@@@@@@@ back")
         self.presentingViewController?.dismiss(animated: true)
     }
     @objc
@@ -84,7 +86,6 @@ extension WriteDiaryPageViewController {
                         StorageManager.shared.uploadImage(with: data, filePath: "diary", fileName: String(writeTime)) { result in
                             switch result {
                             case .success(let downloadUrl):
-//                                let diary = Diary(id: nil, uid: uid, imageUrl: downloadUrl, title: title, content: content, writeTime: writeTime)
                                 DatabaseManager.shared.updateImageUrl(docId: String(writeTime), imageUrl: downloadUrl) { result in
                                     switch result {
                                     case .success(let success):
@@ -93,15 +94,6 @@ extension WriteDiaryPageViewController {
                                         print("@@@@@@@@ failedToUpdateImageUrl error : \(error)")
                                     }
                                 }
-//                                DatabaseManager.shared.writeDiary(diary: diary) { result in
-//                                    switch result {
-//                                    case .success(let success):
-//                                        print("@@@@@@@ 일기쓰기 성공 : \(success)")
-//                                        self.presentingViewController?.dismiss(animated: true)
-//                                    case .failure(let error):
-//                                        print("@@@@@@@ 일기쓰기 실패 error : \(error)")
-//                                    }
-//                                }
                             case .failure(let error):
                                 print("@@@@@@@@@@@ Storage manager error: \(error)")
                             }
@@ -112,18 +104,6 @@ extension WriteDiaryPageViewController {
                     print("@@@@@@@ 일기쓰기 실패 error : \(error)")
                 }
             }
-//            } else {
-//                let diary = Diary(id: nil, uid: uid, imageUrl: "", title: title, content: content, writeTime: writeTime)
-//                DatabaseManager.shared.writeDiary(diary: diary) { result in
-//                    switch result {
-//                    case .success(let success):
-//                        print("@@@@@@@ 일기쓰기 성공 : \(success)")
-//                        self.presentingViewController?.dismiss(animated: true)
-//                    case .failure(let error):
-//                        print("@@@@@@@ 일기쓰기 실패 error : \(error)")
-//                    }
-//                }
-//            }
         } else {
             print("@@@@@@@@@@@ uid 없음 토스트")
         }
@@ -155,6 +135,20 @@ extension WriteDiaryPageViewController {
     }
 }
 
+// MARK: textField 글자 수 제한 + BackSpace 감지
+extension WriteDiaryPageViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let char = string.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
+        guard textField.text!.count < titleMaxLength else { return false }
+        return true
+    }
+}
+
 extension WriteDiaryPageViewController: FMPhotoPickerViewControllerDelegate {
     func fmImageEditorViewController(_ editor: FMImageEditorViewController, didFinishEdittingPhotoWith photo: UIImage) {
         self.dismiss(animated: true, completion: nil)
@@ -168,6 +162,27 @@ extension WriteDiaryPageViewController: FMPhotoPickerViewControllerDelegate {
 }
 
 extension WriteDiaryPageViewController: UITextViewDelegate {
+    //    func animateTextField(textField: UITextField, up: Bool) {
+    //        let movementDistance: CGFloat = -130
+    //        let movementDuration: Double = 0.3
+    //        var movement: CGFloat = 0
+    //        if up {
+    //            movement = movementDistance
+    //        } else {
+    //            movement = -movementDistance
+    //        }
+    //        UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState], animations: {
+    //            self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+    //        }, completion: nil)
+    //    }
+    //
+    //    func textFieldDidBeginEditing(_ textField: UITextField) {
+    //        animateTextField(textField: textField, up: true)
+    //    }
+    //
+    //    func textFieldDidEndEditing(_ textField: UITextField) {
+    //        animateTextField(textField: textField, up: false)
+    //    }
     func textViewDidBeginEditing(_ textView: UITextView) {
         if self.view.window != nil {
             if textView.textColor == UIColor.lightGray {
