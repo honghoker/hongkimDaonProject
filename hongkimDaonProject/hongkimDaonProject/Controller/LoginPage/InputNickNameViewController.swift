@@ -23,15 +23,7 @@ class InputNickNameViewController: UIViewController {
         nickNameTextField.delegate = self
         nickNameTextField.addUnderLine()
     }
-    // 이거 두개 무슨 차인지..? 결과는 똑같음
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        confirmBtn.titleLabel?.textAlignment = .center
-        confirmBtn.layer.borderWidth = 1
-        confirmBtn.layer.borderColor = UIColor.black.cgColor
-        confirmBtn.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
-        confirmBtn.addTarget(self, action: #selector(onTapConfirmBtn), for: .touchUpInside)
-    }
+    // storyboard에서 세팅을 해놨는데 vc에서 confirmBtn click 하고나면 왜 layout이 초기화되는건지..?
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         confirmBtn.titleLabel?.textAlignment = .center
@@ -73,30 +65,23 @@ extension InputNickNameViewController {
                 overLapValue = true
                 self.changeState(overLapValue: overLapValue)
             } else {
-                let docRef = database.collection("user")
+                let docRef = database.collection("user").whereField("nickName", isEqualTo: text)
                 docRef.getDocuments(completion: { snapshot, error in
                     if let error = error {
                         print("DEBUG: \(error.localizedDescription)")
                         return
                     }
-                    guard let documents = snapshot?.documents else { return } // document 가져옴
-                    documents.forEach { snapshot in
-                        if let nickName = snapshot["nickName"] {
-                            if String(describing: nickName) == text {
-                                overLapValue = true
-                            }
-                            self.changeState(overLapValue: overLapValue)
-                        }
-                    }
+                    guard let documents = snapshot?.documents else { return }
+                    overLapValue = documents.isEmpty == true ? false : true
+                    self.changeState(overLapValue: overLapValue)
                 })
             }
         }
     }
     func changeState(overLapValue: Bool) {
-        print("overLapValue \(overLapValue)")
         self.overLapCheck = !overLapValue
-        self.warningOverLapText.isHidden = !overLapValue
-        self.warningOverLapText.text = overLapValue ? "닉네임이 중복입니다" : "사용가능한. 닉네임입니다"
+        self.warningOverLapText.isHidden = false
+        self.warningOverLapText.text = overLapValue ? "닉네임이 중복입니다" : "사용가능한 닉네임입니다"
         self.warningOverLapText.textColor = overLapValue ? UIColor.systemRed : UIColor.systemGreen
         overLapValue ? self.nickNameTextField.addRedUnderLine() : self.nickNameTextField.addUnderLine()
         self.nickNameTextField.setNeedsLayout()

@@ -1,6 +1,7 @@
 import UIKit
 import Tabman
 import Pageboy
+import FirebaseStorage
 
 class AlphaMainPageViewController: TabmanViewController {
     private var viewControllers: Array<UIViewController> = []
