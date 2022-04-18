@@ -15,84 +15,99 @@
     </customFonts>
     <scenes>
         <!--Detail Diary View Controller-->
-        <scene sceneID="s0d-6b-0kx">
+        <scene sceneID="6wR-sc-SU6">
             <objects>
-                <viewController storyboardIdentifier="DetailDiaryViewController" id="Y6W-OH-hqX" customClass="DetailDiaryViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                <viewController storyboardIdentifier="DetailDiaryViewController" id="DnZ-SF-MPP" customClass="DetailDiaryViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uFl-VA-Hzr">
+                        <rect key="frame" x="0.0" y="0.0" width="335" height="1500"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cAE-bX-z2w">
-                                <rect key="frame" x="16" y="144" width="44.5" height="21"/>
-                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="18"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J7h-Ad-jxI">
-                                <rect key="frame" x="16" y="197" width="34.5" height="16.5"/>
-                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
-                                <color key="textColor" systemColor="systemGray2Color"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uXc-jM-V9o">
-                                <rect key="frame" x="16" y="233.5" width="382" height="180"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="szv-3A-TNZ">
+                                <rect key="frame" x="0.0" y="44" width="335" height="1422"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pSn-u1-4vc">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="415"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iT6-pu-eeh" userLabel="Diary Title">
+                                                <rect key="frame" x="16" y="32" width="42.5" height="18"/>
+                                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="18"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKf-bA-V63" userLabel="Write Time">
+                                                <rect key="frame" x="16" y="82" width="33" height="14.5"/>
+                                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="253" translatesAutoresizingMaskIntoConstraints="NO" id="26B-sY-s81">
+                                                <rect key="frame" x="16" y="128.5" width="303" height="240"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="240" id="ezs-Gh-ia2"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLb-xj-LKN" userLabel="Diary Content">
+                                                <rect key="frame" x="16" y="400.5" width="303" height="14.5"/>
+                                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WKf-bA-V63" secondAttribute="trailing" constant="16" id="4Yp-xq-Evh"/>
+                                            <constraint firstAttribute="trailing" secondItem="WLb-xj-LKN" secondAttribute="trailing" constant="16" id="FuE-gE-WUI"/>
+                                            <constraint firstAttribute="bottom" secondItem="WLb-xj-LKN" secondAttribute="bottom" id="HfC-n2-QZR"/>
+                                            <constraint firstItem="iT6-pu-eeh" firstAttribute="leading" secondItem="pSn-u1-4vc" secondAttribute="leading" constant="16" id="JJp-pS-YU9"/>
+                                            <constraint firstItem="WKf-bA-V63" firstAttribute="leading" secondItem="pSn-u1-4vc" secondAttribute="leading" constant="16" id="K5b-cG-48H"/>
+                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iT6-pu-eeh" secondAttribute="trailing" constant="16" id="NPj-xi-JWu"/>
+                                            <constraint firstItem="iT6-pu-eeh" firstAttribute="top" secondItem="pSn-u1-4vc" secondAttribute="top" constant="32" id="RS5-Xl-szX"/>
+                                            <constraint firstItem="WLb-xj-LKN" firstAttribute="top" secondItem="26B-sY-s81" secondAttribute="bottom" constant="32" id="V0g-JA-5sg"/>
+                                            <constraint firstAttribute="trailing" secondItem="26B-sY-s81" secondAttribute="trailing" constant="16" id="XUd-de-Pyb"/>
+                                            <constraint firstItem="WKf-bA-V63" firstAttribute="top" secondItem="iT6-pu-eeh" secondAttribute="bottom" constant="32" id="XZQ-yi-68b"/>
+                                            <constraint firstItem="WLb-xj-LKN" firstAttribute="leading" secondItem="pSn-u1-4vc" secondAttribute="leading" constant="16" id="akR-Yi-Z6m"/>
+                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="WLb-xj-LKN" secondAttribute="bottom" id="ksV-Hx-yYS"/>
+                                            <constraint firstItem="26B-sY-s81" firstAttribute="top" secondItem="WKf-bA-V63" secondAttribute="bottom" constant="32" id="oVj-cS-nBX"/>
+                                            <constraint firstItem="26B-sY-s81" firstAttribute="leading" secondItem="pSn-u1-4vc" secondAttribute="leading" constant="16" id="s2B-8R-EMo"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="5zs-nD-vaA"/>
+                                    <constraint firstItem="pSn-u1-4vc" firstAttribute="top" secondItem="JVq-NN-8HM" secondAttribute="top" id="BiJ-xa-dSb"/>
+                                    <constraint firstItem="pSn-u1-4vc" firstAttribute="bottom" secondItem="JVq-NN-8HM" secondAttribute="bottom" id="CeK-1k-59x"/>
+                                    <constraint firstItem="pSn-u1-4vc" firstAttribute="width" secondItem="sFG-2g-OjC" secondAttribute="width" id="ILx-38-aXo"/>
+                                    <constraint firstItem="pSn-u1-4vc" firstAttribute="leading" secondItem="JVq-NN-8HM" secondAttribute="leading" id="Sth-d7-10P"/>
+                                    <constraint firstItem="pSn-u1-4vc" firstAttribute="trailing" secondItem="JVq-NN-8HM" secondAttribute="trailing" id="kTq-NI-bI6"/>
                                 </constraints>
-                            </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6Pc-h9-KYd">
-                                <rect key="frame" x="16" y="433.5" width="382" height="428.5"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <color key="textColor" systemColor="labelColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wpv-r4-GAl">
-                                <rect key="frame" x="331" y="815" width="67" height="31"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="Button"/>
-                            </button>
+                                <viewLayoutGuide key="contentLayoutGuide" id="JVq-NN-8HM"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="sFG-2g-OjC"/>
+                            </scrollView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <viewLayoutGuide key="safeArea" id="mlW-63-vrX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Pc-h9-KYd" firstAttribute="top" secondItem="uXc-jM-V9o" secondAttribute="bottom" constant="20" id="Mju-OD-S5T"/>
-                            <constraint firstItem="J7h-Ad-jxI" firstAttribute="top" secondItem="cAE-bX-z2w" secondAttribute="bottom" constant="32" id="Y4A-c3-t03"/>
-                            <constraint firstItem="6Pc-h9-KYd" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="bok-SW-oHo"/>
-                            <constraint firstItem="cAE-bX-z2w" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="100" id="cVy-be-UrI"/>
-                            <constraint firstItem="uXc-jM-V9o" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="cWk-Gz-XUx"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="wpv-r4-GAl" secondAttribute="bottom" constant="16" id="cjD-lz-W7j"/>
-                            <constraint firstItem="uXc-jM-V9o" firstAttribute="top" secondItem="J7h-Ad-jxI" secondAttribute="bottom" constant="20" id="f7w-VW-cEq"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="uXc-jM-V9o" secondAttribute="trailing" constant="16" id="hOF-Vy-2aV"/>
-                            <constraint firstItem="cAE-bX-z2w" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="hg8-bt-JDL"/>
-                            <constraint firstItem="J7h-Ad-jxI" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="l51-OG-GLH"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="wpv-r4-GAl" secondAttribute="trailing" constant="16" id="n0c-bX-Ym3"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="6Pc-h9-KYd" secondAttribute="trailing" constant="16" id="rhp-Hn-5ak"/>
-                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="6Pc-h9-KYd" secondAttribute="bottom" id="vJr-2O-SXZ"/>
+                            <constraint firstItem="szv-3A-TNZ" firstAttribute="leading" secondItem="mlW-63-vrX" secondAttribute="leading" id="2lu-SE-tbI"/>
+                            <constraint firstItem="szv-3A-TNZ" firstAttribute="top" secondItem="mlW-63-vrX" secondAttribute="top" id="NOO-Qc-6d4"/>
+                            <constraint firstAttribute="bottom" secondItem="szv-3A-TNZ" secondAttribute="bottom" constant="34" id="YMo-8E-7vl"/>
+                            <constraint firstItem="mlW-63-vrX" firstAttribute="trailing" secondItem="szv-3A-TNZ" secondAttribute="trailing" id="qjy-AX-eBh"/>
                         </constraints>
                     </view>
+                    <size key="freeformSize" width="335" height="1500"/>
                     <connections>
-                        <outlet property="diaryContent" destination="6Pc-h9-KYd" id="BiB-V4-wml"/>
-                        <outlet property="diaryImage" destination="uXc-jM-V9o" id="jNW-Jf-vsi"/>
-                        <outlet property="diaryTitle" destination="cAE-bX-z2w" id="WLS-OP-VpL"/>
-                        <outlet property="uploadTime" destination="J7h-Ad-jxI" id="60f-nQ-tP5"/>
+                        <outlet property="diaryContent" destination="WLb-xj-LKN" id="Grw-oj-U4z"/>
+                        <outlet property="diaryImage" destination="26B-sY-s81" id="HnX-N6-ZFn"/>
+                        <outlet property="diaryTitle" destination="iT6-pu-eeh" id="zwQ-zP-zhr"/>
+                        <outlet property="writeTime" destination="WKf-bA-V63" id="Xk7-2z-Ohd"/>
                     </connections>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aYs-8j-FIX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-16" y="41"/>
+            <point key="canvasLocation" x="707.97101449275362" y="242.41071428571428"/>
         </scene>
     </scenes>
     <resources>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray2Color">
-            <color red="0.68235294117647061" green="0.68235294117647061" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
