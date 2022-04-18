@@ -41,7 +41,7 @@ extension InputNickNameViewController {
         //        logout()
         if self.overLapCheck == true {
             print("가입성공")
-            let demmyUserData: User = User(uid: self.userUid, nickName: self.nickNameTextField.text!, joinTime: Date.currentTimeInMilli(), platForm: self.platForm, notification: true, notificationTime: Date.currentTimeInMilli())
+            let demmyUserData: User = User(uid: self.userUid, nickName: self.nickNameTextField.text!, joinTime: Int(Date().millisecondsSince1970), platForm: self.platForm, notification: true, notificationTime: Int(Date().millisecondsSince1970))
             writeUserData(userData: demmyUserData)
         } else {
             print("가입실패")
@@ -129,23 +129,5 @@ extension InputNickNameViewController: UITextFieldDelegate {
         }
         guard textField.text!.count < 8 else { return false }
         return true
-    }
-}
-
-extension Date {
-    /**
-     # currentTimeInMilli
-     - Note: 현재 시간의 밀리초 반환
-    */
-    public static func currentTimeInMilli() -> Int {
-        return Date().timeInMilli()
-    }
-
-    /**
-     # timeInMilli
-     - Note: timeIntervalSince1970의 밀리초 반환
-    */
-    public func timeInMilli() -> Int {
-        return Int(self.timeIntervalSince1970 / 1000.0)
     }
 }

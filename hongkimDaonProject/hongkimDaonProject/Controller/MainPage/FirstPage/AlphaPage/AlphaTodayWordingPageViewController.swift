@@ -1,6 +1,7 @@
 import UIKit
 import SnapKit
 import FirebaseStorage
+import Kingfisher
 
 class AlphaTodayWordingPageViewController: UIViewController {
     @IBOutlet weak var downloadBtn: UIButton!
@@ -8,29 +9,21 @@ class AlphaTodayWordingPageViewController: UIViewController {
     @IBOutlet weak var shareBtn: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var backgroundUIView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
         let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-//        StorageManager.shared.downloadURL(for: "today/2022/04/testPage.png") { [weak self] result in
-//            switch result {
-//            case .success(let url):
-//                var image: UIImage?
-//                DispatchQueue.global().async {
-//                    print("main dispatchqueue")
-//                    let data = try? Data(contentsOf: url)
-//                    DispatchQueue.main.async {
-//                        image = UIImage(data: data!)
-//                        self?.imageView.image = image?.withAlpha(0.5)
-//                        self?.imageView.isUserInteractionEnabled = true
-//                    }
-//                }
-//            case .failure(let error):
-//                print("Failed to get download url:\(error)")
-//            }
-//        }
-        imageView.image = UIImage(named: "testPage")?.withAlpha(0.5)
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(imageClick)
+        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        backgroundUIView.isUserInteractionEnabled = true
+        backgroundUIView.addGestureRecognizer(imageClick)
+        imageView.image = UIImage(named: "testPage")
+        // MARK: 성훈 위에 주석하고 밑에 작업
+        //        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+        //        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        //        backgroundUIView.isUserInteractionEnabled = true
+        //        backgroundUIView.addGestureRecognizer(imageClick)
+        //        imageView.kf.indicatorType = .activity
+        //        imageView.kf.setImage(with: URL(string: mainImageUrl))
     }
     override func viewWillLayoutSubviews() {
         shareBtn.titleLabel?.text = ""
