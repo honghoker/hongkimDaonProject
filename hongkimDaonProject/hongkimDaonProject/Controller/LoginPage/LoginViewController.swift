@@ -48,9 +48,6 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-    }
 }
 
 // MARK: Navigator

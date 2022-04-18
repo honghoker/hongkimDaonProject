@@ -268,7 +268,7 @@
                         <viewControllerLayoutGuide type="top" id="quu-zW-98M"/>
                         <viewControllerLayoutGuide type="bottom" id="eFq-Nd-xII"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="SzF-OT-E4Z">
+                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SzF-OT-E4Z">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -363,17 +363,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="KI9-rR-kLe">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KI9-rR-kLe">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="KI9-rR-kLe" firstAttribute="leading" secondItem="5ab-p0-NDX" secondAttribute="leading" id="8C4-HB-o3S"/>
-                            <constraint firstAttribute="bottom" secondItem="KI9-rR-kLe" secondAttribute="bottom" id="H9y-Hw-Glv"/>
-                            <constraint firstItem="KI9-rR-kLe" firstAttribute="top" secondItem="5ab-p0-NDX" secondAttribute="top" id="Wq5-pT-acL"/>
-                            <constraint firstAttribute="trailing" secondItem="KI9-rR-kLe" secondAttribute="trailing" id="sOn-bY-txE"/>
+                            <constraint firstItem="KI9-rR-kLe" firstAttribute="top" secondItem="5ab-p0-NDX" secondAttribute="top" id="c1h-8p-zrn"/>
+                            <constraint firstItem="KI9-rR-kLe" firstAttribute="leading" secondItem="5ab-p0-NDX" secondAttribute="leading" id="eEb-zn-lbC"/>
+                            <constraint firstAttribute="bottom" secondItem="KI9-rR-kLe" secondAttribute="bottom" id="eFw-eY-jkn"/>
+                            <constraint firstAttribute="trailing" secondItem="KI9-rR-kLe" secondAttribute="trailing" id="wVH-Gj-J0K"/>
                         </constraints>
                     </view>
                     <connections>
