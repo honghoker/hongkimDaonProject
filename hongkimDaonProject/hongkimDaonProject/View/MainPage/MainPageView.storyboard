@@ -320,18 +320,27 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xwz-th-NaZ">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Xwz-th-NaZ" secondAttribute="trailing" id="5KR-xZ-UeS"/>
+                            <constraint firstAttribute="bottom" secondItem="Xwz-th-NaZ" secondAttribute="bottom" id="7cj-nK-Whp"/>
                             <constraint firstItem="6Eb-qh-UaD" firstAttribute="top" secondItem="x5P-5j-Q0r" secondAttribute="bottom" constant="16" id="AAq-n3-RAU"/>
                             <constraint firstItem="rKf-zc-jhr" firstAttribute="leading" secondItem="nUo-97-vj2" secondAttribute="leading" id="QGO-wd-gSf"/>
                             <constraint firstItem="rKf-zc-jhr" firstAttribute="top" secondItem="nUo-97-vj2" secondAttribute="top" id="b1H-Ty-zp5"/>
                             <constraint firstAttribute="trailing" secondItem="x5P-5j-Q0r" secondAttribute="trailing" constant="16" id="e5n-MF-Z4F"/>
                             <constraint firstAttribute="trailing" secondItem="rKf-zc-jhr" secondAttribute="trailing" id="etY-dq-15z"/>
+                            <constraint firstItem="Xwz-th-NaZ" firstAttribute="top" secondItem="nUo-97-vj2" secondAttribute="top" id="hIz-V1-xgP"/>
                             <constraint firstAttribute="bottom" secondItem="rKf-zc-jhr" secondAttribute="bottom" id="j3g-sT-kp8"/>
+                            <constraint firstItem="Xwz-th-NaZ" firstAttribute="leading" secondItem="nUo-97-vj2" secondAttribute="leading" id="zxI-zY-v0A"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backgroundUIView" destination="Xwz-th-NaZ" id="wDD-Na-oe8"/>
                         <outlet property="downloadBtn" destination="Nl5-hR-dh9" id="fP4-hl-LOR"/>
                         <outlet property="imageView" destination="rKf-zc-jhr" id="itx-3c-lRk"/>
                         <outlet property="saveBtn" destination="hXg-Sg-Kwz" id="BkQ-2Z-6Z2"/>
