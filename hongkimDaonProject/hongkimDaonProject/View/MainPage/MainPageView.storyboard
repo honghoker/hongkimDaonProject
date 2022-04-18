@@ -25,6 +25,9 @@
                                 <rect key="frame" x="351" y="76" width="47" height="31"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="text.justify.trailing" catalog="system"/>
+                                <connections>
+                                    <action selector="testNavigateToSettingPage" destination="AzR-Gy-LGx" eventType="touchUpInside" id="gZb-Vh-7JK"/>
+                                </connections>
                             </button>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MsC-Ym-M3L">
                                 <rect key="frame" x="16" y="139" width="382" height="723"/>
@@ -67,20 +70,10 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wm9-KT-EZ6">
-                                <rect key="frame" x="334" y="766" width="64" height="64"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="64" id="l7V-i1-AGo"/>
-                                    <constraint firstAttribute="width" constant="64" id="zg7-Og-XPs"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="brZ-UJ-sgY" firstAttribute="top" secondItem="yvl-PJ-Pex" secondAttribute="bottom" id="0K1-Tv-4IZ"/>
-                            <constraint firstAttribute="trailing" secondItem="wm9-KT-EZ6" secondAttribute="trailing" constant="16" id="F1z-yf-fW6"/>
-                            <constraint firstItem="dn1-YL-cAA" firstAttribute="top" secondItem="wm9-KT-EZ6" secondAttribute="bottom" constant="32" id="bO9-Ng-iVG"/>
                             <constraint firstItem="brZ-UJ-sgY" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="lbT-xB-oUW"/>
                             <constraint firstAttribute="trailing" secondItem="brZ-UJ-sgY" secondAttribute="trailing" id="p5P-iF-gF2"/>
                             <constraint firstItem="dn1-YL-cAA" firstAttribute="top" secondItem="brZ-UJ-sgY" secondAttribute="bottom" id="zwg-At-VUO"/>
@@ -88,12 +81,11 @@
                     </view>
                     <connections>
                         <outlet property="diaryTableView" destination="brZ-UJ-sgY" id="zva-QU-8jg"/>
-                        <outlet property="floatingBtn" destination="wm9-KT-EZ6" id="cJz-3m-SVe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2157" y="274"/>
+            <point key="canvasLocation" x="-2157.971014492754" y="273.88392857142856"/>
         </scene>
         <!--My Storage View Controller-->
         <scene sceneID="Fh5-Wn-HwI">
