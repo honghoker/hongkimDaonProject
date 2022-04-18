@@ -3,10 +3,10 @@ import FirebaseStorage
 
 final class StorageManager {
     static let shared = StorageManager()
-    private let storage = Storage.storage().reference()
-    public typealias UploadPictureCompletion = (Result<String, Error>) -> Void
-    public func uploadImage(with data: Data, filePath: String, fileName: String, completion: @escaping UploadPictureCompletion) {
-        storage.child("\(filePath)/\(fileName)").putData(data, metadata: nil, completion: { [weak self] metadata, error in
+    private let storage = Storage.storage()
+    public typealias StorageCompletion = (Result<String, Error>) -> Void
+    public func uploadImage(with data: Data, filePath: String, fileName: String, completion: @escaping StorageCompletion) {
+        storage.reference().child("\(filePath)/\(fileName)").putData(data, metadata: nil, completion: { [weak self] metadata, error in
             guard let strongSelf = self else {
                 return
             }
@@ -16,7 +16,7 @@ final class StorageManager {
                 completion(.failure(StorageErrors.failedToUpload))
                 return
             }
-            strongSelf.storage.child("\(filePath)/\(fileName)").downloadURL { url, error in
+            strongSelf.storage.reference().child("\(filePath)/\(fileName)").downloadURL { url, error in
                 guard let url = url else {
                     print("Failed to get download url")
                     completion(.failure(StorageErrors.failedToGetDownloadUrl))
@@ -27,6 +27,17 @@ final class StorageManager {
                 completion(.success(urlString))
             }
         })
+    }
+    public func downloadImage(url: URL, completion: @escaping (UIImage?) -> Void) {
+        let reference = storage.reference(forURL: url.absoluteString)
+        let megaByte = Int64(1 * 1024 * 1024)
+        reference.getData(maxSize: megaByte) { data, error in
+            guard let imageData = data else {
+                completion(nil)
+                return
+            }
+            completion(UIImage(data: imageData))
+        }
     }
     public enum StorageErrors: Error {
         case failedToUpload

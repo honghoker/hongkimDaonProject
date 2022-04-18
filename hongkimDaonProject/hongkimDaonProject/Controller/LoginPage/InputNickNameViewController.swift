@@ -85,9 +85,9 @@ extension InputNickNameViewController {
                             if String(describing: nickName) == text {
                                 overLapValue = true
                             }
-                            self.changeState(overLapValue: overLapValue)
                         }
                     }
+                    self.changeState(overLapValue: overLapValue)
                 })
             }
         }
@@ -95,8 +95,8 @@ extension InputNickNameViewController {
     func changeState(overLapValue: Bool) {
         print("overLapValue \(overLapValue)")
         self.overLapCheck = !overLapValue
-        self.warningOverLapText.isHidden = !overLapValue
-        self.warningOverLapText.text = overLapValue ? "닉네임이 중복입니다" : "사용가능한. 닉네임입니다"
+        self.warningOverLapText.isHidden = false
+        self.warningOverLapText.text = overLapValue ? "닉네임이 중복입니다" : "사용가능한 닉네임입니다"
         self.warningOverLapText.textColor = overLapValue ? UIColor.systemRed : UIColor.systemGreen
         overLapValue ? self.nickNameTextField.addRedUnderLine() : self.nickNameTextField.addUnderLine()
         self.nickNameTextField.setNeedsLayout()

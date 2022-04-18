@@ -65,7 +65,7 @@ extension WriteDiaryPageViewController {
     @objc
     func complete(_ gesture: UITapGestureRecognizer) {
         if let uid = Auth.auth().currentUser?.uid {
-            let writeTime: Int = Int(Date().millisecondsSince1970)
+            let writeTime: Int64 = Int64(Date().millisecondsSince1970)
             let title = diaryTitleTextField.text ?? ""
             var content: String = ""
             if diaryContentTextView.textColor != UIColor.lightGray {

@@ -7,7 +7,6 @@
 
 import UIKit
 
-
 struct NoAlert: FMAlertable {
     func show(in viewController: UIViewController, ok: @escaping () -> Void, cancel: @escaping () -> Void) {
         return

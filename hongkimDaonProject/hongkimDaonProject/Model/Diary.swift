@@ -15,5 +15,5 @@ struct Diary: Codable, Identifiable {
     var imageUrl: String
     let title: String
     let content: String
-    let writeTime: Int
+    let writeTime: Int64
 }

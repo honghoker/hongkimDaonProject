@@ -21,7 +21,11 @@
 		516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 516944502800142600462016 /* JejuMyeongjoOTF.otf */; };
 		5174FEA82808167400A844CD /* Diary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5174FEA72808167400A844CD /* Diary.swift */; };
 		5174FEAA2808DFD800A844CD /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5174FEA92808DFD800A844CD /* DatabaseManager.swift */; };
+		5174FEAE280C3A2900A844CD /* TestDiaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5174FEAD280C3A2900A844CD /* TestDiaryCell.xib */; };
+		5174FEB0280C3B2400A844CD /* TestDiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5174FEAF280C3B2400A844CD /* TestDiaryCell.swift */; };
 		51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 51795E3927FD8BA700D5C696 /* .swiftlint.yml */; };
+		51F363C2280D221B003452F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 51F363C1280D221B003452F4 /* Realm */; };
+		51F363C4280D221B003452F4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 51F363C3280D221B003452F4 /* RealmSwift */; };
 		BC07019A280449ED00139415 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC070199280449ED00139415 /* GoogleService-Info.plist */; };
 		BC4BC7C82809236C00C755BF /* AllWordingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC4BC7C72809236C00C755BF /* AllWordingCell.xib */; };
 		BC4BC7CB280923EC00C755BF /* AllWordingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4BC7CA280923EC00C755BF /* AllWordingCell.swift */; };
@@ -66,6 +70,8 @@
 		516944502800142600462016 /* JejuMyeongjoOTF.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = JejuMyeongjoOTF.otf; sourceTree = "<group>"; };
 		5174FEA72808167400A844CD /* Diary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diary.swift; sourceTree = "<group>"; };
 		5174FEA92808DFD800A844CD /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		5174FEAD280C3A2900A844CD /* TestDiaryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestDiaryCell.xib; sourceTree = "<group>"; };
+		5174FEAF280C3B2400A844CD /* TestDiaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestDiaryCell.swift; sourceTree = "<group>"; };
 		51795E3927FD8BA700D5C696 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		7F7D6921C9B889176CDFE59F /* Pods-hongkimDaonProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.debug.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.debug.xcconfig"; sourceTree = "<group>"; };
 		95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hongkimDaonProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -101,6 +107,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				51F363C4280D221B003452F4 /* RealmSwift in Frameworks */,
+				51F363C2280D221B003452F4 /* Realm in Frameworks */,
 				CC6576549A2D44437F8B7E24 /* Pods_hongkimDaonProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -327,6 +335,7 @@
 				BC69DD5A2802D94D00A6A9F6 /* MyDiaryCell.xib */,
 				BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */,
 				BC4BC7C72809236C00C755BF /* AllWordingCell.xib */,
+				5174FEAD280C3A2900A844CD /* TestDiaryCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -354,6 +363,7 @@
 			children = (
 				BC69DD5C2802DBE000A6A9F6 /* MyDiaryCell.swift */,
 				BCA9C4CF2803E6BC0017EC87 /* MyStorageCell.swift */,
+				5174FEAF280C3B2400A844CD /* TestDiaryCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -377,6 +387,10 @@
 			dependencies = (
 			);
 			name = hongkimDaonProject;
+			packageProductDependencies = (
+				51F363C1280D221B003452F4 /* Realm */,
+				51F363C3280D221B003452F4 /* RealmSwift */,
+			);
 			productName = hongkimDaonProject;
 			productReference = 5153FF2027FD7BE00096AE7A /* hongkimDaonProject.app */;
 			productType = "com.apple.product-type.application";
@@ -405,6 +419,9 @@
 				Base,
 			);
 			mainGroup = 5153FF1727FD7BE00096AE7A;
+			packageReferences = (
+				51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift" */,
+			);
 			productRefGroup = 5153FF2127FD7BE00096AE7A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -430,6 +447,7 @@
 				BC69DD4C28017D7D00A6A9F6 /* MainPageView.storyboard in Resources */,
 				5153FF2D27FD7BE00096AE7A /* Assets.xcassets in Resources */,
 				BCA9C4D22803E84C0017EC87 /* MyStorageCell.xib in Resources */,
+				5174FEAE280C3A2900A844CD /* TestDiaryCell.xib in Resources */,
 				5153FF2B27FD7BE00096AE7A /* LoginView.storyboard in Resources */,
 				5117C9DB2803F4820072B9B2 /* SettingPageView.storyboard in Resources */,
 				BC69DD5B2802D94D00A6A9F6 /* MyDiaryCell.xib in Resources */,
@@ -510,7 +528,7 @@
 				5117C9D92803F4500072B9B2 /* SettingPageViewController.swift in Sources */,
 				5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */,
 				BC4BC7CB280923EC00C755BF /* AllWordingCell.swift in Sources */,
-				5117C9CE28008AD90072B9B2 /* ImageUploader.swift in Sources */,
+				5117C9CE28008AD90072B9B2 /* StorageManager.swift in Sources */,
 				5117C9CE28008AD90072B9B2 /* StorageManager.swift in Sources */,
 				5153FF2827FD7BE00096AE7A /* LoginViewController.swift in Sources */,
 				BC69DD5F2802FE5900A6A9F6 /* SecondMainPageContainerViewController.swift in Sources */,
@@ -521,6 +539,7 @@
 				BC69DD4E28017DA200A6A9F6 /* SecondMainPageViewController.swift in Sources */,
 				BC69DD5D2802DBE000A6A9F6 /* MyDiaryCell.swift in Sources */,
 				BCD0D7C3280033B400E862D7 /* InputNickNameViewController.swift in Sources */,
+				5174FEB0280C3B2400A844CD /* TestDiaryCell.swift in Sources */,
 				5174FEA82808167400A844CD /* Diary.swift in Sources */,
 				BC69DD572801905400A6A9F6 /* MyStorageViewController.swift in Sources */,
 				BC57775328082CDD00B4E664 /* AllWordingPageViewController.swift in Sources */,
@@ -677,7 +696,6 @@
 				CODE_SIGN_ENTITLEMENTS = hongkimDaonProject/hongkimDaonProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F92UQYH2RA;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = hongkimDaonProject/Info.plist;
@@ -708,7 +726,6 @@
 				CODE_SIGN_ENTITLEMENTS = hongkimDaonProject/hongkimDaonProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = F92UQYH2RA;
 				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = hongkimDaonProject/Info.plist;
@@ -752,6 +769,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/realm-swift.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		51F363C1280D221B003452F4 /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		51F363C3280D221B003452F4 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 5153FF1827FD7BE00096AE7A /* Project object */;
 }
