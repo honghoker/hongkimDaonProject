@@ -30,8 +30,8 @@ class MyDiaryViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        let myTableViewCellNib = UINib(nibName: String(describing: TestDiaryCell.self), bundle: nil)
-        self.diaryTableView.register(myTableViewCellNib, forCellReuseIdentifier: "TestDiaryCell")
+        let myTableViewCellNib = UINib(nibName: String(describing: MyDiaryCell.self), bundle: nil)
+        self.diaryTableView.register(myTableViewCellNib, forCellReuseIdentifier: "MyDiaryCell")
         self.diaryTableView.rowHeight = 120
         self.diaryTableView.estimatedRowHeight = UITableView.automaticDimension
         self.diaryTableView.separatorStyle = .none
@@ -132,7 +132,7 @@ extension MyDiaryViewController: UITableViewDataSource {
     }
     // MARK: 각 셀에 대한 설정
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = diaryTableView.dequeueReusableCell(withIdentifier: "TestDiaryCell", for: indexPath) as? TestDiaryCell else {
+        guard let cell = diaryTableView.dequeueReusableCell(withIdentifier: "MyDiaryCell", for: indexPath) as? MyDiaryCell else {
             return UITableViewCell()
         }
         cell.selectionStyle = UITableViewCell.SelectionStyle.none

@@ -30,7 +30,6 @@ class TodayWordingPageViewController: UIViewController {
         //                self.setImageView(url: URL(string: mainImageUrl)!, imageClick: imageClick)
         //            }
         //        }
-        
         // MARK: 캐시 삭제
         //                        ImageCache.default.clearMemoryCache()
         //                         ImageCache.default.clearDiskCache { print("done clearDiskCache") }

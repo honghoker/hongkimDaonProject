@@ -14,7 +14,6 @@ class Today: Object {
 //            dataList.append(objectsIn: )
 //        }
 //    }
-    
 }
 
 class TodayList: Object {
