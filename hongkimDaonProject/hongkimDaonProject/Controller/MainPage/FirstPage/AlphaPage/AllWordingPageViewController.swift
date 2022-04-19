@@ -31,10 +31,20 @@ extension AllWordingPageViewController: UITableViewDelegate {
 extension AllWordingPageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let imageUrl = todayArray[indexPath.row].url
+        let imageId = todayArray[indexPath.row].id
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "allWordingCellId", for: indexPath) as? AllWordingCell else {
             return UITableViewCell()
         }
         cell.allImageView.kf.setImage(with: URL(string: imageUrl))
+        let dateFormatter = DateFormatter()
+        let realmDayDate = Date(timeIntervalSince1970: (Double(Int(imageId)) / 1000.0))
+        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let nowDayString = dateFormatter.string(from: realmDayDate)
+        cell.dayLabel.text = String(describing: nowDayString)
+        cell.dayLabel.textColor = .white
+        cell.dayLabel.backgroundColor = .none
+        cell.dayLabel.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
         cell.contentMode = .scaleAspectFit
         cell.directionalLayoutMargins = .zero
         cell.layoutMargins = .zero

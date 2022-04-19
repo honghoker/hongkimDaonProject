@@ -14,18 +14,18 @@ class AlphaTodayWordingPageViewController: UIViewController {
     @IBOutlet weak var backgroundUIView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-        backgroundUIView.isUserInteractionEnabled = true
-        backgroundUIView.addGestureRecognizer(imageClick)
-        imageView.image = UIImage(named: "testPage")
-        // MARK: 성훈 위에 주석하고 밑에 작업
         //        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
         //        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         //        backgroundUIView.isUserInteractionEnabled = true
         //        backgroundUIView.addGestureRecognizer(imageClick)
-        //        imageView.kf.indicatorType = .activity
-        //        imageView.kf.setImage(with: URL(string: mainImageUrl))
+        //        imageView.image = UIImage(named: "testPage")
+        // MARK: 성훈 위에 주석하고 밑에 작업
+        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        backgroundUIView.isUserInteractionEnabled = true
+        backgroundUIView.addGestureRecognizer(imageClick)
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(with: URL(string: mainImageUrl))
     }
     override func viewWillLayoutSubviews() {
         shareBtn.titleLabel?.text = ""

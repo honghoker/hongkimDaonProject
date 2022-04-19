@@ -6,6 +6,11 @@ import FirebaseFirestore
 
 public var mainImageUrl = ""
 
+class Person: Object {
+    @objc dynamic var name = ""
+    @objc dynamic var age = 0
+}
+
 class TodayWordingPageViewController: UIViewController {
     var realm: Realm!
     let database = Firestore.firestore()
@@ -13,23 +18,24 @@ class TodayWordingPageViewController: UIViewController {
     private let storage = Storage.storage().reference()
     override func viewDidLoad() {
         super.viewDidLoad()
-        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-        imageView.image = UIImage(named: "testPage")
-        imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(imageClick)
-        // MARK: 성훈 위에 주석하고 밑에 작업
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         //        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-        //        let beforeImageURL = mainImageUrl
-        //        todayImageCacheSet {imageUrl in
-        //            print("todayImageCacheSet 완료 \(imageUrl)")
-        //            if beforeImageURL != "" {
-        //                mainImageUrl = beforeImageURL
-        //                self.setImageView(url: URL(string: mainImageUrl)!, imageClick: imageClick)
-        //            } else {
-        //                mainImageUrl = imageUrl
-        //                self.setImageView(url: URL(string: mainImageUrl)!, imageClick: imageClick)
-        //            }
-        //        }
+        //        imageView.image = UIImage(named: "testPage")
+        //        imageView.isUserInteractionEnabled = true
+        //        imageView.addGestureRecognizer(imageClick)
+        // MARK: 성훈 위에 주석하고 밑에 작업
+        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+        let beforeImageURL = mainImageUrl
+        todayImageCacheSet {imageUrl in
+            print("todayImageCacheSet 완료 \(imageUrl)")
+            if beforeImageURL != "" {
+                mainImageUrl = beforeImageURL
+                self.setImageView(url: URL(string: mainImageUrl)!, imageClick: imageClick)
+            } else {
+                mainImageUrl = imageUrl
+                self.setImageView(url: URL(string: mainImageUrl)!, imageClick: imageClick)
+            }
+        }
         // MARK: 캐시 삭제
         //                        ImageCache.default.clearMemoryCache()
         //                         ImageCache.default.clearDiskCache { print("done clearDiskCache") }
@@ -74,6 +80,7 @@ extension TodayWordingPageViewController {
                             self.realm.add(today)
                         }
                         mainImageUrl = today.url
+                        completion(mainImageUrl)
                     }}
             }
         } else {
@@ -103,6 +110,7 @@ extension TodayWordingPageViewController {
                                 self.realm.add(today)
                             }
                             mainImageUrl = today.url
+                            completion(mainImageUrl)
                         }}
                 }
             } else {
@@ -111,6 +119,7 @@ extension TodayWordingPageViewController {
                     // else -> 월이 바뀌고 첫 접속이다 -> realm 전체 delete -> 다운 해야함
                     if realmImageId == nowMonthDate.millisecondsSince1970 {
                         mainImageUrl = String(describing: imageUrl)
+                        completion(mainImageUrl)
                     } else {
                         try? realm.write {
                             realm.deleteAll()
@@ -129,6 +138,7 @@ extension TodayWordingPageViewController {
                                         self.realm.add(today)
                                     }
                                     mainImageUrl = today.url
+                                    completion(mainImageUrl)
                                 }}
                         }
                     }
@@ -136,6 +146,7 @@ extension TodayWordingPageViewController {
                     // if nowString == 마지막 날짜 -> 이미 접속했다 -> 다운 x
                     if realmImageId == nowDayDate.millisecondsSince1970 {
                         mainImageUrl = String(describing: imageUrl)
+                        completion(mainImageUrl)
                     } else {
                         // else -> 다운 해야함
                         let docRef = self.database.document("today/\(Int(nowDayDate.millisecondsSince1970))")
@@ -156,13 +167,13 @@ extension TodayWordingPageViewController {
                                 }
                                 guard let imageUrl = URL(string: String(describing: url)) else { return }
                                 mainImageUrl = String(describing: imageUrl)
+                                completion(mainImageUrl)
                             }
                         }
                     }
                 }
             }
         }
-        completion(mainImageUrl)
     }
 }
 
