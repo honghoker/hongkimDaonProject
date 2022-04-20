@@ -4,6 +4,8 @@ import FirebaseAuth
 import FirebaseFirestore
 import FirebaseStorage
 import Kingfisher
+import RealmSwift
+import Toast_Swift
 
 class AlphaTodayWordingPageViewController: UIViewController {
     @IBOutlet weak var downloadBtn: UIButton!
@@ -12,6 +14,8 @@ class AlphaTodayWordingPageViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var backgroundUIView: UIView!
+    var uploadTime: Int = 0
+    var realm: Realm!
     override func viewDidLoad() {
         super.viewDidLoad()
         let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
@@ -26,6 +30,8 @@ class AlphaTodayWordingPageViewController: UIViewController {
         //        backgroundUIView.addGestureRecognizer(imageClick)
         //        imageView.kf.indicatorType = .activity
         //        imageView.kf.setImage(with: URL(string: mainImageUrl))
+        //        saveBtn.addTarget(self, action: #selector(daonStorageSave), for: .touchUpInside)
+        //        downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
     }
     override func viewWillLayoutSubviews() {
         shareBtn.titleLabel?.text = ""
@@ -33,22 +39,38 @@ class AlphaTodayWordingPageViewController: UIViewController {
         downloadBtn.titleLabel?.text = ""
     }
     @objc
-    func testDaonUpload() {
-        let nowTime = Date().millisecondsSince1970
-        Firestore.firestore().collection("daon").document("\(nowTime)").setData(["imageUrl": "https://firebasestorage.googleapis.com:443/v0/b/hongkimdaonproject.appspot.com/o/diary%2F1649996407571?alt=media&token=0d53a2ef-7ae8-4b3c-aa6b-286fd1b486b3", "uploadTime": nowTime, "storageUser": [String: String]() ])
+    func imageDownload() {
+        let data = try? Data(contentsOf: URL(string: mainImageUrl)!)
+        // 컴플레션 처리해서 사진 다운 로딩 구현하기 -> 로딩 끝나면 토스트 띄우기
+        UIImageWriteToSavedPhotosAlbum(UIImage(data: data!)!, self, nil, nil)
+        self.backgroundUIView.makeToast("사진첩에 저장되었습니다", duration: 1.5, position: .center)
     }
     @objc
     func daonStorageSave() {
         // MARK: 성훈 내부 db 추가 필요
         // 1. 터치 시 내부 db에 있으면 이미 저장된거라고 토스트 띄우기
         // 2. 터치 시 내부 db에 없으면 추가
-        DatabaseManager.shared.daonStorageSave(docId: "1650313640244") { result in
+        DatabaseManager.shared.daonStorageSave(docId: "\(uploadTime)") { result in
             switch result {
             case .success(let success):
-                print("@@@@@@@ 저장됐다는 토스트 : \(success)")
+                print("\(success)")
             case .failure(let error):
-                print("@@@@@@@ 저장 실패했다는 토스트 : \(error)")
+                print("\(error)")
             }
+        }
+        realm = try? Realm()
+        let list = realm.objects(MyStorage.self).filter("imageUrl CONTAINS[cd] %@", mainImageUrl)
+        if list.isEmpty == true {
+            let myStorage = MyStorage()
+            myStorage.uploadTime = uploadTime
+            myStorage.imageUrl = mainImageUrl
+            myStorage.storageTime = Int(Date().millisecondsSince1970)
+            try? self.realm.write {
+                self.realm.add(myStorage)
+            }
+            self.backgroundUIView.makeToast("보관함에 추가되었습니다", duration: 1.5, position: .center)
+        } else {
+            self.backgroundUIView.makeToast("이미 보관함에 있습니다", duration: 1.5, position: .center)
         }
     }
 }
