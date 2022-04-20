@@ -12,7 +12,7 @@ class MyDiaryViewController: UIViewController {
     private var limit = 10
     private var isFetching = false
     private var isNext = true
-    lazy var floatBtn: UIButton = {
+    lazy var floatingBtn: UIButton = {
         let btn = UIButton()
         btn.layer.backgroundColor = UIColor.white.cgColor
         btn.layer.shadowColor = UIColor.gray.cgColor
@@ -37,14 +37,14 @@ class MyDiaryViewController: UIViewController {
         self.diaryTableView.separatorStyle = .none
         self.diaryTableView.delegate = self
         self.diaryTableView.dataSource = self
-        view.addSubview(floatBtn)
-        self.floatBtn.snp.makeConstraints { (make) in
+        view.addSubview(floatingBtn)
+        self.floatingBtn.snp.makeConstraints { (make) in
             make.width.height.equalTo(64)
             make.right.equalTo(diaryTableView).offset(-16)
             make.bottom.equalTo(diaryTableView).offset(-32)
         }
         let floatingClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn(_:)))
-        floatBtn.addGestureRecognizer(floatingClick)
+        floatingBtn.addGestureRecognizer(floatingClick)
         fetch()
     }
 }

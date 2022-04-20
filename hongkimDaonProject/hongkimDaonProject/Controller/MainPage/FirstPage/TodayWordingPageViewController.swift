@@ -18,18 +18,18 @@ class TodayWordingPageViewController: UIViewController {
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(imageClick)
         // MARK: 성훈 위에 주석하고 밑에 작업
-        //        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-        //        let beforeImageURL = mainImageUrl
-        //        todayImageCacheSet {imageUrl in
-        //            print("todayImageCacheSet 완료 \(imageUrl)")
-        //            if beforeImageURL != "" {
-        //                mainImageUrl = beforeImageURL
-        //                self.setImageView(url: URL(string: mainImageUrl)!, imageClick: imageClick)
-        //            } else {
-        //                mainImageUrl = imageUrl
-        //                self.setImageView(url: URL(string: mainImageUrl)!, imageClick: imageClick)
-        //            }
-        //        }
+//                let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+//                let beforeImageURL = mainImageUrl
+//                todayImageCacheSet {imageUrl in
+//                    print("todayImageCacheSet 완료 \(imageUrl)")
+//                    if beforeImageURL != "" {
+//                        mainImageUrl = beforeImageURL
+//                        self.setImageView(url: URL(string: mainImageUrl)!, imageClick: imageClick)
+//                    } else {
+//                        mainImageUrl = imageUrl
+//                        self.setImageView(url: URL(string: mainImageUrl)!, imageClick: imageClick)
+//                    }
+//                }
         // MARK: 캐시 삭제
         //                        ImageCache.default.clearMemoryCache()
         //                         ImageCache.default.clearDiskCache { print("done clearDiskCache") }
@@ -59,7 +59,7 @@ extension TodayWordingPageViewController {
         let nowDayDate: Date = dateFormatter.date(from: nowDayString)!
         if list.count == .zero {
             // empty
-            // store 접근 -> date.millisecondsSince1970 이거보다 큰 것들 다 가져와서 db 저장
+            // store 접근 -> date.millisecondsSince1970 이거보다 큰 것들 다 가져와서 db 저장 \(nowMonthDate.millisecondsSince1970)")
             self.database.collection("today").whereField("id", isGreaterThan: Int(nowMonthDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
                 if error != nil {
                     print("Error getting documents: \(String(describing: error))")
@@ -67,6 +67,8 @@ extension TodayWordingPageViewController {
                     for document in (snapshot?.documents)! {
                         guard let id = document.data()["id"] else { return }
                         guard let url = document.data()["url"] else { return }
+                        print("id id \(id)")
+                        print("url url \(url)")
                         let today = Today()
                         today.id = Int(String(describing: id)) ?? 0
                         today.url = String(describing: url)
@@ -74,6 +76,7 @@ extension TodayWordingPageViewController {
                             self.realm.add(today)
                         }
                         mainImageUrl = today.url
+                        completion(mainImageUrl)
                     }}
             }
         } else {
@@ -103,6 +106,7 @@ extension TodayWordingPageViewController {
                                 self.realm.add(today)
                             }
                             mainImageUrl = today.url
+                            completion(mainImageUrl)
                         }}
                 }
             } else {
@@ -129,6 +133,7 @@ extension TodayWordingPageViewController {
                                         self.realm.add(today)
                                     }
                                     mainImageUrl = today.url
+                                    completion(mainImageUrl)
                                 }}
                         }
                     }
@@ -136,6 +141,7 @@ extension TodayWordingPageViewController {
                     // if nowString == 마지막 날짜 -> 이미 접속했다 -> 다운 x
                     if realmImageId == nowDayDate.millisecondsSince1970 {
                         mainImageUrl = String(describing: imageUrl)
+                        completion(mainImageUrl)
                     } else {
                         // else -> 다운 해야함
                         let docRef = self.database.document("today/\(Int(nowDayDate.millisecondsSince1970))")
@@ -156,13 +162,13 @@ extension TodayWordingPageViewController {
                                 }
                                 guard let imageUrl = URL(string: String(describing: url)) else { return }
                                 mainImageUrl = String(describing: imageUrl)
+                                completion(mainImageUrl)
                             }
                         }
                     }
                 }
             }
         }
-        completion(mainImageUrl)
     }
 }
 

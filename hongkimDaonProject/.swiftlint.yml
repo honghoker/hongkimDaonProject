@@ -6,6 +6,7 @@ disabled_rules: # rule identifiers turned on by default to exclude from running
   - unused_closure_parameter
   # 추후에 지우거나 맞게 수정해야함 
   - cyclomatic_complexity
+  - function_body_length
 
 opt_in_rules: # some rules are turned off by default, so you need to opt-in
   - empty_count # Find all the available rules by running: `swiftlint rules`

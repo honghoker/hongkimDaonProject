@@ -62,7 +62,21 @@ extension Date {
 extension WriteDiaryPageViewController {
     @objc
     func back(_ gesture: UITapGestureRecognizer) {
-        self.presentingViewController?.dismiss(animated: true)
+        if self.imageButton.currentImage != nil || diaryTitleTextField.text != "" || diaryContentTextView.textColor != UIColor.lightGray {
+            let alert = UIAlertController(title: "작성된 내용이 있어요.\n저장하지 않고 나가시겠어요?",
+                                          message: "", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
+                // Cancel Action
+            }))
+            alert.addAction(UIAlertAction(title: "확인",
+                                          style: UIAlertAction.Style.default,
+                                          handler: {(_: UIAlertAction!) in
+                self.presentingViewController?.dismiss(animated: true)
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            self.presentingViewController?.dismiss(animated: true)
+        }
     }
     @objc
     func complete(_ gesture: UITapGestureRecognizer) {
