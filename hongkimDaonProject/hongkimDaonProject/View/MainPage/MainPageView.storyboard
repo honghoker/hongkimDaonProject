@@ -102,17 +102,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="zll-V3-fsW">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zll-V3-fsW">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="zll-V3-fsW" firstAttribute="top" secondItem="U2O-W8-x4q" secondAttribute="bottom" id="8gx-fs-RJY"/>
-                            <constraint firstItem="M2D-3Z-obK" firstAttribute="top" secondItem="zll-V3-fsW" secondAttribute="bottom" id="PYK-4Q-6tL"/>
-                            <constraint firstAttribute="trailing" secondItem="zll-V3-fsW" secondAttribute="trailing" id="Xbi-UU-4VJ"/>
-                            <constraint firstItem="zll-V3-fsW" firstAttribute="leading" secondItem="L3P-5a-33l" secondAttribute="leading" id="pnx-TL-3Nn"/>
+                            <constraint firstAttribute="bottom" secondItem="zll-V3-fsW" secondAttribute="bottom" id="J4U-CG-UsT"/>
+                            <constraint firstAttribute="trailing" secondItem="zll-V3-fsW" secondAttribute="trailing" id="jhy-fH-QLH"/>
+                            <constraint firstItem="zll-V3-fsW" firstAttribute="top" secondItem="U2O-W8-x4q" secondAttribute="bottom" id="l1N-BC-XNj"/>
+                            <constraint firstItem="zll-V3-fsW" firstAttribute="leading" secondItem="L3P-5a-33l" secondAttribute="leading" id="rq1-0L-iGW"/>
                         </constraints>
                     </view>
                     <connections>
@@ -123,10 +123,10 @@
             </objects>
             <point key="canvasLocation" x="-1465" y="273"/>
         </scene>
-        <!--Alpha Main Page Container View Controller-->
+        <!--Alpha Main Page View Controller-->
         <scene sceneID="fVr-vD-mre">
             <objects>
-                <viewController storyboardIdentifier="AlphaMainPageContainerViewController" id="8GK-IN-WBi" customClass="AlphaMainPageContainerViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AlphaMainPageViewController" id="8GK-IN-WBi" customClass="AlphaMainPageViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="r5O-nM-Han"/>
                         <viewControllerLayoutGuide type="bottom" id="StA-wG-JqJ"/>
@@ -134,21 +134,7 @@
                     <view key="view" contentMode="scaleToFill" id="wzg-T1-cfr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dr6-Ir-617">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <connections>
-                                    <segue destination="ka0-uG-dax" kind="embed" id="sJD-bl-ZYD"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Dr6-Ir-617" secondAttribute="trailing" id="1L0-SO-umd"/>
-                            <constraint firstItem="Dr6-Ir-617" firstAttribute="top" secondItem="wzg-T1-cfr" secondAttribute="top" id="TLD-ER-XYe"/>
-                            <constraint firstAttribute="bottom" secondItem="Dr6-Ir-617" secondAttribute="bottom" id="gSg-fp-M1u"/>
-                            <constraint firstItem="Dr6-Ir-617" firstAttribute="leading" secondItem="wzg-T1-cfr" secondAttribute="leading" id="tIS-l7-mE3"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mzw-SO-nYf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -255,24 +241,6 @@
             </objects>
             <point key="canvasLocation" x="-4639" y="274"/>
         </scene>
-        <!--Alpha Main Page View Controller-->
-        <scene sceneID="asl-t3-vsx">
-            <objects>
-                <viewController storyboardIdentifier="AlphaMainPageViewController" id="ka0-uG-dax" customClass="AlphaMainPageViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="quu-zW-98M"/>
-                        <viewControllerLayoutGuide type="bottom" id="eFq-Nd-xII"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="SzF-OT-E4Z">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="K0E-xf-Nja" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-4639" y="1674"/>
-        </scene>
         <!--Alpha Today Wording Page View Controller-->
         <scene sceneID="eqO-7W-db0">
             <objects>
@@ -356,7 +324,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Iey-EI-a79" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4639.130434782609" y="2387.9464285714284"/>
+            <point key="canvasLocation" x="-4714" y="1675"/>
         </scene>
         <!--All Wording Page View Controller-->
         <scene sceneID="h3Q-gg-WQ4">
@@ -389,7 +357,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NC4-xI-2GO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3470" y="2388"/>
+            <point key="canvasLocation" x="-3899" y="1675"/>
         </scene>
     </scenes>
     <resources>
