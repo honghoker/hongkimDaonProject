@@ -61,10 +61,10 @@ extension KFImageProtocol {
     ///               If `nil`, the `absoluteString` of `url` is used as the cache key.
     /// - Returns: A `KFImage` for future configuration or embedding to a `SwiftUI.View`.
     public static func url(
-        _ url: URL?, cacheKey: String? = nil
+        _ imageUrl: URL?, cacheKey: String? = nil
     ) -> Self
     {
-        source(url?.convertToSource(overrideCacheKey: cacheKey))
+        source(imageUrl?.convertToSource(overrideCacheKey: cacheKey))
     }
 
     /// Creates a `KFImage` for a given `ImageDataProvider`.

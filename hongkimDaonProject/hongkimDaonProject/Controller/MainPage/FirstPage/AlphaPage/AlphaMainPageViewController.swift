@@ -5,14 +5,17 @@ import FirebaseStorage
 
 class AlphaMainPageViewController: TabmanViewController {
     private var viewControllers: Array<UIViewController> = []
+    var uploadTime: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
         if let allWordingPageViewController = storyboard?.instantiateViewController(withIdentifier: "AllWordingPageViewController") as? AllWordingPageViewController {
             viewControllers.append(allWordingPageViewController)
         }
         if let alphaTodayWordingPageViewController = storyboard?.instantiateViewController(withIdentifier: "AlphaTodayWordingPageViewController") as? AlphaTodayWordingPageViewController {
+            alphaTodayWordingPageViewController.uploadTime = uploadTime
             viewControllers.append(alphaTodayWordingPageViewController)
         }
+        
         self.dataSource = self
         let tabBar = TMBar.ButtonBar()
         tabBar.backgroundView.style = .clear
