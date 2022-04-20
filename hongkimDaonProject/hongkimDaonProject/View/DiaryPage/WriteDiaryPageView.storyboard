@@ -202,8 +202,8 @@
                     <connections>
                         <outlet property="backBtn" destination="nqY-0I-JBh" id="0Oj-G7-CD0"/>
                         <outlet property="completeBtn" destination="TBe-PB-vCa" id="4Mf-sJ-P7n"/>
-                        <outlet property="diaryContentTextView" destination="nja-Js-fvd" id="Jt1-X6-G3v"/>
-                        <outlet property="diaryTitleTextField" destination="dC2-04-Jly" id="xsm-0e-0YG"/>
+                        <outlet property="diaryContentTextView" destination="nja-Js-fvd" id="F9u-Om-DLJ"/>
+                        <outlet property="diaryTitleTextField" destination="dC2-04-Jly" id="6Tz-DE-Ast"/>
                         <outlet property="imageButton" destination="Luj-y4-M3b" id="U2S-J3-Zj5"/>
                         <outlet property="scrollView" destination="Isv-Sa-8f8" id="fcW-Tl-D1t"/>
                     </connections>

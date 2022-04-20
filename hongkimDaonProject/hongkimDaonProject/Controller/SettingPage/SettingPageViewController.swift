@@ -66,41 +66,41 @@ extension SettingPageViewController {
                                       style: UIAlertAction.Style.default,
                                       handler: {(_: UIAlertAction!) in
             Auth.auth().currentUser?.delete(completion: { (error) in
-              if let error = error as? NSError {
-                switch AuthErrorCode(rawValue: error.code) {
-                case .operationNotAllowed:
-                  // Error: The given sign-in provider is disabled for this Firebase project. Enable it in the Firebase console, under the sign-in method tab of the Auth section.
-                  print("Email/ Password sign in provider is new disabled")
-                case .requiresRecentLogin:
-                  // Error: Updating a user’s password is a security sensitive operation that requires a recent login from the user. This error indicates the user has not signed in recently enough. To resolve, reauthenticate the user by invoking reauthenticateWithCredential:completion: on FIRUser.
-                  print("Updating a user’s password is a security sensitive operation that requires a recent login from the user. This error indicates the user has not signed in recently enough. To resolve, reauthenticate the user by invoking reauthenticateWithCredential:completion: on FIRUser.")
-                    if let user = Auth.auth().currentUser {
-                        var credential: AuthCredential
-//                        GoogleAuthProvider.credential(withIDToken: user.getIDToken(), accessToken: String)
-                        user.getIDToken(completion: { (result, error) in
-                            if let error = error {
-                                print("@@@@@@@@ error : \(error)")
-                                return
-                            } else {
-                                let userIdToken = result!
-                                GoogleAuthProvider.credential(withIDToken: userIdToken, accessToken: "")
-                            }
+                if let error = error as? NSError {
+                    switch AuthErrorCode(rawValue: error.code) {
+                    case .operationNotAllowed:
+                        // Error: The given sign-in provider is disabled for this Firebase project. Enable it in the Firebase console, under the sign-in method tab of the Auth section.
+                        print("Email/ Password sign in provider is new disabled")
+                    case .requiresRecentLogin:
+                        // Error: Updating a user’s password is a security sensitive operation that requires a recent login from the user. This error indicates the user has not signed in recently enough. To resolve, reauthenticate the user by invoking reauthenticateWithCredential:completion: on FIRUser.
+                        print("Updating a user’s password is a security sensitive operation that requires a recent login from the user. This error indicates the user has not signed in recently enough. To resolve, reauthenticate the user by invoking reauthenticateWithCredential:completion: on FIRUser.")
+                        if let user = Auth.auth().currentUser {
+                            var credential: AuthCredential
+                            //                        GoogleAuthProvider.credential(withIDToken: user.getIDToken(), accessToken: String)
+                            user.getIDToken(completion: { (result, error) in
+                                if let error = error {
+                                    print("@@@@@@@@ error : \(error)")
+                                    return
+                                } else {
+                                    let userIdToken = result!
+                                    GoogleAuthProvider.credential(withIDToken: userIdToken, accessToken: "")
+                                }
                             })
-
-//                        user.reauthenticate(with: credential, completion: { (result, error) in
-//                            if let err = error {
-//                                // error
-//                            } else {
-//                                // go on
-//                            }
-//                        })
+                            
+                            //                        user.reauthenticate(with: credential, completion: { (result, error) in
+                            //                            if let err = error {
+                            //                                // error
+                            //                            } else {
+                            //                                // go on
+                            //                            }
+                            //                        })
+                        }
+                    default:
+                        print("Error message: \(error.localizedDescription)")
                     }
-                default:
-                  print("Error message: \(error.localizedDescription)")
+                } else {
+                    print("User account is deleted successfully")
                 }
-              } else {
-                print("User account is deleted successfully")
-              }
             })
         }))
         self.present(alert, animated: true, completion: nil)
