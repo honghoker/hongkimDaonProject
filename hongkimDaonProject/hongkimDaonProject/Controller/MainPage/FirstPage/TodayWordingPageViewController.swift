@@ -15,10 +15,10 @@ class TodayWordingPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(Realm.Configuration.defaultConfiguration.fileURL!)
-        //        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-        //        imageView.image = UIImage(named: "testPage")
-        //        imageView.isUserInteractionEnabled = true
-        //        imageView.addGestureRecognizer(imageClick)
+        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+        imageView.image = UIImage(named: "testPage")
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(imageClick)
         // MARK: nowDayDate mil
         //        let now = Date()
         //        let dateFormatter = DateFormatter()
@@ -30,21 +30,20 @@ class TodayWordingPageViewController: UIViewController {
         //        print("nowDayDate \(nowDayDate)")
         //        print("nowDayDate mil \(nowDayDate.millisecondsSince1970)")
         // MARK: 성훈 위에 주석하고 밑에 작업
-        
-        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-        let beforeImageURL = mainImageUrl
-        todayImageCacheSet {imageUrl, uploadTime in
-            print("todayImageCacheSet 완료 \(imageUrl)")
-            if beforeImageURL != "" {
-                mainImageUrl = beforeImageURL
-                self.imageUploadTime = uploadTime
-                self.setImageView(url: URL(string: mainImageUrl)!, imageClick: imageClick)
-            } else {
-                mainImageUrl = imageUrl
-                self.imageUploadTime = uploadTime
-                self.setImageView(url: URL(string: mainImageUrl)!, imageClick: imageClick)
-            }
-        }
+        //        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+        //        let beforeImageURL = mainImageUrl
+        //        todayImageCacheSet {imageUrl, uploadTime in
+        //            print("todayImageCacheSet 완료 \(imageUrl)")
+        //            if beforeImageURL != "" {
+        //                mainImageUrl = beforeImageURL
+        //                self.imageUploadTime = uploadTime
+        //                self.setImageView(url: URL(string: mainImageUrl)!, imageClick: imageClick)
+        //            } else {
+        //                mainImageUrl = imageUrl
+        //                self.imageUploadTime = uploadTime
+        //                self.setImageView(url: URL(string: mainImageUrl)!, imageClick: imageClick)
+        //            }
+        //        }
         // MARK: 캐시 삭제
         //                        ImageCache.default.clearMemoryCache()
         //                         ImageCache.default.clearDiskCache { print("done clearDiskCache") }
