@@ -15,7 +15,6 @@ class AlphaMainPageViewController: TabmanViewController {
             alphaTodayWordingPageViewController.uploadTime = uploadTime
             viewControllers.append(alphaTodayWordingPageViewController)
         }
-        
         self.dataSource = self
         let tabBar = TMBar.ButtonBar()
         tabBar.backgroundView.style = .clear
