@@ -27,10 +27,21 @@ class SettingPageViewController: UIViewController {
         let withdrawalBtnClicked: UITapGestureRecognizer =  UITapGestureRecognizer(target: self, action: #selector(withdrawal(_:)))
         withdrawalBtn.isUserInteractionEnabled = true
         withdrawalBtn.addGestureRecognizer(withdrawalBtnClicked)
+        let setNotificationClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapSetNotification(_:)))
+        notificationConfigBtn.isUserInteractionEnabled = true
+        notificationConfigBtn.addGestureRecognizer(setNotificationClick)
     }
 }
 
 extension SettingPageViewController {
+    @objc
+    func onTapSetNotification(_ gesture: UITapGestureRecognizer) {
+        guard let nextView = self.storyboard?.instantiateViewController(identifier: "SetNotificationPageViewController") as? SetNotificationPageViewController else {
+            return
+        }
+        nextView.modalPresentationStyle = .fullScreen
+        self.present(nextView, animated: false, completion: nil)
+    }
     @objc
     func back() {
         self.presentingViewController?.dismiss(animated: true)
@@ -86,7 +97,6 @@ extension SettingPageViewController {
                                     GoogleAuthProvider.credential(withIDToken: userIdToken, accessToken: "")
                                 }
                             })
-                            
                             //                        user.reauthenticate(with: credential, completion: { (result, error) in
                             //                            if let err = error {
                             //                                // error

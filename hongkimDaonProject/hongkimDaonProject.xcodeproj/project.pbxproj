@@ -43,6 +43,7 @@
 		BC69DD542801903E00A6A9F6 /* MyDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD532801903E00A6A9F6 /* MyDiaryViewController.swift */; };
 		BC69DD572801905400A6A9F6 /* MyStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD562801905400A6A9F6 /* MyStorageViewController.swift */; };
 		BC69DD5F2802FE5900A6A9F6 /* SecondMainPageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD5E2802FE5900A6A9F6 /* SecondMainPageContainerViewController.swift */; };
+		BC6C87B82812AC3D00156D89 /* SetNotificationPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6C87B72812AC3D00156D89 /* SetNotificationPageViewController.swift */; };
 		BC7C9CBA28055D4300FF28E1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7C9CB928055D4300FF28E1 /* User.swift */; };
 		BCA9C4D02803E6BC0017EC87 /* MyStorageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9C4CF2803E6BC0017EC87 /* MyStorageCell.swift */; };
 		BCA9C4D22803E84C0017EC87 /* MyStorageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */; };
@@ -93,6 +94,7 @@
 		BC69DD532801903E00A6A9F6 /* MyDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDiaryViewController.swift; sourceTree = "<group>"; };
 		BC69DD562801905400A6A9F6 /* MyStorageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageViewController.swift; sourceTree = "<group>"; };
 		BC69DD5E2802FE5900A6A9F6 /* SecondMainPageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondMainPageContainerViewController.swift; sourceTree = "<group>"; };
+		BC6C87B72812AC3D00156D89 /* SetNotificationPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNotificationPageViewController.swift; sourceTree = "<group>"; };
 		BC7C9CB928055D4300FF28E1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = SOURCE_ROOT; };
 		BCA9C4CF2803E6BC0017EC87 /* MyStorageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageCell.swift; sourceTree = "<group>"; };
 		BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyStorageCell.xib; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				5117C9D82803F4500072B9B2 /* SettingPageViewController.swift */,
+				BC6C87B72812AC3D00156D89 /* SetNotificationPageViewController.swift */,
 			);
 			path = SettingPage;
 			sourceTree = "<group>";
@@ -520,6 +523,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC6C87B82812AC3D00156D89 /* SetNotificationPageViewController.swift in Sources */,
 				BC5777482807DE0700B4E664 /* TodayWordingPageViewController.swift in Sources */,
 				5174FEAA2808DFD800A844CD /* DatabaseManager.swift in Sources */,
 				5117C9E42803FF070072B9B2 /* WriteDiaryPageViewController.swift in Sources */,
@@ -696,14 +700,17 @@
 				CODE_SIGN_ENTITLEMENTS = hongkimDaonProject/hongkimDaonProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = F92UQYH2RA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = hongkimDaonProject/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = LoginView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -726,14 +733,17 @@
 				CODE_SIGN_ENTITLEMENTS = hongkimDaonProject/hongkimDaonProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = F92UQYH2RA;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = hongkimDaonProject/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = LoginView;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
