@@ -6,6 +6,8 @@ import FirebaseStorage
 import Kingfisher
 import RealmSwift
 import Toast_Swift
+import MobileCoreServices
+import FirebaseDynamicLinks
 
 class AlphaTodayWordingPageViewController: UIViewController {
     @IBOutlet weak var downloadBtn: UIButton!
@@ -22,6 +24,7 @@ class AlphaTodayWordingPageViewController: UIViewController {
         backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         backgroundUIView.isUserInteractionEnabled = true
         backgroundUIView.addGestureRecognizer(imageClick)
+        shareBtn.addTarget(self, action: #selector(shareInfo), for: .touchUpInside)
         imageView.image = UIImage(named: "testPage")
         // MARK: 성훈 위에 주석하고 밑에 작업
 //        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
@@ -41,6 +44,45 @@ class AlphaTodayWordingPageViewController: UIViewController {
         // 컴플레션 처리해서 사진 다운 로딩 구현하기 -> 로딩 끝나면 토스트 띄우기
         UIImageWriteToSavedPhotosAlbum(UIImage(data: data!)!, self, nil, nil)
         self.backgroundUIView.makeToast("사진첩에 저장되었습니다", duration: 1.5, position: .center)
+    }
+    @objc
+    func shareInfo() {
+        let link = URL(string: "https://hongkimDaonProject.page.link")
+        let referralLink = DynamicLinkComponents(link: link!, domainURIPrefix: "https://hongkimDaonProject.page.link")
+        // iOS 설정
+        referralLink?.iOSParameters = DynamicLinkIOSParameters(bundleID: "com.green.hongkimDaonProject")
+        referralLink?.iOSParameters?.minimumAppVersion = "1.0.1"
+        referralLink?.iOSParameters?.appStoreID = "1440705745" // 나중에 수정하세요
+        // Android 설정
+//        referralLink?.androidParameters = DynamicLinkAndroidParameters(packageName: "com.green.hongkimDaonProject")
+//        referralLink?.androidParameters?.minimumVersion = 811
+        // 단축 URL 생성
+        referralLink?.shorten { (shortURL, warnings, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                return
+            }
+            print("@@@@@@@@@@@@ shortURL : \(shortURL)")
+            if let url: String = shortURL?.absoluteString {
+                var objectsToShare = [String]()
+                objectsToShare.append(url)
+                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
+                activityVC.popoverPresentationController?.sourceView = self.view
+                // 공유하기 기능 중 제외할 기능이 있을 때 사용
+                //        activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
+                self.present(activityVC, animated: true, completion: nil)
+            // SMS 전송
+//            guard MFMessageComposeViewController.canSendText() else {
+//                print("SMS services are not available")
+//                return
+//            }
+//            let composeViewController = MFMessageComposeViewController()
+//            composeViewController.messageComposeDelegate = self
+//            composeViewController.recipients = ["01033555940"]
+//            composeViewController.body = shortURL?.absoluteString ?? ""
+//            self.present(composeViewController, animated: true, completion: nil)
+            }
+        }
     }
     @objc
     func daonStorageSave() {
@@ -90,3 +132,7 @@ extension UIImage {
         }
     }
 }
+
+
+
+

@@ -358,6 +358,9 @@ PODS:
     - FirebaseAnalytics (~> 8.14.0)
   - Firebase/CoreOnly (8.14.0):
     - FirebaseCore (= 8.14.0)
+  - Firebase/DynamicLinks (8.14.0):
+    - Firebase/CoreOnly
+    - FirebaseDynamicLinks (~> 8.14.0)
   - Firebase/Firestore (8.14.0):
     - Firebase/CoreOnly
     - FirebaseFirestore (~> 8.14.0)
@@ -396,6 +399,8 @@ PODS:
     - GoogleUtilities/Environment (~> 7.7)
     - GoogleUtilities/Logger (~> 7.7)
     - nanopb (~> 2.30908.0)
+  - FirebaseDynamicLinks (8.14.0):
+    - FirebaseCore (~> 8.0)
   - FirebaseFirestore (8.14.0):
     - abseil/algorithm (= 0.20200225.0)
     - abseil/base (= 0.20200225.0)
@@ -514,6 +519,7 @@ PODS:
 DEPENDENCIES:
   - Firebase/Auth
   - Firebase/Core
+  - Firebase/DynamicLinks
   - Firebase/Firestore
   - Firebase/Storage
   - FirebaseFirestoreSwift (> 8.14.0-beta)
@@ -536,6 +542,7 @@ SPEC REPOS:
     - FirebaseAuth
     - FirebaseCore
     - FirebaseCoreDiagnostics
+    - FirebaseDynamicLinks
     - FirebaseFirestore
     - FirebaseFirestoreSwift
     - FirebaseInstallations
@@ -569,6 +576,7 @@ SPEC CHECKSUMS:
   FirebaseAuth: c5fde343630090253d3af7e2d35697b414b40202
   FirebaseCore: b84a44ee7ba999e0f9f76d198a9c7f60a797b848
   FirebaseCoreDiagnostics: fd0c8490f34287229c1d6c103d3a55f81ec85712
+  FirebaseDynamicLinks: 5fe9d2405cc93a58fead4af4ef4c81a466516ba0
   FirebaseFirestore: fff37682b934e3e94d83e5c24936721890a2edf0
   FirebaseFirestoreSwift: 97c6e6e7d67b6c5ab5398734b4983b8cec236724
   FirebaseInstallations: 7d1d967a307c12f1aadd76844fc321cef699b1ce
@@ -593,6 +601,6 @@ SPEC CHECKSUMS:
   Tabman: 447a50447ed2869c39ab3b1a779327e43e067c4e
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: 69e9f8a1b86cf4cf02e79d519481fc07f60558e3
+PODFILE CHECKSUM: 6b8a3361275c0be7b0bc62570d9ce79f61a9bebe
 
 COCOAPODS: 1.11.3
