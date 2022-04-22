@@ -7,4 +7,5 @@ struct User {
     let platForm: String
     let notification: Bool
     let notificationTime: Int
+    let fcmToken: String
 }

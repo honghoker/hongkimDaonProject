@@ -3,6 +3,8 @@ import FirebaseStorage
 import Kingfisher
 import RealmSwift
 import FirebaseFirestore
+import FirebaseMessaging
+import FirebaseAuth
 
 public var mainImageUrl = ""
 
@@ -15,10 +17,28 @@ class TodayWordingPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(Realm.Configuration.defaultConfiguration.fileURL!)
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("Error fetching FCM registration token: \(error)")
+            } else if let token = token {
+                if let user = Auth.auth().currentUser {
+                    self.database.document("user/\(user.uid)").getDocument {snaphot, error in
+                        if let error = error {
+                            print("DEBUG: \(error.localizedDescription)")
+                            return
+                        }
+                        guard let userFcmToken = snaphot?.data()?["fcmToken"] else { return }
+                        print("user Token \(userFcmToken)")
+                    }
+                }
+                print("FCM registration token: \(token)")
+            }
+        }
         let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
         imageView.image = UIImage(named: "testPage")
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(imageClick)
+
         // MARK: nowDayDate mil
         //        let now = Date()
         //        let dateFormatter = DateFormatter()
