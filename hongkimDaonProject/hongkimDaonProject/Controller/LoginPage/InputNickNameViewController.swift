@@ -2,12 +2,20 @@ import UIKit
 import FirebaseFirestore
 import FirebaseAuth
 import SnapKit
+import FirebaseMessaging
+
+enum NickNameOverCheck {
+    case entrance
+    case notCheck
+    case check
+}
 
 class InputNickNameViewController: UIViewController {
     let database = Firestore.firestore()
-    lazy var overLapCheck: Bool = false
+    lazy var overLapCheck: NickNameOverCheck = NickNameOverCheck.entrance
     var userUid: String = ""
     var platForm: String = ""
+    var userFcmToken: String = ""
     @IBOutlet weak var overlapText: UILabel!
     @IBOutlet weak var confirmBtn: UIButton!
     @IBOutlet weak var nickNameTextField: UITextField!
@@ -16,12 +24,24 @@ class InputNickNameViewController: UIViewController {
         super.viewDidLoad()
         print("get userUid \(userUid)")
         print("get platForm \(platForm)")
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("Error fetching FCM registration token: \(error)")
+            } else if let token = token {
+                self.userFcmToken = token
+                print("FCM registration token: \(token)")
+            }
+        }
         let overlapClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapOverlapCheck(_:)))
         overlapText.isUserInteractionEnabled = true
         overlapText.addGestureRecognizer(overlapClick)
         warningOverLapText.isHidden = true
         nickNameTextField.delegate = self
-        nickNameTextField.addUnderLine()
+    }
+    override func viewDidLayoutSubviews() {
+        print("overLapCheck \(overLapCheck)")
+        overLapCheck == NickNameOverCheck.entrance ? self.nickNameTextField.addUnderLine() : overLapCheck == NickNameOverCheck.check ? self.nickNameTextField.addUnderLine() :
+        self.nickNameTextField.addRedUnderLine()
     }
     // storyboard에서 세팅을 해놨는데 vc에서 confirmBtn click 하고나면 왜 layout이 초기화되는건지..?
     override func viewWillLayoutSubviews() {
@@ -39,9 +59,9 @@ extension InputNickNameViewController {
     @objc
     func onTapConfirmBtn() {
         //        logout()
-        if self.overLapCheck == true {
+        if self.overLapCheck == NickNameOverCheck.check {
             print("가입성공")
-            let demmyUserData: User = User(uid: self.userUid, nickName: self.nickNameTextField.text!, joinTime: Int(Date().millisecondsSince1970), platForm: self.platForm, notification: true, notificationTime: Int(Date().millisecondsSince1970))
+            let demmyUserData: User = User(uid: self.userUid, nickName: self.nickNameTextField.text!, joinTime: Int(Date().millisecondsSince1970), platForm: self.platForm, notification: true, notificationTime: Int(Date().millisecondsSince1970), fcmToken: userFcmToken)
             writeUserData(userData: demmyUserData)
         } else {
             print("가입실패")
@@ -49,7 +69,7 @@ extension InputNickNameViewController {
     }
     func writeUserData(userData: User) {
         let docRef = database.document("user/\(userData.uid)")
-        docRef.setData(["uid": userData.uid, "nickName": userData.nickName, "joinTime": userData.joinTime, "platForm": userData.platForm, "notification": userData.notification, "notificationTime": userData.notificationTime])
+        docRef.setData(["uid": userData.uid, "nickName": userData.nickName, "joinTime": userData.joinTime, "platForm": userData.platForm, "notification": userData.notification, "notificationTime": userData.notificationTime, "fcmToken": userData.fcmToken])
         //         메인 페이지 이동
         let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
         let mainViewController = storyboard.instantiateInitialViewController()
@@ -79,12 +99,16 @@ extension InputNickNameViewController {
         }
     }
     func changeState(overLapValue: Bool) {
-        self.overLapCheck = !overLapValue
+        if overLapValue == true {
+            self.overLapCheck = NickNameOverCheck.notCheck
+        } else {
+            self.overLapCheck = NickNameOverCheck.check
+        }
         self.warningOverLapText.isHidden = false
         self.warningOverLapText.text = overLapValue ? "닉네임이 중복입니다" : "사용가능한 닉네임입니다"
         self.warningOverLapText.textColor = overLapValue ? UIColor.systemRed : UIColor.systemGreen
         overLapValue ? self.nickNameTextField.addRedUnderLine() : self.nickNameTextField.addUnderLine()
-        self.nickNameTextField.setNeedsLayout()
+        //        self.nickNameTextField.setNeedsLayout()
     }
     // 추후 삭제
     @objc
@@ -105,14 +129,16 @@ extension InputNickNameViewController {
 extension UITextField {
     func addUnderLine () {
         let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0.0, y: self.bounds.height + 10, width: self.bounds.width, height: 1)
+        //                self.bounds.width
+        bottomLine.frame = CGRect(x: 0.0, y: self.frame.height + 10, width: self.frame.width, height: 1)
         bottomLine.backgroundColor = UIColor.lightGray.cgColor
         self.borderStyle = UITextField.BorderStyle.none
         self.layer.addSublayer(bottomLine)
     }
     func addRedUnderLine () {
         let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0.0, y: self.bounds.height + 10, width: self.bounds.width, height: 1)
+        //        self.bounds.width
+        bottomLine.frame = CGRect(x: 0.0, y: self.frame.height + 10, width: self.frame.width, height: 1)
         bottomLine.backgroundColor = UIColor.systemRed.cgColor
         self.borderStyle = UITextField.BorderStyle.none
         self.layer.addSublayer(bottomLine)

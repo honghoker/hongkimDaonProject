@@ -20,30 +20,32 @@ class AlphaTodayWordingPageViewController: UIViewController {
     var realm: Realm!
     override func viewDidLoad() {
         super.viewDidLoad()
+        //        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+        //        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        //        backgroundUIView.isUserInteractionEnabled = true
+        //        backgroundUIView.addGestureRecognizer(imageClick)
+        //        imageView.image = UIImage(named: "testPage")
+        // MARK: 성훈 위에 주석하고 밑에 작업
         let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
         backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         backgroundUIView.isUserInteractionEnabled = true
         backgroundUIView.addGestureRecognizer(imageClick)
-        shareBtn.addTarget(self, action: #selector(shareInfo), for: .touchUpInside)
-        imageView.image = UIImage(named: "testPage")
-        // MARK: 성훈 위에 주석하고 밑에 작업
-//        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-//        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-//        backgroundUIView.isUserInteractionEnabled = true
-//        backgroundUIView.addGestureRecognizer(imageClick)
-//        imageView.kf.indicatorType = .activity
-//        imageView.kf.setImage(with: URL(string: mainImageUrl))
-//        saveBtn.addTarget(self, action: #selector(daonStorageSave), for: .touchUpInside)
-//        downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(with: URL(string: mainImageUrl))
+        saveBtn.addTarget(self, action: #selector(daonStorageSave), for: .touchUpInside)
+        downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
     }
     override func viewWillLayoutSubviews() {
     }
     @objc
     func imageDownload() {
+        LoadingIndicator.showLoading()
         let data = try? Data(contentsOf: URL(string: mainImageUrl)!)
-        // 컴플레션 처리해서 사진 다운 로딩 구현하기 -> 로딩 끝나면 토스트 띄우기
         UIImageWriteToSavedPhotosAlbum(UIImage(data: data!)!, self, nil, nil)
-        self.backgroundUIView.makeToast("사진첩에 저장되었습니다", duration: 1.5, position: .center)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            LoadingIndicator.hideLoading()
+            self.backgroundUIView.makeToast("사진첩에 저장되었습니다", duration: 1.5, position: .center)
+        }
     }
     @objc
     func shareInfo() {
@@ -86,7 +88,6 @@ class AlphaTodayWordingPageViewController: UIViewController {
     }
     @objc
     func daonStorageSave() {
-        // MARK: 성훈 내부 db 추가 필요
         // 1. 터치 시 내부 db에 있으면 이미 저장된거라고 토스트 띄우기
         // 2. 터치 시 내부 db에 없으면 추가
         DatabaseManager.shared.daonStorageSave(docId: "\(uploadTime)") { result in
@@ -133,6 +134,30 @@ extension UIImage {
     }
 }
 
-
-
-
+// MARK: Loading
+class LoadingIndicator {
+    static func showLoading() {
+        DispatchQueue.main.async {
+            // 최상단에 있는 window 객체 획득
+            guard let window = UIApplication.shared.windows.last else { return }
+            let loadingIndicatorView: UIActivityIndicatorView
+            if let existedView = window.subviews.first(where: { $0 is UIActivityIndicatorView }) as? UIActivityIndicatorView {
+                loadingIndicatorView = existedView
+            } else {
+                loadingIndicatorView = UIActivityIndicatorView(style: .large)
+                // 다른 UI가 눌리지 않도록 indicatorView의 크기를 full로 할당
+                loadingIndicatorView.frame = window.frame
+                // 은표형한테 물어봐서 우리 어플 색깔로 변경하기
+                loadingIndicatorView.color = .white
+                window.addSubview(loadingIndicatorView)
+            }
+            loadingIndicatorView.startAnimating()
+        }
+    }
+    static func hideLoading() {
+        DispatchQueue.main.async {
+            guard let window = UIApplication.shared.windows.last else { return }
+            window.subviews.filter({ $0 is UIActivityIndicatorView }).forEach { $0.removeFromSuperview() }
+        }
+    }
+}
