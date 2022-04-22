@@ -121,9 +121,9 @@ extension SettingPageViewController {
                                 } else {
                                     self.view.makeToast("회원탈퇴가 실패했습니다.\n현재 로그인한 계정과 다른 계정입니다.", duration: 1.5, position: .bottom)
                                 }
+                            }
                         default:
                             print("Error message: \(error.localizedDescription)")
-
                         }
                     } else {
                         print("@@@@@@@@ 회원탈퇴 성공")
