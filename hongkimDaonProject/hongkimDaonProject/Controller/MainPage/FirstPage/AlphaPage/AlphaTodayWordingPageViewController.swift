@@ -148,7 +148,8 @@ class LoadingIndicator {
                 // 다른 UI가 눌리지 않도록 indicatorView의 크기를 full로 할당
                 loadingIndicatorView.frame = window.frame
                 // 은표형한테 물어봐서 우리 어플 색깔로 변경하기
-                loadingIndicatorView.color = .white
+                loadingIndicatorView.color = .black
+//                loadingIndicatorView.color = .white
                 window.addSubview(loadingIndicatorView)
             }
             loadingIndicatorView.startAnimating()

@@ -6,6 +6,6 @@ struct User {
     let joinTime: Int
     let platForm: String
     let notification: Bool
-    let notificationTime: Int
+    let notificationTime: String
     let fcmToken: String
 }
