@@ -29,6 +29,9 @@ class TodayWordingPageViewController: UIViewController {
                         }
                         guard let userFcmToken = snaphot?.data()?["fcmToken"] else { return }
                         print("user Token \(userFcmToken)")
+                        if String(describing: userFcmToken) != token {
+                            self.database.document("user/\(user.uid)").updateData(["fcmToken": token])
+                        }
                     }
                 }
                 print("FCM registration token: \(token)")

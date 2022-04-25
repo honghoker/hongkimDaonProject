@@ -20,20 +20,20 @@ class AlphaTodayWordingPageViewController: UIViewController {
     var realm: Realm!
     override func viewDidLoad() {
         super.viewDidLoad()
-        //        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-        //        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-        //        backgroundUIView.isUserInteractionEnabled = true
-        //        backgroundUIView.addGestureRecognizer(imageClick)
-        //        imageView.image = UIImage(named: "testPage")
-        // MARK: 성훈 위에 주석하고 밑에 작업
         let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
         backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         backgroundUIView.isUserInteractionEnabled = true
         backgroundUIView.addGestureRecognizer(imageClick)
-        imageView.kf.indicatorType = .activity
-        imageView.kf.setImage(with: URL(string: mainImageUrl))
-        saveBtn.addTarget(self, action: #selector(daonStorageSave), for: .touchUpInside)
-        downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
+        imageView.image = UIImage(named: "testPage")
+        // MARK: 성훈 위에 주석하고 밑에 작업
+        //        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+        //        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        //        backgroundUIView.isUserInteractionEnabled = true
+        //        backgroundUIView.addGestureRecognizer(imageClick)
+        //        imageView.kf.indicatorType = .activity
+        //        imageView.kf.setImage(with: URL(string: mainImageUrl))
+        //        saveBtn.addTarget(self, action: #selector(daonStorageSave), for: .touchUpInside)
+        //        downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
     }
     override func viewWillLayoutSubviews() {
     }
@@ -56,8 +56,8 @@ class AlphaTodayWordingPageViewController: UIViewController {
         referralLink?.iOSParameters?.minimumAppVersion = "1.0.1"
         referralLink?.iOSParameters?.appStoreID = "1440705745" // 나중에 수정하세요
         // Android 설정
-//        referralLink?.androidParameters = DynamicLinkAndroidParameters(packageName: "com.green.hongkimDaonProject")
-//        referralLink?.androidParameters?.minimumVersion = 811
+        //        referralLink?.androidParameters = DynamicLinkAndroidParameters(packageName: "com.green.hongkimDaonProject")
+        //        referralLink?.androidParameters?.minimumVersion = 811
         // 단축 URL 생성
         referralLink?.shorten { (shortURL, warnings, error) in
             if let error = error {
@@ -73,16 +73,16 @@ class AlphaTodayWordingPageViewController: UIViewController {
                 // 공유하기 기능 중 제외할 기능이 있을 때 사용
                 //        activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
                 self.present(activityVC, animated: true, completion: nil)
-            // SMS 전송
-//            guard MFMessageComposeViewController.canSendText() else {
-//                print("SMS services are not available")
-//                return
-//            }
-//            let composeViewController = MFMessageComposeViewController()
-//            composeViewController.messageComposeDelegate = self
-//            composeViewController.recipients = ["01033555940"]
-//            composeViewController.body = shortURL?.absoluteString ?? ""
-//            self.present(composeViewController, animated: true, completion: nil)
+                // SMS 전송
+                //            guard MFMessageComposeViewController.canSendText() else {
+                //                print("SMS services are not available")
+                //                return
+                //            }
+                //            let composeViewController = MFMessageComposeViewController()
+                //            composeViewController.messageComposeDelegate = self
+                //            composeViewController.recipients = ["01033555940"]
+                //            composeViewController.body = shortURL?.absoluteString ?? ""
+                //            self.present(composeViewController, animated: true, completion: nil)
             }
         }
     }
@@ -149,7 +149,7 @@ class LoadingIndicator {
                 loadingIndicatorView.frame = window.frame
                 // 은표형한테 물어봐서 우리 어플 색깔로 변경하기
                 loadingIndicatorView.color = .black
-//                loadingIndicatorView.color = .white
+                //                loadingIndicatorView.color = .white
                 window.addSubview(loadingIndicatorView)
             }
             loadingIndicatorView.startAnimating()

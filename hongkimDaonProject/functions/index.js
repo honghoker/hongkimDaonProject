@@ -4,7 +4,7 @@ const admin = require('firebase-admin');
 admin.initializeApp();
 const databaseStroe = admin.firestore();
 
-exports.sendTodayMessage = functions.region("asia-northeast3").pubsub.schedule('*/1 * * * *').timeZone("Asia/Seoul").onRun(async (context) => {    
+exports.sendTodayMessage = functions.region("asia-northeast3").pubsub.schedule('*/10 * * * *').timeZone("Asia/Seoul").onRun(async (context) => {    
     const query = await databaseStroe.collection('user').get();
     try {
         return query.forEach(async eachGroup => {
@@ -15,11 +15,15 @@ exports.sendTodayMessage = functions.region("asia-northeast3").pubsub.schedule('
                 // if 현재시간 == notificationTime 이면 알림보내기
                 var nowHoursTime = admin.firestore.Timestamp.now().toDate().getHours();
                 var nowMinuteTime = admin.firestore.Timestamp.now().toDate().getMinutes();
+                var MinuteTime = nowMinuteTime
+                if (nowMinuteTime < 10) {
+                    MinuteTime = "0" + nowMinuteTime 
+                }
                 var koreaHoursTime = nowHoursTime + 9
                 if (koreaHoursTime >= 24) {
                     koreaHoursTime = koreaHoursTime - 24
                     var hoursTime = "0" + koreaHoursTime
-                    var timeString = hoursTime + ":" + nowMinuteTime
+                    var timeString = hoursTime + ":" + MinuteTime
                     if (timeString.toString() === notificationTime){
                         var payload = {
                             "notification": {
@@ -41,7 +45,7 @@ exports.sendTodayMessage = functions.region("asia-northeast3").pubsub.schedule('
                 else {
                     if (koreaHoursTime < 10) {
                         var hoursTime = "0" + koreaHoursTime
-                        var timeString = hoursTime + ":" + nowMinuteTime
+                        var timeString = hoursTime + ":" + MinuteTime
                         if (timeString.toString() === notificationTime){
                             var payload = {
                                 "notification": {
@@ -61,7 +65,7 @@ exports.sendTodayMessage = functions.region("asia-northeast3").pubsub.schedule('
                         }
                     }
                     else{
-                        var timeString = koreaHoursTime + ":" + nowMinuteTime
+                        var timeString = koreaHoursTime + ":" + MinuteTime
                         if (timeString.toString() === notificationTime){
                             var payload = {
                                 "notification": {
@@ -98,7 +102,6 @@ exports.sendTodayMessageOneTest = functions.region("asia-northeast3").pubsub.sch
         koreaHoursTime = koreaHoursTime - 24
         var hoursTime = "0" + koreaHoursTime
         var timeString = hoursTime + ":" + nowMinuteTime
-        print("hoursTime nowMinuteTime " + hoursTime + ":" + nowMinuteTime)
     }
     else {
         if (koreaHoursTime < 10) {

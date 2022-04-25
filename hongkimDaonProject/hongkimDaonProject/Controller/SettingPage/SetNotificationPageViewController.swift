@@ -15,6 +15,7 @@ class SetNotificationPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print("view load")
+        self.setupHideKeyboardOnTap()
         setNotificationValue {
             LoadingIndicator.hideLoading()
             print("set 완료")
@@ -25,6 +26,8 @@ class SetNotificationPageViewController: UIViewController {
         timePicker.preferredDatePickerStyle = .wheels
         timePicker.addTarget(self, action: #selector(timePickerValueChanged(sender:)), for: UIControl.Event.valueChanged)
         timePicker.frame.size = CGSize(width: 0, height: 250)
+        // 앱 색깔로 변경하기
+        switchBtn.onTintColor = .black
         textField.tintColor = .clear
         textField.inputView = timePicker
     }
@@ -109,5 +112,19 @@ class SetNotificationPageViewController: UIViewController {
             let docRef = database.document("user/\(user.uid)")
             docRef.updateData(["notification": sender.isOn])
         }
+    }
+}
+
+// MARK: outSide touch 하면 inputView dismiss
+extension UIViewController {
+    func setupHideKeyboardOnTap() {
+        self.view.addGestureRecognizer(self.endEditingRecognizer())
+        self.navigationController?.navigationBar.addGestureRecognizer(self.endEditingRecognizer())
+    }
+
+    private func endEditingRecognizer() -> UIGestureRecognizer {
+        let tap = UITapGestureRecognizer(target: self.view, action: #selector(self.view.endEditing(_:)))
+        tap.cancelsTouchesInView = false
+        return tap
     }
 }
