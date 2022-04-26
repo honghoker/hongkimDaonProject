@@ -12,7 +12,7 @@ struct Daon: Codable, Identifiable {
 
 class RealmDaon: Object {
     @objc dynamic var uploadTime = 0
-    @objc dynamic var imageUrl = ""
+    @objc dynamic var imageData = Data()
 }
 
 // MARK: Realm db에 test용으로 class 들어가있음

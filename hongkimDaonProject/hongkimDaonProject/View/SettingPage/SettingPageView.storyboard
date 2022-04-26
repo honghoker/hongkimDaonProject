@@ -99,8 +99,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9FT-o5-7w9">
-                                <rect key="frame" x="32" y="122" width="350" height="31"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9FT-o5-7w9">
+                                <rect key="frame" x="32" y="144" width="350" height="31"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알림 받기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eU6-9P-Exh">
                                         <rect key="frame" x="0.0" y="0.0" width="301" height="31"/>
@@ -110,24 +110,83 @@
                                     </label>
                                     <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WhC-E1-LRL">
                                         <rect key="frame" x="301" y="0.0" width="51" height="31"/>
+                                        <connections>
+                                            <action selector="switchChanged:" destination="53M-4L-a3W" eventType="valueChanged" id="JN3-gf-SND"/>
+                                        </connections>
                                     </switch>
                                 </subviews>
                             </stackView>
-                            <view contentMode="scaleToFill" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mpb-VQ-B1j">
-                                <rect key="frame" x="52" y="209" width="310" height="1"/>
+                            <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mpb-VQ-B1j">
+                                <rect key="frame" x="52" y="207" width="310" height="1"/>
                                 <color key="backgroundColor" systemColor="systemGray2Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="Yuq-5z-tmT"/>
+                                </constraints>
                             </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="5eh-GE-3nl">
+                                <rect key="frame" x="32" y="240" width="350" height="18"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dsh-DL-f2R">
+                                        <rect key="frame" x="0.0" y="0.0" width="47" height="18"/>
+                                        <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="18"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="변경하기" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lgT-zy-gsN">
+                                        <rect key="frame" x="298" y="0.0" width="52" height="18"/>
+                                        <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeL-QD-JCv">
+                                <rect key="frame" x="32" y="290" width="350" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="hd5-pk-QYp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="저장">
+                                    <color key="titleColor" systemColor="labelColor"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kNr-kd-gXt" userLabel="back Button">
+                                <rect key="frame" x="16" y="60" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="HIz-To-elo"/>
+                                    <constraint firstAttribute="width" constant="24" id="iRt-79-0pv"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="chevron.backward" catalog="system"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ZlK-cn-K04"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Mpb-VQ-B1j" firstAttribute="top" secondItem="9FT-o5-7w9" secondAttribute="bottom" constant="56" id="73Q-Hx-iip"/>
+                            <constraint firstItem="kNr-kd-gXt" firstAttribute="top" secondItem="ZlK-cn-K04" secondAttribute="top" constant="16" id="8BV-8u-Ojm"/>
                             <constraint firstItem="ZlK-cn-K04" firstAttribute="trailing" secondItem="9FT-o5-7w9" secondAttribute="trailing" constant="32" id="8og-3c-uMo"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Mpb-VQ-B1j" secondAttribute="trailing" constant="32" id="ZTH-wp-mFp"/>
+                            <constraint firstItem="Mpb-VQ-B1j" firstAttribute="leading" secondItem="DJV-b6-ATY" secondAttribute="leadingMargin" constant="32" id="Akp-md-s1i"/>
+                            <constraint firstItem="5eh-GE-3nl" firstAttribute="leading" secondItem="ZlK-cn-K04" secondAttribute="leading" constant="32" id="FwW-lb-Ntu"/>
+                            <constraint firstItem="Mpb-VQ-B1j" firstAttribute="top" secondItem="9FT-o5-7w9" secondAttribute="bottom" constant="32" id="HVl-QN-khR"/>
+                            <constraint firstItem="9FT-o5-7w9" firstAttribute="top" secondItem="ZlK-cn-K04" secondAttribute="top" constant="100" id="LAT-pb-HqX"/>
+                            <constraint firstItem="ZlK-cn-K04" firstAttribute="trailing" secondItem="5eh-GE-3nl" secondAttribute="trailing" constant="32" id="QD6-Oa-2Jl"/>
+                            <constraint firstItem="kNr-kd-gXt" firstAttribute="leading" secondItem="ZlK-cn-K04" secondAttribute="leading" constant="16" id="SF6-wG-n1I"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Mpb-VQ-B1j" secondAttribute="trailing" constant="32" id="aAy-r5-GDu"/>
+                            <constraint firstItem="ZlK-cn-K04" firstAttribute="trailing" secondItem="ZeL-QD-JCv" secondAttribute="trailing" constant="32" id="ab6-Sm-taT"/>
                             <constraint firstItem="9FT-o5-7w9" firstAttribute="leading" secondItem="ZlK-cn-K04" secondAttribute="leading" constant="32" id="bUX-Da-wMf"/>
-                            <constraint firstItem="Mpb-VQ-B1j" firstAttribute="leading" secondItem="DJV-b6-ATY" secondAttribute="leadingMargin" constant="32" id="li4-v1-A3e"/>
+                            <constraint firstItem="ZeL-QD-JCv" firstAttribute="leading" secondItem="ZlK-cn-K04" secondAttribute="leading" constant="32" id="cFI-KY-Vb8"/>
+                            <constraint firstItem="ZeL-QD-JCv" firstAttribute="top" secondItem="5eh-GE-3nl" secondAttribute="bottom" constant="32" id="pgC-0d-qlI"/>
+                            <constraint firstItem="5eh-GE-3nl" firstAttribute="top" secondItem="Mpb-VQ-B1j" secondAttribute="bottom" constant="32" id="utE-a2-T34"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backBtn" destination="kNr-kd-gXt" id="fUC-99-Zl2"/>
+                        <outlet property="saveBtn" destination="ZeL-QD-JCv" id="tn9-xo-dxB"/>
+                        <outlet property="switchBtn" destination="WhC-E1-LRL" id="ep4-3n-Fx5"/>
+                        <outlet property="textField" destination="lgT-zy-gsN" id="CBF-YO-Yid"/>
+                        <outlet property="textLabel" destination="Dsh-DL-f2R" id="sEF-HK-eOh"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5mi-WL-h1F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -136,6 +195,9 @@
     </scenes>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

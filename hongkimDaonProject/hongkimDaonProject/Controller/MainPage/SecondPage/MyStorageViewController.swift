@@ -51,8 +51,10 @@ extension MyStorageViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "myStorageCellId", for: indexPath) as? MyStorageCell else {
             return UITableViewCell()
         }
-        let imageUrl = myDaons[indexPath.row].imageUrl
-        cell.myStorageImageView.kf.setImage(with: URL(string: imageUrl))
+//        let imageUrl = myDaons[indexPath.row].imageUrl
+        let imageData = myDaons[indexPath.row].imageData
+//        cell.myStorageImageView.kf.setImage(with: URL(string: imageUrl))
+        cell.myStorageImageView.image = UIImage(data: imageData)
         cell.contentMode = .scaleAspectFit
         cell.directionalLayoutMargins = .zero
         cell.layoutMargins = .zero
@@ -65,8 +67,10 @@ extension MyStorageViewController: UITableViewDataSource {
         // MARK: 클릭한 셀의 이벤트 처리
         // MARK: 이미지 크게 보기
         tableView.deselectRow(at: indexPath, animated: true)
-        print("todayArray[indexPath.row].url \(myDaons[indexPath.row].imageUrl)")
-        mainImageUrl = myDaons[indexPath.row].imageUrl
+//        print("todayArray[indexPath.row].url \(myDaons[indexPath.row].imageUrl)")
+//        mainImageUrl = myDaons[indexPath.row].imageUrl
+        mainImageData = myDaons[indexPath.row].imageData
+        mainUploadTime = myDaons[indexPath.row].uploadTime
         let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
         guard let mainVC = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
         // 화면 전환 애니메이션 설정
