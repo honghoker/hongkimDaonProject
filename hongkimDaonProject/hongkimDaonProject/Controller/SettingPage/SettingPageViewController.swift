@@ -15,7 +15,7 @@ import FirebaseFirestore
 import Toast_Swift
 import RealmSwift
 
-class SettingPageViewController: UIViewController {
+class SettingPageViewController: UIViewController, withdrawalProtocol {
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var nickNameChangeBtn: UILabel!
     @IBOutlet weak var notificationConfigBtn: UILabel!
@@ -27,6 +27,9 @@ class SettingPageViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
+        let nickNameChangeBtnClicked: UITapGestureRecognizer =  UITapGestureRecognizer(target: self, action: #selector(nickName(_:)))
+        nickNameChangeBtn.isUserInteractionEnabled = true
+        nickNameChangeBtn.addGestureRecognizer(nickNameChangeBtnClicked)
         let logoutBtnClicked: UITapGestureRecognizer =  UITapGestureRecognizer(target: self, action: #selector(logout(_:)))
         logoutBtn.isUserInteractionEnabled = true
         logoutBtn.addGestureRecognizer(logoutBtnClicked)
@@ -40,6 +43,19 @@ class SettingPageViewController: UIViewController {
 }
 
 extension SettingPageViewController {
+    @objc
+    func showToast(msg: String) {
+        self.view.makeToast(msg, duration: 1.5, position: .bottom)
+    }
+    @objc
+    func nickName(_ gesture: UITapGestureRecognizer) {
+        // MARK: 닉네임 변경 페이지 이동
+        guard let changeNickNameVC = self.storyboard?.instantiateViewController(identifier: "ChangeNickNameViewController") as? ChangeNickNameViewController else {
+            return
+        }
+        changeNickNameVC.modalPresentationStyle = .fullScreen
+        self.present(changeNickNameVC, animated: true, completion: nil)
+    }
     @objc
     func onTapSetNotification(_ gesture: UITapGestureRecognizer) {
         guard let nextView = self.storyboard?.instantiateViewController(identifier: "SetNotificationPageViewController") as? SetNotificationPageViewController else {
@@ -83,54 +99,24 @@ extension SettingPageViewController {
         alert.addAction(UIAlertAction(title: "탈퇴",
                                       style: UIAlertAction.Style.default,
                                       handler: {(_: UIAlertAction!) in
-            if let currentUser = Auth.auth().currentUser {
-                currentUser.delete { error in
-                    if let error = error as? NSError {
-                        switch AuthErrorCode(rawValue: error.code) {
-                        case .operationNotAllowed:
-                            print("Email/ Password sign in provider is new disabled")
-                        case .requiresRecentLogin:
-                            print("@@@@@@@@@@@@@@@@@ requiresRecentLogin request")
-                            guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-                            let signInConfig = GIDConfiguration.init(clientID: clientID)
-                            GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-                                guard error == nil else { return } // 로그인 실패
-                                guard let authentication = user?.authentication else { return }
-                                // access token 부여 받음
-                                // MARK: 은표 예외처리 필요
-                                if currentUser.email == user?.profile?.email && currentUser.displayName == user?.profile?.name {
-                                    let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
-                                    currentUser.reauthenticate(with: credential) { result, error in
-                                        if let error = error {
-                                            print("@@@@@@@@ reauthenticate erorr : \(error)")
-                                        } else {
-                                            print("@@@@@@@@ reauthenticate success : \(result)")
-                                            currentUser.delete { error in
-                                                if let error = error as? NSError {
-                                                    print("@@@@@@@ 또 실패 : \(error)")
-                                                } else {
-                                                    print("@@@@@@@@ 회원탈퇴 성공")
-                                                    self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
-                                                    // MARK: 은표 나의 일기 firestore 삭제 필요
-                                                    // MARK: 성훈 realm 나의 보관함 삭제 필요
-                                                    try? FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
-                                                }
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    self.view.makeToast("회원탈퇴가 실패했습니다.\n현재 로그인한 계정과 다른 계정입니다.", duration: 1.5, position: .bottom)
-                                }
-                            }
-                        default:
-                            print("Error message: \(error.localizedDescription)")
-                        }
-                    } else {
-                        print("@@@@@@@@ 회원탈퇴 성공")
-                        self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
-                        // MARK: 은표 나의 일기 firestore 삭제 필요
-                        // MARK: realm 데이터 삭제
-                        try? FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
+            self.withdrawal { result in
+                switch result {
+                case .success:
+                    self.showToast(msg: "회원탈퇴에 성공했습니다.")
+                    print("@@@@@@@@ withdrawal success")
+                    self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+                case .failure(let error):
+                    switch error as? AuthErros {
+                    case .failedToSignIn:
+                        self.showToast(msg: "로그인에 실패했습니다.")
+                    case .currentUserNotExist:
+                        self.showToast(msg: "사용자 정보를 가져오는데 실패했습니다.")
+                    case .notEqualUser:
+                        self.showToast(msg: "회원탈퇴가 실패했습니다.\n현재 로그인한 계정과 다른 계정입니다.")
+                    case .failedToWithdrawal:
+                        self.showToast(msg: "회원탈퇴에 실패했습니다.")
+                    default:
+                        self.showToast(msg: "회원탈퇴에 실패했습니다.")
                     }
                 }
             }

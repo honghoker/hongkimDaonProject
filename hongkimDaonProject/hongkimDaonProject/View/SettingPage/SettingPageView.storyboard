@@ -133,6 +133,93 @@
             </objects>
             <point key="canvasLocation" x="940.57971014492762" y="34.821428571428569"/>
         </scene>
+        <!--Change Nick Name View Controller-->
+        <scene sceneID="PnH-fw-Wre">
+            <objects>
+                <viewController storyboardIdentifier="ChangeNickNameViewController" id="Pno-YI-bOf" customClass="ChangeNickNameViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ql2-fa-27j">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GdO-ha-DXS" userLabel="back Button">
+                                <rect key="frame" x="16" y="60" width="24" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="8l8-5r-w5Y"/>
+                                    <constraint firstAttribute="width" constant="24" id="cCO-Bv-81b"/>
+                                </constraints>
+                                <color key="tintColor" systemColor="systemGrayColor"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="chevron.backward" catalog="system"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNP-32-Paa">
+                                <rect key="frame" x="32" y="132" width="39" height="14.5"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="닉네임" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9RJ-Dm-1wa">
+                                <rect key="frame" x="32" y="168.5" width="350" height="16"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="중복확인" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9a2-Az-1pO">
+                                <rect key="frame" x="330" y="168.5" width="52" height="14.5"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="sQb-Dk-fHn">
+                                <rect key="frame" x="32" y="214.5" width="350" height="84.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임이 중복입니다" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFZ-bk-uL2">
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="14.5"/>
+                                        <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                        <color key="textColor" systemColor="systemRedColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ4-zu-sCm">
+                                        <rect key="frame" x="0.0" y="34.5" width="350" height="50"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="OAE-kl-m3H"/>
+                                        </constraints>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="변경">
+                                            <fontDescription key="titleFontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                        </buttonConfiguration>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="xU5-Tl-eSg"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xU5-Tl-eSg" firstAttribute="trailing" secondItem="9RJ-Dm-1wa" secondAttribute="trailing" constant="32" id="04W-xf-eIB"/>
+                            <constraint firstItem="sQb-Dk-fHn" firstAttribute="leading" secondItem="xU5-Tl-eSg" secondAttribute="leading" constant="32" id="2qG-Vq-wxk"/>
+                            <constraint firstItem="yNP-32-Paa" firstAttribute="leading" secondItem="xU5-Tl-eSg" secondAttribute="leading" constant="32" id="5KB-14-fs4"/>
+                            <constraint firstItem="sQb-Dk-fHn" firstAttribute="top" secondItem="9RJ-Dm-1wa" secondAttribute="bottom" constant="30" id="72u-Zj-M0K"/>
+                            <constraint firstItem="xU5-Tl-eSg" firstAttribute="trailing" secondItem="9a2-Az-1pO" secondAttribute="trailing" constant="32" id="7NN-Od-tme"/>
+                            <constraint firstItem="GdO-ha-DXS" firstAttribute="top" secondItem="xU5-Tl-eSg" secondAttribute="top" constant="16" id="HGX-sg-LZ1"/>
+                            <constraint firstItem="9RJ-Dm-1wa" firstAttribute="leading" secondItem="xU5-Tl-eSg" secondAttribute="leading" constant="32" id="M4W-4A-4aB"/>
+                            <constraint firstItem="9a2-Az-1pO" firstAttribute="top" secondItem="9RJ-Dm-1wa" secondAttribute="top" id="Qot-6V-N0I"/>
+                            <constraint firstItem="GdO-ha-DXS" firstAttribute="leading" secondItem="xU5-Tl-eSg" secondAttribute="leading" constant="16" id="W4V-lk-8db"/>
+                            <constraint firstItem="yNP-32-Paa" firstAttribute="top" secondItem="GdO-ha-DXS" secondAttribute="bottom" constant="48" id="eov-FY-nVn"/>
+                            <constraint firstItem="xU5-Tl-eSg" firstAttribute="trailing" secondItem="sQb-Dk-fHn" secondAttribute="trailing" constant="32" id="gvO-Vc-4uY"/>
+                            <constraint firstItem="9RJ-Dm-1wa" firstAttribute="top" secondItem="yNP-32-Paa" secondAttribute="bottom" constant="22" id="h6j-t0-ShR"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backBtn" destination="GdO-ha-DXS" id="THh-Ll-DgG"/>
+                        <outlet property="editBtn" destination="ZQ4-zu-sCm" id="v9v-sD-j6g"/>
+                        <outlet property="nickNameTextField" destination="9RJ-Dm-1wa" id="bIt-Lp-aHI"/>
+                        <outlet property="overlapText" destination="9a2-Az-1pO" id="yTk-Pm-YWp"/>
+                        <outlet property="warningOverLapText" destination="dFZ-bk-uL2" id="yyA-Nf-eEu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kON-Q0-ZXg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-17" y="765"/>
+        </scene>
     </scenes>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
@@ -147,6 +234,9 @@
         </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemRedColor">
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

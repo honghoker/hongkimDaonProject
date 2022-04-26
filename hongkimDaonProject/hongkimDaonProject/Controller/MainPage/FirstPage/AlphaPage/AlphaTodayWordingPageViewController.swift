@@ -32,6 +32,7 @@ class AlphaTodayWordingPageViewController: UIViewController {
         backgroundUIView.addGestureRecognizer(imageClick)
         imageView.kf.indicatorType = .activity
         imageView.kf.setImage(with: URL(string: mainImageUrl))
+        shareBtn.addTarget(self, action: #selector(shareInfo), for: .touchUpInside)
         saveBtn.addTarget(self, action: #selector(daonStorageSave), for: .touchUpInside)
         downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
     }

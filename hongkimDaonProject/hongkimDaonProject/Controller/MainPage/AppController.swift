@@ -31,17 +31,17 @@ final class AppController {
         checkLoginIn()
     }
     private func registerAuthStateDidChangeEvent() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(checkLoginIn),
-                                               name: .AuthStateDidChange, // <- Firebase Auth 이벤트
-                                               object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(checkLoginIn),
+//                                               name: .AuthStateDidChange, // <- Firebase Auth 이벤트
+//                                               object: nil)
     }
     @objc private func checkLoginIn() {
         if let user = Auth.auth().currentUser { // <- Firebase Auth
-            print("@@@@@@@@@@ user = \(user)")
+            print("@@@@@@@@@@ checkLoginIn user : \(user)")
             setHome()
         } else {
-            print("@@@@@@@@@@ no currentUser")
+            print("@@@@@@@@@@ checkLoginIn not exist currentUser")
             routeToLogin()
         }
     }

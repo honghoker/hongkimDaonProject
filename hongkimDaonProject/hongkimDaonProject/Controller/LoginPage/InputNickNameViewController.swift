@@ -105,23 +105,10 @@ extension InputNickNameViewController {
             self.overLapCheck = NickNameOverCheck.check
         }
         self.warningOverLapText.isHidden = false
-        self.warningOverLapText.text = overLapValue ? "닉네임이 중복입니다" : "사용가능한 닉네임입니다"
+        self.warningOverLapText.text = overLapValue ? "중복된 닉네임입니다." : "사용가능한 닉네임입니다."
         self.warningOverLapText.textColor = overLapValue ? UIColor.systemRed : UIColor.systemGreen
         overLapValue ? self.nickNameTextField.addRedUnderLine() : self.nickNameTextField.addUnderLine()
         //        self.nickNameTextField.setNeedsLayout()
-    }
-    // 추후 삭제
-    @objc
-    func logout() {
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-            self.navigationController?.popToRootViewController(animated: true)
-            self.presentingViewController?.dismiss(animated: true)
-            print("@@@@@@@@ logout complete")
-        } catch let signOutError as NSError {
-            print("ERROR: signOutError \(signOutError.localizedDescription)")
-        }
     }
 }
 

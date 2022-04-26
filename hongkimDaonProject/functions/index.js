@@ -2,10 +2,10 @@
 const functions = require("firebase-functions");
 const admin = require('firebase-admin');
 admin.initializeApp();
-const databaseStroe = admin.firestore();
+const databaseStore = admin.firestore();
 
 exports.sendTodayMessage = functions.pubsub.schedule('every 10 minutes').onRun(async (context) => {
-    const query = await databaseStroe.collection('user').get();
+    const query = await databaseStore.collection('user').get();
     try {
         return query.forEach(async eachGroup => {
             // 알림 받을지 말지 먼저 체크
@@ -36,3 +36,19 @@ exports.sendTodayMessage = functions.pubsub.schedule('every 10 minutes').onRun(a
         throw new functions.https.HttpsError('invalid-argument', "some message");
     }
 })
+
+exports.withdrawal = functions.auth.user().onDelete((user) => {
+    const uid = user.uid
+    databaseStore.collection("user").doc(uid).delete();
+    databaseStore.collection("diary").where("uid", "==", uid).get().then((querySnapshot) => {
+        querySnapshot.docs.forEach((diarySnapshot) => {
+            const imageUrl = diarySnapshot.get("imageUrl")
+            const path = decodeURIComponent(imageUrl.split("o/")[1].split("?")[0]);
+
+            if (imageUrl != null && imageUrl != "") { 
+                admin.storage().bucket().file(path).delete()
+            }
+            databaseStore.collection("diary").doc(diarySnapshot.id).delete();
+        })
+    }); 
+});

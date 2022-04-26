@@ -29,6 +29,7 @@
 		51F363C6280E01A7003452F4 /* Daon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F363C5280E01A6003452F4 /* Daon.swift */; };
 		51F920992811A617005CC6B7 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F920982811A617005CC6B7 /* AuthManager.swift */; };
 		51F9209B2811B132005CC6B7 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F9209A2811B132005CC6B7 /* AppController.swift */; };
+		51F9209D2817DAE9005CC6B7 /* ChangeNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F9209C2817DAE9005CC6B7 /* ChangeNickNameViewController.swift */; };
 		BC07019A280449ED00139415 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC070199280449ED00139415 /* GoogleService-Info.plist */; };
 		BC4BC7C82809236C00C755BF /* AllWordingCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC4BC7C72809236C00C755BF /* AllWordingCell.xib */; };
 		BC4BC7CB280923EC00C755BF /* AllWordingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4BC7CA280923EC00C755BF /* AllWordingCell.swift */; };
@@ -79,6 +80,7 @@
 		51F363C5280E01A6003452F4 /* Daon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daon.swift; sourceTree = "<group>"; };
 		51F920982811A617005CC6B7 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		51F9209A2811B132005CC6B7 /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
+		51F9209C2817DAE9005CC6B7 /* ChangeNickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeNickNameViewController.swift; sourceTree = "<group>"; };
 		7F7D6921C9B889176CDFE59F /* Pods-hongkimDaonProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.debug.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.debug.xcconfig"; sourceTree = "<group>"; };
 		95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hongkimDaonProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB26D9613EEAC686E23807B9 /* Pods-hongkimDaonProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.release.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 			children = (
 				5117C9D82803F4500072B9B2 /* SettingPageViewController.swift */,
 				BC6C87B72812AC3D00156D89 /* SetNotificationPageViewController.swift */,
+				51F9209C2817DAE9005CC6B7 /* ChangeNickNameViewController.swift */,
 			);
 			path = SettingPage;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				51F363C6280E01A7003452F4 /* Daon.swift in Sources */,
 				5153FF2427FD7BE00096AE7A /* AppDelegate.swift in Sources */,
 				5117C9D92803F4500072B9B2 /* SettingPageViewController.swift in Sources */,
+				51F9209D2817DAE9005CC6B7 /* ChangeNickNameViewController.swift in Sources */,
 				5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */,
 				BC4BC7CB280923EC00C755BF /* AllWordingCell.swift in Sources */,
 				5117C9CE28008AD90072B9B2 /* StorageManager.swift in Sources */,
