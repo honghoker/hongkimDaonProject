@@ -56,6 +56,19 @@
 		CC6576549A2D44437F8B7E24 /* Pods_hongkimDaonProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		BC219A0728167BD200FE66A3 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5117C9CD28008AD90072B9B2 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		5117C9D82803F4500072B9B2 /* SettingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPageViewController.swift; sourceTree = "<group>"; };
@@ -83,6 +96,8 @@
 		95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hongkimDaonProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB26D9613EEAC686E23807B9 /* Pods-hongkimDaonProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.release.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.release.xcconfig"; sourceTree = "<group>"; };
 		BC070199280449ED00139415 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BC2199FA28167BD100FE66A3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		BC2199FC28167BD100FE66A3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		BC4BC7C72809236C00C755BF /* AllWordingCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AllWordingCell.xib; sourceTree = "<group>"; };
 		BC4BC7CA280923EC00C755BF /* AllWordingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWordingCell.swift; sourceTree = "<group>"; };
 		BC5777432807D81C00B4E664 /* FirstMainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMainPageViewController.swift; sourceTree = "<group>"; };
@@ -126,6 +141,8 @@
 			isa = PBXGroup;
 			children = (
 				95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */,
+				BC2199FA28167BD100FE66A3 /* WidgetKit.framework */,
+				BC2199FC28167BD100FE66A3 /* SwiftUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -390,6 +407,7 @@
 				5153FF1D27FD7BE00096AE7A /* Frameworks */,
 				5153FF1E27FD7BE00096AE7A /* Resources */,
 				4BE70DF9EFFD94FC004EF977 /* [CP] Embed Pods Frameworks */,
+				BC219A0728167BD200FE66A3 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);

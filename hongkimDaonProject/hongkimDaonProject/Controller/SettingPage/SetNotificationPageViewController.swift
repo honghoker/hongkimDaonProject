@@ -26,14 +26,12 @@ class SetNotificationPageViewController: UIViewController {
         timePicker.preferredDatePickerStyle = .wheels
         timePicker.addTarget(self, action: #selector(timePickerValueChanged(sender:)), for: UIControl.Event.valueChanged)
         timePicker.frame.size = CGSize(width: 0, height: 250)
-        // 앱 색깔로 변경하기
-        switchBtn.onTintColor = .black
+        switchBtn.onTintColor = DaonConstants.daonColor
         textField.tintColor = .clear
         textField.inputView = timePicker
     }
     override func viewWillAppear(_ animated: Bool) {
         print("view will appear")
-//        LoadingIndicator.showLoading()
     }
     override func viewWillLayoutSubviews() {
         print("view will layout")
@@ -64,13 +62,6 @@ class SetNotificationPageViewController: UIViewController {
                 guard let userNotificationTime = snaphot?.data()?["notificationTime"] else { return }
                 guard let userSwitchValue = snaphot?.data()?["notification"] else { return }
                 self.switchBtn.isOn = userSwitchValue as! Bool
-//                print("user userNotificationTime \(userNotificationTime)")
-//                let formatter = DateFormatter()
-//                formatter.locale = Locale(identifier: "ko_KR")
-//                formatter.dateFormat = "HH:mm"
-//                let userNotificationDate = Date(timeIntervalSince1970: (Double(Int(String(describing: userNotificationTime))!) / 1000.0))
-//                let userNotificationTimeString = formatter.string(from: userNotificationDate)
-//                print("userNotificationTimeString \(userNotificationTimeString)")
                 self.textLabel.text = String(describing: userNotificationTime)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     completion()
@@ -99,13 +90,6 @@ class SetNotificationPageViewController: UIViewController {
         formatter.dateFormat = "HH:mm"
         textLabel.text = formatter.string(from: sender.date)
         timeIntValue = formatter.string(from: sender.date)
-//        formatter.dateFormat = "yyyy-MM-dd HH:mm"
-//        let timeString = formatter.string(from: sender.date)
-//        print("timePicker.date \(timeString)")
-//        formatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-//        let timeDate: Date = formatter.date(from: timeString)!
-//        timeIntValue = timeDate.millisecondsSince1970
-//        print("timePicker.date.millisecondsSince1970 \(timeIntValue)")
     }
     @IBAction func switchChanged(_ sender: UISwitch) {
         if let user = Auth.auth().currentUser {
