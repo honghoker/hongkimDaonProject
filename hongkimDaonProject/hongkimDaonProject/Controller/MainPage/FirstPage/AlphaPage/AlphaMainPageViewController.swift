@@ -12,7 +12,7 @@ class AlphaMainPageViewController: TabmanViewController {
             viewControllers.append(allWordingPageViewController)
         }
         if let alphaTodayWordingPageViewController = storyboard?.instantiateViewController(withIdentifier: "AlphaTodayWordingPageViewController") as? AlphaTodayWordingPageViewController {
-            alphaTodayWordingPageViewController.uploadTime = uploadTime
+//            alphaTodayWordingPageViewController.uploadTime = uploadTime
             viewControllers.append(alphaTodayWordingPageViewController)
         }    
         self.dataSource = self

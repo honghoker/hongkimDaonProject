@@ -61,7 +61,10 @@ extension InputNickNameViewController {
         //        logout()
         if self.overLapCheck == NickNameOverCheck.check {
             print("가입성공")
-            let demmyUserData: User = User(uid: self.userUid, nickName: self.nickNameTextField.text!, joinTime: Int(Date().millisecondsSince1970), platForm: self.platForm, notification: true, notificationTime: Int(Date().millisecondsSince1970), fcmToken: userFcmToken)
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "ko_KR")
+            formatter.dateFormat = "HH:mm"
+            let demmyUserData: User = User(uid: self.userUid, nickName: self.nickNameTextField.text!, joinTime: Int(Date().millisecondsSince1970), platForm: self.platForm, notification: true, notificationTime: formatter.string(from: Date()), fcmToken: userFcmToken)
             writeUserData(userData: demmyUserData)
         } else {
             print("가입실패")

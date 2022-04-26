@@ -31,12 +31,12 @@ extension AllWordingPageViewController: UITableViewDelegate {
 
 extension AllWordingPageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let imageUrl = daonArray[indexPath.row].imageUrl
+        let imageData = daonArray[indexPath.row].imageData
         let imageId = daonArray[indexPath.row].uploadTime
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "allWordingCellId", for: indexPath) as? AllWordingCell else {
             return UITableViewCell()
         }
-        cell.allImageView.kf.setImage(with: URL(string: imageUrl))
+        cell.allImageView.image = UIImage(data: imageData)
         let dateFormatter = DateFormatter()
         let realmDayDate = Date(timeIntervalSince1970: (Double(Int(imageId)) / 1000.0))
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
@@ -56,8 +56,8 @@ extension AllWordingPageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 클릭한 셀의 이벤트 처리
         tableView.deselectRow(at: indexPath, animated: true)
-        print("todayArray[indexPath.row].url \(daonArray[indexPath.row].imageUrl)")
-        mainImageUrl = daonArray[indexPath.row].imageUrl
+        mainImageData = daonArray[indexPath.row].imageData
+        mainUploadTime = daonArray[indexPath.row].uploadTime
         let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
         guard let mainVC = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
         // 화면 전환 애니메이션 설정
