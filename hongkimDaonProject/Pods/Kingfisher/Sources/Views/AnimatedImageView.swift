@@ -44,17 +44,17 @@ public protocol AnimatedImageViewDelegate: AnyObject {
     /// - Parameters:
     ///   - imageView: The `AnimatedImageView` that is being animated.
     ///   - count: The looped count.
-    func animatedImageView(_ imageView: AnimatedImageView, didPlayAnimationLoops count: UInt)
+    func animatedImageView(_ testimageView: AnimatedImageView, didPlayAnimationLoops count: UInt)
 
     /// Called after the `AnimatedImageView` has reached the max repeat count.
     ///
     /// - Parameter imageView: The `AnimatedImageView` that is being animated.
-    func animatedImageViewDidFinishAnimating(_ imageView: AnimatedImageView)
+    func animatedImageViewDidFinishAnimating(_ testimageView: AnimatedImageView)
 }
 
 extension AnimatedImageViewDelegate {
-    public func animatedImageView(_ imageView: AnimatedImageView, didPlayAnimationLoops count: UInt) {}
-    public func animatedImageViewDidFinishAnimating(_ imageView: AnimatedImageView) {}
+    public func animatedImageView(_ testimageView: AnimatedImageView, didPlayAnimationLoops count: UInt) {}
+    public func animatedImageViewDidFinishAnimating(_ testimageView: AnimatedImageView) {}
 }
 
 let KFRunLoopModeCommon = RunLoop.Mode.common

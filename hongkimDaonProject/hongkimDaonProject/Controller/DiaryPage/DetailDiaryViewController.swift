@@ -36,7 +36,8 @@ class DetailDiaryViewController: UIViewController {
                         }
                     }
                 }
-                self.diaryTitle.text = diary.title
+//                self.diaryTitle.text = diary.title
+                self.diaryTitle.text = ""
                 self.diaryContent.text = diary.content
                 let myDateFormatter = DateFormatter()
                 myDateFormatter.dateFormat = "yyyy년 MM월 dd일 a h:mm" // 2020.08.13 오후 04시 30분
