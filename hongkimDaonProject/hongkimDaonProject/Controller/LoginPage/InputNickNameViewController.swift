@@ -55,6 +55,10 @@ class InputNickNameViewController: UIViewController {
         confirmBtn.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
         confirmBtn.addTarget(self, action: #selector(onTapConfirmBtn), for: .touchUpInside)
     }
+    // MARK: 빈 화면 터치시 키보드 내림
+    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    //          self.view.endEditing(true)
+    //    }
 }
 
 // MARK: 가입완료, 중복확인
@@ -83,9 +87,12 @@ extension InputNickNameViewController {
         }
         // MARK: 가입 성공 후 메인 페이지 이동
         let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
-        let mainViewController = storyboard.instantiateInitialViewController()
-        mainViewController?.modalPresentationStyle = .fullScreen
-        self.present(mainViewController!, animated: true, completion: nil)
+        guard let mainViewController = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
+        // MARK: 화면 전환 애니메이션 설정
+        mainViewController.modalTransitionStyle = .crossDissolve
+        // MARK: 전환된 화면이 보여지는 방법 설정
+        mainViewController.modalPresentationStyle = .fullScreen
+        self.present(mainViewController, animated: true, completion: nil)
     }
     @objc
     func onTapOverlapCheck(_ gesture: UITapGestureRecognizer) {

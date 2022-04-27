@@ -9,20 +9,14 @@ import FirebaseFirestore
 class LoginViewController: UIViewController {
     let database = Firestore.firestore()
     private var currentNonce: String?
-    @IBOutlet weak var googleLoginBtn: UIView!
-    @IBOutlet weak var appleLoginBtn: UIView!
+    @IBOutlet weak var googleLoginBtn: UIImageView!
+    @IBOutlet weak var appleLoginBtn: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // googleLoginBtn
-        googleLoginBtn.layer.borderColor = UIColor.black.cgColor
-        googleLoginBtn.layer.backgroundColor = .none
-        googleLoginBtn.layer.borderWidth = 1
-        googleLoginBtn.layer.cornerRadius = 24
-        // appleLoginBtn
-        appleLoginBtn.layer.borderColor = UIColor.black.cgColor
-        appleLoginBtn.layer.backgroundColor = .none
-        appleLoginBtn.layer.borderWidth = 1
-        appleLoginBtn.layer.cornerRadius = 24
+        googleLoginBtn.image = UIImage(named: "googleLoginBtn")
+        googleLoginBtn.isUserInteractionEnabled = true
+        appleLoginBtn.image = UIImage(named: "appleLoginBtn")
+        appleLoginBtn.isUserInteractionEnabled = true
         // login btn click action
         let googleLoginClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGoogleBtn(_:)))
         googleLoginBtn.addGestureRecognizer(googleLoginClick)
@@ -161,7 +155,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
-            FirebaseAuth.Auth.auth().signIn(with: credential) { (authDataResult, error) in
+            Auth.auth().signIn(with: credential) { (authDataResult, error) in
                 if let user = authDataResult?.user {
                     print("애플 로그인 성공", user.uid, user.email ?? "-")
                     self.showMainViewController()

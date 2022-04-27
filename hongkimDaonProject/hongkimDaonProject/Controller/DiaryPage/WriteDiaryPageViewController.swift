@@ -11,28 +11,28 @@ import FirebaseAuth
 import Firebase
 import FirebaseFirestoreSwift
 import FMPhotoPicker
+import SnapKit
 
 class WriteDiaryPageViewController: UIViewController {
     var delegate: DispatchDiary?
+    @IBOutlet weak var imageViewLabel: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var backBtn: UILabel!
     @IBOutlet weak var completeBtn: UILabel!
-    @IBOutlet weak var imageButton: UIButton!
-    @IBOutlet weak var diaryTitleTextField: UITextField!
     @IBOutlet weak var diaryContentTextView: UITextView!
     @IBOutlet weak var scrollView: UIScrollView!
     let placeholderText = "내용을 입력해주세요."
     private let titleMaxLength: Int = 50
     override func viewDidLoad() {
         super.viewDidLoad()
-        diaryTitleTextField.delegate = self
         diaryContentTextView.text = placeholderText
         diaryContentTextView.textColor = .lightGray
         diaryContentTextView.delegate = self
         // MARK: 첫 영문자 소문자로 시작
-        diaryTitleTextField.autocapitalizationType = .none
         diaryContentTextView.autocapitalizationType = .none
         let imgButtonClicked: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(pickImage(_:)))
-        imageButton.addGestureRecognizer(imgButtonClicked)
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(imgButtonClicked)
         let backBtnClicked: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(back(_:)))
         backBtn.isUserInteractionEnabled = true
         backBtn.addGestureRecognizer(backBtnClicked)
@@ -40,13 +40,11 @@ class WriteDiaryPageViewController: UIViewController {
         completeBtn.isUserInteractionEnabled = true
         completeBtn.addGestureRecognizer(completeBtnClicked)
     }
+
     override func viewDidLayoutSubviews() {
         // MARK: underLine 긋기
         let bottomLine = CALayer()
-        bottomLine.frame = CGRect(x: 0, y: diaryTitleTextField.frame.height+6, width: diaryTitleTextField.frame.width, height: 0.5)
         bottomLine.backgroundColor = UIColor.systemGray4.cgColor
-        diaryTitleTextField.borderStyle = .none
-        diaryTitleTextField.layer.addSublayer(bottomLine)
         // MARK: to remove left padding
         diaryContentTextView.textContainer.lineFragmentPadding = 0
     }
@@ -60,14 +58,14 @@ extension Date {
         self = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
     }
     func adding(_ component: Calendar.Component, value: Int, using calendar: Calendar = .current) -> Date {
-            calendar.date(byAdding: component, value: value, to: self)!
+        calendar.date(byAdding: component, value: value, to: self)!
     }
 }
 
 extension WriteDiaryPageViewController {
     @objc
     func back(_ gesture: UITapGestureRecognizer) {
-        if self.imageButton.currentImage != nil || diaryTitleTextField.text != "" || diaryContentTextView.textColor != UIColor.lightGray {
+        if self.imageView.image != nil ||  diaryContentTextView.textColor != UIColor.lightGray {
             let alert = UIAlertController(title: "작성된 내용이 있어요.\n저장하지 않고 나가시겠어요?",
                                           message: "", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
@@ -87,18 +85,17 @@ extension WriteDiaryPageViewController {
     func complete(_ gesture: UITapGestureRecognizer) {
         if let uid = Auth.auth().currentUser?.uid {
             let writeTime: Int64 = Int64(Date().millisecondsSince1970)
-            let title = diaryTitleTextField.text ?? ""
             var content: String = ""
             if diaryContentTextView.textColor != UIColor.lightGray {
                 content = diaryContentTextView.text
             }
-            let diary = Diary(id: nil, uid: uid, imageUrl: "", title: title, content: content, writeTime: writeTime)
+            let diary = Diary(id: nil, uid: uid, imageUrl: "", content: content, writeTime: writeTime)
             DatabaseManager.shared.writeDiary(diary: diary) { result in
                 switch result {
                 case .success(let success):
                     print("@@@@@@@ 일기쓰기 성공 : \(success)")
-                    if self.imageButton.currentImage != nil {
-                        guard let image = self.imageButton.currentImage,
+                    if self.imageView.image != nil {
+                        guard let image = self.imageView.image,
                               let data = image.jpegData(compressionQuality: 0.5) else {
                             return
                         }
@@ -169,6 +166,25 @@ extension WriteDiaryPageViewController: FMPhotoPickerViewControllerDelegate {
 
 // MARK: textField 글자 수 제한 + BackSpace 감지
 extension WriteDiaryPageViewController: UITextFieldDelegate {
+    func animateTextField(textField: UITextField, up: Bool) {
+        let movementDistance: CGFloat = -130
+        let movementDuration: Double = 0.3
+        var movement: CGFloat = 0
+        if up {
+            movement = movementDistance
+        } else {
+            movement = -movementDistance
+        }
+        UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState], animations: {
+            self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        }, completion: nil)
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        animateTextField(textField: textField, up: true)
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        animateTextField(textField: textField, up: false)
+    }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")
@@ -178,6 +194,19 @@ extension WriteDiaryPageViewController: UITextFieldDelegate {
         }
         guard textField.text!.count < titleMaxLength else { return false }
         return true
+    }
+}
+
+extension WriteDiaryPageViewController: FMPhotoPickerViewControllerDelegate {
+    func fmImageEditorViewController(_ editor: FMImageEditorViewController, didFinishEdittingPhotoWith photo: UIImage) {
+        self.dismiss(animated: true, completion: nil)
+        print("@@@@@@@@@@@@ photo : \(photo)")
+    }
+    func fmPhotoPickerController(_ picker: FMPhotoPickerViewController, didFinishPickingPhotoWith photos: [UIImage]) {
+        print("@@@@@@@@@@@@ photo222 : \(photos[0])")
+        self.dismiss(animated: true, completion: nil)
+        imageView.image = photos[0]
+        imageViewLabel.isHidden = true
     }
 }
 
