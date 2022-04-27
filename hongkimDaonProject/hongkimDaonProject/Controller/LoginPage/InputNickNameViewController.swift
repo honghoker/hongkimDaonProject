@@ -75,8 +75,7 @@ extension InputNickNameViewController {
     }
     func writeUserData(userData: User) {
         let docRef = db.document("user/\(userData.uid)")
-        docRef.setData(["uid": userData.uid, "nickName": userData.nickName, "joinTime": userData.joinTime, "platForm": userData.platForm, "notification": userData.notification, "notificationTime": userData.notificationTime, "fcmToken": userData.fcmToken]) {
-            result in
+        docRef.setData(["uid": userData.uid, "nickName": userData.nickName, "joinTime": userData.joinTime, "platForm": userData.platForm, "notification": userData.notification, "notificationTime": userData.notificationTime, "fcmToken": userData.fcmToken]) { result in
             guard result == nil else {
                 print("@@@@@@@ 데이터 저장 실패")
                 return

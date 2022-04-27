@@ -63,14 +63,15 @@ extension LoginViewController {
         self.present(mainViewController, animated: true, completion: nil)
     }
     func showInputNickNameViewController(userUid: String, platForm: String) {
-        if let inputNickNameController = self.storyboard?.instantiateViewController(withIdentifier: "InputNickNameViewController") as? InputNickNameViewController {
-            print("before userUid \(userUid)")
-            print("before platForm \(platForm)")
-            inputNickNameController.userUid = userUid
-            inputNickNameController.platForm = platForm
-            inputNickNameController.modalPresentationStyle = .fullScreen
-            UIApplication.shared.windows.first?.rootViewController?.show(inputNickNameController, sender: nil)
-        }
+        let storyboard: UIStoryboard = UIStoryboard(name: "LoginView", bundle: nil)
+        guard let inputNickNameController = storyboard.instantiateViewController(withIdentifier: "InputNickNameViewController") as? InputNickNameViewController else { return }
+        inputNickNameController.userUid = userUid
+        inputNickNameController.platForm = platForm
+        // MARK: 화면 전환 애니메이션 설정
+        inputNickNameController.modalTransitionStyle = .crossDissolve
+        // MARK: 전환된 화면이 보여지는 방법 설정
+        inputNickNameController.modalPresentationStyle = .fullScreen
+        self.present(inputNickNameController, animated: true, completion: nil)
     }
 }
 
