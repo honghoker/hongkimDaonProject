@@ -17,6 +17,7 @@ class TodayWordingPageViewController: UIViewController {
     private let storage = Storage.storage().reference()
     override func viewDidLoad() {
         super.viewDidLoad()
+        // MARK: realm db 삭제
         //        try! FileManager.default.removeItem(at:Realm.Configuration.defaultConfiguration.fileURL!)
         //        print(Realm.Configuration.defaultConfiguration.fileURL!)
         Messaging.messaging().token { token, error in
@@ -43,16 +44,24 @@ class TodayWordingPageViewController: UIViewController {
         imageView.image = UIImage(named: "testPage")
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(imageClick)
+        // MARK: custom DayDate mil
+        //        let dateString:String = "2022-05"
+        //        let dateFormatter = DateFormatter()
+        //        dateFormatter.dateFormat = "yyyy-MM"
+        //        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+        //        let date:Date = dateFormatter.date(from: dateString)!
+        //        print("before date String \(date)")
+        //        print("after date String \(date.adding(.month, value: 1))")
         // MARK: nowDayDate mil
-        //                let now = Date()
-        //                let dateFormatter = DateFormatter()
-        //                dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
-        //                dateFormatter.dateFormat = "yyyy-MM-dd"
-        //                let nowDayString = dateFormatter.string(from: now)
-        //                dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-        //                let nowDayDate: Date = dateFormatter.date(from: nowDayString)!
-        //                print("nowDayDate \(nowDayDate)")
-        //                print("nowDayDate mil \(nowDayDate.millisecondsSince1970)")
+        //        let now = Date()
+        //        let dateFormatter = DateFormatter()
+        //        dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
+        //        dateFormatter.dateFormat = "yyyy-MM-dd"
+        //        let nowDayString = dateFormatter.string(from: now)
+        //        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+        //        let nowDayDate: Date = dateFormatter.date(from: nowDayString)!
+        //        print("nowDayDate \(nowDayDate)")
+        //        print("nowDayDate mil \(nowDayDate.millisecondsSince1970)")
         // MARK: 성훈 위에 주석하고 밑에 작업
         //        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
         //        let beforeImageData = mainImageData
@@ -87,12 +96,18 @@ class TodayWordingPageViewController: UIViewController {
 
 extension TodayWordingPageViewController {
     func todayImageCacheSet(completion: @escaping (Data, Int) -> Void) {
-        print("input todayImageCacheSet")
         // 내부 db today null check
         // empty -> 해당 월 url 다 가져오기
         // isEmpty -> 최근에 받은 url id랑 비교해서 월 변경됐는지 확인
         // 변경됐으면 변경된 월 1일 ~ 오늘까지 다운
         // 변경안됐으면 최근에 받은 일 ~ 오늘까지 다운
+        // MARK: month debug
+        //        let mayDayDateString:String = "2022-05-01"
+        //        let mayDateString:String = "2022-05"
+        //        let mayDateFormatter = DateFormatter()
+        //        mayDateFormatter.dateFormat = "yyyy-MM"
+        //        mayDateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+        //        let mayDate:Date = mayDateFormatter.date(from: mayDateString)!
         realm = try? Realm()
         var daonUploadTime  = 0
         let list = realm.objects(RealmDaon.self)
@@ -111,7 +126,7 @@ extension TodayWordingPageViewController {
         if list.count == .zero {
             // empty
             // store 접근 -> date.millisecondsSince1970 이거보다 큰 것들 다 가져와서 db 저장
-            self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(nowMonthDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
+            self.database.collection("daon").whereField("uploadTime", isGreaterThanOrEqualTo: Int(nowMonthDate.millisecondsSince1970)).whereField("uploadTime", isLessThan: Int(nowMonthDate.adding(.month, value: 1).millisecondsSince1970)).getDocuments { (snapshot, error) in
                 if error != nil {
                     print("Error getting documents: \(String(describing: error))")
                 } else {
@@ -142,7 +157,7 @@ extension TodayWordingPageViewController {
                 try? realm.write {
                     realm.deleteAll()
                 }
-                self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(nowMonthDate.millisecondsSince1970)).getDocuments { [self] (snapshot, error) in
+                self.database.collection("daon").whereField("uploadTime", isGreaterThanOrEqualTo: Int(nowMonthDate.millisecondsSince1970)).whereField("uploadTime", isLessThan: Int(nowMonthDate.adding(.month, value: 1).millisecondsSince1970)).getDocuments { [self] (snapshot, error) in
                     if error != nil {
                         print("Error getting documents: \(String(describing: error))")
                     } else {
@@ -172,7 +187,7 @@ extension TodayWordingPageViewController {
                         try? realm.write {
                             realm.deleteAll()
                         }
-                        self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(nowMonthDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
+                        self.database.collection("daon").whereField("uploadTime", isGreaterThanOrEqualTo: Int(nowMonthDate.millisecondsSince1970)).whereField("uploadTime", isLessThan: Int(nowMonthDate.adding(.month, value: 1).millisecondsSince1970)).getDocuments { (snapshot, error) in
                             if error != nil {
                                 print("Error getting documents: \(String(describing: error))")
                             } else {
@@ -199,24 +214,23 @@ extension TodayWordingPageViewController {
                         completion(mainImageData, realmImageId)
                     } else {
                         // else -> 다운 해야함
-                        let docRef = self.database.document("daon/\(Int(nowDayDate.millisecondsSince1970))")
-                        docRef.getDocument { snapshot, error in
-                            if let error = error {
-                                print("DEBUG: \(error.localizedDescription)")
-                                return
+                        self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(realmMonthDate.millisecondsSince1970)).whereField("uploadTime", isLessThan: Int(nowMonthDate.adding(.month, value: 1).millisecondsSince1970)).getDocuments { (snapshot, error) in
+                            if error != nil {
+                                print("Error getting documents: \(String(describing: error))")
                             } else {
-                                guard let uploadTime = snapshot?.data()?["uploadTime"] else { return }
-                                guard let imageUrl = snapshot?.data()!["imageUrl"] else { return }
-                                let daon = RealmDaon()
-                                if let resultId = uploadTime as? Int {
-                                    daon.uploadTime = resultId
+                                for document in (snapshot?.documents)! {
+                                    guard let uploadTime = document.data()["uploadTime"] else { return }
+                                    guard let imageUrl = document.data()["imageUrl"] else { return }
+                                    let daon = RealmDaon()
+                                    daon.imageData = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
+                                    daon.uploadTime = Int(String(describing: uploadTime)) ?? 0
+                                    try? self.realm.write {
+                                        self.realm.add(daon)
+                                    }
+                                    mainImageData = daon.imageData
+                                    daonUploadTime = daon.uploadTime
                                 }
-                                daon.imageData = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
-                                try? self.realm.write {
-                                    self.realm.add(daon)
-                                }
-                                mainImageData = daon.imageData
-                                completion(daon.imageData, daon.uploadTime)
+                                completion(mainImageData, daonUploadTime)
                             }
                         }
                     }
@@ -240,7 +254,6 @@ extension TodayWordingPageViewController {
         guard let nextView = self.storyboard?.instantiateViewController(identifier: "AlphaMainPageViewController") as? AlphaMainPageViewController else {
             return
         }
-        //        nextView.uploadTime = imageUploadTime
         nextView.modalPresentationStyle = .fullScreen
         self.present(nextView, animated: false, completion: nil)
     }

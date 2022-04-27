@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="tZf-2n-sAf">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="7M1-QC-EyS">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -8,6 +8,11 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="JejuMyeongjoOTF.otf">
+            <string>JejuMyeongjoOTF</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Second Main Page Container View Controller-->
         <scene sceneID="8oV-2M-90T">
@@ -172,6 +177,36 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v6v-lV-TXc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3659.420289855073" y="995.75892857142856"/>
+        </scene>
+        <!--Start Page View Controller-->
+        <scene sceneID="6EW-C5-Qnl">
+            <objects>
+                <viewController storyboardIdentifier="StartPageViewController" id="7M1-QC-EyS" customClass="StartPageViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="3HP-Bx-tOC"/>
+                        <viewControllerLayoutGuide type="bottom" id="6Pk-TF-Z4S"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="uIc-yr-eH7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="다온" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Nd-hU-b2d">
+                                <rect key="frame" x="161" y="423" width="92" height="50"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="0Nd-hU-b2d" firstAttribute="centerX" secondItem="uIc-yr-eH7" secondAttribute="centerX" id="2UA-hG-ocr"/>
+                            <constraint firstItem="0Nd-hU-b2d" firstAttribute="centerY" secondItem="uIc-yr-eH7" secondAttribute="centerY" id="8xQ-9W-Nbt"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yXm-O8-Mc7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-6623" y="960"/>
         </scene>
         <!--First Main Page Container View Controller-->
         <scene sceneID="tYv-TO-T9o">
