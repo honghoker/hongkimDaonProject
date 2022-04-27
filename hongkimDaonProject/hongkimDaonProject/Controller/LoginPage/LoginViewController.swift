@@ -9,20 +9,14 @@ import FirebaseFirestore
 class LoginViewController: UIViewController {
     let database = Firestore.firestore()
     private var currentNonce: String?
-    @IBOutlet weak var googleLoginBtn: UIView!
-    @IBOutlet weak var appleLoginBtn: UIView!
+    @IBOutlet weak var googleLoginBtn: UIImageView!
+    @IBOutlet weak var appleLoginBtn: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // googleLoginBtn
-        googleLoginBtn.layer.borderColor = UIColor.black.cgColor
-        googleLoginBtn.layer.backgroundColor = .none
-        googleLoginBtn.layer.borderWidth = 1
-        googleLoginBtn.layer.cornerRadius = 24
-        // appleLoginBtn
-        appleLoginBtn.layer.borderColor = UIColor.black.cgColor
-        appleLoginBtn.layer.backgroundColor = .none
-        appleLoginBtn.layer.borderWidth = 1
-        appleLoginBtn.layer.cornerRadius = 24
+        googleLoginBtn.image = UIImage(named: "googleLoginBtn")
+        googleLoginBtn.isUserInteractionEnabled = true
+        appleLoginBtn.image = UIImage(named: "appleLoginBtn")
+        appleLoginBtn.isUserInteractionEnabled = true
         // login btn click action
         let googleLoginClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGoogleBtn(_:)))
         googleLoginBtn.addGestureRecognizer(googleLoginClick)
@@ -63,15 +57,16 @@ extension LoginViewController {
         self.present(mainViewController, animated: true, completion: nil)
     }
     func showInputNickNameViewController(userUid: String, platForm: String) {
-        if let inputNickNameController = self.storyboard?.instantiateViewController(withIdentifier: "InputNickNameViewController") as? InputNickNameViewController {
-            print("before userUid \(userUid)")
-            print("before platForm \(platForm)")
-            inputNickNameController.userUid = userUid
-            inputNickNameController.platForm = platForm
-            inputNickNameController.modalPresentationStyle = .fullScreen
-            UIApplication.shared.windows.first?.rootViewController?.show(inputNickNameController, sender: nil)
+        let storyboard: UIStoryboard = UIStoryboard(name: "LoginView", bundle: nil)
+        guard let inputNickNameController = storyboard.instantiateViewController(withIdentifier: "InputNickNameViewController") as? InputNickNameViewController else { return }
+        inputNickNameController.userUid = userUid
+        inputNickNameController.platForm = platForm
+        // MARK: 화면 전환 애니메이션 설정
+        inputNickNameController.modalTransitionStyle = .crossDissolve
+        // MARK: 전환된 화면이 보여지는 방법 설정
+        inputNickNameController.modalPresentationStyle = .fullScreen
+        self.present(inputNickNameController, animated: true, completion: nil)
         }
-    }
 }
 
 // MARK: Google, Apple Login
@@ -160,7 +155,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
-            FirebaseAuth.Auth.auth().signIn(with: credential) { (authDataResult, error) in
+            Auth.auth().signIn(with: credential) { (authDataResult, error) in
                 if let user = authDataResult?.user {
                     print("애플 로그인 성공", user.uid, user.email ?? "-")
                     self.showMainViewController()
