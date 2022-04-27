@@ -24,34 +24,42 @@ extension withdrawalProtocol where Self: UIViewController {
                 if let error = error as? NSError {
                     switch AuthErrorCode(rawValue: error.code) {
                     case .requiresRecentLogin:
-                        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-                        let signInConfig = GIDConfiguration.init(clientID: clientID)
-                        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-                            guard error == nil else {
-                                completion(.failure(AuthErros.failedToSignIn))
-                                return
-                            }
-                            guard let authentication = user?.authentication else { return }
-                            if currentUser.email == user?.profile?.email && currentUser.displayName == user?.profile?.name {
-                                let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
-                                currentUser.reauthenticate(with: credential) { result, error in
-                                    guard error == nil else {
-                                        completion(.failure(AuthErros.failedToWithdrawal))
-                                        return
-                                    }
-                                    currentUser.delete { error in
+                        let alert = UIAlertController(title: "사용자 정보가 만료되었습니다.",
+                                                      message: "탈퇴하려는 사용자의 계정으로 다시 로그인해주세요.", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
+                            // Cancel Action
+                        }))
+                        alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { _ in
+                            guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+                            let signInConfig = GIDConfiguration.init(clientID: clientID)
+                            GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+                                guard error == nil else {
+                                    completion(.failure(AuthErros.failedToSignIn))
+                                    return
+                                }
+                                guard let authentication = user?.authentication else { return }
+                                if currentUser.email == user?.profile?.email && currentUser.displayName == user?.profile?.name {
+                                    let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
+                                    currentUser.reauthenticate(with: credential) { result, error in
                                         guard error == nil else {
                                             completion(.failure(AuthErros.failedToWithdrawal))
                                             return
                                         }
-                                        self.successToWithdrawal(uid)
-                                        completion(.success(""))
+                                        currentUser.delete { error in
+                                            guard error == nil else {
+                                                completion(.failure(AuthErros.failedToWithdrawal))
+                                                return
+                                            }
+                                            self.successToWithdrawal(uid)
+                                            completion(.success(""))
+                                        }
                                     }
+                                } else {
+                                    completion(.failure(AuthErros.notEqualUser))
                                 }
-                            } else {
-                                completion(.failure(AuthErros.notEqualUser))
                             }
-                        }
+                        }))
+                        self.present(alert, animated: true, completion: nil)
                     default:
                         completion(.failure(AuthErros.failedToWithdrawal))
                         print("Error message: \(error.localizedDescription)")

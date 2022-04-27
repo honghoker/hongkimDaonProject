@@ -1,8 +1,13 @@
 import UIKit
 import SnapKit
+import FirebaseAuth
 import Firebase
 import FirebaseFirestore
 import CoreAudio
+
+protocol DispatchDiary {
+    func dispatch(_ vc: UIViewController, Input value: Diary?)
+}
 
 class MyDiaryViewController: UIViewController {
     @IBOutlet weak var diaryTableView: UITableView!
@@ -107,10 +112,22 @@ extension MyDiaryViewController {
     @objc
     func tapFloatingBtn(_ gesture: UITapGestureRecognizer) {
         let storyboard: UIStoryboard = UIStoryboard(name: "WriteDiaryPageView", bundle: nil)
-        let inputNickNameVC = storyboard.instantiateViewController(withIdentifier: "WriteDiaryPageViewController")
-        inputNickNameVC.modalPresentationStyle = .fullScreen
-        inputNickNameVC.modalTransitionStyle = .crossDissolve
-        self.present(inputNickNameVC, animated: true, completion: nil)
+        guard let writeDiaryPageVC = storyboard.instantiateViewController(withIdentifier: "WriteDiaryPageViewController") as? WriteDiaryPageViewController else { return }
+        writeDiaryPageVC.delegate = self
+        writeDiaryPageVC.modalPresentationStyle = .fullScreen
+        writeDiaryPageVC.modalTransitionStyle = .crossDissolve
+        self.present(writeDiaryPageVC, animated: true, completion: nil)
+    }
+}
+
+extension MyDiaryViewController: DispatchDiary {
+    func dispatch(_ vc: UIViewController, Input value: Diary?) {
+        if let diary = value {
+            self.myDiarys.insert(diary, at: 0)
+            DispatchQueue.main.async {
+                self.diaryTableView.reloadData()
+            }
+        }
     }
 }
 

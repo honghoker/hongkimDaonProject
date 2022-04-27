@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import Toast_Swift
 import FirebaseFirestore
 import FirebaseAuth
 
@@ -28,10 +29,11 @@ class ChangeNickNameViewController: UIViewController {
         backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
         warningOverLapText.isHidden = true
         nickNameTextField.delegate = self
+        self.nickNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
     }
     override func viewDidLayoutSubviews() {
-        overLapCheck == NickNameOverCheck.entrance ? self.nickNameTextField.addUnderLine() : overLapCheck == NickNameOverCheck.check ? self.nickNameTextField.addUnderLine() :
-        self.nickNameTextField.addRedUnderLine()
+        super.viewDidLayoutSubviews()
+        changeOverLap()
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -61,20 +63,16 @@ extension ChangeNickNameViewController {
     }
     @objc
     func onTapOverlapCheck(_ gesture: UITapGestureRecognizer) {
-        if let text = nickNameTextField.text {
+        if let text = self.nickNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
             // MARK: 아무것도 입력안했을 때
             if text.isEmpty == true {
-                warningOverLapText.isHidden = false
-                self.overLapCheck = NickNameOverCheck.notCheck
-                self.warningOverLapText.text = "변경할 닉네임을 입력해주세요."
-                self.warningOverLapText.textColor = UIColor.systemRed
-                self.nickNameTextField.addRedUnderLine()
+                self.overLapCheck = NickNameOverCheck.empty
+                self.changeOverLap()
             } else {
                 // MARK: 기존 닉네임과 같을 때
                 if text == self.nickName {
-                    warningOverLapText.isHidden = true
-                    self.overLapCheck = NickNameOverCheck.notCheck
-                    self.nickNameTextField.addUnderLine()
+                    self.overLapCheck = NickNameOverCheck.same
+                    self.changeOverLap()
                 } else {
                     let docRef = db.collection("user").whereField("nickName", isEqualTo: text)
                     docRef.getDocuments(completion: { snapshot, error in
@@ -84,36 +82,76 @@ extension ChangeNickNameViewController {
                         }
                         guard let documents = snapshot?.documents else { return }
                         if documents.isEmpty {
-                            self.warningOverLapText.text = "사용가능한 닉네임입니다."
-                            self.warningOverLapText.textColor = UIColor.systemGreen
                             self.overLapCheck = NickNameOverCheck.check
-                            self.nickNameTextField.addUnderLine()
+                            self.changeOverLap()
                         } else {
-                            self.warningOverLapText.text = "중복된 닉네임입니다."
-                            self.warningOverLapText.textColor = UIColor.systemRed
-                            self.overLapCheck = NickNameOverCheck.notCheck
-                            self.nickNameTextField.addRedUnderLine()
+                            self.overLapCheck = NickNameOverCheck.overlap
+                            self.changeOverLap()
                         }
-                        self.warningOverLapText.isHidden = false
                     })
                 }
             }
         }
     }
+    // MARK: underLine, 경고문구 변경
+    func changeOverLap() {
+        switch self.overLapCheck {
+        case .entrance: // 처음
+            self.nickNameTextField.addUnderLine()
+            warningOverLapText.isHidden = true
+        case .empty: // 공백
+            self.warningOverLapText.textColor = UIColor.systemRed
+            self.nickNameTextField.addRedUnderLine()
+            self.warningOverLapText.isHidden = false
+        case .overlap: // 중복
+            self.warningOverLapText.textColor = UIColor.systemRed
+            self.nickNameTextField.addRedUnderLine()
+            self.warningOverLapText.isHidden = false
+        case .requireCheck: // 중복확인 요구
+            self.warningOverLapText.textColor = UIColor.systemRed
+            self.nickNameTextField.addRedUnderLine()
+            self.warningOverLapText.isHidden = false
+        case .check: // 사용가능
+            self.warningOverLapText.textColor = UIColor.systemGreen
+            self.nickNameTextField.addUnderLine()
+            self.warningOverLapText.isHidden = false
+        case .same: // 기존이랑 같음
+            self.warningOverLapText.textColor = UIColor.systemRed
+            self.nickNameTextField.addRedUnderLine()
+            self.warningOverLapText.isHidden = false
+        }
+        self.warningOverLapText.text = self.overLapCheck.rawValue
+    }
     @objc
     func onTapEditBtn() {
         if self.overLapCheck == NickNameOverCheck.check {
             if let uid = Auth.auth().currentUser?.uid {
-                db.collection("user").document(uid).updateData(["nickName": nickNameTextField.text!])
+                db.collection("user").document(uid).updateData(["nickName": nickNameTextField.text!]) { result in
+                    guard result == nil else {
+                        self.view.makeToast("닉네임 변경에 실패했습니다.", duration: 1.5, position: .bottom)
+                        return
+                    }
+                    self.view.makeToast("닉네임 변경에 성공했습니다.", duration: 1.5, position: .bottom)
+                }
             } else {
-                print("변경실패")
+                self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
             }
+        } else {
+            self.overLapCheck = NickNameOverCheck.requireCheck
+            changeOverLap()
         }
     }
 }
 
-// MARK: textField 글자 수 제한 + BackSpace 감지
 extension ChangeNickNameViewController: UITextFieldDelegate {
+    // MARK: 중복확인완료 후 텍스트 필드가 변경되었을 때
+    @objc func textFieldDidChange(_ sender: Any?) {
+        if self.overLapCheck == NickNameOverCheck.check {
+            self.overLapCheck = NickNameOverCheck.entrance
+            changeOverLap()
+        }
+    }
+    // MARK: textField 글자 수 제한 + BackSpace 감지
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")

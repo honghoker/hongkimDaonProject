@@ -7,11 +7,13 @@
 
 import UIKit
 import MobileCoreServices
+import FirebaseAuth
 import Firebase
 import FirebaseFirestoreSwift
 import FMPhotoPicker
 
 class WriteDiaryPageViewController: UIViewController {
+    var delegate: DispatchDiary?
     @IBOutlet weak var backBtn: UILabel!
     @IBOutlet weak var completeBtn: UILabel!
     @IBOutlet weak var imageButton: UIButton!
@@ -116,6 +118,7 @@ extension WriteDiaryPageViewController {
                             }
                         }
                     }
+                    self.delegate?.dispatch(self, Input: diary)
                     self.presentingViewController?.dismiss(animated: true)
                 case .failure(let error):
                     print("@@@@@@@ 일기쓰기 실패 error : \(error)")
