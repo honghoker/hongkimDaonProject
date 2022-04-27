@@ -4,14 +4,17 @@ import FirebaseAuth
 import SnapKit
 import FirebaseMessaging
 
-enum NickNameOverCheck {
-    case entrance
-    case notCheck
-    case check
+enum NickNameOverCheck: String {
+    case entrance = ""
+    case empty = "변경할 닉네임을 입력해주세요."
+    case overlap = "중복된 닉네임입니다."
+    case requireCheck = "중복확인을 해주세요."
+    case check = "사용가능한 닉네임입니다."
+    case same = "기존 닉네임과 같습니다."
 }
 
 class InputNickNameViewController: UIViewController {
-    let database = Firestore.firestore()
+    let db = Firestore.firestore()
     lazy var overLapCheck: NickNameOverCheck = NickNameOverCheck.entrance
     var userUid: String = ""
     var platForm: String = ""
@@ -37,11 +40,11 @@ class InputNickNameViewController: UIViewController {
         overlapText.addGestureRecognizer(overlapClick)
         warningOverLapText.isHidden = true
         nickNameTextField.delegate = self
+        self.nickNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
     }
     override func viewDidLayoutSubviews() {
-        print("overLapCheck \(overLapCheck)")
-        overLapCheck == NickNameOverCheck.entrance ? self.nickNameTextField.addUnderLine() : overLapCheck == NickNameOverCheck.check ? self.nickNameTextField.addUnderLine() :
-        self.nickNameTextField.addRedUnderLine()
+        super.viewDidLayoutSubviews()
+        changeOverLap()
     }
     // storyboard에서 세팅을 해놨는데 vc에서 confirmBtn click 하고나면 왜 layout이 초기화되는건지..?
     override func viewWillLayoutSubviews() {
@@ -60,20 +63,26 @@ extension InputNickNameViewController {
     func onTapConfirmBtn() {
         //        logout()
         if self.overLapCheck == NickNameOverCheck.check {
-            print("가입성공")
             let formatter = DateFormatter()
             formatter.locale = Locale(identifier: "ko_KR")
             formatter.dateFormat = "HH:mm"
             let demmyUserData: User = User(uid: self.userUid, nickName: self.nickNameTextField.text!, joinTime: Int(Date().millisecondsSince1970), platForm: self.platForm, notification: true, notificationTime: formatter.string(from: Date()), fcmToken: userFcmToken)
             writeUserData(userData: demmyUserData)
         } else {
-            print("가입실패")
+            self.overLapCheck = NickNameOverCheck.requireCheck
+            changeOverLap()
         }
     }
     func writeUserData(userData: User) {
-        let docRef = database.document("user/\(userData.uid)")
-        docRef.setData(["uid": userData.uid, "nickName": userData.nickName, "joinTime": userData.joinTime, "platForm": userData.platForm, "notification": userData.notification, "notificationTime": userData.notificationTime, "fcmToken": userData.fcmToken])
-        //         메인 페이지 이동
+        let docRef = db.document("user/\(userData.uid)")
+        docRef.setData(["uid": userData.uid, "nickName": userData.nickName, "joinTime": userData.joinTime, "platForm": userData.platForm, "notification": userData.notification, "notificationTime": userData.notificationTime, "fcmToken": userData.fcmToken]) {
+            result in
+            guard result == nil else {
+                print("@@@@@@@ 데이터 저장 실패")
+                return
+            }
+        }
+        // MARK: 가입 성공 후 메인 페이지 이동
         let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
         let mainViewController = storyboard.instantiateInitialViewController()
         mainViewController?.modalPresentationStyle = .fullScreen
@@ -81,37 +90,58 @@ extension InputNickNameViewController {
     }
     @objc
     func onTapOverlapCheck(_ gesture: UITapGestureRecognizer) {
-        print("overlap tap")
-        lazy var overLapValue = false
-        if let text = nickNameTextField.text {
+        if let text = self.nickNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
+            // MARK: 아무것도 입력안했을 때
             if text.isEmpty == true {
-                overLapValue = true
-                self.changeState(overLapValue: overLapValue)
+                self.overLapCheck = NickNameOverCheck.empty
+                self.changeOverLap()
             } else {
-                let docRef = database.collection("user").whereField("nickName", isEqualTo: text)
+                let docRef = db.collection("user").whereField("nickName", isEqualTo: text)
                 docRef.getDocuments(completion: { snapshot, error in
                     if let error = error {
                         print("DEBUG: \(error.localizedDescription)")
                         return
                     }
                     guard let documents = snapshot?.documents else { return }
-                    overLapValue = documents.isEmpty == true ? false : true
-                    self.changeState(overLapValue: overLapValue)
+                    if documents.isEmpty {
+                        self.overLapCheck = NickNameOverCheck.check
+                        self.changeOverLap()
+                    } else {
+                        self.overLapCheck = NickNameOverCheck.overlap
+                        self.changeOverLap()
+                    }
                 })
             }
         }
     }
-    func changeState(overLapValue: Bool) {
-        if overLapValue == true {
-            self.overLapCheck = NickNameOverCheck.notCheck
-        } else {
-            self.overLapCheck = NickNameOverCheck.check
+    // MARK: underLine, 경고문구 변경
+    func changeOverLap() {
+        switch self.overLapCheck {
+        case .entrance: // 처음
+            self.nickNameTextField.addUnderLine()
+            warningOverLapText.isHidden = true
+        case .empty: // 공백
+            self.warningOverLapText.textColor = UIColor.systemRed
+            self.nickNameTextField.addRedUnderLine()
+            self.warningOverLapText.isHidden = false
+        case .overlap: // 중복
+            self.warningOverLapText.textColor = UIColor.systemRed
+            self.nickNameTextField.addRedUnderLine()
+            self.warningOverLapText.isHidden = false
+        case .requireCheck: // 중복확인 요구
+            self.warningOverLapText.textColor = UIColor.systemRed
+            self.nickNameTextField.addRedUnderLine()
+            self.warningOverLapText.isHidden = false
+        case .check: // 사용가능
+            self.warningOverLapText.textColor = UIColor.systemGreen
+            self.nickNameTextField.addUnderLine()
+            self.warningOverLapText.isHidden = false
+        case .same: // 기존이랑 같음
+            self.warningOverLapText.textColor = UIColor.systemRed
+            self.nickNameTextField.addRedUnderLine()
+            self.warningOverLapText.isHidden = false
         }
-        self.warningOverLapText.isHidden = false
-        self.warningOverLapText.text = overLapValue ? "중복된 닉네임입니다." : "사용가능한 닉네임입니다."
-        self.warningOverLapText.textColor = overLapValue ? UIColor.systemRed : UIColor.systemGreen
-        overLapValue ? self.nickNameTextField.addRedUnderLine() : self.nickNameTextField.addUnderLine()
-        //        self.nickNameTextField.setNeedsLayout()
+        self.warningOverLapText.text = self.overLapCheck.rawValue
     }
 }
 
@@ -134,8 +164,15 @@ extension UITextField {
         self.layer.addSublayer(bottomLine)
     }}
 
-// MARK: textField 글자 수 제한 + BackSpace 감지
 extension InputNickNameViewController: UITextFieldDelegate {
+    // MARK: 중복확인완료 후 텍스트 필드가 변경되었을 때
+    @objc func textFieldDidChange(_ sender: Any?) {
+        if self.overLapCheck == NickNameOverCheck.check {
+            self.overLapCheck = NickNameOverCheck.entrance
+            changeOverLap()
+        }
+    }
+    // MARK: textField 글자 수 제한 + BackSpace 감지
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")
