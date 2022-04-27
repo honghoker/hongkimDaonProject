@@ -152,18 +152,6 @@ extension WriteDiaryPageViewController {
     }
 }
 
-extension WriteDiaryPageViewController: FMPhotoPickerViewControllerDelegate {
-    func fmImageEditorViewController(_ editor: FMImageEditorViewController, didFinishEdittingPhotoWith photo: UIImage) {
-        self.dismiss(animated: true, completion: nil)
-        print("@@@@@@@@@@@@ photo : \(photo)")
-    }
-    func fmPhotoPickerController(_ picker: FMPhotoPickerViewController, didFinishPickingPhotoWith photos: [UIImage]) {
-        print("@@@@@@@@@@@@ photo222 : \(photos[0])")
-        self.dismiss(animated: true, completion: nil)
-        imageButton.setImage(photos[0], for: .normal)
-    }
-}
-
 // MARK: textField 글자 수 제한 + BackSpace 감지
 extension WriteDiaryPageViewController: UITextFieldDelegate {
     func animateTextField(textField: UITextField, up: Bool) {

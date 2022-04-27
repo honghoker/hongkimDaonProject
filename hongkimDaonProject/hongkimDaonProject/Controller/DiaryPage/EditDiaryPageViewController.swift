@@ -36,7 +36,7 @@ class EditDiaryPageViewController: UIViewController {
             self.imageButton.setImage(self.image, for: .normal)
         }
         if let diary = self.diary {
-            diaryTitleTextField.text = diary.title
+            diaryTitleTextField.text = ""
             diaryContentTextView.text = diary.content
         }
     }
@@ -55,7 +55,7 @@ class EditDiaryPageViewController: UIViewController {
 extension EditDiaryPageViewController {
     @objc
     func back(_ gesture: UITapGestureRecognizer) {
-        if image != self.imageButton.currentImage || diary?.title !=  diaryTitleTextField.text || diary?.content != diaryContentTextView.text {
+        if image != self.imageButton.currentImage || diary?.content != diaryContentTextView.text {
             let alert = UIAlertController(title: "변경사항이 있습니다.",
                                           message: "수정된 내용을 저장하지 않고 나가시겠어요?", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in

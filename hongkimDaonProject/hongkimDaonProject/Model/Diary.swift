@@ -13,7 +13,6 @@ struct Diary: Codable, Identifiable {
     @DocumentID var id: String?
     let uid: String
     var imageUrl: String
-//    let title: String
     let content: String
     let writeTime: Int64
 }

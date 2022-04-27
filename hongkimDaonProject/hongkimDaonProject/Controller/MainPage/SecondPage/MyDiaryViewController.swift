@@ -167,8 +167,6 @@ extension MyDiaryViewController: UITableViewDataSource {
         }
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         //        cell.separatorInset = UIEdgeInsets.zero
-//        cell.title.text = self.myDiarys[indexPath.row].title
-        cell.title.text = ""
         cell.content.text = self.myDiarys[indexPath.row].content
         let myDateFormatter = DateFormatter()
         myDateFormatter.dateFormat = "yyyy년 MM월 dd일 a h:mm" // 2020.08.13 오후 04시 30분

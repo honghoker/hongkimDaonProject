@@ -31,13 +31,6 @@ class NewDetailDiaryPageViewController: UIViewController {
         imageView.contentMode = .scaleAspectFit
         return imageView
     }()
-    let titleLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 1
-        label.font = UIFont(name: "JejuMyeongjoOTF", size: 18)
-        label.textColor = .black
-        return label
-    }()
     let writeTimeLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 1
@@ -74,16 +67,11 @@ class NewDetailDiaryPageViewController: UIViewController {
             $0.edges.equalToSuperview()
             $0.width.equalToSuperview()
         }
-        self.contentsView.addSubview(self.titleLabel)
         self.contentsView.addSubview(self.contentLabel)
         self.contentsView.addSubview(self.writeTimeLabel)
         self.contentsView.addSubview(self.imageView)
-        self.titleLabel.snp.makeConstraints {
-            $0.top.equalTo(self.scrollView.snp.top).offset(32)
-            $0.leading.equalToSuperview().offset(16)
-        }
         self.writeTimeLabel.snp.makeConstraints {
-            $0.top.equalTo(self.titleLabel.snp.bottom).offset(32)
+            $0.top.equalTo(self.scrollView.snp.top).offset(32)
             $0.leading.equalToSuperview().offset(16)
         }
         Firestore.firestore().collection("diary").document(docId!).addSnapshotListener { documentSnapshot, error in
@@ -97,7 +85,6 @@ class NewDetailDiaryPageViewController: UIViewController {
             }
             guard let diary: Diary = try? document.data(as: Diary.self) else { return }
             self.diary = diary
-            self.titleLabel.text = diary.title
             self.contentLabel.text = diary.content
             let myDateFormatter = DateFormatter()
             myDateFormatter.dateFormat = "yyyy년 MM월 dd일 a h:mm" // 2020.08.13 오후 04시 30분
