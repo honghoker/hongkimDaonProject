@@ -152,8 +152,39 @@ extension WriteDiaryPageViewController {
     }
 }
 
+extension WriteDiaryPageViewController: FMPhotoPickerViewControllerDelegate {
+    func fmImageEditorViewController(_ editor: FMImageEditorViewController, didFinishEdittingPhotoWith photo: UIImage) {
+        self.dismiss(animated: true, completion: nil)
+        print("@@@@@@@@@@@@ photo : \(photo)")
+    }
+    func fmPhotoPickerController(_ picker: FMPhotoPickerViewController, didFinishPickingPhotoWith photos: [UIImage]) {
+        print("@@@@@@@@@@@@ photo222 : \(photos[0])")
+        self.dismiss(animated: true, completion: nil)
+        imageButton.setImage(photos[0], for: .normal)
+    }
+}
+
 // MARK: textField 글자 수 제한 + BackSpace 감지
 extension WriteDiaryPageViewController: UITextFieldDelegate {
+    func animateTextField(textField: UITextField, up: Bool) {
+        let movementDistance: CGFloat = -130
+        let movementDuration: Double = 0.3
+        var movement: CGFloat = 0
+        if up {
+            movement = movementDistance
+        } else {
+            movement = -movementDistance
+        }
+        UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState], animations: {
+            self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
+        }, completion: nil)
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        animateTextField(textField: textField, up: true)
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        animateTextField(textField: textField, up: false)
+    }
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let char = string.cString(using: String.Encoding.utf8) {
             let isBackSpace = strcmp(char, "\\b")
@@ -180,25 +211,6 @@ extension WriteDiaryPageViewController: FMPhotoPickerViewControllerDelegate {
 }
 
 extension WriteDiaryPageViewController: UITextViewDelegate {
-        func animateTextField(textField: UITextField, up: Bool) {
-            let movementDistance: CGFloat = -130
-            let movementDuration: Double = 0.3
-            var movement: CGFloat = 0
-            if up {
-                movement = movementDistance
-            } else {
-                movement = -movementDistance
-            }
-            UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState], animations: {
-                self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-            }, completion: nil)
-        }
-        func textFieldDidBeginEditing(_ textField: UITextField) {
-            animateTextField(textField: textField, up: true)
-        }
-        func textFieldDidEndEditing(_ textField: UITextField) {
-            animateTextField(textField: textField, up: false)
-        }
     func textViewDidBeginEditing(_ textView: UITextView) {
         if self.view.window != nil {
             if textView.textColor == UIColor.lightGray {

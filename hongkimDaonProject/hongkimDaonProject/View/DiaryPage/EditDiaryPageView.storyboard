@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="JejuMyeongjoOTF.otf">
+            <string>JejuMyeongjoOTF</string>
+        </array>
+    </customFonts>
+    <scenes>
+        <!--Edit Diary Page View Controller-->
+        <scene sceneID="s0d-6b-0kx">
+            <objects>
+                <viewController storyboardIdentifier="EditDiaryPageViewController" id="Y6W-OH-hqX" customClass="EditDiaryPageViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="완료" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PSK-oO-fbc">
+                                <rect key="frame" x="372" y="64" width="26" height="14.5"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="취소" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbt-ot-Mg5">
+                                <rect key="frame" x="16" y="64" width="26" height="14.5"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                <color key="textColor" systemColor="systemGray3Color"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일기쓰기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cNy-1u-2oy">
+                                <rect key="frame" x="177.5" y="64" width="59" height="16"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OQX-bq-4D0">
+                                <rect key="frame" x="0.0" y="96" width="414" height="766"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gov-GL-erK">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="494"/>
+                                        <subviews>
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="characterWrap" translatesAutoresizingMaskIntoConstraints="NO" id="Ft4-p1-A7U">
+                                                <rect key="frame" x="16" y="16" width="382" height="200"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="Pcs-y7-MiM"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                <state key="normal" title="오늘 하루를 표현하는 사진 한장을 올려보세요">
+                                                    <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                            </button>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="제목" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="boH-6g-6fy">
+                                                <rect key="frame" x="16" y="246" width="382" height="16"/>
+                                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1WB-ka-lSa">
+                                                <rect key="frame" x="16" y="278" width="382" height="200"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="200" id="M7E-E3-ZvK"/>
+                                                </constraints>
+                                                <color key="textColor" systemColor="labelColor"/>
+                                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                            </textView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="boH-6g-6fy" firstAttribute="top" secondItem="Ft4-p1-A7U" secondAttribute="bottom" constant="30" id="1GH-pQ-FeF"/>
+                                            <constraint firstItem="boH-6g-6fy" firstAttribute="leading" secondItem="gov-GL-erK" secondAttribute="leading" constant="16" id="9O4-c1-p4d"/>
+                                            <constraint firstItem="1WB-ka-lSa" firstAttribute="trailing" secondItem="boH-6g-6fy" secondAttribute="trailing" id="EfV-ku-Zyc"/>
+                                            <constraint firstItem="1WB-ka-lSa" firstAttribute="leading" secondItem="boH-6g-6fy" secondAttribute="leading" id="GF3-dA-RqY"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ft4-p1-A7U" secondAttribute="trailing" constant="16" id="Iua-FR-EMy"/>
+                                            <constraint firstItem="Ft4-p1-A7U" firstAttribute="top" secondItem="gov-GL-erK" secondAttribute="top" constant="16" id="M0T-6I-t8a"/>
+                                            <constraint firstAttribute="bottom" secondItem="1WB-ka-lSa" secondAttribute="bottom" constant="16" id="T9X-gS-96x"/>
+                                            <constraint firstItem="Ft4-p1-A7U" firstAttribute="leading" secondItem="gov-GL-erK" secondAttribute="leading" constant="16" id="Wup-yb-hv2"/>
+                                            <constraint firstAttribute="trailing" secondItem="boH-6g-6fy" secondAttribute="trailing" constant="16" id="ZeH-VH-lJk"/>
+                                            <constraint firstItem="1WB-ka-lSa" firstAttribute="top" secondItem="boH-6g-6fy" secondAttribute="bottom" constant="16" id="jVq-lI-oSU"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="gov-GL-erK" firstAttribute="top" secondItem="tEO-RN-WSp" secondAttribute="top" id="DSf-dL-zca"/>
+                                    <constraint firstItem="gov-GL-erK" firstAttribute="bottom" secondItem="tEO-RN-WSp" secondAttribute="bottom" id="N7B-nI-UWq"/>
+                                    <constraint firstItem="gov-GL-erK" firstAttribute="width" secondItem="C07-Tw-HwL" secondAttribute="width" id="SBW-5e-ncf"/>
+                                    <constraint firstItem="gov-GL-erK" firstAttribute="leading" secondItem="tEO-RN-WSp" secondAttribute="leading" id="iV7-ee-jby"/>
+                                    <constraint firstItem="gov-GL-erK" firstAttribute="trailing" secondItem="tEO-RN-WSp" secondAttribute="trailing" id="xEo-4N-OZf"/>
+                                </constraints>
+                                <viewLayoutGuide key="contentLayoutGuide" id="tEO-RN-WSp"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="C07-Tw-HwL"/>
+                            </scrollView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="OQX-bq-4D0" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" id="3wH-h6-JBq"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="PSK-oO-fbc" secondAttribute="trailing" constant="16" id="53B-rE-3Op"/>
+                            <constraint firstItem="Vbt-ot-Mg5" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="20" id="Hmp-0p-jz8"/>
+                            <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="OQX-bq-4D0" secondAttribute="bottom" id="IIV-ON-Lc6"/>
+                            <constraint firstItem="PSK-oO-fbc" firstAttribute="top" secondItem="Vbt-ot-Mg5" secondAttribute="top" id="KL6-AN-Qih"/>
+                            <constraint firstItem="cNy-1u-2oy" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerX" id="MiL-Ix-0qH"/>
+                            <constraint firstItem="OQX-bq-4D0" firstAttribute="trailing" secondItem="vDu-zF-Fre" secondAttribute="trailing" id="lpy-XQ-5gM"/>
+                            <constraint firstItem="cNy-1u-2oy" firstAttribute="top" secondItem="Vbt-ot-Mg5" secondAttribute="top" id="oRw-gA-Xhp"/>
+                            <constraint firstItem="Vbt-ot-Mg5" firstAttribute="leading" secondItem="vDu-zF-Fre" secondAttribute="leading" constant="16" id="qEY-AL-wA5"/>
+                            <constraint firstItem="OQX-bq-4D0" firstAttribute="top" secondItem="cNy-1u-2oy" secondAttribute="bottom" constant="16" id="u5i-l7-9NA"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="backBtn" destination="Vbt-ot-Mg5" id="lqj-63-zJs"/>
+                        <outlet property="diaryContentTextView" destination="1WB-ka-lSa" id="0SU-Ct-Z92"/>
+                        <outlet property="diaryTitleTextField" destination="boH-6g-6fy" id="I1m-lb-YtB"/>
+                        <outlet property="imageButton" destination="Ft4-p1-A7U" id="K2D-2b-i81"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-249" y="28"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray3Color">
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

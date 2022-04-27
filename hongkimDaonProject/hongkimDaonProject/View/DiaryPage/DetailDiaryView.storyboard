@@ -19,7 +19,7 @@
             <objects>
                 <viewController storyboardIdentifier="DetailDiaryViewController" id="DnZ-SF-MPP" customClass="DetailDiaryViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uFl-VA-Hzr">
-                        <rect key="frame" x="0.0" y="0.0" width="335" height="1500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UqA-gd-VF2">
@@ -33,10 +33,10 @@
                                 <state key="normal" image="chevron.backward" catalog="system"/>
                             </button>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="szv-3A-TNZ">
-                                <rect key="frame" x="0.0" y="104" width="335" height="1362"/>
+                                <rect key="frame" x="0.0" y="104" width="414" height="792"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pSn-u1-4vc">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="403"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="403"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iT6-pu-eeh" userLabel="Diary Title">
                                                 <rect key="frame" x="16" y="32" width="42.5" height="18"/>
@@ -51,13 +51,13 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="26B-sY-s81">
-                                                <rect key="frame" x="16" y="116.5" width="303" height="240"/>
+                                                <rect key="frame" x="16" y="116.5" width="382" height="240"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="240" id="ezs-Gh-ia2"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLb-xj-LKN" userLabel="Diary Content">
-                                                <rect key="frame" x="16" y="388.5" width="303" height="14.5"/>
+                                                <rect key="frame" x="16" y="388.5" width="382" height="14.5"/>
                                                 <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -92,34 +92,104 @@
                                 <viewLayoutGuide key="contentLayoutGuide" id="JVq-NN-8HM"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="sFG-2g-OjC"/>
                             </scrollView>
+                            <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMU-Hv-n0D">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="kvx-22-xmm"/>
+                                    <barButtonItem title="Item" image="scribble" catalog="system" id="znQ-ge-WNp">
+                                        <connections>
+                                            <action selector="tapEditBtn:" destination="DnZ-SF-MPP" id="svZ-Pt-eTX"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Item" image="trash" catalog="system" id="HXX-EV-Ovg">
+                                        <connections>
+                                            <action selector="tapRemoveBtn:" destination="DnZ-SF-MPP" id="iq9-nl-sBY"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <color key="barTintColor" white="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </toolbar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mlW-63-vrX"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="UqA-gd-VF2" firstAttribute="leading" secondItem="mlW-63-vrX" secondAttribute="leading" constant="16" id="1C7-SM-P8q"/>
+                            <constraint firstItem="wMU-Hv-n0D" firstAttribute="leading" secondItem="mlW-63-vrX" secondAttribute="leading" id="1gR-Lb-vUg"/>
                             <constraint firstItem="szv-3A-TNZ" firstAttribute="leading" secondItem="mlW-63-vrX" secondAttribute="leading" id="2lu-SE-tbI"/>
                             <constraint firstItem="UqA-gd-VF2" firstAttribute="top" secondItem="mlW-63-vrX" secondAttribute="top" constant="20" id="H81-A7-zZ5"/>
                             <constraint firstItem="szv-3A-TNZ" firstAttribute="top" secondItem="UqA-gd-VF2" secondAttribute="bottom" constant="16" id="NOO-Qc-6d4"/>
-                            <constraint firstAttribute="bottom" secondItem="szv-3A-TNZ" secondAttribute="bottom" constant="34" id="YMo-8E-7vl"/>
+                            <constraint firstAttribute="bottom" secondItem="szv-3A-TNZ" secondAttribute="bottom" id="YMo-8E-7vl"/>
+                            <constraint firstItem="mlW-63-vrX" firstAttribute="bottom" secondItem="wMU-Hv-n0D" secondAttribute="bottom" id="g4A-FF-qij"/>
                             <constraint firstItem="mlW-63-vrX" firstAttribute="trailing" secondItem="szv-3A-TNZ" secondAttribute="trailing" id="qjy-AX-eBh"/>
+                            <constraint firstItem="wMU-Hv-n0D" firstAttribute="trailing" secondItem="mlW-63-vrX" secondAttribute="trailing" id="uyX-ts-zAq"/>
                         </constraints>
                     </view>
-                    <size key="freeformSize" width="335" height="1500"/>
+                    <size key="freeformSize" width="414" height="896"/>
                     <connections>
                         <outlet property="backBtn" destination="UqA-gd-VF2" id="Sfj-hB-hAx"/>
                         <outlet property="diaryContent" destination="WLb-xj-LKN" id="Grw-oj-U4z"/>
                         <outlet property="diaryImage" destination="26B-sY-s81" id="HnX-N6-ZFn"/>
                         <outlet property="diaryTitle" destination="iT6-pu-eeh" id="zwQ-zP-zhr"/>
+                        <outlet property="editBtn" destination="znQ-ge-WNp" id="lI5-0a-oRK"/>
+                        <outlet property="removeBtn" destination="HXX-EV-Ovg" id="4qL-An-K1R"/>
+                        <outlet property="scrollView" destination="szv-3A-TNZ" id="M7v-b4-ty5"/>
+                        <outlet property="toolBar" destination="wMU-Hv-n0D" id="WKY-62-1u9"/>
                         <outlet property="writeTime" destination="WKf-bA-V63" id="Xk7-2z-Ohd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aYs-8j-FIX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="706.52173913043487" y="242.41071428571428"/>
+            <point key="canvasLocation" x="705.79710144927537" y="242.41071428571428"/>
+        </scene>
+        <!--New Detail Diary Page View Controller-->
+        <scene sceneID="YSi-qF-syF">
+            <objects>
+                <viewController storyboardIdentifier="NewDetailDiaryPageViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yMo-GX-jNm" customClass="NewDetailDiaryPageViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="HxY-bD-D5c">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kov-UA-QlX">
+                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="UlL-24-V99"/>
+                                    <barButtonItem title="Item" image="scribble" catalog="system" id="Xkz-EJ-kMR">
+                                        <connections>
+                                            <action selector="tapEditBtn:" destination="DnZ-SF-MPP" id="1AC-xj-4ag"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Item" image="trash" catalog="system" id="ffG-w7-NpT">
+                                        <connections>
+                                            <action selector="tapRemoveBtn:" destination="DnZ-SF-MPP" id="MD5-DK-gjT"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <color key="barTintColor" white="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </toolbar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="5vZ-BY-N6W"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="kov-UA-QlX" firstAttribute="leading" secondItem="5vZ-BY-N6W" secondAttribute="leading" id="9cW-yz-6j4"/>
+                            <constraint firstItem="5vZ-BY-N6W" firstAttribute="bottom" secondItem="kov-UA-QlX" secondAttribute="bottom" id="JQq-sT-gbQ"/>
+                            <constraint firstItem="kov-UA-QlX" firstAttribute="trailing" secondItem="5vZ-BY-N6W" secondAttribute="trailing" id="yei-WH-T9B"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="toolBar" destination="kov-UA-QlX" id="A9V-Gt-wFa"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oOc-XO-Vn1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1357" y="243"/>
         </scene>
     </scenes>
     <resources>
         <image name="chevron.backward" catalog="system" width="96" height="128"/>
+        <image name="scribble" catalog="system" width="128" height="118"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

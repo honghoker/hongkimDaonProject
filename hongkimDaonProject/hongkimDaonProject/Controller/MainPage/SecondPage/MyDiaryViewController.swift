@@ -7,6 +7,7 @@ import CoreAudio
 
 protocol DispatchDiary {
     func dispatch(_ vc: UIViewController, Input value: Diary?)
+    func delete(_ vc:UIViewController, Delete id: String?)
 }
 
 class MyDiaryViewController: UIViewController {
@@ -121,6 +122,17 @@ extension MyDiaryViewController {
 }
 
 extension MyDiaryViewController: DispatchDiary {
+    func delete(_ vc: UIViewController, Delete value: String?) {
+        if let writeTime = value {
+            if let index = self.myDiarys.firstIndex(where: {
+                $0.writeTime == Int64(writeTime)}) {
+                self.myDiarys.remove(at: index)
+                DispatchQueue.main.async {
+                    self.diaryTableView.reloadData()
+                }
+            }
+        }
+    }
     func dispatch(_ vc: UIViewController, Input value: Diary?) {
         if let diary = value {
             self.myDiarys.insert(diary, at: 0)
@@ -129,6 +141,7 @@ extension MyDiaryViewController: DispatchDiary {
             }
         }
     }
+
 }
 
 extension MyDiaryViewController: UITableViewDelegate {
@@ -167,8 +180,19 @@ extension MyDiaryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // MARK: 클릭한 셀의 이벤트 처리
         tableView.deselectRow(at: indexPath, animated: true)
+//        let storyboard: UIStoryboard = UIStoryboard(name: "DetailDiaryView", bundle: nil)
+//        guard let DetailDiaryVC = storyboard.instantiateViewController(withIdentifier: "DetailDiaryViewController") as? DetailDiaryViewController else { return }
+//        DetailDiaryVC.delegate = self
+//        // MARK: 화면 전환 애니메이션 설정
+//        DetailDiaryVC.modalTransitionStyle = .crossDissolve
+//        // MARK: 전환된 화면이 보여지는 방법 설정 (fullScreen)
+//        DetailDiaryVC.docId = String(myDiarys[indexPath.row].writeTime)
+//        DetailDiaryVC.modalPresentationStyle = .fullScreen
+//        self.present(DetailDiaryVC, animated: true, completion: nil)
+        
         let storyboard: UIStoryboard = UIStoryboard(name: "DetailDiaryView", bundle: nil)
-        guard let DetailDiaryVC = storyboard.instantiateViewController(withIdentifier: "DetailDiaryViewController") as? DetailDiaryViewController else { return }
+        guard let DetailDiaryVC = storyboard.instantiateViewController(withIdentifier: "NewDetailDiaryPageViewController") as? NewDetailDiaryPageViewController else { return }
+        DetailDiaryVC.delegate = self
         // MARK: 화면 전환 애니메이션 설정
         DetailDiaryVC.modalTransitionStyle = .crossDissolve
         // MARK: 전환된 화면이 보여지는 방법 설정 (fullScreen)

@@ -66,7 +66,7 @@ extension LoginViewController {
         // MARK: 전환된 화면이 보여지는 방법 설정
         inputNickNameController.modalPresentationStyle = .fullScreen
         self.present(inputNickNameController, animated: true, completion: nil)
-        }
+    }
 }
 
 // MARK: Google, Apple Login

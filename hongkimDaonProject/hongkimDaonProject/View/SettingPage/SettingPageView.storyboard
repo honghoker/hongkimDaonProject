@@ -33,22 +33,22 @@
                                 <state key="normal" image="chevron.backward" catalog="system"/>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="50" translatesAutoresizingMaskIntoConstraints="NO" id="mrO-EJ-Xnl">
-                                <rect key="frame" x="173" y="318.5" width="68.5" height="259"/>
+                                <rect key="frame" x="175" y="314.5" width="64.5" height="267"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임 변경" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="enU-iV-hB5">
-                                        <rect key="frame" x="0.0" y="0.0" width="68.5" height="14.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="64.5" height="16.5"/>
                                         <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="알림 설정" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lwq-Or-O2M">
-                                        <rect key="frame" x="6.5" y="64.5" width="55.5" height="14.5"/>
+                                        <rect key="frame" x="6" y="66.5" width="52.5" height="16.5"/>
                                         <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a5E-hg-i1j">
-                                        <rect key="frame" x="29" y="129" width="10" height="1"/>
+                                        <rect key="frame" x="27" y="133" width="10" height="1"/>
                                         <color key="backgroundColor" systemColor="systemGray3Color"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="10" id="6nV-GP-5E2"/>
@@ -56,13 +56,13 @@
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="로그아웃" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yDf-xp-jpm">
-                                        <rect key="frame" x="8" y="180" width="52" height="14.5"/>
+                                        <rect key="frame" x="8" y="184" width="48.5" height="16.5"/>
                                         <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="회원탈퇴" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jWJ-9H-kEW">
-                                        <rect key="frame" x="8" y="244.5" width="52" height="14.5"/>
+                                        <rect key="frame" x="8" y="250.5" width="48.5" height="16.5"/>
                                         <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
                                         <color key="textColor" red="0.9679320455" green="0.59470969439999999" blue="0.58336079119999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -124,23 +124,23 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="5eh-GE-3nl">
-                                <rect key="frame" x="32" y="240" width="350" height="18"/>
+                                <rect key="frame" x="32" y="240" width="350" height="21"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dsh-DL-f2R">
-                                        <rect key="frame" x="0.0" y="0.0" width="47" height="18"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="45.5" height="21"/>
                                         <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="18"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="변경하기" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lgT-zy-gsN">
-                                        <rect key="frame" x="298" y="0.0" width="52" height="18"/>
+                                        <rect key="frame" x="301" y="0.0" width="49" height="21"/>
                                         <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZeL-QD-JCv">
-                                <rect key="frame" x="32" y="290" width="350" height="50"/>
+                                <rect key="frame" x="32" y="293" width="350" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="hd5-pk-QYp"/>
                                 </constraints>
@@ -211,33 +211,33 @@
                                 <state key="normal" image="chevron.backward" catalog="system"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yNP-32-Paa">
-                                <rect key="frame" x="32" y="132" width="39" height="14.5"/>
+                                <rect key="frame" x="32" y="132" width="36.5" height="16.5"/>
                                 <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="닉네임" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9RJ-Dm-1wa">
-                                <rect key="frame" x="32" y="168.5" width="350" height="16"/>
+                                <rect key="frame" x="32" y="170.5" width="350" height="18"/>
                                 <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="중복확인" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9a2-Az-1pO">
-                                <rect key="frame" x="330" y="168.5" width="52" height="14.5"/>
+                                <rect key="frame" x="333.5" y="170.5" width="48.5" height="16.5"/>
                                 <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="sQb-Dk-fHn">
-                                <rect key="frame" x="32" y="214.5" width="350" height="84.5"/>
+                                <rect key="frame" x="32" y="218.5" width="350" height="86.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="닉네임이 중복입니다" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dFZ-bk-uL2">
-                                        <rect key="frame" x="0.0" y="0.0" width="350" height="14.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="350" height="16.5"/>
                                         <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
                                         <color key="textColor" systemColor="systemRedColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ4-zu-sCm">
-                                        <rect key="frame" x="0.0" y="34.5" width="350" height="50"/>
+                                        <rect key="frame" x="0.0" y="36.5" width="350" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="OAE-kl-m3H"/>
                                         </constraints>
