@@ -25,14 +25,14 @@ class AlphaTodayWordingPageViewController: UIViewController {
         backgroundUIView.addGestureRecognizer(imageClick)
         imageView.image = UIImage(named: "testPage")
         // MARK: 성훈 위에 주석하고 밑에 작업
-        //                let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-        //                backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-        //                backgroundUIView.isUserInteractionEnabled = true
-        //                backgroundUIView.addGestureRecognizer(imageClick)
-        //                imageView.image = UIImage(data: mainImageData)
-        //                saveBtn.addTarget(self, action: #selector(daonStorageSave), for: .touchUpInside)
-        //                downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
-
+        //                        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+        //                        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        //                        backgroundUIView.isUserInteractionEnabled = true
+        //                        backgroundUIView.addGestureRecognizer(imageClick)
+        //                        imageView.image = UIImage(data: mainImageData)
+        //                        saveBtn.addTarget(self, action: #selector(daonStorageSave), for: .touchUpInside)
+        //                        downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
+        
     }
     override func viewWillLayoutSubviews() {
     }

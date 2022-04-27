@@ -13,7 +13,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var appleLoginBtn: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // googleLoginBtn0
+        // googleLoginBtn
         googleLoginBtn.layer.borderColor = UIColor.black.cgColor
         googleLoginBtn.layer.backgroundColor = .none
         googleLoginBtn.layer.borderWidth = 1
@@ -41,6 +41,7 @@ class LoginViewController: UIViewController {
                 }
                 guard let exist = snapshot?.exists else {return}
                 if exist == true {
+                    print("login view exist")
                     self.showMainViewController()
                 } else {
                     self.showInputNickNameViewController(userUid: user.uid, platForm: platForm)
@@ -53,10 +54,13 @@ class LoginViewController: UIViewController {
 // MARK: Navigator
 extension LoginViewController {
     func showMainViewController() {
-        let storyboard = UIStoryboard(name: "MainPageView", bundle: Bundle.main)
-        let mainViewController = storyboard.instantiateViewController(identifier: "FirstMainPageContainerViewController")
+        let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
+        guard let mainViewController = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
+        // MARK: 화면 전환 애니메이션 설정
+        mainViewController.modalTransitionStyle = .crossDissolve
+        // MARK: 전환된 화면이 보여지는 방법 설정
         mainViewController.modalPresentationStyle = .fullScreen
-        UIApplication.shared.windows.first?.rootViewController?.show(mainViewController, sender: nil)
+        self.present(mainViewController, animated: true, completion: nil)
     }
     func showInputNickNameViewController(userUid: String, platForm: String) {
         if let inputNickNameController = self.storyboard?.instantiateViewController(withIdentifier: "InputNickNameViewController") as? InputNickNameViewController {
@@ -95,7 +99,7 @@ extension LoginViewController {
                             return
                         }
                         guard let exist = snapshot?.exists else {return}
-                        print("snapshot?.exists\(exist)")
+                        print("snapshot?.exists \(exist)")
                         if exist == true {
                             self.showMainViewController()
                         } else {

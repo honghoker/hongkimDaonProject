@@ -1,10 +1,3 @@
-//
-//  SettingPageViewController.swift
-//  hongkimDaonProject
-//
-//  Created by 홍은표 on 2022/04/11.
-//
-
 import UIKit
 import Firebase
 import GoogleSignIn
@@ -80,8 +73,14 @@ extension SettingPageViewController {
             do {
                 let firebaseAuth = Auth.auth()
                 try firebaseAuth.signOut()
+                let storyboard: UIStoryboard = UIStoryboard(name: "LoginView", bundle: nil)
+                guard let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
+                // MARK: 화면 전환 애니메이션 설정
+                loginViewController.modalTransitionStyle = .crossDissolve
+                // MARK: 전환된 화면이 보여지는 방법 설정
+                loginViewController.modalPresentationStyle = .fullScreen
+                self.present(loginViewController, animated: true, completion: nil)
                 //                GIDSignIn.sharedInstance.signOut()
-                self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
                 print("@@@@@@@@ logout complete")
             } catch let signOutError as NSError {
                 print("ERROR: signOutError \(signOutError.localizedDescription)")
