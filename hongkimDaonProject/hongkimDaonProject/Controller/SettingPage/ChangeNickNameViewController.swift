@@ -42,6 +42,10 @@ class ChangeNickNameViewController: UIViewController {
         editBtn.layer.borderColor = UIColor.black.cgColor
         editBtn.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
         editBtn.addTarget(self, action: #selector(onTapEditBtn), for: .touchUpInside)
+        LoadingIndicator.showLoading()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+            LoadingIndicator.hideLoading()
+        }
     }
 }
 
@@ -59,7 +63,7 @@ extension ChangeNickNameViewController {
     }
     @objc
     func back() {
-        self.presentingViewController?.dismiss(animated: true)
+        self.presentingViewController?.dismiss(animated: false)
     }
     @objc
     func onTapOverlapCheck(_ gesture: UITapGestureRecognizer) {

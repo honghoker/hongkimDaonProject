@@ -47,7 +47,7 @@ extension SettingPageViewController {
             return
         }
         changeNickNameVC.modalPresentationStyle = .fullScreen
-        self.present(changeNickNameVC, animated: true, completion: nil)
+        self.present(changeNickNameVC, animated: false, completion: nil)
     }
     @objc
     func onTapSetNotification(_ gesture: UITapGestureRecognizer) {
