@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -252,7 +253,7 @@
                                             </imageView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5P-AS-uYy">
                                                 <rect key="frame" x="16" y="316" width="382" height="468"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <color key="backgroundColor" name="bgColor"/>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -264,7 +265,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <color key="backgroundColor" name="bgColor"/>
                                         <constraints>
                                             <constraint firstItem="6zv-fD-avM" firstAttribute="leading" secondItem="rYy-TJ-yWi" secondAttribute="leading" constant="16" id="61o-U5-v0I"/>
                                             <constraint firstItem="FwX-kg-Tn2" firstAttribute="centerX" secondItem="6zv-fD-avM" secondAttribute="centerX" id="99n-Dc-gT5"/>
@@ -278,6 +279,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" name="bgColor"/>
                                 <constraints>
                                     <constraint firstItem="rYy-TJ-yWi" firstAttribute="trailing" secondItem="0t5-3x-tYS" secondAttribute="trailing" id="TFo-ig-G8d"/>
                                     <constraint firstItem="rYy-TJ-yWi" firstAttribute="top" secondItem="0t5-3x-tYS" secondAttribute="top" id="aC2-zR-3E4"/>
@@ -291,7 +293,7 @@
                             </scrollView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="XQf-Cm-9MU"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="bgColor"/>
                         <constraints>
                             <constraint firstItem="7HO-hh-jCt" firstAttribute="leading" secondItem="XQf-Cm-9MU" secondAttribute="leading" id="0R8-Ci-aVW"/>
                             <constraint firstItem="Xsw-fz-BRc" firstAttribute="centerX" secondItem="gzb-4G-Tbm" secondAttribute="centerX" id="BlW-bW-3Y2"/>
@@ -321,6 +323,9 @@
         </scene>
     </scenes>
     <resources>
+        <namedColor name="bgColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

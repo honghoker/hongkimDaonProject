@@ -40,7 +40,7 @@ class SetNotificationPageViewController: UIViewController {
         backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
         saveBtn.titleLabel?.textAlignment = .center
         saveBtn.layer.borderWidth = 1
-        saveBtn.layer.borderColor = UIColor.black.cgColor
+        saveBtn.layer.borderColor = UIColor.label.cgColor
         saveBtn.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
         saveBtn.addTarget(self, action: #selector(onTapSaveBtn), for: .touchUpInside)
         LoadingIndicator.showLoading()

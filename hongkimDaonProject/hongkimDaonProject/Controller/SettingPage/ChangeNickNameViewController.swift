@@ -39,7 +39,8 @@ class ChangeNickNameViewController: UIViewController {
         super.viewWillLayoutSubviews()
         editBtn.titleLabel?.textAlignment = .center
         editBtn.layer.borderWidth = 1
-        editBtn.layer.borderColor = UIColor.black.cgColor
+        editBtn.layer.borderColor = UIColor.label.cgColor
+        editBtn.tintColor = UIColor.label
         editBtn.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
         editBtn.addTarget(self, action: #selector(onTapEditBtn), for: .touchUpInside)
         LoadingIndicator.showLoading()

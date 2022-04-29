@@ -9,13 +9,16 @@ import Toast_Swift
 import RealmSwift
 
 class SettingPageViewController: UIViewController, withdrawalProtocol {
+    let defaults = UserDefaults.standard
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var nickNameChangeBtn: UILabel!
     @IBOutlet weak var notificationConfigBtn: UILabel!
     @IBOutlet weak var logoutBtn: UILabel!
     @IBOutlet weak var withdrawalBtn: UILabel!
+    @IBOutlet weak var setDarkModeBtn: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor(named: "bgColor")
     }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
@@ -32,10 +35,42 @@ class SettingPageViewController: UIViewController, withdrawalProtocol {
         let setNotificationClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapSetNotification(_:)))
         notificationConfigBtn.isUserInteractionEnabled = true
         notificationConfigBtn.addGestureRecognizer(setNotificationClick)
+        let setDarkModeClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapDarkModeClick(_:)))
+        setDarkModeBtn.isUserInteractionEnabled = true
+        setDarkModeBtn.addGestureRecognizer(setDarkModeClick)
     }
 }
 
 extension SettingPageViewController {
+    @objc
+    func onTapDarkModeClick(_ gesture: UITapGestureRecognizer) {
+        let alert = UIAlertController(title: .none, message: .none, preferredStyle: .actionSheet)
+        let lightMode = UIAlertAction(title: "주간모드", style: .default) {(action) in
+            print("주간모드")
+            if let window = UIApplication.shared.windows.first {
+                if #available(iOS 13.0, *) {
+                    window.overrideUserInterfaceStyle = .light
+                    self.defaults.set(false, forKey: "darkModeState")
+                }
+            }
+        }
+        let darkMode = UIAlertAction(title: "야간모드", style: .default) {(action) in
+            print("야간모드")
+            if let window = UIApplication.shared.windows.first {
+                if #available(iOS 13.0, *) {
+                    window.overrideUserInterfaceStyle = .dark
+                    self.defaults.set(true, forKey: "darkModeState")
+                }
+            }
+        }
+        let cancelAction = UIAlertAction(title: "취소", style: .cancel) {(action) in
+            print("cancel")
+        }
+        alert.addAction(lightMode)
+        alert.addAction(darkMode)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
+    }
     @objc
     func showToast(msg: String) {
         self.view.makeToast(msg, duration: 1.5, position: .bottom)

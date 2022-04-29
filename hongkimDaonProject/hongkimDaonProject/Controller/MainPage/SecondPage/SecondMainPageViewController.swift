@@ -14,17 +14,17 @@ class SecondMainPageViewController: TabmanViewController {
         }
         self.dataSource = self
         let tabBar = TMBar.ButtonBar()
-        tabBar.backgroundView.style = .blur(style: .regular)
+        tabBar.backgroundView.style = .clear
         tabBar.buttons.customize { (button) in
             button.tintColor = .gray
-            button.selectedTintColor = .black
+            button.selectedTintColor = DaonConstants.daonColor
             button.font = UIFont(name: "JejuMyeongjoOTF", size: 14) ?? UIFont.systemFont(ofSize: 14)
         }
         tabBar.layout.transitionStyle = .snap
         tabBar.layout.contentInset = UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
         tabBar.layout.interButtonSpacing = 12
         tabBar.indicator.weight = .custom(value: 1)
-        tabBar.indicator.tintColor = .black
+        tabBar.indicator.tintColor = DaonConstants.daonColor
         tabBar.indicator.overscrollBehavior = .bounce
         addBar(tabBar, dataSource: self, at: .top)
     }
