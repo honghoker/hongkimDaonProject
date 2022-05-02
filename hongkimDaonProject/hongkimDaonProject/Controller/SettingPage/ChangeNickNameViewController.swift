@@ -43,10 +43,10 @@ class ChangeNickNameViewController: UIViewController {
         editBtn.tintColor = UIColor.label
         editBtn.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
         editBtn.addTarget(self, action: #selector(onTapEditBtn), for: .touchUpInside)
-        LoadingIndicator.showLoading()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-            LoadingIndicator.hideLoading()
-        }
+//        LoadingIndicator.showLoading()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//            LoadingIndicator.hideLoading()
+//        }
     }
 }
 
@@ -131,12 +131,18 @@ extension ChangeNickNameViewController {
     func onTapEditBtn() {
         if self.overLapCheck == NickNameOverCheck.check {
             if let uid = Auth.auth().currentUser?.uid {
+                LoadingIndicator.showLoading()
+//                LoadingIndicator.hideLoading()
                 db.collection("user").document(uid).updateData(["nickName": nickNameTextField.text!]) { result in
                     guard result == nil else {
                         self.view.makeToast("닉네임 변경에 실패했습니다.", duration: 1.5, position: .bottom)
                         return
                     }
                     self.view.makeToast("닉네임 변경에 성공했습니다.", duration: 1.5, position: .bottom)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        LoadingIndicator.hideLoading()
+                    }
+                    self.presentingViewController?.dismiss(animated: false)
                 }
             } else {
                 self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)

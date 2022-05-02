@@ -63,22 +63,22 @@ class TodayWordingPageViewController: UIViewController {
         //        print("nowDayDate \(nowDayDate)")
         //        print("nowDayDate mil \(nowDayDate.millisecondsSince1970)")
         // MARK: 성훈 위에 주석하고 밑에 작업
-        //        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-        //        let beforeImageData = mainImageData
-        //        let beforeUploadTime = mainUploadTime
-        //        todayImageCacheSet {imageData, uploadTime in
-        //            if beforeImageData.isEmpty {
-        //                mainImageData = imageData
-        //                mainUploadTime = uploadTime
-        //                self.setImageView(data: mainImageData, imageClick: imageClick)
-        //            } else {
-        //                mainImageData = beforeImageData
-        //                mainUploadTime = beforeUploadTime
-        //                self.setImageView(data: mainImageData, imageClick: imageClick)
-        //            }
-        //            print("call LoadingIndicator")
-        //            LoadingIndicator.hideLoading()
-        //        }
+//                let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+//                let beforeImageData = mainImageData
+//                let beforeUploadTime = mainUploadTime
+//                todayImageCacheSet {imageData, uploadTime in
+//                    if beforeImageData.isEmpty {
+//                        mainImageData = imageData
+//                        mainUploadTime = uploadTime
+//                        self.setImageView(data: mainImageData, imageClick: imageClick)
+//                    } else {
+//                        mainImageData = beforeImageData
+//                        mainUploadTime = beforeUploadTime
+//                        self.setImageView(data: mainImageData, imageClick: imageClick)
+//                    }
+//                    print("call LoadingIndicator")
+//                    LoadingIndicator.hideLoading()
+//                }
     }
     override func viewWillLayoutSubviews() {
         print("sunghun viewWillLayoutSubviews")

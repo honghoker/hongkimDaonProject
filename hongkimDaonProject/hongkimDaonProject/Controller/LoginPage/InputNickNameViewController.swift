@@ -36,7 +36,6 @@ class InputNickNameViewController: UIViewController {
             }
         }
         let overlapClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapOverlapCheck(_:)))
-//        self.view.backgroundColor = UIColor(named: "bgColor")
         overlapText.isUserInteractionEnabled = true
         overlapText.addGestureRecognizer(overlapClick)
         warningOverLapText.isHidden = true
@@ -50,11 +49,11 @@ class InputNickNameViewController: UIViewController {
     // storyboard에서 세팅을 해놨는데 vc에서 confirmBtn click 하고나면 왜 layout이 초기화되는건지..?
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
+        confirmBtn.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
         confirmBtn.titleLabel?.textAlignment = .center
         confirmBtn.layer.borderWidth = 1
         confirmBtn.layer.borderColor = UIColor.label.cgColor
         confirmBtn.tintColor = UIColor.label
-        confirmBtn.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
         confirmBtn.addTarget(self, action: #selector(onTapConfirmBtn), for: .touchUpInside)
     }
     // MARK: 빈 화면 터치시 키보드 내림
