@@ -43,13 +43,13 @@ class NewDetailDiaryPageViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
-        label.textColor = .black
+//        label.textColor = .la
         return label
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.view.backgroundColor = UIColor(named: "bgColor")
+        self.view.backgroundColor = UIColor(named: "bgColor")
         self.view.addSubview(self.backBtn)
         self.backBtn.snp.makeConstraints {
             $0.width.height.equalTo(24)

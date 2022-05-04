@@ -25,8 +25,9 @@ class WriteDiaryPageViewController: UIViewController {
     private let titleMaxLength: Int = 50
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor(named: "bgColor")
         diaryContentTextView.text = placeholderText
-        diaryContentTextView.textColor = .lightGray
+        diaryContentTextView.textColor = .systemGray
         diaryContentTextView.delegate = self
         // MARK: 첫 영문자 소문자로 시작
         diaryContentTextView.autocapitalizationType = .none
@@ -49,7 +50,7 @@ class WriteDiaryPageViewController: UIViewController {
 extension WriteDiaryPageViewController {
     @objc
     func back(_ gesture: UITapGestureRecognizer) {
-        if self.imageView.image != nil ||  diaryContentTextView.textColor != UIColor.lightGray {
+        if self.imageView.image != nil ||  diaryContentTextView.textColor != UIColor.systemGray {
             let alert = UIAlertController(title: "작성된 내용이 있어요.\n저장하지 않고 나가시겠어요?",
                                           message: "", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
@@ -70,7 +71,7 @@ extension WriteDiaryPageViewController {
         if let uid = Auth.auth().currentUser?.uid {
             let writeTime: Int64 = Int64(Date().millisecondsSince1970)
             var content: String = ""
-            if diaryContentTextView.textColor != UIColor.lightGray {
+            if diaryContentTextView.textColor != UIColor.systemGray {
                 content = diaryContentTextView.text
             }
             let diary = Diary(id: nil, uid: uid, imageUrl: "", content: content, writeTime: writeTime,
@@ -152,14 +153,14 @@ extension WriteDiaryPageViewController: FMPhotoPickerViewControllerDelegate {
 extension WriteDiaryPageViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if self.view.window != nil {
-            if textView.textColor == UIColor.lightGray {
+            if textView.textColor == UIColor.systemGray {
                 textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
             }
         }
     }
     func textViewDidChangeSelection(_ textView: UITextView) {
         if self.view.window != nil {
-            if textView.textColor == UIColor.lightGray {
+            if textView.textColor == UIColor.systemGray {
                 textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
             }
         }
@@ -173,15 +174,15 @@ extension WriteDiaryPageViewController: UITextViewDelegate {
         // and set the cursor to the beginning of the text view
         if updatedText.isEmpty {
             textView.text = placeholderText
-            textView.textColor = UIColor.lightGray
+            textView.textColor = UIColor.systemGray
             textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
         }
         // Else if the text view's placeholder is showing and the
         // length of the replacement string is greater than 0, set
         // the text color to black then set its text to the
         // replacement string
-        else if textView.textColor == UIColor.lightGray && !text.isEmpty {
-            textView.textColor = UIColor.black
+        else if textView.textColor == UIColor.systemGray && !text.isEmpty {
+            textView.textColor = UIColor.label
             textView.text = text
         }
         // For every other case, the text should change with the usual

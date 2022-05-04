@@ -32,7 +32,7 @@ class AlphaTodayWordingPageViewController: UIViewController {
 //        imageView.image = UIImage(data: mainImageData)
 //        saveBtn.addTarget(self, action: #selector(daonStorageSave), for: .touchUpInside)
 //        downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
-//        shareBtn.addTarget(self, action: #selector(shareInfo), for: .touchUpInside)
+        shareBtn.addTarget(self, action: #selector(shareInfo), for: .touchUpInside)
     }
     override func viewWillLayoutSubviews() {
     }
