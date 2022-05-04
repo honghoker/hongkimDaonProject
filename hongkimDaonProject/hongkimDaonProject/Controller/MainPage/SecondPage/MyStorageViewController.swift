@@ -69,8 +69,6 @@ extension MyStorageViewController: UITableViewDataSource {
         // MARK: 클릭한 셀의 이벤트 처리
         // MARK: 이미지 크게 보기
         tableView.deselectRow(at: indexPath, animated: true)
-//        print("todayArray[indexPath.row].url \(myDaons[indexPath.row].imageUrl)")
-//        mainImageUrl = myDaons[indexPath.row].imageUrl
         mainImageData = myDaons[indexPath.row].imageData
         mainUploadTime = myDaons[indexPath.row].uploadTime
         let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)

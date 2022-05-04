@@ -63,22 +63,22 @@ class TodayWordingPageViewController: UIViewController {
         //        print("nowDayDate \(nowDayDate)")
         //        print("nowDayDate mil \(nowDayDate.millisecondsSince1970)")
         // MARK: 성훈 위에 주석하고 밑에 작업
-//                let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-//                let beforeImageData = mainImageData
-//                let beforeUploadTime = mainUploadTime
-//                todayImageCacheSet {imageData, uploadTime in
-//                    if beforeImageData.isEmpty {
-//                        mainImageData = imageData
-//                        mainUploadTime = uploadTime
-//                        self.setImageView(data: mainImageData, imageClick: imageClick)
-//                    } else {
-//                        mainImageData = beforeImageData
-//                        mainUploadTime = beforeUploadTime
-//                        self.setImageView(data: mainImageData, imageClick: imageClick)
-//                    }
-//                    print("call LoadingIndicator")
-//                    LoadingIndicator.hideLoading()
-//                }
+        //                let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+        //                let beforeImageData = mainImageData
+        //                let beforeUploadTime = mainUploadTime
+        //                todayImageCacheSet {imageData, uploadTime in
+        //                    if beforeImageData.isEmpty {
+        //                        mainImageData = imageData
+        //                        mainUploadTime = uploadTime
+        //                        self.setImageView(data: mainImageData, imageClick: imageClick)
+        //                    } else {
+        //                        mainImageData = beforeImageData
+        //                        mainUploadTime = beforeUploadTime
+        //                        self.setImageView(data: mainImageData, imageClick: imageClick)
+        //                    }
+        //                    print("call LoadingIndicator")
+        //                    LoadingIndicator.hideLoading()
+        //                }
     }
     override func viewWillLayoutSubviews() {
         print("sunghun viewWillLayoutSubviews")
@@ -257,9 +257,4 @@ extension TodayWordingPageViewController {
         nextView.modalPresentationStyle = .fullScreen
         self.present(nextView, animated: false, completion: nil)
     }
-}
-
-// MARK: 폰트나 컬러 공통적으로 쓰는거 여기다 빼서 파일 하나 새로 파기
-struct DaonConstants {
-    static let daonColor = UIColor(red: 238/255, green: 226/255, blue: 203/255, alpha: 1)
 }

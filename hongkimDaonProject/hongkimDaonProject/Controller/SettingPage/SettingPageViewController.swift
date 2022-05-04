@@ -46,7 +46,6 @@ extension SettingPageViewController {
     func onTapDarkModeClick(_ gesture: UITapGestureRecognizer) {
         let alert = UIAlertController(title: .none, message: .none, preferredStyle: .actionSheet)
         let lightMode = UIAlertAction(title: "주간모드", style: .default) {(action) in
-            print("주간모드")
             if let window = UIApplication.shared.windows.first {
                 if #available(iOS 13.0, *) {
                     window.overrideUserInterfaceStyle = .light
@@ -55,7 +54,6 @@ extension SettingPageViewController {
             }
         }
         let darkMode = UIAlertAction(title: "야간모드", style: .default) {(action) in
-            print("야간모드")
             if let window = UIApplication.shared.windows.first {
                 if #available(iOS 13.0, *) {
                     window.overrideUserInterfaceStyle = .dark

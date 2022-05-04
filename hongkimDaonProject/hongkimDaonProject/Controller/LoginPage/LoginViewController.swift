@@ -35,7 +35,6 @@ class LoginViewController: UIViewController {
                 }
                 guard let exist = snapshot?.exists else {return}
                 if exist == true {
-                    print("login view exist")
                     self.showMainViewController()
                 } else {
                     self.showInputNickNameViewController(userUid: user.uid, platForm: platForm)
@@ -94,7 +93,6 @@ extension LoginViewController {
                             return
                         }
                         guard let exist = snapshot?.exists else {return}
-                        print("snapshot?.exists \(exist)")
                         if exist == true {
                             self.showMainViewController()
                         } else {
@@ -108,7 +106,6 @@ extension LoginViewController {
     }
     @objc
     func tapAppleBtn(_ gesture: UITapGestureRecognizer) {
-        print("apple tap")
         let request = createAppleIDRequest()
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self

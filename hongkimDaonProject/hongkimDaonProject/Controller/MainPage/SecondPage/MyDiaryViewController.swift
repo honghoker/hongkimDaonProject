@@ -190,7 +190,6 @@ extension MyDiaryViewController: UITableViewDataSource {
 //        DetailDiaryVC.docId = String(myDiarys[indexPath.row].writeTime)
 //        DetailDiaryVC.modalPresentationStyle = .fullScreen
 //        self.present(DetailDiaryVC, animated: true, completion: nil)
-        
         let storyboard: UIStoryboard = UIStoryboard(name: "DetailDiaryView", bundle: nil)
         guard let DetailDiaryVC = storyboard.instantiateViewController(withIdentifier: "NewDetailDiaryPageViewController") as? NewDetailDiaryPageViewController else { return }
         DetailDiaryVC.delegate = self

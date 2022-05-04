@@ -25,8 +25,6 @@ class InputNickNameViewController: UIViewController {
     @IBOutlet weak var warningOverLapText: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("get userUid \(userUid)")
-        print("get platForm \(platForm)")
         Messaging.messaging().token { token, error in
             if let error = error {
                 print("Error fetching FCM registration token: \(error)")
@@ -151,25 +149,6 @@ extension InputNickNameViewController {
         self.warningOverLapText.text = self.overLapCheck.rawValue
     }
 }
-
-// MARK: textField UI변경
-extension UITextField {
-    func addUnderLine () {
-        let bottomLine = CALayer()
-        //                self.bounds.width
-        bottomLine.frame = CGRect(x: 0.0, y: self.frame.height + 10, width: self.frame.width, height: 1)
-        bottomLine.backgroundColor = UIColor.lightGray.cgColor
-        self.borderStyle = UITextField.BorderStyle.none
-        self.layer.addSublayer(bottomLine)
-    }
-    func addRedUnderLine () {
-        let bottomLine = CALayer()
-        //        self.bounds.width
-        bottomLine.frame = CGRect(x: 0.0, y: self.frame.height + 10, width: self.frame.width, height: 1)
-        bottomLine.backgroundColor = UIColor.systemRed.cgColor
-        self.borderStyle = UITextField.BorderStyle.none
-        self.layer.addSublayer(bottomLine)
-    }}
 
 extension InputNickNameViewController: UITextFieldDelegate {
     // MARK: 중복확인완료 후 텍스트 필드가 변경되었을 때
