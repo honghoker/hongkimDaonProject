@@ -7,7 +7,7 @@ import CoreAudio
 
 protocol DispatchDiary {
     func dispatch(_ vc: UIViewController, Input value: Diary?)
-    func delete(_ vc:UIViewController, Delete id: String?)
+    func delete(_ vc: UIViewController, Delete id: String?)
 }
 
 class MyDiaryViewController: UIViewController {
@@ -38,7 +38,7 @@ class MyDiaryViewController: UIViewController {
         super.viewDidLoad()
         let myTableViewCellNib = UINib(nibName: String(describing: MyDiaryCell.self), bundle: nil)
         self.diaryTableView.register(myTableViewCellNib, forCellReuseIdentifier: "MyDiaryCell")
-        self.diaryTableView.rowHeight = 120
+        self.diaryTableView.rowHeight = 100
         self.diaryTableView.estimatedRowHeight = UITableView.automaticDimension
         self.diaryTableView.separatorStyle = .none
         self.diaryTableView.delegate = self
@@ -169,7 +169,7 @@ extension MyDiaryViewController: UITableViewDataSource {
         //        cell.separatorInset = UIEdgeInsets.zero
         cell.content.text = self.myDiarys[indexPath.row].content
         let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "yyyy년 MM월 dd일 a h:mm" // 2020.08.13 오후 04시 30분
+        myDateFormatter.dateFormat = "# yyyy.MM.dd a h:mm" // 2020.08.13 오후 04:30분
         myDateFormatter.locale = Locale(identifier: "ko_KR") // PM, AM을 언어에 맞게 setting (ex: PM -> 오후)
         let convertNowStr = myDateFormatter.string(from: Date(milliseconds: myDiarys[indexPath.row].writeTime)) //
         cell.time.text = convertNowStr
@@ -187,7 +187,6 @@ extension MyDiaryViewController: UITableViewDataSource {
 //        DetailDiaryVC.docId = String(myDiarys[indexPath.row].writeTime)
 //        DetailDiaryVC.modalPresentationStyle = .fullScreen
 //        self.present(DetailDiaryVC, animated: true, completion: nil)
-        
         let storyboard: UIStoryboard = UIStoryboard(name: "DetailDiaryView", bundle: nil)
         guard let DetailDiaryVC = storyboard.instantiateViewController(withIdentifier: "NewDetailDiaryPageViewController") as? NewDetailDiaryPageViewController else { return }
         DetailDiaryVC.delegate = self

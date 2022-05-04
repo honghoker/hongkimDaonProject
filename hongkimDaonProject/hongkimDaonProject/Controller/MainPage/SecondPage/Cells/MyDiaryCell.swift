@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 class MyDiaryCell: UITableViewCell {
-    @IBOutlet weak var title: UILabel!
     @IBOutlet weak var content: UILabel!
     @IBOutlet weak var time: UILabel!
     override class func awakeFromNib() {

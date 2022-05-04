@@ -31,6 +31,9 @@ final class StorageManager {
     public func deleteImage(fileName: String, filePath: String) {
         storage.reference().child("\(filePath)/\(fileName)").delete()
     }
+    public func deleteImage(downloadURL: String) {
+        storage.reference(forURL: downloadURL).delete()
+    }
     public func downloadImage(url: URL, completion: @escaping (UIImage?) -> Void) {
         let reference = storage.reference(forURL: url.absoluteString)
         let megaByte = Int64(1 * 1024 * 1024)
