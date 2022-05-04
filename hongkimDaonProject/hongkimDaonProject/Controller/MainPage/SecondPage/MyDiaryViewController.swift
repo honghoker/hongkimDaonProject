@@ -37,6 +37,7 @@ class MyDiaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let myTableViewCellNib = UINib(nibName: String(describing: MyDiaryCell.self), bundle: nil)
+        self.diaryTableView.backgroundColor = UIColor(named: "bgColor")
         self.diaryTableView.register(myTableViewCellNib, forCellReuseIdentifier: "MyDiaryCell")
         self.diaryTableView.rowHeight = 120
         self.diaryTableView.estimatedRowHeight = UITableView.automaticDimension
@@ -44,6 +45,7 @@ class MyDiaryViewController: UIViewController {
         self.diaryTableView.delegate = self
         self.diaryTableView.dataSource = self
         view.addSubview(floatingBtn)
+        floatingBtn.backgroundColor = UIColor(named: "bgColor")
         self.floatingBtn.snp.makeConstraints { (make) in
             make.width.height.equalTo(64)
             make.right.equalTo(diaryTableView).offset(-16)
@@ -165,6 +167,7 @@ extension MyDiaryViewController: UITableViewDataSource {
         guard let cell = diaryTableView.dequeueReusableCell(withIdentifier: "MyDiaryCell", for: indexPath) as? MyDiaryCell else {
             return UITableViewCell()
         }
+        cell.backgroundColor = UIColor(named: "bgColor")
         cell.selectionStyle = UITableViewCell.SelectionStyle.none
         //        cell.separatorInset = UIEdgeInsets.zero
         cell.content.text = self.myDiarys[indexPath.row].content
@@ -187,7 +190,6 @@ extension MyDiaryViewController: UITableViewDataSource {
 //        DetailDiaryVC.docId = String(myDiarys[indexPath.row].writeTime)
 //        DetailDiaryVC.modalPresentationStyle = .fullScreen
 //        self.present(DetailDiaryVC, animated: true, completion: nil)
-        
         let storyboard: UIStoryboard = UIStoryboard(name: "DetailDiaryView", bundle: nil)
         guard let DetailDiaryVC = storyboard.instantiateViewController(withIdentifier: "NewDetailDiaryPageViewController") as? NewDetailDiaryPageViewController else { return }
         DetailDiaryVC.delegate = self

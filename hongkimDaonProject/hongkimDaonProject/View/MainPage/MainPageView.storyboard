@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -44,7 +45,7 @@
                                 </connections>
                             </containerView>
                         </subviews>
-                        <color key="backgroundColor" red="0.99323421720000005" green="0.99323421720000005" blue="0.99323421720000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="bgColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="MsC-Ym-M3L" secondAttribute="trailing" constant="16" id="1VO-9M-DTF"/>
                             <constraint firstAttribute="trailing" secondItem="r9X-Dg-F0q" secondAttribute="trailing" constant="16" id="4rP-CS-TMx"/>
@@ -79,7 +80,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="bgColor"/>
                         <constraints>
                             <constraint firstItem="brZ-UJ-sgY" firstAttribute="top" secondItem="yvl-PJ-Pex" secondAttribute="bottom" id="0K1-Tv-4IZ"/>
                             <constraint firstItem="brZ-UJ-sgY" firstAttribute="leading" secondItem="5EZ-qb-Rvc" secondAttribute="leading" id="lbT-xB-oUW"/>
@@ -112,7 +113,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" name="bgColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="zll-V3-fsW" secondAttribute="bottom" id="J4U-CG-UsT"/>
                             <constraint firstAttribute="trailing" secondItem="zll-V3-fsW" secondAttribute="trailing" id="jhy-fH-QLH"/>
@@ -139,7 +140,7 @@
                     <view key="view" contentMode="scaleToFill" id="wzg-T1-cfr">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="bgColor"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mzw-SO-nYf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -251,7 +252,7 @@
                     <view key="view" contentMode="scaleToFill" id="9xn-Qx-PZW">
                         <rect key="frame" x="0.0" y="0.0" width="382" height="723"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" name="bgColor"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="L32-bQ-Nr1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -334,7 +335,6 @@
                                 </subviews>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Xwz-th-NaZ" secondAttribute="trailing" id="5KR-xZ-UeS"/>
                             <constraint firstAttribute="bottom" secondItem="Xwz-th-NaZ" secondAttribute="bottom" id="7cj-nK-Whp"/>
@@ -378,7 +378,6 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="KI9-rR-kLe" firstAttribute="top" secondItem="5ab-p0-NDX" secondAttribute="top" id="c1h-8p-zrn"/>
                             <constraint firstItem="KI9-rR-kLe" firstAttribute="leading" secondItem="5ab-p0-NDX" secondAttribute="leading" id="eEb-zn-lbC"/>
@@ -400,6 +399,9 @@
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
         <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <namedColor name="bgColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

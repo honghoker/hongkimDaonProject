@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
         IQKeyboardManager.shared.toolbarDoneBarButtonItemText = "완료"
+        IQKeyboardManager.shared.toolbarTintColor = .black
         IQKeyboardManager.shared.previousNextDisplayMode = .alwaysHide
         IQKeyboardManager.shared.shouldResignOnTouchOutside = false
         // MARK: realm migration
@@ -47,6 +48,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: {_, _ in })
                 application.registerForRemoteNotifications()
         return true
+    }
+    // 세로방향 고정
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.portrait
     }
     func application(_ application: UIApplication, continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {

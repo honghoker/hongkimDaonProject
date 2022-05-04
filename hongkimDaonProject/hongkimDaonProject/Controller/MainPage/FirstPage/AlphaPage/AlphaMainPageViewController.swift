@@ -12,22 +12,21 @@ class AlphaMainPageViewController: TabmanViewController {
             viewControllers.append(allWordingPageViewController)
         }
         if let alphaTodayWordingPageViewController = storyboard?.instantiateViewController(withIdentifier: "AlphaTodayWordingPageViewController") as? AlphaTodayWordingPageViewController {
-//            alphaTodayWordingPageViewController.uploadTime = uploadTime
             viewControllers.append(alphaTodayWordingPageViewController)
-        }  
+        }
         self.dataSource = self
         let tabBar = TMBar.ButtonBar()
         tabBar.backgroundView.style = .clear
         tabBar.buttons.customize { (button) in
             button.tintColor = .gray
-            button.selectedTintColor = .black
+            button.selectedTintColor = DaonConstants.daonColor
             button.font = UIFont(name: "JejuMyeongjoOTF", size: 14) ?? UIFont.systemFont(ofSize: 14)
         }
         tabBar.layout.transitionStyle = .snap
         tabBar.layout.alignment = .centerDistributed
         tabBar.layout.interButtonSpacing = 12
         tabBar.indicator.weight = .custom(value: 1)
-        tabBar.indicator.tintColor = .black
+        tabBar.indicator.tintColor = DaonConstants.daonColor
         tabBar.indicator.overscrollBehavior = .bounce
         addBar(tabBar, dataSource: self, at: .top)
     }

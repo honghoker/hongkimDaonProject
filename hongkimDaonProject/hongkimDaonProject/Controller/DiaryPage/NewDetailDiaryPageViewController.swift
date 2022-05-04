@@ -45,6 +45,7 @@ class NewDetailDiaryPageViewController: UIViewController {
         label.textColor = .black
         return label
     }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(self.backBtn)
@@ -157,5 +158,14 @@ extension NewDetailDiaryPageViewController: UIScrollViewDelegate {
                 self.scrolldirection = true
             }
         }
+    }
+}
+
+extension NewDetailDiaryPageViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if gestureRecognizer.isEqual(navigationController?.interactivePopGestureRecognizer) {
+            navigationController?.popViewController(animated: true)
+        }
+        return false
     }
 }

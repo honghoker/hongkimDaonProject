@@ -19,20 +19,20 @@ class AlphaTodayWordingPageViewController: UIViewController {
     var realm: Realm!
     override func viewDidLoad() {
         super.viewDidLoad()
-        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-        backgroundUIView.isUserInteractionEnabled = true
-        backgroundUIView.addGestureRecognizer(imageClick)
-        imageView.image = UIImage(named: "testPage")
+                let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+                backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+                backgroundUIView.isUserInteractionEnabled = true
+                backgroundUIView.addGestureRecognizer(imageClick)
+                imageView.image = UIImage(named: "testPage")
         // MARK: 성훈 위에 주석하고 밑에 작업
-        //                        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-        //                        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-        //                        backgroundUIView.isUserInteractionEnabled = true
-        //                        backgroundUIView.addGestureRecognizer(imageClick)
-        //                        imageView.image = UIImage(data: mainImageData)
-        //                        saveBtn.addTarget(self, action: #selector(daonStorageSave), for: .touchUpInside)
-        //                        downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
-        
+//        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+//        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+//        backgroundUIView.isUserInteractionEnabled = true
+//        backgroundUIView.addGestureRecognizer(imageClick)
+//        imageView.image = UIImage(data: mainImageData)
+//        saveBtn.addTarget(self, action: #selector(daonStorageSave), for: .touchUpInside)
+//        downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
+//        shareBtn.addTarget(self, action: #selector(shareInfo), for: .touchUpInside)
     }
     override func viewWillLayoutSubviews() {
     }
@@ -125,40 +125,4 @@ extension AlphaTodayWordingPageViewController {
     }
 }
 
-// MARK: UIImage alpha (투명도)
-extension UIImage {
-    func withAlpha(_ value: CGFloat) -> UIImage {
-        return UIGraphicsImageRenderer(size: size, format: imageRendererFormat).image { (_) in
-            draw(in: CGRect(origin: .zero, size: size), blendMode: .normal, alpha: value)
-        }
-    }
-}
 
-// MARK: Loading
-class LoadingIndicator {
-    static func showLoading() {
-        DispatchQueue.main.async {
-            print("showLoading showLoading showLoading")
-            // 최상단에 있는 window 객체 획득
-            guard let window = UIApplication.shared.windows.last else { return }
-            let loadingIndicatorView: UIActivityIndicatorView
-            if let existedView = window.subviews.first(where: { $0 is UIActivityIndicatorView }) as? UIActivityIndicatorView {
-                loadingIndicatorView = existedView
-            } else {
-                loadingIndicatorView = UIActivityIndicatorView(style: .large)
-                // 다른 UI가 눌리지 않도록 indicatorView의 크기를 full로 할당
-                loadingIndicatorView.frame = window.frame
-                loadingIndicatorView.color = DaonConstants.daonColor
-                window.addSubview(loadingIndicatorView)
-            }
-            loadingIndicatorView.startAnimating()
-        }
-    }
-    static func hideLoading() {
-        print("hideLoading hideLoading hideLoading")
-        DispatchQueue.main.async {
-            guard let window = UIApplication.shared.windows.last else { return }
-            window.subviews.filter({ $0 is UIActivityIndicatorView }).forEach { $0.removeFromSuperview() }
-        }
-    }
-}

@@ -19,6 +19,7 @@ class MyStorageViewController: UIViewController {
         let result = realm.objects(MyStorage.self).sorted(byKeyPath: "storageTime", ascending: false)
         myDaons = Array(result)
         let storageTableViewCellNib = UINib(nibName: String(describing: MyStorageCell.self), bundle: nil)
+        self.storageTableView.backgroundColor = UIColor(named: "bgColor")
         self.storageTableView.register(storageTableViewCellNib, forCellReuseIdentifier: "myStorageCellId")
         self.storageTableView.separatorInset = .zero
         self.storageTableView.directionalLayoutMargins = .zero
@@ -54,6 +55,7 @@ extension MyStorageViewController: UITableViewDataSource {
 //        let imageUrl = myDaons[indexPath.row].imageUrl
         let imageData = myDaons[indexPath.row].imageData
 //        cell.myStorageImageView.kf.setImage(with: URL(string: imageUrl))
+        cell.backgroundColor = UIColor(named: "bgColor")
         cell.myStorageImageView.image = UIImage(data: imageData)
         cell.contentMode = .scaleAspectFit
         cell.directionalLayoutMargins = .zero
@@ -67,8 +69,6 @@ extension MyStorageViewController: UITableViewDataSource {
         // MARK: 클릭한 셀의 이벤트 처리
         // MARK: 이미지 크게 보기
         tableView.deselectRow(at: indexPath, animated: true)
-//        print("todayArray[indexPath.row].url \(myDaons[indexPath.row].imageUrl)")
-//        mainImageUrl = myDaons[indexPath.row].imageUrl
         mainImageData = myDaons[indexPath.row].imageData
         mainUploadTime = myDaons[indexPath.row].uploadTime
         let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)

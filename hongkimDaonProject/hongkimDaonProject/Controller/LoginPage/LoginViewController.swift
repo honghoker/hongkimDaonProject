@@ -35,7 +35,6 @@ class LoginViewController: UIViewController {
                 }
                 guard let exist = snapshot?.exists else {return}
                 if exist == true {
-                    print("login view exist")
                     self.showMainViewController()
                 } else {
                     self.showInputNickNameViewController(userUid: user.uid, platForm: platForm)
@@ -94,7 +93,6 @@ extension LoginViewController {
                             return
                         }
                         guard let exist = snapshot?.exists else {return}
-                        print("snapshot?.exists \(exist)")
                         if exist == true {
                             self.showMainViewController()
                         } else {
@@ -108,7 +106,6 @@ extension LoginViewController {
     }
     @objc
     func tapAppleBtn(_ gesture: UITapGestureRecognizer) {
-        print("apple tap")
         let request = createAppleIDRequest()
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
@@ -158,7 +155,19 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             Auth.auth().signIn(with: credential) { (authDataResult, error) in
                 if let user = authDataResult?.user {
                     print("애플 로그인 성공", user.uid, user.email ?? "-")
-                    self.showMainViewController()
+                    let docRef = self.database.document("user/\(user.uid)")
+                    docRef.getDocument { snapshot, error in
+                        if let error = error {
+                            print("DEBUG: \(error.localizedDescription)")
+                            return
+                        }
+                        guard let exist = snapshot?.exists else {return}
+                        if exist == true {
+                            self.showMainViewController()
+                        } else {
+                            self.showInputNickNameViewController(userUid: user.uid, platForm: "apple")
+                        }
+                    }
                 }
                 if error != nil {
                     print(error?.localizedDescription ?? "error" as Any)

@@ -20,5 +20,6 @@ class SecondMainPageContainerViewController: UIViewController {
         // MARK: 전환된 화면이 보여지는 방법 설정
         SettingPageVC.modalPresentationStyle = .fullScreen
         self.present(SettingPageVC, animated: true, completion: nil)
+//        self.navigationController?.pushViewController(SettingPageVC, animated: true)
     }
 }

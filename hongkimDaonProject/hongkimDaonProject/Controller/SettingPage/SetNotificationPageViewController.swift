@@ -14,11 +14,9 @@ class SetNotificationPageViewController: UIViewController {
     lazy var timeIntValue: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("view load")
         self.setupHideKeyboardOnTap()
         setNotificationValue {
             LoadingIndicator.hideLoading()
-            print("set 완료")
         }
         let timePicker = UIDatePicker()
         timePicker.datePickerMode = .time
@@ -30,17 +28,13 @@ class SetNotificationPageViewController: UIViewController {
         textField.tintColor = .clear
         textField.inputView = timePicker
     }
-    override func viewWillAppear(_ animated: Bool) {
-        print("view will appear")
-    }
     override func viewWillLayoutSubviews() {
-        print("view will layout")
         super.viewWillLayoutSubviews()
         backBtn.layer.borderWidth = 0.0
         backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
         saveBtn.titleLabel?.textAlignment = .center
         saveBtn.layer.borderWidth = 1
-        saveBtn.layer.borderColor = UIColor.black.cgColor
+        saveBtn.layer.borderColor = UIColor.label.cgColor
         saveBtn.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
         saveBtn.addTarget(self, action: #selector(onTapSaveBtn), for: .touchUpInside)
         LoadingIndicator.showLoading()
@@ -49,7 +43,6 @@ class SetNotificationPageViewController: UIViewController {
         }
     }
     override func viewDidLayoutSubviews() {
-        print("view did layout")
         textField.text = "변경하기"
     }
     func setNotificationValue(completion: @escaping() -> ()) {
@@ -96,19 +89,5 @@ class SetNotificationPageViewController: UIViewController {
             let docRef = database.document("user/\(user.uid)")
             docRef.updateData(["notification": sender.isOn])
         }
-    }
-}
-
-// MARK: outSide touch 하면 inputView dismiss
-extension UIViewController {
-    func setupHideKeyboardOnTap() {
-        self.view.addGestureRecognizer(self.endEditingRecognizer())
-        self.navigationController?.navigationBar.addGestureRecognizer(self.endEditingRecognizer())
-    }
-
-    private func endEditingRecognizer() -> UIGestureRecognizer {
-        let tap = UITapGestureRecognizer(target: self.view, action: #selector(self.view.endEditing(_:)))
-        tap.cancelsTouchesInView = false
-        return tap
     }
 }

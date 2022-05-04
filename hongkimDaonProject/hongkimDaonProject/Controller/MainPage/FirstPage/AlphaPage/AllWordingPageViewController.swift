@@ -9,6 +9,7 @@ class AllWordingPageViewController: UIViewController {
     var daonArray: Array<RealmDaon>!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.backgroundColor = UIColor(named: "bgColor")
         realm = try? Realm()
         let result = realm.objects(RealmDaon.self)
         daonArray = Array(result)
@@ -36,6 +37,7 @@ extension AllWordingPageViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "allWordingCellId", for: indexPath) as? AllWordingCell else {
             return UITableViewCell()
         }
+        cell.backgroundColor = UIColor(named: "bgColor")
         cell.allImageView.image = UIImage(data: imageData)
         let dateFormatter = DateFormatter()
         let realmDayDate = Date(timeIntervalSince1970: (Double(Int(imageId)) / 1000.0))

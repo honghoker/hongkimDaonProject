@@ -5,7 +5,7 @@ admin.initializeApp();
 const databaseStore = admin.firestore();
 
 exports.sendTodayMessage = functions.region("asia-northeast3").pubsub.schedule('*/10 * * * *').timeZone("Asia/Seoul").onRun(async (context) => {    
-    const query = await databaseStroe.collection('user').get();
+    const query = await databaseStore.collection('user').get();
     try {
         return query.forEach(async eachGroup => {
             // 알림 받을지 말지 먼저 체크
