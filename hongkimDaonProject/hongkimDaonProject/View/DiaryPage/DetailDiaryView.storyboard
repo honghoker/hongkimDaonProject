@@ -149,37 +149,9 @@
                     <view key="view" contentMode="scaleToFill" id="HxY-bD-D5c">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kov-UA-QlX">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="UlL-24-V99"/>
-                                    <barButtonItem title="Item" image="scribble" catalog="system" id="Xkz-EJ-kMR">
-                                        <connections>
-                                            <action selector="tapEditBtn:" destination="DnZ-SF-MPP" id="1AC-xj-4ag"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Item" image="trash" catalog="system" id="ffG-w7-NpT">
-                                        <connections>
-                                            <action selector="tapRemoveBtn:" destination="DnZ-SF-MPP" id="MD5-DK-gjT"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                                <color key="barTintColor" white="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </toolbar>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="5vZ-BY-N6W"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="kov-UA-QlX" firstAttribute="leading" secondItem="5vZ-BY-N6W" secondAttribute="leading" id="9cW-yz-6j4"/>
-                            <constraint firstItem="5vZ-BY-N6W" firstAttribute="bottom" secondItem="kov-UA-QlX" secondAttribute="bottom" id="JQq-sT-gbQ"/>
-                            <constraint firstItem="kov-UA-QlX" firstAttribute="trailing" secondItem="5vZ-BY-N6W" secondAttribute="trailing" id="yei-WH-T9B"/>
-                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="toolBar" destination="kov-UA-QlX" id="A9V-Gt-wFa"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oOc-XO-Vn1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

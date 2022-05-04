@@ -15,33 +15,6 @@ final class DatabaseManager {
     private let db = Firestore.firestore()
     private var diaryDocumentListener: ListenerRegistration?
     public typealias DiaryCompletion = (Result<String, Error>) -> Void
-    public func getDiary(completion: @escaping (Result<[Diary], Error>) -> Void) {
-        removeListener()
-        guard let user = Auth.auth().currentUser else {
-            return
-        }
-        let uid = user.uid
-        db.collection("diary").whereField("uid", isEqualTo: uid).order(by: "writeTime", descending: true).addSnapshotListener { snapshot, error in
-            guard let snapshot = snapshot else {
-                completion(.failure(DiaryErros.failedToGet))
-                return
-            }
-            var diarys = [Diary]()
-            snapshot.documentChanges.forEach { change in
-                switch change.type {
-                case .added, .modified:
-                    do {
-                        let diary = try change.document.data(as: Diary.self)
-                        diarys.append(diary)
-                    } catch {
-                        completion(.failure( DiaryErros.failedToDecoded))
-                    }
-                default: break
-                }
-            }
-            completion(.success(diarys))
-        }
-    }
     public func writeDiary(diary: Diary, completion: @escaping DiaryCompletion) {
         try? db.collection("diary").document(String(describing: diary.writeTime)).setData(from: diary, completion: { error in
             guard error == nil else {
@@ -51,10 +24,19 @@ final class DatabaseManager {
             completion(.success(""))
         })
     }
-    public func updateDiary(diary: Diary) {
+    public func updateDiary(diary: Diary, completion: @escaping DiaryCompletion) {
+        db.collection("diary").document(String(diary.writeTime)).updateData(["imageExist": diary.imageExist, "imageWidth": diary.imageWidth, "imageHeight": diary.imageHeight, "imageUploadComplete": diary.imageUploadComplete, "content": diary.content], completion: {error in
+            guard error == nil else {
+                completion(.failure(DiaryErros.failedToUpdate))
+                return
+            }
+            completion(.success(""))
+        })
     }
     public func updateImageUrl(docId: String, imageUrl: String, completion: @escaping DiaryCompletion) {
-        db.collection("diary").document(docId).updateData(["imageUrl": imageUrl], completion: {error in
+        db.collection("diary").document(docId).updateData([
+            "imageUploadComplete": true,
+            "imageUrl": imageUrl], completion: {error in
             guard error == nil else {
                 completion(.failure(DiaryErros.failedToUpdateImageUrl))
                 return

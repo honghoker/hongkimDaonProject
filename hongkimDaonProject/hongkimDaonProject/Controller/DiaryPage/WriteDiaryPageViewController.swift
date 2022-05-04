@@ -40,11 +40,7 @@ class WriteDiaryPageViewController: UIViewController {
         completeBtn.isUserInteractionEnabled = true
         completeBtn.addGestureRecognizer(completeBtnClicked)
     }
-
     override func viewDidLayoutSubviews() {
-        // MARK: underLine 긋기
-        let bottomLine = CALayer()
-        bottomLine.backgroundColor = UIColor.systemGray4.cgColor
         // MARK: to remove left padding
         diaryContentTextView.textContainer.lineFragmentPadding = 0
     }
@@ -77,7 +73,8 @@ extension WriteDiaryPageViewController {
             if diaryContentTextView.textColor != UIColor.lightGray {
                 content = diaryContentTextView.text
             }
-            let diary = Diary(id: nil, uid: uid, imageUrl: "", content: content, writeTime: writeTime)
+            let diary = Diary(id: nil, uid: uid, imageUrl: "", content: content, writeTime: writeTime,
+                              imageExist: self.imageView.image != nil, imageWidth: self.imageView.image?.size.width ?? 0, imageHeight: self.imageView.image?.size.height ?? 0, imageUploadComplete: self.imageView.image == nil)
             DatabaseManager.shared.writeDiary(diary: diary) { result in
                 switch result {
                 case .success(let success):
@@ -115,7 +112,6 @@ extension WriteDiaryPageViewController {
     }
     @objc
     func pickImage(_ gesture: UITapGestureRecognizer) {
-        print("@@@@@@@@ navigate")
         var config = FMPhotoPickerConfig()
         config.maxImage = 1
         config.selectMode = .single
@@ -137,39 +133,6 @@ extension WriteDiaryPageViewController {
         let picker = FMPhotoPickerViewController(config: config)
         picker.delegate = self
         self.present(picker, animated: true)
-    }
-}
-
-// MARK: textField 글자 수 제한 + BackSpace 감지
-extension WriteDiaryPageViewController: UITextFieldDelegate {
-    func animateTextField(textField: UITextField, up: Bool) {
-        let movementDistance: CGFloat = -130
-        let movementDuration: Double = 0.3
-        var movement: CGFloat = 0
-        if up {
-            movement = movementDistance
-        } else {
-            movement = -movementDistance
-        }
-        UIView.animate(withDuration: movementDuration, delay: 0, options: [.beginFromCurrentState], animations: {
-            self.view.frame = self.view.frame.offsetBy(dx: 0, dy: movement)
-        }, completion: nil)
-    }
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        animateTextField(textField: textField, up: true)
-    }
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        animateTextField(textField: textField, up: false)
-    }
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if let char = string.cString(using: String.Encoding.utf8) {
-            let isBackSpace = strcmp(char, "\\b")
-            if isBackSpace == -92 {
-                return true
-            }
-        }
-        guard textField.text!.count < titleMaxLength else { return false }
-        return true
     }
 }
 
