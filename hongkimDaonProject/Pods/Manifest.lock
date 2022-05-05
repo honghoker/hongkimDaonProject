@@ -524,6 +524,7 @@ PODS:
   - PromisesObjC (2.0.0)
   - SideMenu (6.5.0)
   - SnapKit (5.0.1)
+  - STTextView (1.1.3)
   - SwiftLint (0.47.0)
   - Tabman (2.12.0):
     - Pageboy (~> 3.6.0)
@@ -543,6 +544,7 @@ DEPENDENCIES:
   - Kingfisher (~> 7.0)
   - SideMenu
   - SnapKit (~> 5.0.0)
+  - STTextView
   - SwiftLint
   - Tabman (~> 2.9)
   - Toast-Swift (~> 5.0.1)
@@ -580,6 +582,7 @@ SPEC REPOS:
     - PromisesObjC
     - SideMenu
     - SnapKit
+    - STTextView
     - SwiftLint
     - Tabman
     - Toast-Swift
@@ -616,10 +619,11 @@ SPEC CHECKSUMS:
   PromisesObjC: 68159ce6952d93e17b2dfe273b8c40907db5ba58
   SideMenu: f583187d21c5b1dd04c72002be544b555a2627a2
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
+  STTextView: cb4d43949845294bd7d203f870bb50a426b65e36
   SwiftLint: d41cc46a2ae58ac6d9f26954bc89f1d72e71fdef
   Tabman: 447a50447ed2869c39ab3b1a779327e43e067c4e
   Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
 
-PODFILE CHECKSUM: e1fddc2158439a9e2c17a739712767879e54d269
+PODFILE CHECKSUM: 4940fa384eab8f5a4ed6d8e42ca8f2c39ffe0b9f
 
 COCOAPODS: 1.11.3

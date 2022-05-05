@@ -12,6 +12,7 @@ import Firebase
 import FirebaseFirestoreSwift
 import FMPhotoPicker
 import SnapKit
+import STTextView
 
 class WriteDiaryPageViewController: UIViewController {
     var delegate: DispatchDiary?
@@ -19,18 +20,12 @@ class WriteDiaryPageViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var backBtn: UILabel!
     @IBOutlet weak var completeBtn: UILabel!
-    @IBOutlet weak var diaryContentTextView: UITextView!
+    @IBOutlet weak var diaryContentTextView: STTextView!
     @IBOutlet weak var scrollView: UIScrollView!
-    let placeholderText = "내용을 입력해주세요."
     private let titleMaxLength: Int = 50
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "bgColor")
-        diaryContentTextView.text = placeholderText
-        diaryContentTextView.textColor = .systemGray
-        diaryContentTextView.delegate = self
-        // MARK: 첫 영문자 소문자로 시작
-        diaryContentTextView.autocapitalizationType = .none
         let imgButtonClicked: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(pickImage(_:)))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(imgButtonClicked)
@@ -41,20 +36,15 @@ class WriteDiaryPageViewController: UIViewController {
         completeBtn.isUserInteractionEnabled = true
         completeBtn.addGestureRecognizer(completeBtnClicked)
     }
-    override func viewDidLayoutSubviews() {
-        // MARK: to remove left padding
-        diaryContentTextView.textContainer.lineFragmentPadding = 0
-    }
 }
 
 extension WriteDiaryPageViewController {
     @objc
     func back(_ gesture: UITapGestureRecognizer) {
-        if self.imageView.image != nil ||  diaryContentTextView.textColor != UIColor.systemGray {
+        if self.imageView.image != nil || !diaryContentTextView.text.isEmpty {
             let alert = UIAlertController(title: "작성된 내용이 있어요.\n저장하지 않고 나가시겠어요?",
                                           message: "", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
-                // Cancel Action
             }))
             alert.addAction(UIAlertAction(title: "확인",
                                           style: UIAlertAction.Style.default,
@@ -70,10 +60,7 @@ extension WriteDiaryPageViewController {
     func complete(_ gesture: UITapGestureRecognizer) {
         if let uid = Auth.auth().currentUser?.uid {
             let writeTime: Int64 = Int64(Date().millisecondsSince1970)
-            var content: String = ""
-            if diaryContentTextView.textColor != UIColor.systemGray {
-                content = diaryContentTextView.text
-            }
+            let content = diaryContentTextView.text ?? ""
             let diary = Diary(id: nil, uid: uid, imageUrl: "", content: content, writeTime: writeTime,
                               imageExist: self.imageView.image != nil, imageWidth: self.imageView.image?.size.width ?? 0, imageHeight: self.imageView.image?.size.height ?? 0, imageUploadComplete: self.imageView.image == nil)
             DatabaseManager.shared.writeDiary(diary: diary) { result in
@@ -147,51 +134,5 @@ extension WriteDiaryPageViewController: FMPhotoPickerViewControllerDelegate {
         self.dismiss(animated: true, completion: nil)
         imageView.image = photos[0]
         imageViewLabel.isHidden = true
-    }
-}
-
-extension WriteDiaryPageViewController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if self.view.window != nil {
-            if textView.textColor == UIColor.systemGray {
-                textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
-            }
-        }
-    }
-    func textViewDidChangeSelection(_ textView: UITextView) {
-        if self.view.window != nil {
-            if textView.textColor == UIColor.systemGray {
-                textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
-            }
-        }
-    }
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        // Combine the textView text and the replacement text to
-        // create the updated text string
-        let currentText: String = textView.text
-        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: text)
-        // If updated text view will be empty, add the placeholder
-        // and set the cursor to the beginning of the text view
-        if updatedText.isEmpty {
-            textView.text = placeholderText
-            textView.textColor = UIColor.systemGray
-            textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
-        }
-        // Else if the text view's placeholder is showing and the
-        // length of the replacement string is greater than 0, set
-        // the text color to black then set its text to the
-        // replacement string
-        else if textView.textColor == UIColor.systemGray && !text.isEmpty {
-            textView.textColor = UIColor.label
-            textView.text = text
-        }
-        // For every other case, the text should change with the usual
-        // behavior...
-        else {
-            return true
-        }
-        // ...otherwise return false since the updates have already
-        // been made
-        return false
     }
 }

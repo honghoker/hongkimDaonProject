@@ -23,4 +23,5 @@ target 'hongkimDaonProject' do
   pod 'Toast-Swift', '~> 5.0.1'
   pod 'Firebase/Messaging' 
   pod 'IQKeyboardManagerSwift'
+  pod 'STTextView'
 end
