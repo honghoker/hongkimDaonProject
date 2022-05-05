@@ -6,9 +6,7 @@
 //
 
 import UIKit
-import MobileCoreServices
 import FirebaseAuth
-import Firebase
 import FirebaseFirestoreSwift
 import FMPhotoPicker
 import SnapKit
