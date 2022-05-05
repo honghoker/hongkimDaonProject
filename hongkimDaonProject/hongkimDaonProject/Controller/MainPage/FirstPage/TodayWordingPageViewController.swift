@@ -18,8 +18,8 @@ class TodayWordingPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // MARK: realm db 삭제
-        //        try! FileManager.default.removeItem(at:Realm.Configuration.defaultConfiguration.fileURL!)
-        //        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        //                try! FileManager.default.removeItem(at:Realm.Configuration.defaultConfiguration.fileURL!)
+        //                print(Realm.Configuration.defaultConfiguration.fileURL!)
         Messaging.messaging().token { token, error in
             if let error = error {
                 print("Error fetching FCM registration token: \(error)")
@@ -41,6 +41,7 @@ class TodayWordingPageViewController: UIViewController {
             }
         }
         let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+        //        let addImageFile: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addImage(_:)))
         imageView.image = UIImage(named: "testPage")
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(imageClick)
@@ -63,22 +64,22 @@ class TodayWordingPageViewController: UIViewController {
         //        print("nowDayDate \(nowDayDate)")
         //        print("nowDayDate mil \(nowDayDate.millisecondsSince1970)")
         // MARK: 성훈 위에 주석하고 밑에 작업
-        //                let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-        //                let beforeImageData = mainImageData
-        //                let beforeUploadTime = mainUploadTime
-        //                todayImageCacheSet {imageData, uploadTime in
-        //                    if beforeImageData.isEmpty {
-        //                        mainImageData = imageData
-        //                        mainUploadTime = uploadTime
-        //                        self.setImageView(data: mainImageData, imageClick: imageClick)
-        //                    } else {
-        //                        mainImageData = beforeImageData
-        //                        mainUploadTime = beforeUploadTime
-        //                        self.setImageView(data: mainImageData, imageClick: imageClick)
-        //                    }
-        //                    print("call LoadingIndicator")
-        //                    LoadingIndicator.hideLoading()
-        //                }
+        //                        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+        //                        let beforeImageData = mainImageData
+        //                        let beforeUploadTime = mainUploadTime
+        //                        todayImageCacheSet {imageData, uploadTime in
+        //                            if beforeImageData.isEmpty {
+        //                                mainImageData = imageData
+        //                                mainUploadTime = uploadTime
+        //                                self.setImageView(data: mainImageData, imageClick: imageClick)
+        //                            } else {
+        //                                mainImageData = beforeImageData
+        //                                mainUploadTime = beforeUploadTime
+        //                                self.setImageView(data: mainImageData, imageClick: imageClick)
+        //                            }
+        //                            print("call LoadingIndicator")
+        //                            LoadingIndicator.hideLoading()
+        //                        }
     }
     override func viewWillLayoutSubviews() {
         print("sunghun viewWillLayoutSubviews")
@@ -256,5 +257,14 @@ extension TodayWordingPageViewController {
         }
         nextView.modalPresentationStyle = .fullScreen
         self.present(nextView, animated: false, completion: nil)
+    }
+}
+
+// 추후에 삭제해야함
+extension TodayWordingPageViewController {
+    @objc
+    func addImage(_ gesture: UITapGestureRecognizer) {
+        print("add Image")
+        database.collection("daon").document("\(1651708800000)").setData(["imageUrl": "https://firebasestorage.googleapis.com/v0/b/hongkimdaonproject.appspot.com/o/today%2F2022%2F05%2F1651708800000.jpg?alt=media&token=d386bdc1-be5c-4d53-9fa3-b9477d5096e3", "storageUser": "", "uploadTime": 1651708800000])
     }
 }

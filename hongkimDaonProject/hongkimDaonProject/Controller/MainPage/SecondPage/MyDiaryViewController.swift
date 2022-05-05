@@ -66,6 +66,7 @@ extension MyDiaryViewController {
             return
         }
         let uid = user.uid
+        print("uid uid uid \(uid)")
         isFetching = true
         self.fetchDiary(uid: uid) { (snapshot, error) in
             guard error == nil else {
