@@ -40,7 +40,6 @@ class EditDiaryPageViewController: UIViewController {
             imageViewLabel.isHidden = true
         }
         if let diary = self.diary {
-//            diaryContentTextView.textColor = UIColor.label
             diaryContentTextView.text = diary.content
         }
     }

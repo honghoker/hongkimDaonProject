@@ -114,12 +114,19 @@ extension MyDiaryViewController {
     }
     @objc
     func tapFloatingBtn(_ gesture: UITapGestureRecognizer) {
-        let storyboard: UIStoryboard = UIStoryboard(name: "WriteDiaryPageView", bundle: nil)
-        guard let writeDiaryPageVC = storyboard.instantiateViewController(withIdentifier: "WriteDiaryPageViewController") as? WriteDiaryPageViewController else { return }
-        writeDiaryPageVC.delegate = self
-        writeDiaryPageVC.modalPresentationStyle = .fullScreen
-        writeDiaryPageVC.modalTransitionStyle = .crossDissolve
-        self.present(writeDiaryPageVC, animated: true, completion: nil)
+        let current = Calendar.current
+        if current.isDateInToday(Date(milliseconds: self.myDiarys[0].writeTime)) == true {
+            // MARK: 오늘이면
+            self.view.makeToast("이미 오늘의 일기를 작성했습니다.")
+        } else {
+            // MARK: 오늘이 아니면 일기 작성
+            let storyboard: UIStoryboard = UIStoryboard(name: "WriteDiaryPageView", bundle: nil)
+            guard let writeDiaryPageVC = storyboard.instantiateViewController(withIdentifier: "WriteDiaryPageViewController") as? WriteDiaryPageViewController else { return }
+            writeDiaryPageVC.delegate = self
+            writeDiaryPageVC.modalPresentationStyle = .fullScreen
+            writeDiaryPageVC.modalTransitionStyle = .crossDissolve
+            self.present(writeDiaryPageVC, animated: true, completion: nil)
+        }
     }
 }
 
@@ -172,7 +179,7 @@ extension MyDiaryViewController: UITableViewDataSource {
         //        cell.separatorInset = UIEdgeInsets.zero
         cell.content.text = self.myDiarys[indexPath.row].content
         let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "# yyyy.MM.dd a h:mm" // 2020.08.13 오후 04:30분
+        myDateFormatter.dateFormat = "# yyyy.MM.dd" // 2020.08.13 오후 04:30분
         myDateFormatter.locale = Locale(identifier: "ko_KR") // PM, AM을 언어에 맞게 setting (ex: PM -> 오후)
         let convertNowStr = myDateFormatter.string(from: Date(milliseconds: myDiarys[indexPath.row].writeTime)) //
         cell.time.text = convertNowStr

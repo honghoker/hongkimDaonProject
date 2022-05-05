@@ -106,7 +106,8 @@ class NewDetailDiaryPageViewController: UIViewController {
             guard let diary: Diary = try? document.data(as: Diary.self) else { return }
             self.diary = diary
             let myDateFormatter = DateFormatter()
-            myDateFormatter.dateFormat = "# yyyy.MM.dd a h:mm"
+//            myDateFormatter.dateFormat = "# yyyy.MM.dd a h:mm"
+            myDateFormatter.dateFormat = "# yyyy.MM.dd"
             myDateFormatter.locale = Locale(identifier: "ko_KR")
             let convertNowStr = myDateFormatter.string(from: Date(milliseconds: diary.writeTime))
             self.writeTimeLabel.text = convertNowStr
