@@ -119,6 +119,7 @@ class NewDetailDiaryPageViewController: UIViewController {
                 self.contentLabel.snp.remakeConstraints {
                     $0.top.equalTo(self.writeTimeLabel.snp.bottom).offset(32)
                     $0.leading.equalToSuperview().offset(16)
+                    $0.trailing.equalToSuperview().offset(-16)
                     $0.bottom.equalToSuperview()
                 }
                 self.imageLoadComplete = true
@@ -133,6 +134,7 @@ class NewDetailDiaryPageViewController: UIViewController {
                 self.contentLabel.snp.remakeConstraints {
                     $0.top.equalTo(self.imageView.snp.bottom).offset(32)
                     $0.leading.equalToSuperview().offset(16)
+                    $0.trailing.equalToSuperview().offset(-16)
                     $0.bottom.equalToSuperview()
                 }
                 if diary.imageUploadComplete == true {
