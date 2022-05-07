@@ -63,6 +63,7 @@ extension MyDiaryViewController {
             return
         }
         guard let user = AuthManager.shared.auth.currentUser else {
+            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
             return
         }
         let uid = user.uid

@@ -24,7 +24,7 @@ class NewDetailDiaryPageViewController: UIViewController {
     lazy var backBtn: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
-        button.tintColor = .gray
+        button.tintColor = .systemGray
         return button
     }()
     lazy var imageView: UIImageView = {
@@ -36,7 +36,7 @@ class NewDetailDiaryPageViewController: UIViewController {
         let label = UILabel()
         label.numberOfLines = 1
         label.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
-        label.textColor = .gray
+        label.textColor = .systemGray
         return label
     }()
     lazy var contentLabel: UILabel = {
@@ -138,32 +138,35 @@ class NewDetailDiaryPageViewController: UIViewController {
                     $0.trailing.equalToSuperview().offset(-16)
                     $0.bottom.equalToSuperview()
                 }
+                // MARK: 이미지 리사이징
+                let processor = ResizingImageProcessor(referenceSize: CGSize(width: self.view.frame.width, height: height))
                 if diary.imageUploadComplete == true {
                     let url = URL(string: diary.imageUrl)
-                    //                    self.imageView.setImageFrom(diary.imageUrl)
-                    DispatchQueue.global().async { [weak self] in
-                        //                        if let data = try? Data(contentsOf: url!) {
-                        //                            if let image = UIImage(data: data) {
-                        DispatchQueue.main.async {
-                            //                                    self?.imageView.image = image
-                            //                                    self?.imageLoadComplete = true
-                            KingfisherManager.shared.retrieveImage(with: url!, options: nil, progressBlock: nil, completionHandler: { result in
-                                switch result {
-                                case .success(let RetrieveImageResult):
-                                    self?.imageView.contentMode = .scaleAspectFit
-                                    self?.imageView.image = RetrieveImageResult.image
-                                    self?.imageLoadComplete = true
-                                case .failure(let error):
-                                    print("@@@@@ error : \(error)")
-                                }
-                            })
-                        }
-                    }
+                    self.imageView.kf.indicatorType = .activity
+                    self.imageView.kf.setImage(with: url, options: [.processor(processor)])
+                    self.imageLoadComplete = true
+//                    DispatchQueue.global().async { [weak self] in
+//                        //                        if let data = try? Data(contentsOf: url!) {
+//                        //                            if let image = UIImage(data: data) {
+//                        DispatchQueue.main.async {
+//                            //                                    self?.imageView.image = image
+//                            //                                    self?.imageLoadComplete = true
+//                            KingfisherManager.shared.retrieveImage(with: url!, options: nil, progressBlock: nil, completionHandler: { result in
+//                                switch result {
+//                                case .success(let RetrieveImageResult):
+//                                    self?.imageView.contentMode = .scaleAspectFit
+//                                    self?.imageView.image = RetrieveImageResult.image
+//                    self?.imageLoadComplete = true
+//                                case .failure(let error):
+//                                    print("@@@@@ error : \(error)")
+//                                }
+//                            })
+//                        }
+//                    }
                 } else {
-                    print("업로드중이라는 이미지 띄우기")
+                    // MARK: 이미지 업로드 중
                     DispatchQueue.global().async { [weak self] in
                         DispatchQueue.main.async {
-//                            self?.imageView.image = nil
                             self?.imageView.contentMode = .center
                             self?.imageView.image = UIImage(named: "ImageUploading")
                         }
@@ -174,91 +177,6 @@ class NewDetailDiaryPageViewController: UIViewController {
     }
 }
 
-extension UIImageView {
-    func setImage(with urlString: String) {
-        ImageCache.default.retrieveImage(forKey: urlString, options: nil) { result in
-            switch result {
-            case .success(let value):
-                if let image = value.image {
-                    // 캐시가 존재하는 경우
-                    self.image = image
-                } else {
-                    // 캐시가 존재하지 않는 경우
-                    self.kf.indicatorType = .activity
-                    guard let url = URL(string: urlString) else { return }
-                    let resource = ImageResource(downloadURL: url, cacheKey: urlString)
-                    self.kf.setImage(with: resource)
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    // Returns activity indicator view centrally aligned inside the UIImageView
-    private var activityIndicator: UIActivityIndicatorView {
-        let activityIndicator = UIActivityIndicatorView()
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.color = UIColor.black
-        self.addSubview(activityIndicator)
-        activityIndicator.translatesAutoresizingMaskIntoConstraints = false
-        let centerX = NSLayoutConstraint(item: self,
-                                         attribute: .centerX,
-                                         relatedBy: .equal,
-                                         toItem: activityIndicator,
-                                         attribute: .centerX,
-                                         multiplier: 1,
-                                         constant: 0)
-        let centerY = NSLayoutConstraint(item: self,
-                                         attribute: .centerY,
-                                         relatedBy: .equal,
-                                         toItem: activityIndicator,
-                                         attribute: .centerY,
-                                         multiplier: 1,
-                                         constant: 0)
-        self.addConstraints([centerX, centerY])
-        return activityIndicator
-    }
-    func showActivityIndicator() {
-        let activityIndicator = self.activityIndicator
-        DispatchQueue.main.async {
-            activityIndicator.startAnimating()
-        }
-    }
-    func hideActivityIndicator() {
-        
-    }
-    // Asynchronous downloading and setting the image from the provided urlString
-    func setImageFrom(_ urlString: String, completion: (() -> Void)? = nil) {
-        guard let url = URL(string: urlString) else { return }
-        let session = URLSession(configuration: .default)
-        let activityIndicator = self.activityIndicator
-        DispatchQueue.main.async {
-            activityIndicator.startAnimating()
-        }
-        let downloadImageTask = session.dataTask(with: url) { (data, response, error) in
-            if let error = error {
-                print(error.localizedDescription)
-            } else {
-                if let imageData = data {
-                    DispatchQueue.main.async {[weak self] in
-                        var image = UIImage(data: imageData)
-                        self?.image = nil
-                        self?.image = image
-                        image = nil
-                        completion?()
-                    }
-                }
-            }
-            DispatchQueue.main.async {
-                activityIndicator.stopAnimating()
-                activityIndicator.removeFromSuperview()
-            }
-            session.finishTasksAndInvalidate()
-        }
-        downloadImageTask.resume()
-    }
-}
 extension NewDetailDiaryPageViewController {
     @objc
     func back() {
@@ -300,7 +218,7 @@ extension NewDetailDiaryPageViewController {
                 }
                 self.delegate?.delete(self, Delete: self.docId)
                 self.presentingViewController?.dismiss(animated: true, completion: nil)
-                self.view.makeToast("일기를 삭제했습니다.", duration: 1.5, position: .bottom)
+//                self.view.makeToast("일기를 삭제했습니다.", duration: 1.5, position: .bottom)
             }
         }))
         self.present(alert, animated: true, completion: nil)

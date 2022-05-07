@@ -73,7 +73,10 @@ extension LoginViewController {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         let signInConfig = GIDConfiguration.init(clientID: clientID)
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-            guard error == nil else { return } // 로그인 실패
+            guard error == nil else {
+                self.view.makeToast("로그인 실패", duration: 1.5, position: .bottom)
+                return
+            } // 로그인 실패
             guard let authentication = user?.authentication else { return }
             // access token 부여 받음
             let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)

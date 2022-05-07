@@ -34,6 +34,8 @@ class TodayWordingPageViewController: UIViewController {
                             self.database.document("user/\(user.uid)").updateData(["fcmToken": token])
                         }
                     }
+                } else {
+                    self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
                 }
                 print("FCM registration token: \(token)")
             }
