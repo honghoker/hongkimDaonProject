@@ -37,7 +37,7 @@ final class AppController {
 //                                               object: nil)
     }
     @objc private func checkLoginIn() {
-        if let user = Auth.auth().currentUser { // <- Firebase Auth
+        if let user = AuthManager.shared.auth.currentUser { // <- Firebase Auth
             print("@@@@@@@@@@ checkLoginIn user : \(user)")
             setHome()
         } else {

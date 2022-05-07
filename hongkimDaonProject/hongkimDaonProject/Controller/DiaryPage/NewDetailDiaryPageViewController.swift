@@ -7,10 +7,10 @@
 
 import Foundation
 import UIKit
-import FirebaseFirestore
 import SnapKit
 import AuthenticationServices
 import Kingfisher
+import Toast_Swift
 
 class NewDetailDiaryPageViewController: UIViewController {
     var docId: String?
@@ -94,7 +94,7 @@ class NewDetailDiaryPageViewController: UIViewController {
     }
     func getDiary() {
         // MARK: Loading 시작
-        Firestore.firestore().collection("diary").document(docId!).addSnapshotListener { documentSnapshot, error in
+        DatabaseManager.shared.fireStore.collection("diary").document(docId!).addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else {
                 print("Error fetching document: \(error!)")
                 return
@@ -293,7 +293,7 @@ extension NewDetailDiaryPageViewController {
         alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
         }))
         alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { _ in
-            Firestore.firestore().collection("diary").document(self.docId!).delete { result in
+            DatabaseManager.shared.fireStore.collection("diary").document(self.docId!).delete { result in
                 guard result == nil else {
                     self.view.makeToast("일기 삭제에 실패했습니다.", duration: 1.5, position: .bottom)
                     return

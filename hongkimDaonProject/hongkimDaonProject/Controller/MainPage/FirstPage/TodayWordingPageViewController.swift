@@ -2,16 +2,14 @@ import UIKit
 import FirebaseStorage
 import Kingfisher
 import RealmSwift
-import FirebaseFirestore
 import FirebaseMessaging
-import FirebaseAuth
 
 public var mainImageData = Data()
 public var mainUploadTime = 0
 
 class TodayWordingPageViewController: UIViewController {
     var realm: Realm!
-    let database = Firestore.firestore()
+    let database = DatabaseManager.shared.fireStore
     var imageUploadTime: Int = 0
     @IBOutlet weak var imageView: UIImageView!
     private let storage = Storage.storage().reference()
@@ -24,7 +22,7 @@ class TodayWordingPageViewController: UIViewController {
             if let error = error {
                 print("Error fetching FCM registration token: \(error)")
             } else if let token = token {
-                if let user = Auth.auth().currentUser {
+                if let user = AuthManager.shared.auth.currentUser {
                     self.database.document("user/\(user.uid)").getDocument {snaphot, error in
                         if let error = error {
                             print("DEBUG: \(error.localizedDescription)")

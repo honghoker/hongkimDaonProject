@@ -3,11 +3,9 @@ import Firebase
 import GoogleSignIn
 import AuthenticationServices
 import CryptoKit
-import FirebaseAuth
-import FirebaseFirestore
 
 class LoginViewController: UIViewController {
-    let database = Firestore.firestore()
+    let database = DatabaseManager.shared.fireStore
     private var currentNonce: String?
     @IBOutlet weak var googleLoginBtn: UIImageView!
     @IBOutlet weak var appleLoginBtn: UIImageView!
@@ -24,7 +22,7 @@ class LoginViewController: UIViewController {
         appleLoginBtn.addGestureRecognizer(appleLoginClick)
     }
     override func viewDidAppear(_ animated: Bool) {
-        if let user = Auth.auth().currentUser {
+        if let user = AuthManager.shared.auth.currentUser {
             let docRef = self.database.document("user/\(user.uid)")
             guard let platFormCheck = user.email?.contains("gmail") else { return }
             let platForm = platFormCheck == true ? "google" : "apple"
@@ -80,9 +78,9 @@ extension LoginViewController {
             // access token 부여 받음
             let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
             // 파베 인증정보 등록
-            Auth.auth().signIn(with: credential) {_, _ in
+            AuthManager.shared.auth.signIn(with: credential) {_, _ in
                 // token을 넘겨주면, 성공했는지 안했는지에 대한 result값과 error값을 넘겨줌
-                if let user = Auth.auth().currentUser {
+                if let user = AuthManager.shared.auth.currentUser {
                     print("user : \(user.uid)")
                     guard let platFormCheck = user.email?.contains("gmail") else { return }
                     let platForm = platFormCheck == true ? "google" : "apple"
@@ -152,7 +150,7 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
-            Auth.auth().signIn(with: credential) { (authDataResult, error) in
+            AuthManager.shared.auth.signIn(with: credential) { (authDataResult, error) in
                 if let user = authDataResult?.user {
                     print("애플 로그인 성공", user.uid, user.email ?? "-")
                     let docRef = self.database.document("user/\(user.uid)")

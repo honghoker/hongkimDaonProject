@@ -7,7 +7,6 @@
 
 import Foundation
 import UIKit
-import FirebaseAuth
 import FirebaseFirestoreSwift
 import FMPhotoPicker
 import STTextView
@@ -66,7 +65,7 @@ extension EditDiaryPageViewController {
     @objc
     func complete(_ gesture: UITapGestureRecognizer) {
         print("@@@@@@ complete Touch")
-        if Auth.auth().currentUser?.uid != nil {
+        if AuthManager.shared.auth.currentUser?.uid != nil {
             if var diary = self.diary {
                 diary.imageExist = self.imageView.image != nil
                 diary.imageWidth = self.imageView.image?.size.width ?? 0
@@ -110,6 +109,8 @@ extension EditDiaryPageViewController {
                     }
                 })
             }
+        } else {
+            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
         }
     }
     @objc

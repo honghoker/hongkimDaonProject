@@ -3,7 +3,10 @@ import FirebaseStorage
 
 final class StorageManager {
     static let shared = StorageManager()
-    private let storage = Storage.storage()
+    let storage: Storage
+    private init() {
+        self.storage = Storage.storage()
+    }
     public typealias StorageCompletion = (Result<String, Error>) -> Void
     public func uploadImage(with data: Data, filePath: String, fileName: String, completion: @escaping StorageCompletion) {
         storage.reference().child("\(filePath)/\(fileName)").putData(data, metadata: nil, completion: { [weak self] metadata, error in

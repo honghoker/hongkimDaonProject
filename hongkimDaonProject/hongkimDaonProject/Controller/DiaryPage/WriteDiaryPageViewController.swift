@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import FirebaseAuth
 import FirebaseFirestoreSwift
 import FMPhotoPicker
 import SnapKit
@@ -56,7 +55,7 @@ extension WriteDiaryPageViewController {
     }
     @objc
     func complete(_ gesture: UITapGestureRecognizer) {
-        if let uid = Auth.auth().currentUser?.uid {
+        if let uid = AuthManager.shared.auth.currentUser?.uid {
             let writeTime: Int64 = Int64(Date().millisecondsSince1970)
             let content = diaryContentTextView.text ?? ""
             let diary = Diary(id: nil, uid: uid, imageUrl: "", content: content, writeTime: writeTime,
@@ -93,7 +92,7 @@ extension WriteDiaryPageViewController {
                 }
             }
         } else {
-            print("@@@@@@@@@@@ uid 없음 토스트")
+            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
         }
     }
     @objc

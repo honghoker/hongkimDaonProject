@@ -6,17 +6,19 @@
 //
 
 import Foundation
-import FirebaseAuth
+import FirebaseStorage
 import FirebaseFirestore
 import Accelerate
 
 final class DatabaseManager {
     static let shared = DatabaseManager()
-    private let db = Firestore.firestore()
-    private var diaryDocumentListener: ListenerRegistration?
+    let fireStore: Firestore
+    private init() {
+        self.fireStore = Firestore.firestore()
+    }
     public typealias DiaryCompletion = (Result<String, Error>) -> Void
     public func writeDiary(diary: Diary, completion: @escaping DiaryCompletion) {
-        try? db.collection("diary").document(String(describing: diary.writeTime)).setData(from: diary, completion: { error in
+        try? fireStore.collection("diary").document(String(describing: diary.writeTime)).setData(from: diary, completion: { error in
             guard error == nil else {
                 completion(.failure(DiaryErros.failedToWrite))
                 return
@@ -25,7 +27,7 @@ final class DatabaseManager {
         })
     }
     public func updateDiary(diary: Diary, completion: @escaping DiaryCompletion) {
-        db.collection("diary").document(String(diary.writeTime)).updateData(["imageExist": diary.imageExist, "imageWidth": diary.imageWidth, "imageHeight": diary.imageHeight, "imageUploadComplete": diary.imageUploadComplete, "content": diary.content], completion: {error in
+        fireStore.collection("diary").document(String(diary.writeTime)).updateData(["imageExist": diary.imageExist, "imageWidth": diary.imageWidth, "imageHeight": diary.imageHeight, "imageUploadComplete": diary.imageUploadComplete, "content": diary.content], completion: {error in
             guard error == nil else {
                 completion(.failure(DiaryErros.failedToUpdate))
                 return
@@ -34,7 +36,7 @@ final class DatabaseManager {
         })
     }
     public func updateImageUrl(docId: String, imageUrl: String, completion: @escaping DiaryCompletion) {
-        db.collection("diary").document(docId).updateData([
+        fireStore.collection("diary").document(docId).updateData([
             "imageUploadComplete": true,
             "imageUrl": imageUrl], completion: {error in
             guard error == nil else {
@@ -47,10 +49,10 @@ final class DatabaseManager {
     public func deleteDiray(diary: Diary) {
     }
     public func daonStorageSave(docId: String, completion: @escaping (Result<String, Error>) -> Void) {
-        let user = Auth.auth().currentUser
+        let user = AuthManager.shared.auth.currentUser
         guard let uid = user?.uid else { return }
         let nowTime = Int64(Date().millisecondsSince1970)
-        db.collection("daon").document(docId).updateData(["storageUser.\(uid)": nowTime ], completion: {error in
+        fireStore.collection("daon").document(docId).updateData(["storageUser.\(uid)": nowTime ], completion: {error in
             guard error == nil else {
                 completion(.failure(DaonErros.failedToSave))
                 return
@@ -68,8 +70,5 @@ final class DatabaseManager {
     }
     public enum DaonErros: Error {
         case failedToSave
-    }
-    func removeListener() {
-        diaryDocumentListener?.remove()
     }
 }

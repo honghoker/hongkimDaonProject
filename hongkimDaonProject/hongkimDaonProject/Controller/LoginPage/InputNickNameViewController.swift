@@ -1,5 +1,4 @@
 import UIKit
-import FirebaseFirestore
 import FirebaseAuth
 import SnapKit
 import FirebaseMessaging
@@ -14,7 +13,7 @@ enum NickNameOverCheck: String {
 }
 
 class InputNickNameViewController: UIViewController {
-    let db = Firestore.firestore()
+    let db = DatabaseManager.shared.fireStore
     lazy var overLapCheck: NickNameOverCheck = NickNameOverCheck.entrance
     var userUid: String = ""
     var platForm: String = ""

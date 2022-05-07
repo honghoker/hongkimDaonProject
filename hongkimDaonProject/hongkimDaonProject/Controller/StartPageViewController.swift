@@ -1,15 +1,13 @@
 import UIKit
-import FirebaseAuth
-import FirebaseFirestore
 
 class StartPageViewController: UIViewController {
-    let database = Firestore.firestore()
+    let database = DatabaseManager.shared.fireStore
     override func viewDidLoad() {
         super.viewDidLoad()
         print("start viewLoad")
     }
     override func viewDidAppear(_ animated: Bool) {
-        if let user = Auth.auth().currentUser {
+        if let user = AuthManager.shared.auth.currentUser {
             print("view user \(user.uid)")
             let docRef = self.database.document("user/\(user.uid)")
             docRef.getDocument { snapshot, error in

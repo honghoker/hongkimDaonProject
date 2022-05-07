@@ -12,13 +12,22 @@ import FirebaseAuth
 import FirebaseFirestore
 import RealmSwift
 
+final class AuthManager: NSObject {
+    static let shared = AuthManager()
+    let auth: Auth
+
+    override init() {
+        self.auth = Auth.auth()
+    }
+}
+
 protocol withdrawalProtocol {
     func withdrawal(completion: @escaping (Result<String, Error>) -> Void)
 }
 
 extension withdrawalProtocol where Self: UIViewController {
     func withdrawal(completion: @escaping (Result<String, Error>) -> Void) {
-        if let currentUser = Auth.auth().currentUser {
+        if let currentUser = AuthManager.shared.auth.currentUser {
             let uid = currentUser.uid
             currentUser.delete { error in
                 if let error = error as? NSError {
@@ -69,6 +78,8 @@ extension withdrawalProtocol where Self: UIViewController {
                     completion(.success(""))
                 }
             }
+        } else {
+            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
         }
     }
     private func successToWithdrawal(_ uid: String) {
@@ -83,11 +94,3 @@ public enum AuthErros: Error {
     case notEqualUser
     case failedToWithdrawal
 }
-
-//    final class AuthManager {
-//        static let shared = AuthManager()
-//        private let auth = Auth.auth()
-//
-//        public func withdrawal(completion: @escaping (Result<String, Error>) -> Void) {
-//        }
-//    }

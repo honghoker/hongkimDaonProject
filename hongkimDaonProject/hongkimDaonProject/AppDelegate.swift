@@ -42,11 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = window
         AppController.shared.show(in: window)
         // MARK: FCM Test
-                Messaging.messaging().delegate = self
-                UNUserNotificationCenter.current().delegate = self
-                let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-                UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: {_, _ in })
-                application.registerForRemoteNotifications()
+        Messaging.messaging().delegate = self
+        UNUserNotificationCenter.current().delegate = self
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions, completionHandler: {_, _ in })
+        application.registerForRemoteNotifications()
         return true
     }
     // 세로방향 고정
@@ -91,26 +91,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Use this method to release any resources that were specific to the discarded scenes, as they will not return.
     }
     // MARK: FCM Test
-        func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-            Messaging.messaging().apnsToken = deviceToken
-        }
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        Messaging.messaging().apnsToken = deviceToken
+    }
 }
 // MARK: FCM Test
- extension AppDelegate: UNUserNotificationCenterDelegate {
+extension AppDelegate: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         print("\(#function)")
     }
- }
+}
 // MARK: FCM Test
- extension AppDelegate: MessagingDelegate {
+extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
-//        print("Firebase registration token: \(String(describing: fcmToken))")
+        //        print("Firebase registration token: \(String(describing: fcmToken))")
         guard let token = fcmToken else { return }
         print("Firebase registration token: \(token)")
         let dataDict: [String: String] = ["token": token]
         NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
     }
- }
+}
 
 // MARK: FCM Test
 // extension AppDelegate: MessagingDelegate {

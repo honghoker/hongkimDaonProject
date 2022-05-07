@@ -1,7 +1,6 @@
 import UIKit
 import SnapKit
 import FirebaseAuth
-import FirebaseFirestore
 import FirebaseStorage
 import Kingfisher
 import RealmSwift

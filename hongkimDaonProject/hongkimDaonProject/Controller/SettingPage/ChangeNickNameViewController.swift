@@ -8,11 +8,8 @@
 import Foundation
 import UIKit
 import Toast_Swift
-import FirebaseFirestore
-import FirebaseAuth
 
 class ChangeNickNameViewController: UIViewController {
-    let db = Firestore.firestore()
     lazy var overLapCheck: NickNameOverCheck = NickNameOverCheck.entrance
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var nickNameTextField: UITextField!
@@ -48,9 +45,9 @@ class ChangeNickNameViewController: UIViewController {
 
 extension ChangeNickNameViewController {
     func initNickName() {
-        if let uid = Auth.auth().currentUser?.uid {
+        if let uid = AuthManager.shared.auth.currentUser?.uid {
             LoadingIndicator.showLoading()
-            db.collection("user").document(uid).getDocument { snapshot, error in
+            DatabaseManager.shared.fireStore.collection("user").document(uid).getDocument { snapshot, error in
                 guard error == nil else {
                     LoadingIndicator.hideLoading()
                     return
@@ -78,7 +75,7 @@ extension ChangeNickNameViewController {
                     self.overLapCheck = NickNameOverCheck.same
                     self.changeOverLap()
                 } else {
-                    let docRef = db.collection("user").whereField("nickName", isEqualTo: text)
+                    let docRef = DatabaseManager.shared.fireStore.collection("user").whereField("nickName", isEqualTo: text)
                     docRef.getDocuments(completion: { snapshot, error in
                         if let error = error {
                             print("DEBUG: \(error.localizedDescription)")
@@ -129,9 +126,9 @@ extension ChangeNickNameViewController {
     @objc
     func onTapEditBtn() {
         if self.overLapCheck == NickNameOverCheck.check {
-            if let uid = Auth.auth().currentUser?.uid {
+            if let uid = AuthManager.shared.auth.currentUser?.uid {
                 LoadingIndicator.showLoading()
-                db.collection("user").document(uid).updateData(["nickName": nickNameTextField.text!]) { result in
+                DatabaseManager.shared.fireStore.collection("user").document(uid).updateData(["nickName": nickNameTextField.text!]) { result in
                     guard result == nil else {
                         self.view.makeToast("닉네임 변경에 실패했습니다.", duration: 1.5, position: .bottom)
                         LoadingIndicator.showLoading()

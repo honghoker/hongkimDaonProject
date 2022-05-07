@@ -1,9 +1,9 @@
 import UIKit
 import SnapKit
-import FirebaseAuth
 import Firebase
 import FirebaseFirestore
 import CoreAudio
+import Toast_Swift
 
 protocol DispatchDiary {
     func dispatch(_ vc: UIViewController, Input value: Diary?)
@@ -62,7 +62,7 @@ extension MyDiaryViewController {
         guard !(isFetching == true || isNext == false) else {
             return
         }
-        guard let user = Auth.auth().currentUser else {
+        guard let user = AuthManager.shared.auth.currentUser else {
             return
         }
         let uid = user.uid
@@ -97,7 +97,7 @@ extension MyDiaryViewController {
         }
     }
     func fetchDiary(uid: String, completed: @escaping (QuerySnapshot?, Error?) -> Void) {
-        let diaryDB = Firestore.firestore().collection("diary")
+        let diaryDB = DatabaseManager.shared.fireStore.collection("diary")
         var query: Query
         if self.myDiarys.isEmpty {
             query = diaryDB.whereField("uid", isEqualTo: uid).order(by: "writeTime", descending: true).limit(to: limit)
@@ -114,19 +114,27 @@ extension MyDiaryViewController {
     }
     @objc
     func tapFloatingBtn(_ gesture: UITapGestureRecognizer) {
-        let current = Calendar.current
-        if current.isDateInToday(Date(milliseconds: self.myDiarys[0].writeTime)) == true {
-            // MARK: 오늘이면
-            self.view.makeToast("이미 오늘의 일기를 작성했습니다.")
+        if self.myDiarys.isEmpty == true {
+            // MARK: 일기가 비어있으면
+            moveToWriteDiaryPage()
         } else {
-            // MARK: 오늘이 아니면 일기 작성
-            let storyboard: UIStoryboard = UIStoryboard(name: "WriteDiaryPageView", bundle: nil)
-            guard let writeDiaryPageVC = storyboard.instantiateViewController(withIdentifier: "WriteDiaryPageViewController") as? WriteDiaryPageViewController else { return }
-            writeDiaryPageVC.delegate = self
-            writeDiaryPageVC.modalPresentationStyle = .fullScreen
-            writeDiaryPageVC.modalTransitionStyle = .crossDissolve
-            self.present(writeDiaryPageVC, animated: true, completion: nil)
+            let current = Calendar.current
+            if current.isDateInToday(Date(milliseconds: self.myDiarys[0].writeTime)) == true {
+                // MARK: 오늘이면
+                self.view.makeToast("이미 오늘의 일기를 작성했습니다.")
+            } else {
+                // MARK: 오늘이 아니면 일기 작성
+                moveToWriteDiaryPage()
+            }
         }
+    }
+    func moveToWriteDiaryPage() {
+        let storyboard: UIStoryboard = UIStoryboard(name: "WriteDiaryPageView", bundle: nil)
+        guard let writeDiaryPageVC = storyboard.instantiateViewController(withIdentifier: "WriteDiaryPageViewController") as? WriteDiaryPageViewController else { return }
+        writeDiaryPageVC.delegate = self
+        writeDiaryPageVC.modalPresentationStyle = .fullScreen
+        writeDiaryPageVC.modalTransitionStyle = .crossDissolve
+        self.present(writeDiaryPageVC, animated: true, completion: nil)
     }
 }
 
@@ -188,15 +196,6 @@ extension MyDiaryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // MARK: 클릭한 셀의 이벤트 처리
         tableView.deselectRow(at: indexPath, animated: true)
-//        let storyboard: UIStoryboard = UIStoryboard(name: "DetailDiaryView", bundle: nil)
-//        guard let DetailDiaryVC = storyboard.instantiateViewController(withIdentifier: "DetailDiaryViewController") as? DetailDiaryViewController else { return }
-//        DetailDiaryVC.delegate = self
-//        // MARK: 화면 전환 애니메이션 설정
-//        DetailDiaryVC.modalTransitionStyle = .crossDissolve
-//        // MARK: 전환된 화면이 보여지는 방법 설정 (fullScreen)
-//        DetailDiaryVC.docId = String(myDiarys[indexPath.row].writeTime)
-//        DetailDiaryVC.modalPresentationStyle = .fullScreen
-//        self.present(DetailDiaryVC, animated: true, completion: nil)
         let storyboard: UIStoryboard = UIStoryboard(name: "DetailDiaryView", bundle: nil)
         guard let DetailDiaryVC = storyboard.instantiateViewController(withIdentifier: "NewDetailDiaryPageViewController") as? NewDetailDiaryPageViewController else { return }
         DetailDiaryVC.delegate = self
