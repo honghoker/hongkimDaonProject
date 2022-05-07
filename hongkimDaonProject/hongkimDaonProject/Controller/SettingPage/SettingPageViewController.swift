@@ -16,6 +16,7 @@ class SettingPageViewController: UIViewController, withdrawalProtocol {
     @IBOutlet weak var logoutBtn: UILabel!
     @IBOutlet weak var withdrawalBtn: UILabel!
     @IBOutlet weak var setDarkModeBtn: UILabel!
+    var nickNameChangeChk: Bool?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "bgColor")
@@ -38,6 +39,14 @@ class SettingPageViewController: UIViewController, withdrawalProtocol {
         let setDarkModeClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapDarkModeClick(_:)))
         setDarkModeBtn.isUserInteractionEnabled = true
         setDarkModeBtn.addGestureRecognizer(setDarkModeClick)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        if let chk = nickNameChangeChk {
+            if chk == true {
+                self.view.makeToast("닉네임 변경에 성공했습니다.", duration: 1.5, position: .bottom)
+                nickNameChangeChk = nil
+            }
+        }
     }
 }
 

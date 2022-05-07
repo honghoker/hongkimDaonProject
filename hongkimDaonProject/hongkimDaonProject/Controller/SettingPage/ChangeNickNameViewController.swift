@@ -22,7 +22,6 @@ class ChangeNickNameViewController: UIViewController {
     var nickName: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-        initNickName()
         let overlapClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapOverlapCheck(_:)))
         overlapText.isUserInteractionEnabled = true
         overlapText.addGestureRecognizer(overlapClick)
@@ -30,6 +29,7 @@ class ChangeNickNameViewController: UIViewController {
         warningOverLapText.isHidden = true
         nickNameTextField.delegate = self
         self.nickNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        initNickName()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -43,22 +43,21 @@ class ChangeNickNameViewController: UIViewController {
         editBtn.tintColor = UIColor.label
         editBtn.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
         editBtn.addTarget(self, action: #selector(onTapEditBtn), for: .touchUpInside)
-//        LoadingIndicator.showLoading()
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-//            LoadingIndicator.hideLoading()
-//        }
     }
 }
 
 extension ChangeNickNameViewController {
     func initNickName() {
         if let uid = Auth.auth().currentUser?.uid {
+            LoadingIndicator.showLoading()
             db.collection("user").document(uid).getDocument { snapshot, error in
                 guard error == nil else {
+                    LoadingIndicator.hideLoading()
                     return
                 }
                 self.nickName = snapshot?.get("nickName") as? String
                 self.nickNameTextField.text = self.nickName
+                LoadingIndicator.hideLoading()
             }
         }
     }
@@ -132,16 +131,18 @@ extension ChangeNickNameViewController {
         if self.overLapCheck == NickNameOverCheck.check {
             if let uid = Auth.auth().currentUser?.uid {
                 LoadingIndicator.showLoading()
-//                LoadingIndicator.hideLoading()
                 db.collection("user").document(uid).updateData(["nickName": nickNameTextField.text!]) { result in
                     guard result == nil else {
                         self.view.makeToast("닉네임 변경에 실패했습니다.", duration: 1.5, position: .bottom)
+                        LoadingIndicator.showLoading()
                         return
                     }
-                    self.view.makeToast("닉네임 변경에 성공했습니다.", duration: 1.5, position: .bottom)
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        LoadingIndicator.hideLoading()
+                    LoadingIndicator.hideLoading()
+                    let preVC = self.presentingViewController
+                    guard let vc = preVC as? SettingPageViewController else {
+                        return
                     }
+                    vc.nickNameChangeChk = true
                     self.presentingViewController?.dismiss(animated: false)
                 }
             } else {
