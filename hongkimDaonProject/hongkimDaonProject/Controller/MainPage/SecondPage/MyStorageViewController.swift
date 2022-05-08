@@ -18,6 +18,10 @@ class MyStorageViewController: UIViewController {
         realm = try? Realm()
         let result = realm.objects(MyStorage.self).sorted(byKeyPath: "storageTime", ascending: false)
         myDaons = Array(result)
+        setUI()
+    }
+    // MARK: set UI
+    func setUI() {
         let storageTableViewCellNib = UINib(nibName: String(describing: MyStorageCell.self), bundle: nil)
         self.storageTableView.backgroundColor = UIColor(named: "bgColor")
         self.storageTableView.register(storageTableViewCellNib, forCellReuseIdentifier: "myStorageCellId")
@@ -52,9 +56,7 @@ extension MyStorageViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "myStorageCellId", for: indexPath) as? MyStorageCell else {
             return UITableViewCell()
         }
-//        let imageUrl = myDaons[indexPath.row].imageUrl
         let imageData = myDaons[indexPath.row].imageData
-//        cell.myStorageImageView.kf.setImage(with: URL(string: imageUrl))
         cell.backgroundColor = UIColor(named: "bgColor")
         cell.myStorageImageView.image = UIImage(data: imageData)
         cell.contentMode = .scaleAspectFit
@@ -62,12 +64,11 @@ extension MyStorageViewController: UITableViewDataSource {
         cell.layoutMargins = .zero
         cell.contentView.directionalLayoutMargins = .zero
         cell.contentView.layoutMargins = .zero
-        // MARK: Image setting
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // MARK: 클릭한 셀의 이벤트 처리
-        // MARK: 이미지 크게 보기
+        // 클릭한 셀의 이벤트 처리
+        // 이미지 크게 보기
         tableView.deselectRow(at: indexPath, animated: true)
         mainImageData = myDaons[indexPath.row].imageData
         mainUploadTime = myDaons[indexPath.row].uploadTime

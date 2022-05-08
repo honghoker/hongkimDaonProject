@@ -15,10 +15,10 @@ enum NickNameOverCheck: String {
 
 class InputNickNameViewController: UIViewController {
     let db = Firestore.firestore()
-    lazy var overLapCheck: NickNameOverCheck = NickNameOverCheck.entrance
-    var userUid: String = ""
-    var platForm: String = ""
-    var userFcmToken: String = ""
+    var overLapCheck: NickNameOverCheck = NickNameOverCheck.entrance
+    lazy var userUid: String = ""
+    lazy var platForm: String = ""
+    lazy var userFcmToken: String = ""
     @IBOutlet weak var overlapText: UILabel!
     @IBOutlet weak var confirmBtn: UIButton!
     @IBOutlet weak var nickNameTextField: UITextField!
@@ -33,38 +33,39 @@ class InputNickNameViewController: UIViewController {
                 print("FCM registration token: \(token)")
             }
         }
-        let overlapClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapOverlapCheck(_:)))
-        overlapText.isUserInteractionEnabled = true
-        overlapText.addGestureRecognizer(overlapClick)
-        warningOverLapText.isHidden = true
-        nickNameTextField.delegate = self
-        self.nickNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
+        setUIAtViewDidLoad()
+    }
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        setUIWillLayoutSubviews()
     }
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         changeOverLap()
     }
-    // storyboard에서 세팅을 해놨는데 vc에서 confirmBtn click 하고나면 왜 layout이 초기화되는건지..?
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        confirmBtn.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
-        confirmBtn.titleLabel?.textAlignment = .center
-        confirmBtn.layer.borderWidth = 1
-        confirmBtn.layer.borderColor = UIColor.label.cgColor
-        confirmBtn.tintColor = UIColor.label
-        confirmBtn.addTarget(self, action: #selector(onTapConfirmBtn), for: .touchUpInside)
+    // MARK: set UI
+    func setUIAtViewDidLoad() {
+        let overlapClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapOverlapCheck(_:)))
+        self.overlapText.isUserInteractionEnabled = true
+        self.overlapText.addGestureRecognizer(overlapClick)
+        self.warningOverLapText.isHidden = true
+        self.nickNameTextField.delegate = self
+        self.nickNameTextField.addTarget(self, action: #selector(self.textFieldDidChange(_:)), for: .editingChanged)
     }
-    // MARK: 빈 화면 터치시 키보드 내림
-    //    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-    //          self.view.endEditing(true)
-    //    }
+    func setUIWillLayoutSubviews() {
+        self.confirmBtn.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
+        self.confirmBtn.titleLabel?.textAlignment = .center
+        self.confirmBtn.layer.borderWidth = 1
+        self.confirmBtn.layer.borderColor = UIColor.label.cgColor
+        self.confirmBtn.tintColor = UIColor.label
+        self.confirmBtn.addTarget(self, action: #selector(onTapConfirmBtn), for: .touchUpInside)
+    }
 }
 
 // MARK: 가입완료, 중복확인
 extension InputNickNameViewController {
     @objc
     func onTapConfirmBtn() {
-        //        logout()
         if self.overLapCheck == NickNameOverCheck.check {
             let formatter = DateFormatter()
             formatter.locale = Locale(identifier: "ko_KR")
@@ -80,23 +81,23 @@ extension InputNickNameViewController {
         let docRef = db.document("user/\(userData.uid)")
         docRef.setData(["uid": userData.uid, "nickName": userData.nickName, "joinTime": userData.joinTime, "platForm": userData.platForm, "notification": userData.notification, "notificationTime": userData.notificationTime, "fcmToken": userData.fcmToken]) { result in
             guard result == nil else {
-                print("@@@@@@@ 데이터 저장 실패")
+                print("데이터 저장 실패")
                 return
             }
         }
-        // MARK: 가입 성공 후 메인 페이지 이동
+        // 가입 성공 후 메인 페이지 이동
         let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
         guard let mainViewController = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
-        // MARK: 화면 전환 애니메이션 설정
+        // 화면 전환 애니메이션 설정
         mainViewController.modalTransitionStyle = .crossDissolve
-        // MARK: 전환된 화면이 보여지는 방법 설정
+        // 전환된 화면이 보여지는 방법 설정
         mainViewController.modalPresentationStyle = .fullScreen
         self.present(mainViewController, animated: true, completion: nil)
     }
     @objc
     func onTapOverlapCheck(_ gesture: UITapGestureRecognizer) {
         if let text = self.nickNameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) {
-            // MARK: 아무것도 입력안했을 때
+            // 아무것도 입력안했을 때
             if text.isEmpty == true {
                 self.overLapCheck = NickNameOverCheck.empty
                 self.changeOverLap()

@@ -10,11 +10,15 @@ class AlphaMainPageViewController: TabmanViewController {
     var selectedTintColor = UIColor.darkGray
     var uploadTime: Int = 0
     override func viewDidLoad() {
+        super.viewDidLoad()
         if isDark == true {
             tintColor = UIColor.darkGray
             selectedTintColor = UIColor.lightGray
         }
-        super.viewDidLoad()
+        setUI()
+    }
+    // MARK: set UI
+    func setUI() {
         if let allWordingPageViewController = storyboard?.instantiateViewController(withIdentifier: "AllWordingPageViewController") as? AllWordingPageViewController {
             viewControllers.append(allWordingPageViewController)
         }

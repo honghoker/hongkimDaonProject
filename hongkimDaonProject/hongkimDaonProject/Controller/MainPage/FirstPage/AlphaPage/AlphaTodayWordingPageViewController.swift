@@ -19,6 +19,10 @@ class AlphaTodayWordingPageViewController: UIViewController {
     var realm: Realm!
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUI()
+    }
+    // MARK: set UI
+    func setUI() {
         let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
         backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         backgroundUIView.isUserInteractionEnabled = true
@@ -34,7 +38,16 @@ class AlphaTodayWordingPageViewController: UIViewController {
         //        downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
         //        shareBtn.addTarget(self, action: #selector(shareInfo), for: .touchUpInside)
     }
-    override func viewWillLayoutSubviews() {
+}
+
+// MARK: btns action
+extension AlphaTodayWordingPageViewController {
+    @objc
+    func onTapImage(_ gesture: UITapGestureRecognizer) {
+        let storyboard: UIStoryboard = self.storyboard!
+        let nextView = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController")
+        nextView.modalPresentationStyle = .fullScreen
+        self.present(nextView, animated: false, completion: nil)
     }
     @objc
     func imageDownload() {
@@ -85,8 +98,6 @@ class AlphaTodayWordingPageViewController: UIViewController {
     }
     @objc
     func daonStorageSave() {
-        // 1. 터치 시 내부 db에 있으면 이미 저장된거라고 토스트 띄우기
-        // 2. 터치 시 내부 db에 없으면 추가
         DatabaseManager.shared.daonStorageSave(docId: "\(mainUploadTime)") { result in
             switch result {
             case .success(let success):
@@ -114,14 +125,3 @@ class AlphaTodayWordingPageViewController: UIViewController {
         }
     }
 }
-
-extension AlphaTodayWordingPageViewController {
-    @objc
-    func onTapImage(_ gesture: UITapGestureRecognizer) {
-        let storyboard: UIStoryboard = self.storyboard!
-        let nextView = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController")
-        nextView.modalPresentationStyle = .fullScreen
-        self.present(nextView, animated: false, completion: nil)
-    }
-}
-
