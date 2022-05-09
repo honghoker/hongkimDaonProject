@@ -7,6 +7,7 @@ import Toast_Swift
 
 protocol DispatchDiary {
     func dispatch(_ vc: UIViewController, Input value: Diary?)
+    func update(_ vc: UIViewController, Input value: Diary?)
     func delete(_ vc: UIViewController, Delete id: String?)
 }
 
@@ -27,7 +28,6 @@ class MyDiaryViewController: UIViewController {
         btn.layer.shadowRadius = 6.0
         btn.layer.cornerRadius = 32
         btn.tintColor = UIColor.gray
-//        highlighter
         btn.setImage(UIImage(systemName: "scribble"), for: .normal)
         let config = UIImage.SymbolConfiguration(pointSize: 24)
         btn.setPreferredSymbolConfiguration(config, forImageIn: .normal)
@@ -140,6 +140,17 @@ extension MyDiaryViewController {
 }
 
 extension MyDiaryViewController: DispatchDiary {
+    func update(_ vc: UIViewController, Input value: Diary?) {
+        if let diary = value {
+            if let index = self.myDiarys.firstIndex(where: {
+                $0.writeTime == Int64(diary.writeTime)}) {
+                self.myDiarys[index] = diary
+                DispatchQueue.main.async {
+                    self.diaryTableView.reloadData()
+                }
+            }
+        }
+    }
     func delete(_ vc: UIViewController, Delete value: String?) {
         if let writeTime = value {
             if let index = self.myDiarys.firstIndex(where: {

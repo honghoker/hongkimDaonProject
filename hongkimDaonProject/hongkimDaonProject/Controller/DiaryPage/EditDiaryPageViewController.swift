@@ -14,6 +14,7 @@ import STTextView
 class EditDiaryPageViewController: UIViewController {
     var diary: Diary?
     var image: UIImage?
+    var delegate: DispatchDiary?
     @IBOutlet weak var backBtn: UILabel!
     @IBOutlet weak var completeBtn: UILabel!
     @IBOutlet weak var imageViewLabel: UILabel!
@@ -103,6 +104,7 @@ extension EditDiaryPageViewController {
                             }
                         }
                         print("@@@@@@@@@ update 성공")
+                        self.delegate?.update(self, Input: diary)
                         self.presentingViewController?.dismiss(animated: true)
                     case .failure(let error):
                         print("업데이트 실패 토스트 : \(error)")

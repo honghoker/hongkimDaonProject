@@ -106,7 +106,6 @@ class NewDetailDiaryPageViewController: UIViewController {
             guard let diary: Diary = try? document.data(as: Diary.self) else { return }
             self.diary = diary
             let myDateFormatter = DateFormatter()
-//            myDateFormatter.dateFormat = "# yyyy.MM.dd a h:mm"
             myDateFormatter.dateFormat = "# yyyy.MM.dd"
             myDateFormatter.locale = Locale(identifier: "ko_KR")
             let convertNowStr = myDateFormatter.string(from: Date(milliseconds: diary.writeTime))
@@ -145,24 +144,6 @@ class NewDetailDiaryPageViewController: UIViewController {
                     self.imageView.kf.indicatorType = .activity
                     self.imageView.kf.setImage(with: url, options: [.processor(processor)])
                     self.imageLoadComplete = true
-//                    DispatchQueue.global().async { [weak self] in
-//                        //                        if let data = try? Data(contentsOf: url!) {
-//                        //                            if let image = UIImage(data: data) {
-//                        DispatchQueue.main.async {
-//                            //                                    self?.imageView.image = image
-//                            //                                    self?.imageLoadComplete = true
-//                            KingfisherManager.shared.retrieveImage(with: url!, options: nil, progressBlock: nil, completionHandler: { result in
-//                                switch result {
-//                                case .success(let RetrieveImageResult):
-//                                    self?.imageView.contentMode = .scaleAspectFit
-//                                    self?.imageView.image = RetrieveImageResult.image
-//                    self?.imageLoadComplete = true
-//                                case .failure(let error):
-//                                    print("@@@@@ error : \(error)")
-//                                }
-//                            })
-//                        }
-//                    }
                 } else {
                     // MARK: 이미지 업로드 중
                     DispatchQueue.global().async { [weak self] in
@@ -195,6 +176,7 @@ extension NewDetailDiaryPageViewController {
                 } else {
                     let storyboard: UIStoryboard = UIStoryboard(name: "EditDiaryPageView", bundle: nil)
                     guard let editDiaryPageVC = storyboard.instantiateViewController(withIdentifier: "EditDiaryPageViewController") as? EditDiaryPageViewController else { return }
+                    editDiaryPageVC.delegate = self
                     editDiaryPageVC.diary = diary
                     editDiaryPageVC.image = self.imageView.image
                     editDiaryPageVC.modalTransitionStyle = .crossDissolve
@@ -218,7 +200,6 @@ extension NewDetailDiaryPageViewController {
                 }
                 self.delegate?.delete(self, Delete: self.docId)
                 self.presentingViewController?.dismiss(animated: true, completion: nil)
-//                self.view.makeToast("일기를 삭제했습니다.", duration: 1.5, position: .bottom)
             }
         }))
         self.present(alert, animated: true, completion: nil)
@@ -246,6 +227,16 @@ extension NewDetailDiaryPageViewController: UIScrollViewDelegate {
             }
         }
     }
+}
+
+extension NewDetailDiaryPageViewController: DispatchDiary {
+    func update(_ vc: UIViewController, Input value: Diary?) {
+        if let diary = value {
+            self.delegate?.update(self, Input: diary)
+        }
+    }
+    func delete(_ vc: UIViewController, Delete id: String?) {}
+    func dispatch(_ vc: UIViewController, Input value: Diary?) {}
 }
 
 extension NewDetailDiaryPageViewController: UIGestureRecognizerDelegate {
