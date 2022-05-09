@@ -6,7 +6,7 @@ import CryptoKit
 import Toast_Swift
 import RealmSwift
 
-class SettingPageViewController: UIViewController, withdrawalProtocol {
+class SettingPageViewController: UIViewController {
     let defaults = UserDefaults.standard
     @IBOutlet weak var backBtn: UIButton!
     @IBOutlet weak var nickNameChangeBtn: UILabel!
@@ -15,6 +15,7 @@ class SettingPageViewController: UIViewController, withdrawalProtocol {
     @IBOutlet weak var withdrawalBtn: UILabel!
     @IBOutlet weak var setDarkModeBtn: UILabel!
     var nickNameChangeChk: Bool?
+    private var currentNonce: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "bgColor")
@@ -142,10 +143,9 @@ extension SettingPageViewController {
             self.withdrawal { result in
                 switch result {
                 case .success:
-                    // MARK: 토스트 처리 필요
-                    self.showToast(msg: "회원탈퇴에 성공했습니다.")
-                    print("@@@@@@@@ withdrawal success")
-                    self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)
+                    // MARK: 탈퇴 성공 시 앱 종료
+                    UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
                 case .failure(let error):
                     switch error as? AuthErros {
                     case .failedToSignIn:
@@ -163,5 +163,172 @@ extension SettingPageViewController {
             }
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    func withdrawal(completion: @escaping (Result<String, Error>) -> Void) {
+        if let currentUser = AuthManager.shared.auth.currentUser {
+            let uid = currentUser.uid
+            currentUser.delete { error in
+                if let error = error as? NSError {
+                    switch AuthErrorCode(rawValue: error.code) {
+                    case .requiresRecentLogin:
+                        let alert = UIAlertController(title: "사용자 정보가 만료되었습니다.",
+                                                      message: "탈퇴하려는 사용자의 계정으로 다시 로그인해주세요.", preferredStyle: UIAlertController.Style.alert)
+                        alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
+                        }))
+                        alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { _ in
+                            if currentUser.providerData.isEmpty != true {
+                                for userInfo in currentUser.providerData {
+                                    switch userInfo.providerID {
+                                    case "google.com":
+                                        print("@@@@@@@@@ google")
+                                        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+                                        let signInConfig = GIDConfiguration.init(clientID: clientID)
+                                        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+                                            guard error == nil else {
+                                                completion(.failure(AuthErros.failedToSignIn))
+                                                return
+                                            }
+                                            guard let authentication = user?.authentication else { return }
+                                            if currentUser.email == user?.profile?.email && currentUser.displayName == user?.profile?.name {
+                                                let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
+                                                currentUser.reauthenticate(with: credential) { result, error in
+                                                    guard error == nil else {
+                                                        completion(.failure(AuthErros.failedToWithdrawal))
+                                                        return
+                                                    }
+                                                    currentUser.delete { error in
+                                                        guard error == nil else {
+                                                            completion(.failure(AuthErros.failedToWithdrawal))
+                                                            return
+                                                        }
+                                                        self.successToWithdrawal(uid)
+                                                        completion(.success(""))
+                                                    }
+                                                }
+                                            } else {
+                                                completion(.failure(AuthErros.notEqualUser))
+                                            }
+                                        }
+                                    case "apple.com":
+                                        print("@@@@@@@@@ apple")
+                                        let request = self.createAppleIDRequest()
+                                        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+                                        authorizationController.delegate = self
+                                        authorizationController.presentationContextProvider = self
+                                        authorizationController.performRequests()
+                                    default:
+                                        print("user is signed in with \(userInfo.providerID)")
+                                    }
+                                }
+                            }
+                        }))
+                        self.present(alert, animated: true, completion: nil)
+                    default:
+                        completion(.failure(AuthErros.failedToWithdrawal))
+                        print("Error message: \(error.localizedDescription)")
+                    }
+                } else {
+                    self.successToWithdrawal(uid)
+                    completion(.success(""))
+                }
+            }
+        } else {
+            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
+        }
+    }
+    private func successToWithdrawal(_ uid: String) {
+        // MARK: realm 데이터 삭제
+        try? FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
+    }
+    @available(iOS 13, *)
+    func createAppleIDRequest() -> ASAuthorizationAppleIDRequest {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        // 애플로그인은 사용자에게서 2가지 정보를 요구함
+        request.requestedScopes = [.fullName, .email]
+        let nonce = randomNonceString()
+        request.nonce = sha256(nonce)
+        currentNonce = nonce
+        return request
+    }
+    @available(iOS 13, *)
+    private func sha256(_ input: String) -> String {
+        let inputData = Data(input.utf8)
+        let hashedData = SHA256.hash(data: inputData)
+        let hashString = hashedData.compactMap {
+            return String(format: "%02x", $0)
+        }.joined()
+        return hashString
+    }
+}
+
+extension SettingPageViewController: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        print("ASAuthorization ASAuthorization ASAuthorization")
+        if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
+            guard let nonce = currentNonce else {
+                fatalError("Invalid state: A login callback was received, but no login request was sent.")
+            }
+            guard let appleIDtoken = appleIDCredential.identityToken else {
+                print("Unable to fetch identity token")
+                return
+            }
+            guard let idTokenString = String(data: appleIDtoken, encoding: .utf8) else {
+                print("Unable to serialize token string from data: \(appleIDtoken.debugDescription)")
+                return
+            }
+            let credential = OAuthProvider.credential(withProviderID: "apple.com",
+                                                      idToken: idTokenString,
+                                                      rawNonce: nonce)
+            // Reauthenticate current Apple user with fresh Apple credential.
+            if let currentUser = AuthManager.shared.auth.currentUser {
+                AuthManager.shared.auth.currentUser?.reauthenticate(with: credential) { (authResult, error) in
+                    guard error != nil else { return }
+                    // Apple user successfully re-authenticated.
+                    // ...
+                    currentUser.delete { error in
+                        guard error == nil else {
+                            //                            completion(.failure(AuthErros.failedToWithdrawal))
+                            return
+                        }
+                        print("@@@@@@@ 탈퇴 성공")
+                        UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
+                        //                        self.successToWithdrawal(uid)
+                        //                        completion(.success(""))
+                    }
+                }
+            }
+            //            AuthManager.shared.auth.signIn(with: credential) { (authDataResult, error) in
+            //                if let user = authDataResult?.user {
+            //                    print("애플 로그인 성공", user.uid, user.email ?? "-")
+            //                    let docRef = self.database.document("user/\(user.uid)")
+            //                    docRef.getDocument { snapshot, error in
+            //                        if let error = error {
+            //                            print("DEBUG: \(error.localizedDescription)")
+            //                            return
+            //                        }
+            //                        guard let exist = snapshot?.exists else {return}
+            //                        if exist == true {
+            //                            self.showMainViewController()
+            //                        } else {
+            //                            self.showInputNickNameViewController(userUid: user.uid, platForm: "apple")
+            //                        }
+            //                    }
+            //                }
+            //                if error != nil {
+            //                    print(error?.localizedDescription ?? "error" as Any)
+            //                    return
+            //                }
+        }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        print("Sign in with Apple errored: \(error)")
+    }
+}
+extension SettingPageViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
     }
 }
