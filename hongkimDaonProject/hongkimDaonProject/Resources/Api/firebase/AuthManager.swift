@@ -36,35 +36,58 @@ extension withdrawalProtocol where Self: UIViewController {
                         let alert = UIAlertController(title: "사용자 정보가 만료되었습니다.",
                                                       message: "탈퇴하려는 사용자의 계정으로 다시 로그인해주세요.", preferredStyle: UIAlertController.Style.alert)
                         alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
-                            // Cancel Action
                         }))
                         alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { _ in
-                            guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-                            let signInConfig = GIDConfiguration.init(clientID: clientID)
-                            GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-                                guard error == nil else {
-                                    completion(.failure(AuthErros.failedToSignIn))
-                                    return
-                                }
-                                guard let authentication = user?.authentication else { return }
-                                if currentUser.email == user?.profile?.email && currentUser.displayName == user?.profile?.name {
-                                    let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
-                                    currentUser.reauthenticate(with: credential) { result, error in
-                                        guard error == nil else {
-                                            completion(.failure(AuthErros.failedToWithdrawal))
-                                            return
-                                        }
-                                        currentUser.delete { error in
+                            if currentUser.providerData.isEmpty != true {
+                                for userInfo in currentUser.providerData {
+                                    switch userInfo.providerID {
+                                    case "google.com":
+                                        print("@@@@@@@@@ google")
+                                        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+                                        let signInConfig = GIDConfiguration.init(clientID: clientID)
+                                        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
                                             guard error == nil else {
-                                                completion(.failure(AuthErros.failedToWithdrawal))
+                                                completion(.failure(AuthErros.failedToSignIn))
                                                 return
                                             }
-                                            self.successToWithdrawal(uid)
-                                            completion(.success(""))
+                                            guard let authentication = user?.authentication else { return }
+                                            if currentUser.email == user?.profile?.email && currentUser.displayName == user?.profile?.name {
+                                                let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
+                                                currentUser.reauthenticate(with: credential) { result, error in
+                                                    guard error == nil else {
+                                                        completion(.failure(AuthErros.failedToWithdrawal))
+                                                        return
+                                                    }
+                                                    currentUser.delete { error in
+                                                        guard error == nil else {
+                                                            completion(.failure(AuthErros.failedToWithdrawal))
+                                                            return
+                                                        }
+                                                        self.successToWithdrawal(uid)
+                                                        completion(.success(""))
+                                                    }
+                                                }
+                                            } else {
+                                                completion(.failure(AuthErros.notEqualUser))
+                                            }
                                         }
+                                    case "apple.com":
+                                        print("@@@@@@@@@ apple")
+//                                        // Initialize a fresh Apple credential with Firebase.
+//                                        let credential = OAuthProvider.credential(
+//                                          withProviderID: "apple.com",
+//                                          IDToken: appleIdToken,
+//                                          rawNonce: rawNonce
+//                                        )
+//                                        // Reauthenticate current Apple user with fresh Apple credential.
+//                                        currentUser.reauthenticate(with: credential) { (authResult, error) in
+//                                          guard error != nil else { return }
+//                                          // Apple user successfully re-authenticated.
+//                                          // ...
+//                                        }
+                                    default:
+                                        print("user is signed in with \(userInfo.providerID)")
                                     }
-                                } else {
-                                    completion(.failure(AuthErros.notEqualUser))
                                 }
                             }
                         }))

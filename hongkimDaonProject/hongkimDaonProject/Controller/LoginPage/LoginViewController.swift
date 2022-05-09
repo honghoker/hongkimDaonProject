@@ -98,7 +98,7 @@ extension LoginViewController {
         let signInConfig = GIDConfiguration.init(clientID: clientID)
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
             guard error == nil else {
-                self.view.makeToast("로그인 실패", duration: 1.5, position: .bottom)
+//                self.view.makeToast("로그인 실패", duration: 1.5, position: .bottom)
                 return
             } // 로그인 실패
             guard let authentication = user?.authentication else { return }
