@@ -14,7 +14,7 @@ class StartPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         animationView.center = CGPoint(x: view.frame.size.width  / 2, y: view.frame.size.height / 2.3)
-        //        animationView.center = view.center
+//                animationView.center = view.center
         animationView.loopMode = .playOnce
         view.addSubview(animationView)
         animationView.play {(finish) in

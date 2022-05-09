@@ -6,14 +6,20 @@ import CryptoKit
 import FirebaseAuth
 import FirebaseFirestore
 
+// 소중한 당신을 위한 앱
+//
+
 class LoginViewController: UIViewController {
     @IBOutlet weak var googleLoginBtn: UIImageView!
     @IBOutlet weak var appleLoginBtn: UIImageView!
+    @IBOutlet weak var appIconImageView: UIImageView!
     let database = Firestore.firestore()
     private var currentNonce: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        appIconImageView.image = UIImage(named: "loginViewAppIcon")
+//        self?.imageView.image = UIImage(named: "ImageUploading")
     }
     override func viewDidAppear(_ animated: Bool) {
         if let user = Auth.auth().currentUser {
