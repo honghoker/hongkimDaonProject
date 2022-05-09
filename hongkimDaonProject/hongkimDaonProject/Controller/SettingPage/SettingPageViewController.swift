@@ -9,7 +9,6 @@ import RealmSwift
 class SettingPageViewController: UIViewController {
     let defaults = UserDefaults.standard
     @IBOutlet weak var backBtn: UIButton!
-    @IBOutlet weak var nickNameChangeBtn: UILabel!
     @IBOutlet weak var notificationConfigBtn: UILabel!
     @IBOutlet weak var logoutBtn: UILabel!
     @IBOutlet weak var withdrawalBtn: UILabel!
@@ -23,9 +22,6 @@ class SettingPageViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
-        let nickNameChangeBtnClicked: UITapGestureRecognizer =  UITapGestureRecognizer(target: self, action: #selector(nickName(_:)))
-        nickNameChangeBtn.isUserInteractionEnabled = true
-        nickNameChangeBtn.addGestureRecognizer(nickNameChangeBtnClicked)
         let logoutBtnClicked: UITapGestureRecognizer =  UITapGestureRecognizer(target: self, action: #selector(logout(_:)))
         logoutBtn.isUserInteractionEnabled = true
         logoutBtn.addGestureRecognizer(logoutBtnClicked)
@@ -81,15 +77,6 @@ extension SettingPageViewController {
     @objc
     func showToast(msg: String) {
         self.view.makeToast(msg, duration: 1.5, position: .bottom)
-    }
-    @objc
-    func nickName(_ gesture: UITapGestureRecognizer) {
-        // MARK: 닉네임 변경 페이지 이동
-        guard let changeNickNameVC = self.storyboard?.instantiateViewController(identifier: "ChangeNickNameViewController") as? ChangeNickNameViewController else {
-            return
-        }
-        changeNickNameVC.modalPresentationStyle = .fullScreen
-        self.present(changeNickNameVC, animated: false, completion: nil)
     }
     @objc
     func onTapSetNotification(_ gesture: UITapGestureRecognizer) {
