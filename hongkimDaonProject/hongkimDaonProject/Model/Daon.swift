@@ -3,8 +3,7 @@ import Firebase
 import FirebaseFirestoreSwift
 import RealmSwift
 
-struct Daon: Codable, Identifiable {
-    @DocumentID var id: String?
+struct Daon {
     let imageUrl: String
     let storageUser: [String: Int64]
     let uploadTime: Int64
