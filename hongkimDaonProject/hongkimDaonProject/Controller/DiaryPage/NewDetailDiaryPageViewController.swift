@@ -149,9 +149,16 @@ class NewDetailDiaryPageViewController: UIViewController {
                 if diary.imageUploadComplete == true {
                     let url = URL(string: diary.imageUrl)
                     self.imageView.kf.indicatorType = .activity
-                    self.imageView.kf.setImage(with: url, options: [.processor(processor)])
-                    self.imageLoadComplete = true
+                    self.imageView.kf.setImage(with: url, options: [.processor(processor)]) { result in
+                        switch result {
+                        case .success(_):
+                            self.imageLoadComplete = true
+                        case .failure(_):
+                            self.imageLoadComplete = false
+                        }
+                    }
                 } else {
+                    self.imageLoadComplete = false
                     // MARK: 이미지 업로드 중
                     DispatchQueue.global().async { [weak self] in
                         DispatchQueue.main.async {
@@ -175,11 +182,11 @@ extension NewDetailDiaryPageViewController {
         if let diary = self.diary {
             // MARK: 이미지 저장이 아직 덜 된거 처리
             if diary.imageUploadComplete == false {
-                print("@@@@@@@@@ 이미지 저장 기다리라는 토스트")
+                self.view.makeToast("이미지 업로드 중입니다. 잠시 후 시도해주세요.")
             } else {
                 // MARK: 이미지 불러오기가 아직 덜 된거 처리
                 if self.imageLoadComplete == false {
-                    print("@@@@@@@@ 이미지 로딩 기다리라는 토스트")
+                    self.view.makeToast("이미지 로딩 중입니다. 잠시 후 시도해주세요.")
                 } else {
                     let storyboard: UIStoryboard = UIStoryboard(name: "EditDiaryPageView", bundle: nil)
                     guard let editDiaryPageVC = storyboard.instantiateViewController(withIdentifier: "EditDiaryPageViewController") as? EditDiaryPageViewController else { return }
