@@ -57,7 +57,6 @@
 		BCA9C4D02803E6BC0017EC87 /* MyStorageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9C4CF2803E6BC0017EC87 /* MyStorageCell.swift */; };
 		BCA9C4D22803E84C0017EC87 /* MyStorageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */; };
 		BCA9C4D42803F03F0017EC87 /* DetailDiaryView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BCA9C4D32803F03F0017EC87 /* DetailDiaryView.storyboard */; };
-		BCA9C4D62803F06A0017EC87 /* DetailDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9C4D52803F06A0017EC87 /* DetailDiaryViewController.swift */; };
 		BCD0D7C3280033B400E862D7 /* InputNickNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD0D7C2280033B400E862D7 /* InputNickNameViewController.swift */; };
 		BCD34461280FC3CC00D34EE5 /* MyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD34460280FC3CC00D34EE5 /* MyStorage.swift */; };
 		CC6576549A2D44437F8B7E24 /* Pods_hongkimDaonProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */; };
@@ -132,7 +131,6 @@
 		BCA9C4CF2803E6BC0017EC87 /* MyStorageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageCell.swift; sourceTree = "<group>"; };
 		BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyStorageCell.xib; sourceTree = "<group>"; };
 		BCA9C4D32803F03F0017EC87 /* DetailDiaryView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DetailDiaryView.storyboard; sourceTree = "<group>"; };
-		BCA9C4D52803F06A0017EC87 /* DetailDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDiaryViewController.swift; sourceTree = "<group>"; };
 		BCD0D7C2280033B400E862D7 /* InputNickNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputNickNameViewController.swift; sourceTree = "<group>"; };
 		BCD34460280FC3CC00D34EE5 /* MyStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,7 +199,6 @@
 			isa = PBXGroup;
 			children = (
 				5117C9E32803FF070072B9B2 /* WriteDiaryPageViewController.swift */,
-				BCA9C4D52803F06A0017EC87 /* DetailDiaryViewController.swift */,
 				51CD3A3728197EC900145778 /* EditDiaryPageViewController.swift */,
 				510C84AB2819B19F002F12D6 /* NewDetailDiaryPageViewController.swift */,
 			);
@@ -600,7 +597,6 @@
 				BC69DD542801903E00A6A9F6 /* MyDiaryViewController.swift in Sources */,
 				510C84AC2819B19F002F12D6 /* NewDetailDiaryPageViewController.swift in Sources */,
 				BC39EC03281927EF00728B8B /* StartPageViewController.swift in Sources */,
-				BCA9C4D62803F06A0017EC87 /* DetailDiaryViewController.swift in Sources */,
 				BC5777462807DAD100B4E664 /* FirstMainPageContainerViewController.swift in Sources */,
 				BC5777442807D81C00B4E664 /* FirstMainPageViewController.swift in Sources */,
 				BC57774F2808268F00B4E664 /* AlphaMainPageContainerViewController.swift in Sources */,

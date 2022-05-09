@@ -66,9 +66,7 @@ class SetNotificationPageViewController: UIViewController {
     @objc
     func onTapSaveBtn() {
         if timeIntValue != "" {
-            print("@@@@@@@@@@@@ 111111")
             if let user = AuthManager.shared.auth.currentUser {
-                print("@@@@@@@@@@@@ 222222")
                 let docRef = database.document("user/\(user.uid)")
                 docRef.updateData(["notificationTime": timeIntValue]) { result in
                     guard result == nil else {

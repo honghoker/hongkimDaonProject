@@ -297,21 +297,10 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="x5P-5j-Q0r">
-                                <rect key="frame" x="272.5" y="812.5" width="125.5" height="33.5"/>
+                                <rect key="frame" x="321" y="814" width="77" height="32"/>
                                 <subviews>
-                                    <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0B9-rS-kMy">
-                                        <rect key="frame" x="0.0" y="0.0" width="28.5" height="33.5"/>
-                                        <color key="tintColor" red="0.93438279629999998" green="0.88447171449999995" blue="0.79567110539999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="">
-                                            <imageReference key="image" image="square.and.arrow.up" catalog="system" symbolScale="large"/>
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="default">
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                            </preferredSymbolConfiguration>
-                                        </state>
-                                    </button>
                                     <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXg-Sg-Kwz">
-                                        <rect key="frame" x="48.5" y="0.0" width="28.5" height="33.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="28.5" height="32"/>
                                         <color key="tintColor" red="0.93438279629999998" green="0.88447171449999995" blue="0.79567110539999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal">
@@ -322,7 +311,7 @@
                                         </state>
                                     </button>
                                     <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nl5-hR-dh9">
-                                        <rect key="frame" x="97" y="0.0" width="28.5" height="33.5"/>
+                                        <rect key="frame" x="48.5" y="0.0" width="28.5" height="32"/>
                                         <color key="tintColor" red="0.93438279629999998" green="0.88447171449999995" blue="0.79567110539999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal">
@@ -353,7 +342,6 @@
                         <outlet property="downloadBtn" destination="Nl5-hR-dh9" id="fP4-hl-LOR"/>
                         <outlet property="imageView" destination="rKf-zc-jhr" id="itx-3c-lRk"/>
                         <outlet property="saveBtn" destination="hXg-Sg-Kwz" id="BkQ-2Z-6Z2"/>
-                        <outlet property="shareBtn" destination="0B9-rS-kMy" id="XHW-L1-geM"/>
                         <outlet property="stackView" destination="x5P-5j-Q0r" id="seR-Jg-hc7"/>
                     </connections>
                 </viewController>
@@ -398,7 +386,6 @@
         <image name="bag" catalog="system" width="128" height="128"/>
         <image name="gearshape" catalog="system" width="128" height="121"/>
         <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
-        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
         <namedColor name="bgColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

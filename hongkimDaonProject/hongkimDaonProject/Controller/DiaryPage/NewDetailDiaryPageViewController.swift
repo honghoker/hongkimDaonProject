@@ -71,8 +71,7 @@ class NewDetailDiaryPageViewController: UIViewController {
                                     forToolbarPosition: UIBarPosition.any)
         self.toolBar.tintColor = .systemGray
         self.toolBar.clipsToBounds = true
-//        let toolbarEditItem = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(tabEditBtn))
-        let toolbarEditItem = UIBarButtonItem(image: UIImage(systemName: "scribble"), style: .plain, target: self, action: #selector(tabEditBtn))
+        let toolbarEditItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(tabEditBtn))
         let toolbarRemoveItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(tabRemoveBtn))
         self.toolBar.setItems([.flexibleSpace(), toolbarEditItem, toolbarRemoveItem], animated: true)
         self.scrollView.snp.makeConstraints {

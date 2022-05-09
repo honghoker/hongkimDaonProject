@@ -8,140 +8,7 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="JejuMyeongjoOTF.otf">
-            <string>JejuMyeongjoOTF</string>
-        </array>
-    </customFonts>
     <scenes>
-        <!--Detail Diary View Controller-->
-        <scene sceneID="6wR-sc-SU6">
-            <objects>
-                <viewController storyboardIdentifier="DetailDiaryViewController" id="DnZ-SF-MPP" customClass="DetailDiaryViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="uFl-VA-Hzr">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UqA-gd-VF2">
-                                <rect key="frame" x="16" y="64" width="24" height="24"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="24" id="Bx6-M7-oXx"/>
-                                    <constraint firstAttribute="height" constant="24" id="Ywh-fx-0s8"/>
-                                </constraints>
-                                <color key="tintColor" systemColor="systemGrayColor"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="chevron.backward" catalog="system"/>
-                            </button>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="szv-3A-TNZ">
-                                <rect key="frame" x="0.0" y="104" width="414" height="792"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pSn-u1-4vc">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="403"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iT6-pu-eeh" userLabel="Diary Title">
-                                                <rect key="frame" x="16" y="32" width="42.5" height="18"/>
-                                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="18"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WKf-bA-V63" userLabel="Write Time">
-                                                <rect key="frame" x="16" y="82" width="33" height="14.5"/>
-                                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
-                                                <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" verticalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="26B-sY-s81">
-                                                <rect key="frame" x="16" y="116.5" width="382" height="240"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="240" id="ezs-Gh-ia2"/>
-                                                </constraints>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WLb-xj-LKN" userLabel="Diary Content">
-                                                <rect key="frame" x="16" y="388.5" width="382" height="14.5"/>
-                                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="14"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="WKf-bA-V63" secondAttribute="trailing" constant="16" id="4Yp-xq-Evh"/>
-                                            <constraint firstAttribute="trailing" secondItem="WLb-xj-LKN" secondAttribute="trailing" constant="16" id="FuE-gE-WUI"/>
-                                            <constraint firstAttribute="bottom" secondItem="WLb-xj-LKN" secondAttribute="bottom" id="HfC-n2-QZR"/>
-                                            <constraint firstItem="iT6-pu-eeh" firstAttribute="leading" secondItem="pSn-u1-4vc" secondAttribute="leading" constant="16" id="JJp-pS-YU9"/>
-                                            <constraint firstItem="WKf-bA-V63" firstAttribute="leading" secondItem="pSn-u1-4vc" secondAttribute="leading" constant="16" id="K5b-cG-48H"/>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iT6-pu-eeh" secondAttribute="trailing" constant="16" id="NPj-xi-JWu"/>
-                                            <constraint firstItem="WLb-xj-LKN" firstAttribute="top" secondItem="26B-sY-s81" secondAttribute="bottom" constant="32" id="V0g-JA-5sg"/>
-                                            <constraint firstAttribute="trailing" secondItem="26B-sY-s81" secondAttribute="trailing" constant="16" id="XUd-de-Pyb"/>
-                                            <constraint firstItem="WKf-bA-V63" firstAttribute="top" secondItem="iT6-pu-eeh" secondAttribute="bottom" constant="32" id="XZQ-yi-68b"/>
-                                            <constraint firstItem="WLb-xj-LKN" firstAttribute="leading" secondItem="pSn-u1-4vc" secondAttribute="leading" constant="16" id="akR-Yi-Z6m"/>
-                                            <constraint firstItem="iT6-pu-eeh" firstAttribute="top" secondItem="pSn-u1-4vc" secondAttribute="top" constant="32" id="j8J-3G-Vlz"/>
-                                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="WLb-xj-LKN" secondAttribute="bottom" id="ksV-Hx-yYS"/>
-                                            <constraint firstItem="26B-sY-s81" firstAttribute="top" secondItem="WKf-bA-V63" secondAttribute="bottom" constant="20" id="oVj-cS-nBX"/>
-                                            <constraint firstItem="26B-sY-s81" firstAttribute="leading" secondItem="pSn-u1-4vc" secondAttribute="leading" constant="16" id="s2B-8R-EMo"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="pSn-u1-4vc" firstAttribute="top" secondItem="JVq-NN-8HM" secondAttribute="top" id="BiJ-xa-dSb"/>
-                                    <constraint firstItem="pSn-u1-4vc" firstAttribute="bottom" secondItem="JVq-NN-8HM" secondAttribute="bottom" id="CeK-1k-59x"/>
-                                    <constraint firstItem="pSn-u1-4vc" firstAttribute="width" secondItem="sFG-2g-OjC" secondAttribute="width" id="ILx-38-aXo"/>
-                                    <constraint firstItem="pSn-u1-4vc" firstAttribute="leading" secondItem="JVq-NN-8HM" secondAttribute="leading" id="Sth-d7-10P"/>
-                                    <constraint firstItem="pSn-u1-4vc" firstAttribute="trailing" secondItem="JVq-NN-8HM" secondAttribute="trailing" id="kTq-NI-bI6"/>
-                                </constraints>
-                                <viewLayoutGuide key="contentLayoutGuide" id="JVq-NN-8HM"/>
-                                <viewLayoutGuide key="frameLayoutGuide" id="sFG-2g-OjC"/>
-                            </scrollView>
-                            <toolbar opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wMU-Hv-n0D">
-                                <rect key="frame" x="0.0" y="813" width="414" height="49"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <items>
-                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="kvx-22-xmm"/>
-                                    <barButtonItem title="Item" image="scribble" catalog="system" id="znQ-ge-WNp">
-                                        <connections>
-                                            <action selector="tapEditBtn:" destination="DnZ-SF-MPP" id="svZ-Pt-eTX"/>
-                                        </connections>
-                                    </barButtonItem>
-                                    <barButtonItem title="Item" image="trash" catalog="system" id="HXX-EV-Ovg">
-                                        <connections>
-                                            <action selector="tapRemoveBtn:" destination="DnZ-SF-MPP" id="iq9-nl-sBY"/>
-                                        </connections>
-                                    </barButtonItem>
-                                </items>
-                                <color key="barTintColor" white="1" alpha="0.10000000000000001" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </toolbar>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="mlW-63-vrX"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="UqA-gd-VF2" firstAttribute="leading" secondItem="mlW-63-vrX" secondAttribute="leading" constant="16" id="1C7-SM-P8q"/>
-                            <constraint firstItem="wMU-Hv-n0D" firstAttribute="leading" secondItem="mlW-63-vrX" secondAttribute="leading" id="1gR-Lb-vUg"/>
-                            <constraint firstItem="szv-3A-TNZ" firstAttribute="leading" secondItem="mlW-63-vrX" secondAttribute="leading" id="2lu-SE-tbI"/>
-                            <constraint firstItem="UqA-gd-VF2" firstAttribute="top" secondItem="mlW-63-vrX" secondAttribute="top" constant="20" id="H81-A7-zZ5"/>
-                            <constraint firstItem="szv-3A-TNZ" firstAttribute="top" secondItem="UqA-gd-VF2" secondAttribute="bottom" constant="16" id="NOO-Qc-6d4"/>
-                            <constraint firstAttribute="bottom" secondItem="szv-3A-TNZ" secondAttribute="bottom" id="YMo-8E-7vl"/>
-                            <constraint firstItem="mlW-63-vrX" firstAttribute="bottom" secondItem="wMU-Hv-n0D" secondAttribute="bottom" id="g4A-FF-qij"/>
-                            <constraint firstItem="mlW-63-vrX" firstAttribute="trailing" secondItem="szv-3A-TNZ" secondAttribute="trailing" id="qjy-AX-eBh"/>
-                            <constraint firstItem="wMU-Hv-n0D" firstAttribute="trailing" secondItem="mlW-63-vrX" secondAttribute="trailing" id="uyX-ts-zAq"/>
-                        </constraints>
-                    </view>
-                    <size key="freeformSize" width="414" height="896"/>
-                    <connections>
-                        <outlet property="backBtn" destination="UqA-gd-VF2" id="Sfj-hB-hAx"/>
-                        <outlet property="diaryContent" destination="WLb-xj-LKN" id="Grw-oj-U4z"/>
-                        <outlet property="diaryImage" destination="26B-sY-s81" id="HnX-N6-ZFn"/>
-                        <outlet property="diaryTitle" destination="iT6-pu-eeh" id="zwQ-zP-zhr"/>
-                        <outlet property="editBtn" destination="znQ-ge-WNp" id="lI5-0a-oRK"/>
-                        <outlet property="removeBtn" destination="HXX-EV-Ovg" id="4qL-An-K1R"/>
-                        <outlet property="scrollView" destination="szv-3A-TNZ" id="M7v-b4-ty5"/>
-                        <outlet property="toolBar" destination="wMU-Hv-n0D" id="WKY-62-1u9"/>
-                        <outlet property="writeTime" destination="WKf-bA-V63" id="Xk7-2z-Ohd"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aYs-8j-FIX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="705.79710144927537" y="242.41071428571428"/>
-        </scene>
         <!--New Detail Diary Page View Controller-->
         <scene sceneID="YSi-qF-syF">
             <objects>
@@ -159,14 +26,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="chevron.backward" catalog="system" width="96" height="128"/>
-        <image name="scribble" catalog="system" width="128" height="118"/>
-        <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
