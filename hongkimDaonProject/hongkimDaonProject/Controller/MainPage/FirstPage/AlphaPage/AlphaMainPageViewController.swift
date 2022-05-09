@@ -5,9 +5,20 @@ import FirebaseStorage
 
 class AlphaMainPageViewController: TabmanViewController {
     private var viewControllers: Array<UIViewController> = []
+    let isDark = UserDefaults.standard.bool(forKey: "darkModeState")
+    var tintColor = UIColor.lightGray
+    var selectedTintColor = UIColor.darkGray
     var uploadTime: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        if isDark == true {
+            tintColor = UIColor.darkGray
+            selectedTintColor = UIColor.lightGray
+        }
+        setUI()
+    }
+    // MARK: set UI
+    func setUI() {
         if let allWordingPageViewController = storyboard?.instantiateViewController(withIdentifier: "AllWordingPageViewController") as? AllWordingPageViewController {
             viewControllers.append(allWordingPageViewController)
         }
@@ -18,15 +29,15 @@ class AlphaMainPageViewController: TabmanViewController {
         let tabBar = TMBar.ButtonBar()
         tabBar.backgroundView.style = .clear
         tabBar.buttons.customize { (button) in
-            button.tintColor = .gray
-            button.selectedTintColor = DaonConstants.daonColor
+            button.tintColor = self.tintColor
+            button.selectedTintColor = self.selectedTintColor
             button.font = UIFont(name: "JejuMyeongjoOTF", size: 14) ?? UIFont.systemFont(ofSize: 14)
         }
         tabBar.layout.transitionStyle = .snap
         tabBar.layout.alignment = .centerDistributed
         tabBar.layout.interButtonSpacing = 12
         tabBar.indicator.weight = .custom(value: 1)
-        tabBar.indicator.tintColor = DaonConstants.daonColor
+        tabBar.indicator.tintColor = selectedTintColor
         tabBar.indicator.overscrollBehavior = .bounce
         addBar(tabBar, dataSource: self, at: .top)
     }

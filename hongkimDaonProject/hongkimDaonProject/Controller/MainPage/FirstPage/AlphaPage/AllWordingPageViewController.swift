@@ -9,11 +9,15 @@ class AllWordingPageViewController: UIViewController {
     var daonArray: Array<RealmDaon>!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.backgroundColor = UIColor(named: "bgColor")
         realm = try? Realm()
         let result = realm.objects(RealmDaon.self)
         daonArray = Array(result)
+        setUI()
+    }
+    // MARK: set UI
+    func setUI() {
         let allWordingTableViewCellNib = UINib(nibName: String(describing: AllWordingCell.self), bundle: nil)
+        self.tableView.backgroundColor = UIColor(named: "bgColor")
         self.tableView.register(allWordingTableViewCellNib, forCellReuseIdentifier: "allWordingCellId")
         self.tableView.separatorInset = .zero
         self.tableView.directionalLayoutMargins = .zero
