@@ -179,25 +179,34 @@ extension NewDetailDiaryPageViewController {
     }
     @objc
     func tabEditBtn(_ sender: Any) {
-        if let diary = self.diary {
-            // MARK: 이미지 저장이 아직 덜 된거 처리
-            if diary.imageUploadComplete == false {
-                self.view.makeToast("이미지 업로드 중입니다. 잠시 후 시도해주세요.")
-            } else {
-                // MARK: 이미지 불러오기가 아직 덜 된거 처리
-                if self.imageLoadComplete == false {
-                    self.view.makeToast("이미지 로딩 중입니다. 잠시 후 시도해주세요.")
-                } else {
-                    let storyboard: UIStoryboard = UIStoryboard(name: "EditDiaryPageView", bundle: nil)
-                    guard let editDiaryPageVC = storyboard.instantiateViewController(withIdentifier: "EditDiaryPageViewController") as? EditDiaryPageViewController else { return }
-                    editDiaryPageVC.delegate = self
-                    editDiaryPageVC.diary = diary
-                    editDiaryPageVC.image = self.imageView.image
-                    editDiaryPageVC.modalTransitionStyle = .crossDissolve
-                    editDiaryPageVC.modalPresentationStyle = .fullScreen
-                    self.present(editDiaryPageVC, animated: true, completion: nil)
-                }
+        if uploadCheck() == true {
+            if let diary = self.diary {
+                let storyboard: UIStoryboard = UIStoryboard(name: "EditDiaryPageView", bundle: nil)
+                guard let editDiaryPageVC = storyboard.instantiateViewController(withIdentifier: "EditDiaryPageViewController") as? EditDiaryPageViewController else { return }
+                editDiaryPageVC.delegate = self
+                editDiaryPageVC.diary = diary
+                editDiaryPageVC.image = self.imageView.image
+                editDiaryPageVC.modalTransitionStyle = .crossDissolve
+                editDiaryPageVC.modalPresentationStyle = .fullScreen
+                self.present(editDiaryPageVC, animated: true, completion: nil)
             }
+        }
+    }
+    func uploadCheck() -> Bool {
+        if let diary = self.diary {
+            if diary.imageUploadComplete == false {
+                // MARK: 이미지 저장이 아직 덜 된거 처리
+                self.view.makeToast("이미지 업로드 중입니다. 잠시 후 시도해주세요.")
+                return false
+            } else if self.imageLoadComplete == false {
+                // MARK: 이미지 불러오기가 아직 덜 된거 처리
+                self.view.makeToast("이미지 로딩 중입니다. 잠시 후 시도해주세요.")
+                return false
+            } else {
+                return true
+            }
+        } else {
+            return false
         }
     }
     @objc
@@ -207,13 +216,18 @@ extension NewDetailDiaryPageViewController {
         alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
         }))
         alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { _ in
-            DatabaseManager.shared.fireStore.collection("diary").document(self.docId!).delete { result in
-                guard result == nil else {
-                    self.view.makeToast("일기 삭제에 실패했습니다.", duration: 1.5, position: .bottom)
-                    return
+            if self.uploadCheck() == true {
+                LoadingIndicator.showLoading()
+                DatabaseManager.shared.fireStore.collection("diary").document(self.docId!).delete { result in
+                    guard result == nil else {
+                        self.view.makeToast("일기 삭제에 실패했습니다.", duration: 1.5, position: .bottom)
+                        LoadingIndicator.hideLoading()
+                        return
+                    }
+                    LoadingIndicator.hideLoading()
+                    self.delegate?.delete(self, Delete: self.docId)
+                    self.presentingViewController?.dismiss(animated: true, completion: nil)
                 }
-                self.delegate?.delete(self, Delete: self.docId)
-                self.presentingViewController?.dismiss(animated: true, completion: nil)
             }
         }))
         self.present(alert, animated: true, completion: nil)
