@@ -21,6 +21,7 @@ class EditDiaryPageViewController: UIViewController {
     @IBOutlet weak var imageViewLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var diaryContentTextView: STTextView!
+    private let textViewMaxLength: Int = 5000
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "bgColor")
@@ -164,5 +165,22 @@ extension EditDiaryPageViewController: FMPhotoPickerViewControllerDelegate {
         self.dismiss(animated: true, completion: nil)
         imageView.image = photos[0]
         imageViewLabel.isHidden = true
+    }
+}
+
+extension EditDiaryPageViewController: UITextViewDelegate {
+    // MARK: textView 글자 수 제한 + BackSpace 감지
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if let char = text.cString(using: String.Encoding.utf8) {
+            let isBackSpace = strcmp(char, "\\b")
+            if isBackSpace == -92 {
+                return true
+            }
+        }
+        guard textView.text!.count < self.textViewMaxLength else {
+            self.view.makeToast("5,000자까지 입력할 수 있습니다.", duration: 1.5, position: .bottom)
+            return false
+        }
+        return true
     }
 }
