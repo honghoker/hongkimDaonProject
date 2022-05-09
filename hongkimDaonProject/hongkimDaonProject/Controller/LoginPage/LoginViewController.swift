@@ -11,8 +11,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var googleLoginBtn: UIImageView!
     @IBOutlet weak var appleLoginBtn: UIImageView!
     @IBOutlet weak var appIconImageView: UIImageView!
-    let database = Firestore.firestore()
-    private var currentNonce: String?
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()

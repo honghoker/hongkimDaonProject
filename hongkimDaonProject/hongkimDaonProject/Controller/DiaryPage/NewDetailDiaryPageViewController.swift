@@ -44,6 +44,7 @@ class NewDetailDiaryPageViewController: UIViewController {
         label.numberOfLines = 0
         label.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
         label.textColor = .label
+        label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
 
@@ -116,7 +117,6 @@ class NewDetailDiaryPageViewController: UIViewController {
                 $0.leading.equalToSuperview().offset(16)
             }
             // label 행간 조절
-            self.contentLabel.numberOfLines = 0
             let attrString = NSMutableAttributedString(string: diary.content)
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.lineSpacing = 10

@@ -23,6 +23,13 @@ class EditDiaryPageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "bgColor")
+        let style = NSMutableParagraphStyle()
+        style.lineSpacing = 10
+        style.lineBreakStrategy = .hangulWordPriority
+        let attributes =  [NSAttributedString.Key.paragraphStyle: style]
+        diaryContentTextView.typingAttributes = attributes
+        diaryContentTextView.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
+        diaryContentTextView.textColor = .label
         let imgButtonClicked: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(pickImage(_:)))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(imgButtonClicked)

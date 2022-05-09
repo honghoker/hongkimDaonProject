@@ -85,16 +85,3 @@ extension AlphaTodayWordingPageViewController {
         }
     }
 }
-<<<<<<< HEAD
-
-extension AlphaTodayWordingPageViewController {
-    @objc
-    func onTapImage(_ gesture: UITapGestureRecognizer) {
-        let storyboard: UIStoryboard = self.storyboard!
-        let nextView = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController")
-        nextView.modalPresentationStyle = .fullScreen
-        self.present(nextView, animated: false, completion: nil)
-    }
-}
-=======
->>>>>>> main
