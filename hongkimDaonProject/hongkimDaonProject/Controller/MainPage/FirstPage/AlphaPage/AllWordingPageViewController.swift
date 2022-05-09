@@ -39,13 +39,7 @@ class AllWordingPageViewController: UIViewController {
 
 extension AllWordingPageViewController {
     func todayImageCacheSet(completion: @escaping (Bool) -> Void) {
-        // 내부 db today null check
-        // empty -> 해당 월 url 다 가져오기
-        // isEmpty -> 최근에 받은 url id랑 비교해서 월 변경됐는지 확인
-        // 변경됐으면 변경된 월 1일 ~ 오늘까지 다운
-        // 변경안됐으면 최근에 받은 일 ~ 오늘까지 다운
         realm = try? Realm()
-        //            var daonUploadTime  = 0
         let list = realm.objects(RealmDaon.self)
         let now = Date()
         let dateFormatter = DateFormatter()
@@ -53,15 +47,17 @@ extension AllWordingPageViewController {
         dateFormatter.dateFormat = "yyyy-MM"
         let nowMonthString = dateFormatter.string(from: now)
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-        let nowMonthDate: Date = dateFormatter.date(from: nowMonthString)!
+//        let nowMonthDate: Date = dateFormatter.date(from: nowMonthString)!
         dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let nowDayString = dateFormatter.string(from: now)
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         let nowDayDate: Date = dateFormatter.date(from: nowDayString)!
+        print("nowDayDate \(nowDayDate)")
+        print("nowDayDate.millisecondsSince1970 \(nowDayDate.millisecondsSince1970)")
         if list.count == .zero {
             // empty -> store 접근 -> date.millisecondsSince1970 이거보다 큰 것들 다 가져와서 db 저장
-            self.database.collection("daon").whereField("uploadTime", isGreaterThanOrEqualTo: Int(nowMonthDate.millisecondsSince1970)).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
+            self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(nowDayDate.millisecondsSince1970) - 604800000).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
                 if error != nil {
                     print("Error getting documents: \(String(describing: error))")
                 } else {
@@ -76,20 +72,17 @@ extension AllWordingPageViewController {
                         }
                     }
                     completion(true)
-                }            }
+                }
+            }
         } else {
-            // realm 접근 -> 최근에 받은 url id 확인해서 월 바꼈는지 확인
             guard let realmImageId = list.last?.uploadTime else { return }
-            guard let realmImageData = list.last?.imageData else { return }
-            let realmMonthDate = Date(timeIntervalSince1970: (Double(Int(realmImageId)) / 1000.0))
-            dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-            dateFormatter.dateFormat = "yyyy-MM"
-            let realmMonthString = dateFormatter.string(from: realmMonthDate)
-            if nowMonthString.suffix(2) != realmMonthString.suffix(2) {
+            if nowDayDate.millisecondsSince1970 == realmImageId {
+                completion(true)
+            } else if Int(nowDayDate.millisecondsSince1970) - realmImageId > (7 * 86400000) {
                 try? realm.write {
                     realm.deleteAll()
                 }
-                self.database.collection("daon").whereField("uploadTime", isGreaterThanOrEqualTo: Int(nowMonthDate.millisecondsSince1970)).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { [self] (snapshot, error) in
+                self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(nowDayDate.millisecondsSince1970) - 604800000).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
                     if error != nil {
                         print("Error getting documents: \(String(describing: error))")
                     } else {
@@ -107,58 +100,32 @@ extension AllWordingPageViewController {
                     }
                 }
             } else {
-                if nowDayString.suffix(2) == "01" {
-                    // if nowString == 마지막 날짜 -> 이미 접속했다 -> 다운 x
-                    // else -> 월이 바뀌고 첫 접속이다 -> realm 전체 delete -> 다운 해야함
-                    if realmImageId == nowMonthDate.millisecondsSince1970 {
-                        completion(true)
-                    } else {
-                        try? realm.write {
-                            realm.deleteAll()
-                        }
-                        self.database.collection("daon").whereField("uploadTime", isGreaterThanOrEqualTo: Int(nowMonthDate.millisecondsSince1970)).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
-                            if error != nil {
-                                print("Error getting documents: \(String(describing: error))")
-                            } else {
-                                for document in (snapshot?.documents)! {
-                                    guard let uploadTime = document.data()["uploadTime"] else { return }
-                                    guard let imageUrl = document.data()["imageUrl"] else { return }
-                                    let daon = RealmDaon()
-                                    daon.imageData = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
-                                    daon.uploadTime = Int(String(describing: uploadTime)) ?? 0
-                                    try? self.realm.write {
-                                        self.realm.add(daon)
-                                    }
-                                }
-                                completion(true)
-                            }
-                        }
-                    }
-                } else {
-                    // if nowString == 마지막 날짜 -> 이미 접속했다 -> 다운 x
-                    if realmImageId == nowDayDate.millisecondsSince1970 {
-                        completion(true)
-                    } else {
-                        // else -> 다운 해야함
-                        self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(realmMonthDate.millisecondsSince1970)).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
-                            if error != nil {
-                                print("Error getting documents: \(String(describing: error))")
-                            } else {
-                                for document in (snapshot?.documents)! {
-                                    guard let uploadTime = document.data()["uploadTime"] else { return }
-                                    guard let imageUrl = document.data()["imageUrl"] else { return }
-                                    let daon = RealmDaon()
-                                    daon.imageData = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
-                                    daon.uploadTime = Int(String(describing: uploadTime)) ?? 0
-                                    try? self.realm.write {
-                                        self.realm.add(daon)
-                                    }
-                                }
-                                completion(true)
-                            }
-                        }
+                guard let realmImageId = list.last?.uploadTime else { return }
+                for _ in 0..<((Int(nowDayDate.millisecondsSince1970) - realmImageId) / 86400000) {
+                    print("sunghun")
+                    let realmFirstData = list.first
+                    try! realm.write {
+                        realm.delete(realmFirstData!)
                     }
                 }
+                self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(nowDayDate.millisecondsSince1970) - (Int(nowDayDate.millisecondsSince1970) - realmImageId)).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
+                    if error != nil {
+                        print("Error getting documents: \(String(describing: error))")
+                    } else {
+                        for document in (snapshot?.documents)! {
+                            guard let uploadTime = document.data()["uploadTime"] else { return }
+                            guard let imageUrl = document.data()["imageUrl"] else { return }
+                            let daon = RealmDaon()
+                            daon.imageData = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
+                            daon.uploadTime = Int(String(describing: uploadTime)) ?? 0
+                            try? self.realm.write {
+                                self.realm.add(daon)
+                            }
+                        }
+                        completion(true)
+                    }
+                }
+
             }
         }
     }
