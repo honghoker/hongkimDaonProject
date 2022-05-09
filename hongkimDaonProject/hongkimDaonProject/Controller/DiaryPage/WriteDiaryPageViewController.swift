@@ -63,6 +63,7 @@ extension WriteDiaryPageViewController {
     @objc
     func complete(_ gesture: UITapGestureRecognizer) {
         if let uid = AuthManager.shared.auth.currentUser?.uid {
+            LoadingIndicator.showLoading()
             let writeTime: Int64 = Int64(Date().millisecondsSince1970)
             let content = diaryContentTextView.text ?? ""
             let diary = Diary(id: nil, uid: uid, imageUrl: "", content: content, writeTime: writeTime,
@@ -92,10 +93,12 @@ extension WriteDiaryPageViewController {
                             }
                         }
                     }
+                    LoadingIndicator.hideLoading()
                     self.delegate?.dispatch(self, Input: diary)
                     self.presentingViewController?.dismiss(animated: true)
                 case .failure(let error):
-                    print("@@@@@@@ 일기쓰기 실패 error : \(error)")
+                    LoadingIndicator.hideLoading()
+                    self.view.makeToast("일기 쓰기에 실패했습니다.", duration: 1.5, position: .bottom)
                 }
             }
         } else {

@@ -10,6 +10,7 @@ import UIKit
 import FirebaseFirestoreSwift
 import FMPhotoPicker
 import STTextView
+import Toast_Swift
 
 class EditDiaryPageViewController: UIViewController {
     var diary: Diary?
@@ -74,6 +75,7 @@ extension EditDiaryPageViewController {
     func complete(_ gesture: UITapGestureRecognizer) {
         print("@@@@@@ complete Touch")
         if AuthManager.shared.auth.currentUser?.uid != nil {
+            LoadingIndicator.showLoading()
             if var diary = self.diary {
                 diary.imageExist = self.imageView.image != nil
                 diary.imageWidth = self.imageView.image?.size.width ?? 0
@@ -90,7 +92,9 @@ extension EditDiaryPageViewController {
                         // MARK: 이미지를 변경했을 경우, 삭제했을 경우
                         if self.imageView.image != self.image {
                             // MARK: 기존 이미지 삭제
-                            StorageManager.shared.deleteImage(downloadURL: diary.imageUrl)
+                            if self.image != nil {
+                                StorageManager.shared.deleteImage(downloadURL: diary.imageUrl)
+                            }
                             // MARK: 이미지 변경 시
                             if let image = self.imageView.image, let data = image.jpegData(compressionQuality: 0.5) {
                                 StorageManager.shared.uploadImage(with: data, filePath: "diary", fileName: String(diary.writeTime)) { result in
@@ -111,10 +115,12 @@ extension EditDiaryPageViewController {
                             }
                         }
                         print("@@@@@@@@@ update 성공")
+                        LoadingIndicator.hideLoading()
                         self.delegate?.update(self, Input: diary)
                         self.presentingViewController?.dismiss(animated: true)
                     case .failure(let error):
-                        print("업데이트 실패 토스트 : \(error)")
+                        LoadingIndicator.hideLoading()
+                        self.view.makeToast("일기 수정이 실패했습니다.", duration: 1.5, position: .bottom)
                     }
                 })
             }
