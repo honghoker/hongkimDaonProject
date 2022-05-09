@@ -3,25 +3,31 @@ import Firebase
 import GoogleSignIn
 import AuthenticationServices
 import CryptoKit
-
+import FirebaseMessaging
 
 class LoginViewController: UIViewController {
     let database = DatabaseManager.shared.fireStore
+    var userFcmToken: String = ""
     private var currentNonce: String?
     @IBOutlet weak var googleLoginBtn: UIImageView!
     @IBOutlet weak var appleLoginBtn: UIImageView!
     @IBOutlet weak var appIconImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
+        Messaging.messaging().token { token, error in
+            if let error = error {
+                print("Error fetching FCM registration token: \(error)")
+            } else if let token = token {
+                self.userFcmToken = token
+                print("FCM registration token: \(token)")
+            }
+        }
         setUI()
         appIconImageView.image = UIImage(named: "loginViewAppIcon")
-//        self?.imageView.image = UIImage(named: "ImageUploading")
     }
     override func viewDidAppear(_ animated: Bool) {
         if let user = AuthManager.shared.auth.currentUser {
             let docRef = self.database.document("user/\(user.uid)")
-            guard let platFormCheck = user.email?.contains("gmail") else { return }
-            let platForm = platFormCheck == true ? "google" : "apple"
             docRef.getDocument { snapshot, error in
                 if let error = error {
                     print("DEBUG: \(error.localizedDescription)")
@@ -30,8 +36,6 @@ class LoginViewController: UIViewController {
                 guard let exist = snapshot?.exists else {return}
                 if exist == true {
                     self.showMainViewController()
-                } else {
-                    self.showInputNickNameViewController(userUid: user.uid, platForm: platForm)
                 }
             }
         }
@@ -60,19 +64,34 @@ extension LoginViewController {
         mainViewController.modalPresentationStyle = .fullScreen
         self.present(mainViewController, animated: true, completion: nil)
     }
-    func showInputNickNameViewController(userUid: String, platForm: String) {
+    func showLoginViewController() {
         let storyboard: UIStoryboard = UIStoryboard(name: "LoginView", bundle: nil)
-        guard let inputNickNameController = storyboard.instantiateViewController(withIdentifier: "InputNickNameViewController") as? InputNickNameViewController else { return }
-        inputNickNameController.userUid = userUid
-        inputNickNameController.platForm = platForm
-        inputNickNameController.modalTransitionStyle = .crossDissolve
-        inputNickNameController.modalPresentationStyle = .fullScreen
-        self.present(inputNickNameController, animated: true, completion: nil)
+        guard let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
+        loginViewController.modalTransitionStyle = .crossDissolve
+        loginViewController.modalPresentationStyle = .fullScreen
+        self.present(loginViewController, animated: true, completion: nil)
     }
 }
 
 // MARK: Google, Apple Login
 extension LoginViewController {
+    func writeUserData(userData: User) {
+        let docRef = database.document("user/\(userData.uid)")
+        docRef.setData(["uid": userData.uid, "joinTime": userData.joinTime, "platForm": userData.platForm, "notification": userData.notification, "notificationTime": userData.notificationTime, "fcmToken": userData.fcmToken]) { result in
+            guard result == nil else {
+                print("데이터 저장 실패")
+                return
+            }
+        }
+        // 가입 성공 후 메인 페이지 이동
+        let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
+        guard let mainViewController = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
+        // 화면 전환 애니메이션 설정
+        mainViewController.modalTransitionStyle = .crossDissolve
+        // 전환된 화면이 보여지는 방법 설정
+        mainViewController.modalPresentationStyle = .fullScreen
+        self.present(mainViewController, animated: true, completion: nil)
+    }
     @objc
     func tapGoogleBtn(_ gesture: UITapGestureRecognizer) {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
@@ -89,9 +108,7 @@ extension LoginViewController {
             AuthManager.shared.auth.signIn(with: credential) {_, _ in
                 // token을 넘겨주면, 성공했는지 안했는지에 대한 result값과 error값을 넘겨줌
                 if let user = AuthManager.shared.auth.currentUser {
-                    print("user : \(user.uid)")
-                    guard let platFormCheck = user.email?.contains("gmail") else { return }
-                    let platForm = platFormCheck == true ? "google" : "apple"
+                    print("구글 로그인 성공 user : \(user.uid)")
                     let docRef = self.database.document("user/\(user.uid)")
                     docRef.getDocument { snapshot, error in
                         if let error = error {
@@ -102,7 +119,11 @@ extension LoginViewController {
                         if exist == true {
                             self.showMainViewController()
                         } else {
-                            self.showInputNickNameViewController(userUid: user.uid, platForm: platForm)
+                            let formatter = DateFormatter()
+                            formatter.locale = Locale(identifier: "ko_KR")
+                            formatter.dateFormat = "HH:mm"
+                            let demmyUserData: User = User(uid: user.uid, joinTime: Int(Date().millisecondsSince1970), platForm: "google", notification: true, notificationTime: formatter.string(from: Date()), fcmToken: self.userFcmToken)
+                            self.writeUserData(userData: demmyUserData)
                         }
                     }
                 }
@@ -170,7 +191,11 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
                         if exist == true {
                             self.showMainViewController()
                         } else {
-                            self.showInputNickNameViewController(userUid: user.uid, platForm: "apple")
+                            let formatter = DateFormatter()
+                            formatter.locale = Locale(identifier: "ko_KR")
+                            formatter.dateFormat = "HH:mm"
+                            let demmyUserData: User = User(uid: user.uid, joinTime: Int(Date().millisecondsSince1970), platForm: "apple", notification: true, notificationTime: formatter.string(from: Date()), fcmToken: self.userFcmToken)
+                            self.writeUserData(userData: demmyUserData)
                         }
                     }
                 }
@@ -190,34 +215,3 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
         return self.view.window!
     }
 }
-
-// MARK: RandomNonceString
-// extension LoginViewController {
-//    private func randomNonceString(length: Int = 32) -> String {
-//        precondition(length > 0)
-//        let charset: Array<Character> =
-//        Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-//        var result = ""
-//        var remainingLength = length
-//        while remainingLength > 0 {
-//            let randoms: [UInt8] = (0 ..< 16).map { _ in
-//                var random: UInt8 = 0
-//                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-//                if errorCode != errSecSuccess {
-//                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
-//                }
-//                return random
-//            }
-//            randoms.forEach { random in
-//                if length == 0 {
-//                    return
-//                }
-//                if random < charset.count {
-//                    result.append(charset[Int(random)])
-//                    remainingLength -= 1
-//                }
-//            }
-//        }
-//        return result
-//    }
-// }
