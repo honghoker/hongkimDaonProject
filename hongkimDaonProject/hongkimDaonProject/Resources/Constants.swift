@@ -85,3 +85,10 @@ func randomNonceString(length: Int = 32) -> String {
 //        let nowDayDate: Date = dateFormatter.date(from: nowDayString)!
 //        print("nowDayDate \(nowDayDate)")
 //        print("nowDayDate mil \(nowDayDate.millisecondsSince1970)")
+
+// MARK: addImage
+// @objc
+// func addImage(_ gesture: UITapGestureRecognizer) {
+//    print("add Image")
+//    database.collection("daon").document("\(1651708800000)").setData(["imageUrl": "", "storageUser": "", "uploadTime": 1651708800000])
+// }

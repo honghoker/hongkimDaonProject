@@ -41,7 +41,6 @@
 		BC5777442807D81C00B4E664 /* FirstMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5777432807D81C00B4E664 /* FirstMainPageViewController.swift */; };
 		BC5777462807DAD100B4E664 /* FirstMainPageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5777452807DAD100B4E664 /* FirstMainPageContainerViewController.swift */; };
 		BC5777482807DE0700B4E664 /* TodayWordingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5777472807DE0700B4E664 /* TodayWordingPageViewController.swift */; };
-		BC57774A2807E5F300B4E664 /* testPage.png in Resources */ = {isa = PBXBuildFile; fileRef = BC5777492807E5F300B4E664 /* testPage.png */; };
 		BC57774D2808267900B4E664 /* AlphaMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC57774C2808267900B4E664 /* AlphaMainPageViewController.swift */; };
 		BC57774F2808268F00B4E664 /* AlphaMainPageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC57774E2808268F00B4E664 /* AlphaMainPageContainerViewController.swift */; };
 		BC57775128082CB600B4E664 /* AlphaTodayWordingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC57775028082CB600B4E664 /* AlphaTodayWordingPageViewController.swift */; };
@@ -116,7 +115,6 @@
 		BC5777432807D81C00B4E664 /* FirstMainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMainPageViewController.swift; sourceTree = "<group>"; };
 		BC5777452807DAD100B4E664 /* FirstMainPageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstMainPageContainerViewController.swift; sourceTree = "<group>"; };
 		BC5777472807DE0700B4E664 /* TodayWordingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayWordingPageViewController.swift; sourceTree = "<group>"; };
-		BC5777492807E5F300B4E664 /* testPage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = testPage.png; sourceTree = "<group>"; };
 		BC57774C2808267900B4E664 /* AlphaMainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaMainPageViewController.swift; sourceTree = "<group>"; };
 		BC57774E2808268F00B4E664 /* AlphaMainPageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaMainPageContainerViewController.swift; sourceTree = "<group>"; };
 		BC57775028082CB600B4E664 /* AlphaTodayWordingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaTodayWordingPageViewController.swift; sourceTree = "<group>"; };
@@ -327,7 +325,6 @@
 			isa = PBXGroup;
 			children = (
 				BC57774B2808262500B4E664 /* AlphaPage */,
-				BC5777492807E5F300B4E664 /* testPage.png */,
 				BC5777432807D81C00B4E664 /* FirstMainPageViewController.swift */,
 				BC5777452807DAD100B4E664 /* FirstMainPageContainerViewController.swift */,
 				BC5777472807DE0700B4E664 /* TodayWordingPageViewController.swift */,
@@ -486,7 +483,6 @@
 			files = (
 				51CD3A3A2819825300145778 /* EditDiaryPageView.storyboard in Resources */,
 				5117C9E12803FE830072B9B2 /* WriteDiaryPageView.storyboard in Resources */,
-				BC57774A2807E5F300B4E664 /* testPage.png in Resources */,
 				BC4BC7C82809236C00C755BF /* AllWordingCell.xib in Resources */,
 				BCA9C4D42803F03F0017EC87 /* DetailDiaryView.storyboard in Resources */,
 				516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */,

@@ -14,3 +14,8 @@ class RealmDaon: Object {
     @objc dynamic var uploadTime = 0
     @objc dynamic var imageData = Data()
 }
+
+class RecentlyAccess: Object {
+    @objc dynamic var accessTime = 0
+    @objc dynamic var imageData = Data()
+}
