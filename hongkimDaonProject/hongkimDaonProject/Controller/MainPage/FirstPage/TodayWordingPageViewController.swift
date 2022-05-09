@@ -14,6 +14,7 @@ class TodayWordingPageViewController: UIViewController {
     var imageUploadTime: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(Realm.Configuration.defaultConfiguration.fileURL!)
         //        let addImageFile: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addImage(_:)))
         Messaging.messaging().token { token, error in
             if let error = error {
