@@ -13,6 +13,8 @@
 		5117C9DB2803F4820072B9B2 /* SettingPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5117C9DA2803F4820072B9B2 /* SettingPageView.storyboard */; };
 		5117C9E12803FE830072B9B2 /* WriteDiaryPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5117C9E02803FE830072B9B2 /* WriteDiaryPageView.storyboard */; };
 		5117C9E42803FF070072B9B2 /* WriteDiaryPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9E32803FF070072B9B2 /* WriteDiaryPageViewController.swift */; };
+		512AF7AA282938F200398A81 /* PreviewView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 512AF7A9282938F200398A81 /* PreviewView.storyboard */; };
+		512AF7AC2829393000398A81 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512AF7AB2829393000398A81 /* PreviewViewController.swift */; };
 		5153FF2427FD7BE00096AE7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153FF2327FD7BE00096AE7A /* AppDelegate.swift */; };
 		5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153FF2527FD7BE00096AE7A /* SceneDelegate.swift */; };
 		5153FF2827FD7BE00096AE7A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153FF2727FD7BE00096AE7A /* LoginViewController.swift */; };
@@ -81,6 +83,8 @@
 		5117C9DA2803F4820072B9B2 /* SettingPageView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingPageView.storyboard; sourceTree = "<group>"; };
 		5117C9E02803FE830072B9B2 /* WriteDiaryPageView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = WriteDiaryPageView.storyboard; sourceTree = "<group>"; };
 		5117C9E32803FF070072B9B2 /* WriteDiaryPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDiaryPageViewController.swift; sourceTree = "<group>"; };
+		512AF7A9282938F200398A81 /* PreviewView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewView.storyboard; sourceTree = "<group>"; };
+		512AF7AB2829393000398A81 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		5153FF2027FD7BE00096AE7A /* hongkimDaonProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hongkimDaonProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5153FF2327FD7BE00096AE7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5153FF2527FD7BE00096AE7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -368,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				5153FF2927FD7BE00096AE7A /* LoginView.storyboard */,
+				512AF7A9282938F200398A81 /* PreviewView.storyboard */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -396,6 +401,7 @@
 			isa = PBXGroup;
 			children = (
 				5153FF2727FD7BE00096AE7A /* LoginViewController.swift */,
+				512AF7AB2829393000398A81 /* PreviewViewController.swift */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -484,6 +490,7 @@
 				BC4BC7C82809236C00C755BF /* AllWordingCell.xib in Resources */,
 				BCA9C4D42803F03F0017EC87 /* DetailDiaryView.storyboard in Resources */,
 				516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */,
+				512AF7AA282938F200398A81 /* PreviewView.storyboard in Resources */,
 				51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */,
 				5153FF3027FD7BE00096AE7A /* LaunchScreen.storyboard in Resources */,
 				BC75892528263776002DE8E1 /* lottieFile.json in Resources */,
@@ -587,6 +594,7 @@
 				BC69DD4E28017DA200A6A9F6 /* SecondMainPageViewController.swift in Sources */,
 				5174FEB0280C3B2400A844CD /* MyDiaryCell.swift in Sources */,
 				5174FEA82808167400A844CD /* Diary.swift in Sources */,
+				512AF7AC2829393000398A81 /* PreviewViewController.swift in Sources */,
 				BC69DD572801905400A6A9F6 /* MyStorageViewController.swift in Sources */,
 				BCD34461280FC3CC00D34EE5 /* MyStorage.swift in Sources */,
 				BC57775328082CDD00B4E664 /* AllWordingPageViewController.swift in Sources */,

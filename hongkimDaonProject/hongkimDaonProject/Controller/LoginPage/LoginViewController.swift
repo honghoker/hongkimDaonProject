@@ -12,6 +12,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var googleLoginBtn: UIImageView!
     @IBOutlet weak var appleLoginBtn: UIImageView!
     @IBOutlet weak var appIconImageView: UIImageView!
+    @IBOutlet weak var previewBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         Messaging.messaging().token { token, error in
@@ -50,6 +51,7 @@ class LoginViewController: UIViewController {
         self.googleLoginBtn.addGestureRecognizer(googleLoginClick)
         let appleLoginClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapAppleBtn(_:)))
         self.appleLoginBtn.addGestureRecognizer(appleLoginClick)
+        previewBtn.addTarget(self, action: #selector(showPreviewViewController), for: .touchUpInside)
     }
 }
 
@@ -70,6 +72,14 @@ extension LoginViewController {
         loginViewController.modalTransitionStyle = .crossDissolve
         loginViewController.modalPresentationStyle = .fullScreen
         self.present(loginViewController, animated: true, completion: nil)
+    }
+    @objc
+    func showPreviewViewController() {
+        let storyboard: UIStoryboard = UIStoryboard(name: "PreviewView", bundle: nil)
+        guard let PreviewViewController = storyboard.instantiateViewController(withIdentifier: "PreviewViewController") as? PreviewViewController else { return }
+        PreviewViewController.modalTransitionStyle = .crossDissolve
+        PreviewViewController.modalPresentationStyle = .fullScreen
+        self.present(PreviewViewController, animated: true, completion: nil)
     }
 }
 

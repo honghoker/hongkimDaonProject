@@ -81,6 +81,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X2d-5k-cPi">
+                                <rect key="frame" x="159" y="766" width="96" height="24"/>
+                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="12"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="오늘의 글 미리보기">
+                                    <color key="titleColor" systemColor="systemGrayColor"/>
+                                </state>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="bgColor"/>
@@ -92,6 +100,7 @@
                             <constraint firstItem="0GZ-Re-pDT" firstAttribute="top" secondItem="9o4-kt-nxv" secondAttribute="bottom" constant="160" id="Isa-25-lEM"/>
                             <constraint firstItem="F2Y-VE-JeX" firstAttribute="leading" secondItem="0GZ-Re-pDT" secondAttribute="trailing" constant="15.5" id="Jcs-8z-cV9"/>
                             <constraint firstItem="dps-SX-E9C" firstAttribute="top" secondItem="9o4-kt-nxv" secondAttribute="bottom" constant="165" id="KMt-ut-etS"/>
+                            <constraint firstItem="X2d-5k-cPi" firstAttribute="top" secondItem="695-PK-dRc" secondAttribute="bottom" constant="120" id="WDK-Tf-LHJ"/>
                             <constraint firstItem="F2Y-VE-JeX" firstAttribute="top" secondItem="9o4-kt-nxv" secondAttribute="bottom" constant="165" id="coA-ZP-VpG"/>
                             <constraint firstItem="695-PK-dRc" firstAttribute="top" secondItem="F2Y-VE-JeX" secondAttribute="bottom" constant="56" id="csc-84-5Ic"/>
                             <constraint firstItem="2Pi-wh-YyA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dlA-UO-ybt"/>
@@ -99,6 +108,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="F2Y-VE-JeX" secondAttribute="trailing" constant="16" id="eQx-W9-Sax"/>
                             <constraint firstItem="0GZ-Re-pDT" firstAttribute="leading" secondItem="dps-SX-E9C" secondAttribute="trailing" constant="16.5" id="emo-Yd-Lw5"/>
                             <constraint firstItem="9o4-kt-nxv" firstAttribute="top" secondItem="2Pi-wh-YyA" secondAttribute="bottom" constant="24" id="hKu-eE-zPf"/>
+                            <constraint firstItem="X2d-5k-cPi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hd1-GX-OT2"/>
                             <constraint firstItem="0GZ-Re-pDT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="v1H-6M-12G"/>
                             <constraint firstItem="2Pi-wh-YyA" firstAttribute="top" secondItem="SMy-E3-TAq" secondAttribute="bottom" constant="12" id="wUG-dL-McY"/>
                             <constraint firstItem="SMy-E3-TAq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="140" id="zOO-Ao-agt"/>
@@ -108,6 +118,7 @@
                         <outlet property="appIconImageView" destination="SMy-E3-TAq" id="F4k-q2-ZNP"/>
                         <outlet property="appleLoginBtn" destination="Ex2-Q5-lBd" id="b52-B1-yJU"/>
                         <outlet property="googleLoginBtn" destination="DHz-jJ-gDM" id="OJH-oC-jj3"/>
+                        <outlet property="previewBtn" destination="X2d-5k-cPi" id="8DG-aQ-eZW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -121,6 +132,9 @@
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

@@ -13,7 +13,6 @@ class SettingPageViewController: UIViewController {
     @IBOutlet weak var logoutBtn: UILabel!
     @IBOutlet weak var withdrawalBtn: UILabel!
     @IBOutlet weak var setDarkModeBtn: UILabel!
-    var nickNameChangeChk: Bool?
     private var currentNonce: String?
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,15 +33,6 @@ class SettingPageViewController: UIViewController {
         let setDarkModeClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapDarkModeClick(_:)))
         setDarkModeBtn.isUserInteractionEnabled = true
         setDarkModeBtn.addGestureRecognizer(setDarkModeClick)
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        // MARK: 닉네임 변경 토스트 처리
-        if let chk = nickNameChangeChk {
-            if chk == true {
-                self.view.makeToast("닉네임이 변경되었습니다.", duration: 1.5, position: .bottom)
-                nickNameChangeChk = nil
-            }
-        }
     }
 }
 
@@ -131,8 +121,7 @@ extension SettingPageViewController {
                 switch result {
                 case .success:
                     // MARK: 탈퇴 성공 시 앱 종료
-                    UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
+                    self.appExit()
                 case .failure(let error):
                     switch error as? AuthErros {
                     case .failedToSignIn:
@@ -167,7 +156,6 @@ extension SettingPageViewController {
                                 for userInfo in currentUser.providerData {
                                     switch userInfo.providerID {
                                     case "google.com":
-                                        print("@@@@@@@@@ google")
                                         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
                                         let signInConfig = GIDConfiguration.init(clientID: clientID)
                                         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
@@ -197,7 +185,6 @@ extension SettingPageViewController {
                                             }
                                         }
                                     case "apple.com":
-                                        print("@@@@@@@@@ apple")
                                         let request = self.createAppleIDRequest()
                                         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
                                         authorizationController.delegate = self
@@ -247,11 +234,14 @@ extension SettingPageViewController {
         }.joined()
         return hashString
     }
+    private func appExit() {
+        UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
+    }
 }
 
 extension SettingPageViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        print("ASAuthorization ASAuthorization ASAuthorization")
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let nonce = currentNonce else {
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")
@@ -267,49 +257,21 @@ extension SettingPageViewController: ASAuthorizationControllerDelegate {
             let credential = OAuthProvider.credential(withProviderID: "apple.com",
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
-            // Reauthenticate current Apple user with fresh Apple credential.
             if let currentUser = AuthManager.shared.auth.currentUser {
-                AuthManager.shared.auth.currentUser?.reauthenticate(with: credential) { (authResult, error) in
-                    guard error != nil else { return }
-                    // Apple user successfully re-authenticated.
-                    // ...
+                currentUser.reauthenticate(with: credential) { (authResult, error) in
+                    guard error == nil else { return }
                     currentUser.delete { error in
                         guard error == nil else {
-                            //                            completion(.failure(AuthErros.failedToWithdrawal))
+                            self.showToast(msg: "회원탈퇴에 실패했습니다.")
                             return
                         }
                         print("@@@@@@@ 탈퇴 성공")
-                        UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
-                        //                        self.successToWithdrawal(uid)
-                        //                        completion(.success(""))
+                        self.appExit()
                     }
                 }
             }
-            //            AuthManager.shared.auth.signIn(with: credential) { (authDataResult, error) in
-            //                if let user = authDataResult?.user {
-            //                    print("애플 로그인 성공", user.uid, user.email ?? "-")
-            //                    let docRef = self.database.document("user/\(user.uid)")
-            //                    docRef.getDocument { snapshot, error in
-            //                        if let error = error {
-            //                            print("DEBUG: \(error.localizedDescription)")
-            //                            return
-            //                        }
-            //                        guard let exist = snapshot?.exists else {return}
-            //                        if exist == true {
-            //                            self.showMainViewController()
-            //                        } else {
-            //                            self.showInputNickNameViewController(userUid: user.uid, platForm: "apple")
-            //                        }
-            //                    }
-            //                }
-            //                if error != nil {
-            //                    print(error?.localizedDescription ?? "error" as Any)
-            //                    return
-            //                }
         }
     }
-    
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print("Sign in with Apple errored: \(error)")
     }
