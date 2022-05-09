@@ -51,6 +51,7 @@
 		BC69DD572801905400A6A9F6 /* MyStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD562801905400A6A9F6 /* MyStorageViewController.swift */; };
 		BC69DD5F2802FE5900A6A9F6 /* SecondMainPageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD5E2802FE5900A6A9F6 /* SecondMainPageContainerViewController.swift */; };
 		BC6C87B82812AC3D00156D89 /* SetNotificationPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6C87B72812AC3D00156D89 /* SetNotificationPageViewController.swift */; };
+		BC75892528263776002DE8E1 /* lottieFile.json in Resources */ = {isa = PBXBuildFile; fileRef = BC75892428263776002DE8E1 /* lottieFile.json */; };
 		BC7C9CBA28055D4300FF28E1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7C9CB928055D4300FF28E1 /* User.swift */; };
 		BCA410D9282248DC000C318F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA410D8282248DC000C318F /* Constants.swift */; };
 		BCA410DB282248EC000C318F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA410DA282248EC000C318F /* Extensions.swift */; };
@@ -125,6 +126,7 @@
 		BC69DD562801905400A6A9F6 /* MyStorageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageViewController.swift; sourceTree = "<group>"; };
 		BC69DD5E2802FE5900A6A9F6 /* SecondMainPageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondMainPageContainerViewController.swift; sourceTree = "<group>"; };
 		BC6C87B72812AC3D00156D89 /* SetNotificationPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNotificationPageViewController.swift; sourceTree = "<group>"; };
+		BC75892428263776002DE8E1 /* lottieFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = lottieFile.json; sourceTree = "<group>"; };
 		BC7C9CB928055D4300FF28E1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = SOURCE_ROOT; };
 		BCA410D8282248DC000C318F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BCA410DA282248EC000C318F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 		5153FF2227FD7BE00096AE7A /* hongkimDaonProject */ = {
 			isa = PBXGroup;
 			children = (
+				BC75892428263776002DE8E1 /* lottieFile.json */,
 				516944492800046C00462016 /* Resources */,
 				516944482800046300462016 /* Model */,
 				516944472800045D00462016 /* Controller */,
@@ -489,6 +492,7 @@
 				516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */,
 				51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */,
 				5153FF3027FD7BE00096AE7A /* LaunchScreen.storyboard in Resources */,
+				BC75892528263776002DE8E1 /* lottieFile.json in Resources */,
 				BC07019A280449ED00139415 /* GoogleService-Info.plist in Resources */,
 				BC69DD4C28017D7D00A6A9F6 /* MainPageView.storyboard in Resources */,
 				5153FF2D27FD7BE00096AE7A /* Assets.xcassets in Resources */,
@@ -677,6 +681,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "다온";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -731,6 +736,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "다온";
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;

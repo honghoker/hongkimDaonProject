@@ -8,7 +8,6 @@ class AllWordingCell: UITableViewCell {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-//        contentView.backgroundColor = UIColor.blue
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0))
     }
 }

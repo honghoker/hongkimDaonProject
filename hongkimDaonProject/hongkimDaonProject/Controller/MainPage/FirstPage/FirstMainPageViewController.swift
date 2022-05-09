@@ -3,7 +3,7 @@ import Tabman
 import Pageboy
 
 class FirstMainPageViewController: TabmanViewController {
-    private var viewControllers: Array<UIViewController> = []
+    lazy var viewControllers: Array<UIViewController> = []
     override func viewDidLoad() {
         super.viewDidLoad()
         if let todayWordingViewController = storyboard?.instantiateViewController(withIdentifier: "TodayWordingPageViewController") as? TodayWordingPageViewController {
@@ -13,8 +13,6 @@ class FirstMainPageViewController: TabmanViewController {
             viewControllers.append(secondMainViewController)
         }
         self.dataSource = self
-        // 스와이프 disable
-//        self.isScrollEnabled = false
     }
 }
 

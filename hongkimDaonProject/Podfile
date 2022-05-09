@@ -24,4 +24,5 @@ target 'hongkimDaonProject' do
   pod 'Firebase/Messaging' 
   pod 'IQKeyboardManagerSwift'
   pod 'STTextView'
+  pod 'lottie-ios'
 end

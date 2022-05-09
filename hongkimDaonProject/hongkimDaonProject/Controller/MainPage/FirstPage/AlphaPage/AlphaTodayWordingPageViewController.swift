@@ -17,21 +17,35 @@ class AlphaTodayWordingPageViewController: UIViewController {
     var realm: Realm!
     override func viewDidLoad() {
         super.viewDidLoad()
-                let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-                backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-                backgroundUIView.isUserInteractionEnabled = true
-                backgroundUIView.addGestureRecognizer(imageClick)
-                imageView.image = UIImage(named: "testPage")
-        // MARK: 성훈 위에 주석하고 밑에 작업
-//        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-//        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
-//        backgroundUIView.isUserInteractionEnabled = true
-//        backgroundUIView.addGestureRecognizer(imageClick)
-//        imageView.image = UIImage(data: mainImageData)
-//        saveBtn.addTarget(self, action: #selector(daonStorageSave), for: .touchUpInside)
-//        downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
+        setUI()
     }
-    override func viewWillLayoutSubviews() {
+    // MARK: set UI
+    func setUI() {
+        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        backgroundUIView.isUserInteractionEnabled = true
+        backgroundUIView.addGestureRecognizer(imageClick)
+        imageView.image = UIImage(named: "testPage")
+        // MARK: 성훈 위에 주석하고 밑에 작업
+        //        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+        //        backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
+        //        backgroundUIView.isUserInteractionEnabled = true
+        //        backgroundUIView.addGestureRecognizer(imageClick)
+        //        imageView.image = UIImage(data: mainImageData)
+        //        saveBtn.addTarget(self, action: #selector(daonStorageSave), for: .touchUpInside)
+        //        downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
+        //        shareBtn.addTarget(self, action: #selector(shareInfo), for: .touchUpInside)
+    }
+}
+
+// MARK: btns action
+extension AlphaTodayWordingPageViewController {
+    @objc
+    func onTapImage(_ gesture: UITapGestureRecognizer) {
+        let storyboard: UIStoryboard = self.storyboard!
+        let nextView = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController")
+        nextView.modalPresentationStyle = .fullScreen
+        self.present(nextView, animated: false, completion: nil)
     }
     @objc
     func imageDownload() {
@@ -44,8 +58,6 @@ class AlphaTodayWordingPageViewController: UIViewController {
     }
     @objc
     func daonStorageSave() {
-        // 1. 터치 시 내부 db에 있으면 이미 저장된거라고 토스트 띄우기
-        // 2. 터치 시 내부 db에 없으면 추가
         DatabaseManager.shared.daonStorageSave(docId: "\(mainUploadTime)") { result in
             switch result {
             case .success(let success):
@@ -73,6 +85,7 @@ class AlphaTodayWordingPageViewController: UIViewController {
         }
     }
 }
+<<<<<<< HEAD
 
 extension AlphaTodayWordingPageViewController {
     @objc
@@ -83,3 +96,5 @@ extension AlphaTodayWordingPageViewController {
         self.present(nextView, animated: false, completion: nil)
     }
 }
+=======
+>>>>>>> main

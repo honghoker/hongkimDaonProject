@@ -4,22 +4,20 @@ import GoogleSignIn
 import AuthenticationServices
 import CryptoKit
 
+
 class LoginViewController: UIViewController {
     let database = DatabaseManager.shared.fireStore
     private var currentNonce: String?
     @IBOutlet weak var googleLoginBtn: UIImageView!
     @IBOutlet weak var appleLoginBtn: UIImageView!
+    @IBOutlet weak var appIconImageView: UIImageView!
+    let database = Firestore.firestore()
+    private var currentNonce: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-        googleLoginBtn.image = UIImage(named: "googleLoginBtn")
-        googleLoginBtn.isUserInteractionEnabled = true
-        appleLoginBtn.image = UIImage(named: "appleLoginBtn")
-        appleLoginBtn.isUserInteractionEnabled = true
-        // login btn click action
-        let googleLoginClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGoogleBtn(_:)))
-        googleLoginBtn.addGestureRecognizer(googleLoginClick)
-        let appleLoginClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapAppleBtn(_:)))
-        appleLoginBtn.addGestureRecognizer(appleLoginClick)
+        setUI()
+        appIconImageView.image = UIImage(named: "loginViewAppIcon")
+//        self?.imageView.image = UIImage(named: "ImageUploading")
     }
     override func viewDidAppear(_ animated: Bool) {
         if let user = AuthManager.shared.auth.currentUser {
@@ -40,6 +38,17 @@ class LoginViewController: UIViewController {
             }
         }
     }
+    func setUI() {
+        self.googleLoginBtn.image = UIImage(named: "googleLoginBtn")
+        self.googleLoginBtn.isUserInteractionEnabled = true
+        self.appleLoginBtn.image = UIImage(named: "appleLoginBtn")
+        self.appleLoginBtn.isUserInteractionEnabled = true
+        // login btn click action
+        let googleLoginClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGoogleBtn(_:)))
+        self.googleLoginBtn.addGestureRecognizer(googleLoginClick)
+        let appleLoginClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapAppleBtn(_:)))
+        self.appleLoginBtn.addGestureRecognizer(appleLoginClick)
+    }
 }
 
 // MARK: Navigator
@@ -47,9 +56,9 @@ extension LoginViewController {
     func showMainViewController() {
         let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
         guard let mainViewController = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
-        // MARK: 화면 전환 애니메이션 설정
+        // 화면 전환 애니메이션 설정
         mainViewController.modalTransitionStyle = .crossDissolve
-        // MARK: 전환된 화면이 보여지는 방법 설정
+        // 전환된 화면이 보여지는 방법 설정
         mainViewController.modalPresentationStyle = .fullScreen
         self.present(mainViewController, animated: true, completion: nil)
     }
@@ -58,9 +67,7 @@ extension LoginViewController {
         guard let inputNickNameController = storyboard.instantiateViewController(withIdentifier: "InputNickNameViewController") as? InputNickNameViewController else { return }
         inputNickNameController.userUid = userUid
         inputNickNameController.platForm = platForm
-        // MARK: 화면 전환 애니메이션 설정
         inputNickNameController.modalTransitionStyle = .crossDissolve
-        // MARK: 전환된 화면이 보여지는 방법 설정
         inputNickNameController.modalPresentationStyle = .fullScreen
         self.present(inputNickNameController, animated: true, completion: nil)
     }
@@ -98,7 +105,6 @@ extension LoginViewController {
                             self.showMainViewController()
                         } else {
                             self.showInputNickNameViewController(userUid: user.uid, platForm: platForm)
-                            //                            self.showMainViewController()
                         }
                     }
                 }
@@ -188,32 +194,32 @@ extension LoginViewController: ASAuthorizationControllerPresentationContextProvi
 }
 
 // MARK: RandomNonceString
-extension LoginViewController {
-    private func randomNonceString(length: Int = 32) -> String {
-        precondition(length > 0)
-        let charset: Array<Character> =
-        Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
-        var result = ""
-        var remainingLength = length
-        while remainingLength > 0 {
-            let randoms: [UInt8] = (0 ..< 16).map { _ in
-                var random: UInt8 = 0
-                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
-                if errorCode != errSecSuccess {
-                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
-                }
-                return random
-            }
-            randoms.forEach { random in
-                if length == 0 {
-                    return
-                }
-                if random < charset.count {
-                    result.append(charset[Int(random)])
-                    remainingLength -= 1
-                }
-            }
-        }
-        return result
-    }
-}
+// extension LoginViewController {
+//    private func randomNonceString(length: Int = 32) -> String {
+//        precondition(length > 0)
+//        let charset: Array<Character> =
+//        Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+//        var result = ""
+//        var remainingLength = length
+//        while remainingLength > 0 {
+//            let randoms: [UInt8] = (0 ..< 16).map { _ in
+//                var random: UInt8 = 0
+//                let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+//                if errorCode != errSecSuccess {
+//                    fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+//                }
+//                return random
+//            }
+//            randoms.forEach { random in
+//                if length == 0 {
+//                    return
+//                }
+//                if random < charset.count {
+//                    result.append(charset[Int(random)])
+//                    remainingLength -= 1
+//                }
+//            }
+//        }
+//        return result
+//    }
+// }

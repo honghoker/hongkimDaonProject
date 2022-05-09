@@ -2,7 +2,7 @@ import Foundation
 import UIKit
 import Toast_Swift
 
-//  MARK: date to millisecond
+// MARK: date to millisecond
 extension Date {
     var millisecondsSince1970: Int64 {
         Int64((self.timeIntervalSince1970 * 1000.0).rounded())

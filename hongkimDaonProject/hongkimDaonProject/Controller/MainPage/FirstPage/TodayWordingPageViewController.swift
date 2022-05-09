@@ -8,16 +8,13 @@ public var mainImageData = Data()
 public var mainUploadTime = 0
 
 class TodayWordingPageViewController: UIViewController {
+    @IBOutlet weak var imageView: UIImageView!
     var realm: Realm!
     let database = DatabaseManager.shared.fireStore
     var imageUploadTime: Int = 0
-    @IBOutlet weak var imageView: UIImageView!
-    private let storage = Storage.storage().reference()
     override func viewDidLoad() {
         super.viewDidLoad()
-        // MARK: realm db 삭제
-        //        try! FileManager.default.removeItem(at:Realm.Configuration.defaultConfiguration.fileURL!)
-        //        print(Realm.Configuration.defaultConfiguration.fileURL!)
+        //        let addImageFile: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(addImage(_:)))
         Messaging.messaging().token { token, error in
             if let error = error {
                 print("Error fetching FCM registration token: \(error)")
@@ -44,53 +41,55 @@ class TodayWordingPageViewController: UIViewController {
         imageView.image = UIImage(named: "testPage")
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(imageClick)
-        // MARK: custom DayDate mil
-        //        let dateString:String = "2022-05"
-        //        let dateFormatter = DateFormatter()
-        //        dateFormatter.dateFormat = "yyyy-MM"
-        //        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-        //        let date:Date = dateFormatter.date(from: dateString)!
-        //        print("before date String \(date)")
-        //        print("after date String \(date.adding(.month, value: 1))")
-        // MARK: nowDayDate mil
-        //        let now = Date()
-        //        let dateFormatter = DateFormatter()
-        //        dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
-        //        dateFormatter.dateFormat = "yyyy-MM-dd"
-        //        let nowDayString = dateFormatter.string(from: now)
-        //        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-        //        let nowDayDate: Date = dateFormatter.date(from: nowDayString)!
-        //        print("nowDayDate \(nowDayDate)")
-        //        print("nowDayDate mil \(nowDayDate.millisecondsSince1970)")
         // MARK: 성훈 위에 주석하고 밑에 작업
-        //                let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
-        //                let beforeImageData = mainImageData
-        //                let beforeUploadTime = mainUploadTime
-        //                todayImageCacheSet {imageData, uploadTime in
-        //                    if beforeImageData.isEmpty {
-        //                        mainImageData = imageData
-        //                        mainUploadTime = uploadTime
-        //                        self.setImageView(data: mainImageData, imageClick: imageClick)
-        //                    } else {
-        //                        mainImageData = beforeImageData
-        //                        mainUploadTime = beforeUploadTime
-        //                        self.setImageView(data: mainImageData, imageClick: imageClick)
-        //                    }
-        //                    print("call LoadingIndicator")
-        //                    LoadingIndicator.hideLoading()
-        //                }
+        //                        let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
+        //                        let beforeImageData = mainImageData
+        //                        let beforeUploadTime = mainUploadTime
+        //                        todayImageCacheSet {imageData, uploadTime in
+        //                            if beforeImageData.isEmpty {
+        //                                mainImageData = imageData
+        //                                mainUploadTime = uploadTime
+        //                                self.setImageView(data: mainImageData, imageClick: imageClick)
+        //                            } else {
+        //                                mainImageData = beforeImageData
+        //                                mainUploadTime = beforeUploadTime
+        //                                self.setImageView(data: mainImageData, imageClick: imageClick)
+        //                            }
+        //                            print("call LoadingIndicator")
+        //                            LoadingIndicator.hideLoading()
+        //                        }
     }
     override func viewWillLayoutSubviews() {
-        print("sunghun viewWillLayoutSubviews")
         //        if mainImageData.isEmpty {
         //            LoadingIndicator.showLoading()
         //        }
     }
     override func viewDidLayoutSubviews() {
-        print("sunghun viewDidLayoutSubviews")
         //        if !mainImageData.isEmpty {
         //            LoadingIndicator.hideLoading()
         //        }
+    }
+    func setImageView(data: Data, imageClick: UITapGestureRecognizer) {
+        self.imageView.isUserInteractionEnabled = true
+        self.imageView.addGestureRecognizer(imageClick)
+        self.imageView.image = UIImage(data: data)
+    }
+}
+
+extension TodayWordingPageViewController {
+    @objc
+    func onTapImage(_ gesture: UITapGestureRecognizer) {
+        guard let nextView = self.storyboard?.instantiateViewController(identifier: "AlphaMainPageViewController") as? AlphaMainPageViewController else {
+            return
+        }
+        nextView.modalPresentationStyle = .fullScreen
+        self.present(nextView, animated: false, completion: nil)
+    }
+    // 추후에 삭제해야함
+    @objc
+    func addImage(_ gesture: UITapGestureRecognizer) {
+        print("add Image")
+        database.collection("daon").document("\(1651708800000)").setData(["imageUrl": "https://firebasestorage.googleapis.com/v0/b/hongkimdaonproject.appspot.com/o/today%2F2022%2F05%2F1651708800000.jpg?alt=media&token=d386bdc1-be5c-4d53-9fa3-b9477d5096e3", "storageUser": "", "uploadTime": 1651708800000])
     }
 }
 
@@ -101,13 +100,6 @@ extension TodayWordingPageViewController {
         // isEmpty -> 최근에 받은 url id랑 비교해서 월 변경됐는지 확인
         // 변경됐으면 변경된 월 1일 ~ 오늘까지 다운
         // 변경안됐으면 최근에 받은 일 ~ 오늘까지 다운
-        // MARK: month debug
-        //        let mayDayDateString:String = "2022-05-01"
-        //        let mayDateString:String = "2022-05"
-        //        let mayDateFormatter = DateFormatter()
-        //        mayDateFormatter.dateFormat = "yyyy-MM"
-        //        mayDateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-        //        let mayDate:Date = mayDateFormatter.date(from: mayDateString)!
         realm = try? Realm()
         var daonUploadTime  = 0
         let list = realm.objects(RealmDaon.self)
@@ -124,8 +116,7 @@ extension TodayWordingPageViewController {
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         let nowDayDate: Date = dateFormatter.date(from: nowDayString)!
         if list.count == .zero {
-            // empty
-            // store 접근 -> date.millisecondsSince1970 이거보다 큰 것들 다 가져와서 db 저장
+            // empty -> store 접근 -> date.millisecondsSince1970 이거보다 큰 것들 다 가져와서 db 저장
             self.database.collection("daon").whereField("uploadTime", isGreaterThanOrEqualTo: Int(nowMonthDate.millisecondsSince1970)).whereField("uploadTime", isLessThan: Int(nowMonthDate.adding(.month, value: 1).millisecondsSince1970)).getDocuments { (snapshot, error) in
                 if error != nil {
                     print("Error getting documents: \(String(describing: error))")
@@ -237,24 +228,5 @@ extension TodayWordingPageViewController {
                 }
             }
         }
-    }
-}
-
-extension TodayWordingPageViewController {
-    func setImageView(data: Data, imageClick: UITapGestureRecognizer) {
-        self.imageView.isUserInteractionEnabled = true
-        self.imageView.addGestureRecognizer(imageClick)
-        self.imageView.image = UIImage(data: data)
-    }
-}
-
-extension TodayWordingPageViewController {
-    @objc
-    func onTapImage(_ gesture: UITapGestureRecognizer) {
-        guard let nextView = self.storyboard?.instantiateViewController(identifier: "AlphaMainPageViewController") as? AlphaMainPageViewController else {
-            return
-        }
-        nextView.modalPresentationStyle = .fullScreen
-        self.present(nextView, animated: false, completion: nil)
     }
 }

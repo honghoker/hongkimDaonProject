@@ -32,3 +32,56 @@ class LoadingIndicator {
         }
     }
 }
+
+// MARK: RandomNonceString
+func randomNonceString(length: Int = 32) -> String {
+    precondition(length > 0)
+    let charset: Array<Character> =
+    Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
+    var result = ""
+    var remainingLength = length
+    while remainingLength > 0 {
+        let randoms: [UInt8] = (0 ..< 16).map { _ in
+            var random: UInt8 = 0
+            let errorCode = SecRandomCopyBytes(kSecRandomDefault, 1, &random)
+            if errorCode != errSecSuccess {
+                fatalError("Unable to generate nonce. SecRandomCopyBytes failed with OSStatus \(errorCode)")
+            }
+            return random
+        }
+        randoms.forEach { random in
+            if length == 0 {
+                return
+            }
+            if random < charset.count {
+                result.append(charset[Int(random)])
+                remainingLength -= 1
+            }
+        }
+    }
+    return result
+}
+
+// MARK: realm db 삭제
+//                try! FileManager.default.removeItem(at:Realm.Configuration.defaultConfiguration.fileURL!)
+//                print(Realm.Configuration.defaultConfiguration.fileURL!)
+
+// MARK: custom DayDate mil
+//        let dateString:String = "2022-05"
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MM"
+//        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+//        let date:Date = dateFormatter.date(from: dateString)!
+//        print("before date String \(date)")
+//        print("after date String \(date.adding(.month, value: 1))")
+
+// MARK: nowDayDate mil
+//        let now = Date()
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
+//        dateFormatter.dateFormat = "yyyy-MM-dd"
+//        let nowDayString = dateFormatter.string(from: now)
+//        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+//        let nowDayDate: Date = dateFormatter.date(from: nowDayString)!
+//        print("nowDayDate \(nowDayDate)")
+//        print("nowDayDate mil \(nowDayDate.millisecondsSince1970)")

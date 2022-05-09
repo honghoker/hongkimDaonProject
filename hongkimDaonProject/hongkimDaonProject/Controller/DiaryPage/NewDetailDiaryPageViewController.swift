@@ -49,6 +49,7 @@ class NewDetailDiaryPageViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         self.view.backgroundColor = UIColor(named: "bgColor")
         self.view.addSubview(self.backBtn)
         self.backBtn.snp.makeConstraints {
@@ -114,7 +115,13 @@ class NewDetailDiaryPageViewController: UIViewController {
                 $0.top.equalTo(self.scrollView.snp.top).offset(16)
                 $0.leading.equalToSuperview().offset(16)
             }
-            self.contentLabel.text = diary.content
+            // label 행간 조절
+            self.contentLabel.numberOfLines = 0
+            let attrString = NSMutableAttributedString(string: diary.content)
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.lineSpacing = 10
+            attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+            self.contentLabel.attributedText = attrString
             if diary.imageExist == false {
                 self.contentLabel.snp.remakeConstraints {
                     $0.top.equalTo(self.writeTimeLabel.snp.bottom).offset(32)
