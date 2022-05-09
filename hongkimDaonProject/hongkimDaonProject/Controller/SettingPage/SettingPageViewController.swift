@@ -3,8 +3,6 @@ import Firebase
 import GoogleSignIn
 import AuthenticationServices
 import CryptoKit
-import FirebaseAuth
-import FirebaseFirestore
 import Toast_Swift
 import RealmSwift
 
@@ -16,6 +14,7 @@ class SettingPageViewController: UIViewController, withdrawalProtocol {
     @IBOutlet weak var logoutBtn: UILabel!
     @IBOutlet weak var withdrawalBtn: UILabel!
     @IBOutlet weak var setDarkModeBtn: UILabel!
+    var nickNameChangeChk: Bool?
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "bgColor")
@@ -38,6 +37,15 @@ class SettingPageViewController: UIViewController, withdrawalProtocol {
         let setDarkModeClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapDarkModeClick(_:)))
         setDarkModeBtn.isUserInteractionEnabled = true
         setDarkModeBtn.addGestureRecognizer(setDarkModeClick)
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        // MARK: 닉네임 변경 토스트 처리
+        if let chk = nickNameChangeChk {
+            if chk == true {
+                self.view.makeToast("닉네임이 변경되었습니다.", duration: 1.5, position: .bottom)
+                nickNameChangeChk = nil
+            }
+        }
     }
 }
 
@@ -104,7 +112,7 @@ extension SettingPageViewController {
                                       style: UIAlertAction.Style.default,
                                       handler: {(_: UIAlertAction!) in
             do {
-                let firebaseAuth = Auth.auth()
+                let firebaseAuth = AuthManager.shared.auth
                 try firebaseAuth.signOut()
                 let storyboard: UIStoryboard = UIStoryboard(name: "LoginView", bundle: nil)
                 guard let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
@@ -117,6 +125,7 @@ extension SettingPageViewController {
                 print("@@@@@@@@ logout complete")
             } catch let signOutError as NSError {
                 print("ERROR: signOutError \(signOutError.localizedDescription)")
+                self.showToast(msg: "로그아웃이 실패했습니다.")
             }
         }))
         self.present(alert, animated: true, completion: nil)
@@ -126,7 +135,6 @@ extension SettingPageViewController {
         let alert = UIAlertController(title: "회원탈퇴 하시겠습니까?",
                                       message: "[탈퇴 시 주의사항]\n나의 일기, 나의 보관함에 저장된 데이터가 모두 사라지며 복구가 불가능합니다", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
-            // Cancel Action
         }))
         alert.addAction(UIAlertAction(title: "탈퇴",
                                       style: UIAlertAction.Style.default,
@@ -134,6 +142,7 @@ extension SettingPageViewController {
             self.withdrawal { result in
                 switch result {
                 case .success:
+                    // MARK: 토스트 처리 필요
                     self.showToast(msg: "회원탈퇴에 성공했습니다.")
                     print("@@@@@@@@ withdrawal success")
                     self.view.window!.rootViewController?.dismiss(animated: false, completion: nil)

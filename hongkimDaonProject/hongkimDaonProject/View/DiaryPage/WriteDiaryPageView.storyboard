@@ -53,7 +53,7 @@
                                                     <constraint firstAttribute="height" constant="300" id="1dM-cO-tRV"/>
                                                 </constraints>
                                             </imageView>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G5P-AS-uYy">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5P-AS-uYy" customClass="STTextView" customModule="STTextView">
                                                 <rect key="frame" x="16" y="316" width="382" height="468"/>
                                                 <color key="backgroundColor" name="bgColor"/>
                                                 <attributedString key="attributedText">
@@ -66,6 +66,12 @@
                                                     </fragment>
                                                 </attributedString>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="placeholderColor">
+                                                        <color key="value" systemColor="secondaryLabelColor"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="내용을 입력해주세요."/>
+                                                </userDefinedRuntimeAttributes>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="오늘 하루를 표현하는 사진 한장을 올려보세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FwX-kg-Tn2">
                                                 <rect key="frame" x="74.5" y="142.5" width="265" height="15"/>
@@ -120,7 +126,7 @@
                     <connections>
                         <outlet property="backBtn" destination="goA-D0-God" id="icv-NI-3aR"/>
                         <outlet property="completeBtn" destination="sVA-oL-qvR" id="KTf-Zb-b8X"/>
-                        <outlet property="diaryContentTextView" destination="G5P-AS-uYy" id="Hcc-Z5-iuz"/>
+                        <outlet property="diaryContentTextView" destination="G5P-AS-uYy" id="Lvd-BZ-fS0"/>
                         <outlet property="imageView" destination="6zv-fD-avM" id="6gf-gx-v7I"/>
                         <outlet property="imageViewLabel" destination="FwX-kg-Tn2" id="hGE-oN-sfY"/>
                         <outlet property="scrollView" destination="7HO-hh-jCt" id="8Re-cK-yga"/>
@@ -135,6 +141,15 @@
         <namedColor name="bgColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
+<<<<<<< HEAD
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+=======
+>>>>>>> main
         <systemColor name="systemGray3Color">
             <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>

@@ -1,5 +1,4 @@
 import UIKit
-import FirebaseFirestore
 import FirebaseAuth
 import SnapKit
 import FirebaseMessaging
@@ -14,11 +13,11 @@ enum NickNameOverCheck: String {
 }
 
 class InputNickNameViewController: UIViewController {
-    let db = Firestore.firestore()
-    var overLapCheck: NickNameOverCheck = NickNameOverCheck.entrance
-    lazy var userUid: String = ""
-    lazy var platForm: String = ""
-    lazy var userFcmToken: String = ""
+    let db = DatabaseManager.shared.fireStore
+    lazy var overLapCheck: NickNameOverCheck = NickNameOverCheck.entrance
+    var userUid: String = ""
+    var platForm: String = ""
+    var userFcmToken: String = ""
     @IBOutlet weak var overlapText: UILabel!
     @IBOutlet weak var confirmBtn: UIButton!
     @IBOutlet weak var nickNameTextField: UITextField!

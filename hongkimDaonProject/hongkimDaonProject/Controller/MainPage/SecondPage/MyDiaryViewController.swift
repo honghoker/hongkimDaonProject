@@ -1,12 +1,13 @@
 import UIKit
 import SnapKit
-import FirebaseAuth
 import Firebase
 import FirebaseFirestore
 import CoreAudio
+import Toast_Swift
 
 protocol DispatchDiary {
     func dispatch(_ vc: UIViewController, Input value: Diary?)
+    func update(_ vc: UIViewController, Input value: Diary?)
     func delete(_ vc: UIViewController, Delete id: String?)
 }
 
@@ -27,7 +28,6 @@ class MyDiaryViewController: UIViewController {
         btn.layer.shadowRadius = 6.0
         btn.layer.cornerRadius = 32
         btn.tintColor = UIColor.gray
-//        highlighter
         btn.setImage(UIImage(systemName: "scribble"), for: .normal)
         let config = UIImage.SymbolConfiguration(pointSize: 24)
         btn.setPreferredSymbolConfiguration(config, forImageIn: .normal)
@@ -62,7 +62,8 @@ extension MyDiaryViewController {
         guard !(isFetching == true || isNext == false) else {
             return
         }
-        guard let user = Auth.auth().currentUser else {
+        guard let user = AuthManager.shared.auth.currentUser else {
+            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
             return
         }
         let uid = user.uid
@@ -98,7 +99,7 @@ extension MyDiaryViewController {
         }
     }
     func fetchDiary(uid: String, completed: @escaping (QuerySnapshot?, Error?) -> Void) {
-        let diaryDB = Firestore.firestore().collection("diary")
+        let diaryDB = DatabaseManager.shared.fireStore.collection("diary")
         var query: Query
         if self.myDiarys.isEmpty {
             query = diaryDB.whereField("uid", isEqualTo: uid).order(by: "writeTime", descending: true).limit(to: limit)
@@ -115,6 +116,21 @@ extension MyDiaryViewController {
     }
     @objc
     func tapFloatingBtn(_ gesture: UITapGestureRecognizer) {
+        if self.myDiarys.isEmpty == true {
+            // MARK: 일기가 비어있으면
+            moveToWriteDiaryPage()
+        } else {
+            let current = Calendar.current
+            if current.isDateInToday(Date(milliseconds: self.myDiarys[0].writeTime)) == true {
+                // MARK: 오늘이면
+                self.view.makeToast("이미 오늘의 일기를 작성했습니다.")
+            } else {
+                // MARK: 오늘이 아니면 일기 작성
+                moveToWriteDiaryPage()
+            }
+        }
+    }
+    func moveToWriteDiaryPage() {
         let storyboard: UIStoryboard = UIStoryboard(name: "WriteDiaryPageView", bundle: nil)
         guard let writeDiaryPageVC = storyboard.instantiateViewController(withIdentifier: "WriteDiaryPageViewController") as? WriteDiaryPageViewController else { return }
         writeDiaryPageVC.delegate = self
@@ -125,6 +141,17 @@ extension MyDiaryViewController {
 }
 
 extension MyDiaryViewController: DispatchDiary {
+    func update(_ vc: UIViewController, Input value: Diary?) {
+        if let diary = value {
+            if let index = self.myDiarys.firstIndex(where: {
+                $0.writeTime == Int64(diary.writeTime)}) {
+                self.myDiarys[index] = diary
+                DispatchQueue.main.async {
+                    self.diaryTableView.reloadData()
+                }
+            }
+        }
+    }
     func delete(_ vc: UIViewController, Delete value: String?) {
         if let writeTime = value {
             if let index = self.myDiarys.firstIndex(where: {
@@ -173,7 +200,7 @@ extension MyDiaryViewController: UITableViewDataSource {
         //        cell.separatorInset = UIEdgeInsets.zero
         cell.content.text = self.myDiarys[indexPath.row].content
         let myDateFormatter = DateFormatter()
-        myDateFormatter.dateFormat = "# yyyy.MM.dd a h:mm" // 2020.08.13 오후 04:30분
+        myDateFormatter.dateFormat = "# yyyy.MM.dd" // 2020.08.13 오후 04:30분
         myDateFormatter.locale = Locale(identifier: "ko_KR") // PM, AM을 언어에 맞게 setting (ex: PM -> 오후)
         let convertNowStr = myDateFormatter.string(from: Date(milliseconds: myDiarys[indexPath.row].writeTime)) //
         cell.time.text = convertNowStr
@@ -182,15 +209,6 @@ extension MyDiaryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // MARK: 클릭한 셀의 이벤트 처리
         tableView.deselectRow(at: indexPath, animated: true)
-//        let storyboard: UIStoryboard = UIStoryboard(name: "DetailDiaryView", bundle: nil)
-//        guard let DetailDiaryVC = storyboard.instantiateViewController(withIdentifier: "DetailDiaryViewController") as? DetailDiaryViewController else { return }
-//        DetailDiaryVC.delegate = self
-//        // MARK: 화면 전환 애니메이션 설정
-//        DetailDiaryVC.modalTransitionStyle = .crossDissolve
-//        // MARK: 전환된 화면이 보여지는 방법 설정 (fullScreen)
-//        DetailDiaryVC.docId = String(myDiarys[indexPath.row].writeTime)
-//        DetailDiaryVC.modalPresentationStyle = .fullScreen
-//        self.present(DetailDiaryVC, animated: true, completion: nil)
         let storyboard: UIStoryboard = UIStoryboard(name: "DetailDiaryView", bundle: nil)
         guard let DetailDiaryVC = storyboard.instantiateViewController(withIdentifier: "NewDetailDiaryPageViewController") as? NewDetailDiaryPageViewController else { return }
         DetailDiaryVC.delegate = self

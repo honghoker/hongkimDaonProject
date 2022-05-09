@@ -1,7 +1,6 @@
 import UIKit
 import SnapKit
 import FirebaseAuth
-import FirebaseFirestore
 import FirebaseStorage
 import Kingfisher
 import RealmSwift
@@ -12,7 +11,6 @@ import FirebaseDynamicLinks
 class AlphaTodayWordingPageViewController: UIViewController {
     @IBOutlet weak var downloadBtn: UIButton!
     @IBOutlet weak var saveBtn: UIButton!
-    @IBOutlet weak var shareBtn: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var backgroundUIView: UIView!
@@ -59,44 +57,6 @@ extension AlphaTodayWordingPageViewController {
         }
     }
     @objc
-    func shareInfo() {
-        let link = URL(string: "https://hongkimDaonProject.page.link")
-        let referralLink = DynamicLinkComponents(link: link!, domainURIPrefix: "https://hongkimDaonProject.page.link")
-        // iOS 설정
-        referralLink?.iOSParameters = DynamicLinkIOSParameters(bundleID: "com.green.hongkimDaonProject")
-        referralLink?.iOSParameters?.minimumAppVersion = "1.0.1"
-        referralLink?.iOSParameters?.appStoreID = "1440705745" // 나중에 수정하세요
-        // Android 설정
-        //        referralLink?.androidParameters = DynamicLinkAndroidParameters(packageName: "com.green.hongkimDaonProject")
-        //        referralLink?.androidParameters?.minimumVersion = 811
-        // 단축 URL 생성
-        referralLink?.shorten { (shortURL, warnings, error) in
-            if let error = error {
-                print(error.localizedDescription)
-                return
-            }
-            if let url: String = shortURL?.absoluteString {
-                var objectsToShare = [String]()
-                objectsToShare.append(url)
-                let activityVC = UIActivityViewController(activityItems: objectsToShare, applicationActivities: nil)
-                activityVC.popoverPresentationController?.sourceView = self.view
-                // 공유하기 기능 중 제외할 기능이 있을 때 사용
-                //        activityVC.excludedActivityTypes = [UIActivityType.airDrop, UIActivityType.addToReadingList]
-                self.present(activityVC, animated: true, completion: nil)
-                // SMS 전송
-                //            guard MFMessageComposeViewController.canSendText() else {
-                //                print("SMS services are not available")
-                //                return
-                //            }
-                //            let composeViewController = MFMessageComposeViewController()
-                //            composeViewController.messageComposeDelegate = self
-                //            composeViewController.recipients = ["01033555940"]
-                //            composeViewController.body = shortURL?.absoluteString ?? ""
-                //            self.present(composeViewController, animated: true, completion: nil)
-            }
-        }
-    }
-    @objc
     func daonStorageSave() {
         DatabaseManager.shared.daonStorageSave(docId: "\(mainUploadTime)") { result in
             switch result {
@@ -125,3 +85,16 @@ extension AlphaTodayWordingPageViewController {
         }
     }
 }
+<<<<<<< HEAD
+
+extension AlphaTodayWordingPageViewController {
+    @objc
+    func onTapImage(_ gesture: UITapGestureRecognizer) {
+        let storyboard: UIStoryboard = self.storyboard!
+        let nextView = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController")
+        nextView.modalPresentationStyle = .fullScreen
+        self.present(nextView, animated: false, completion: nil)
+    }
+}
+=======
+>>>>>>> main

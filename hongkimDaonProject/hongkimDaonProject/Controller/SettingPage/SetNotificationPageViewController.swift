@@ -1,8 +1,7 @@
 import UIKit
 import SnapKit
-import Toast_Swift
 import FirebaseFirestore
-import FirebaseAuth
+import Toast_Swift
 
 class SetNotificationPageViewController: UIViewController {
     @IBOutlet weak var switchBtn: UISwitch!
@@ -56,7 +55,7 @@ class SetNotificationPageViewController: UIViewController {
     }
     // MARK: set 알람시간
     func setNotificationValue(completion: @escaping() -> Void) {
-        if let user = Auth.auth().currentUser {
+        if let user = AuthManager.shared.auth.currentUser {
             self.database.document("user/\(user.uid)").getDocument {snaphot, error in
                 if let error = error {
                     print("DEBUG: \(error.localizedDescription)")
@@ -70,6 +69,8 @@ class SetNotificationPageViewController: UIViewController {
                     completion()
                 }
             }
+        } else {
+            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
         }
     }
 }
@@ -79,11 +80,18 @@ extension SetNotificationPageViewController {
     @objc
     func onTapSaveBtn() {
         if timeIntValue != "" {
-            if let user = Auth.auth().currentUser {
+            if let user = AuthManager.shared.auth.currentUser {
                 let docRef = database.document("user/\(user.uid)")
-                docRef.updateData(["notificationTime": timeIntValue])
+                docRef.updateData(["notificationTime": timeIntValue]) { result in
+                    guard result == nil else {
+                        self.view.makeToast("알림시간 변경이 실패했습니다.", duration: 1.5, position: .center)
+                        return
+                    }
+                    self.view.makeToast("알림시간이 변경되었습니다", duration: 1.5, position: .center)
+                }
+            } else {
+                self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
             }
-            self.view.makeToast("알림시간이 변경되었습니다", duration: 1.5, position: .center)
         }
     }
     @objc
@@ -99,9 +107,11 @@ extension SetNotificationPageViewController {
         timeIntValue = formatter.string(from: sender.date)
     }
     @IBAction func switchChanged(_ sender: UISwitch) {
-        if let user = Auth.auth().currentUser {
+        if let user = AuthManager.shared.auth.currentUser {
             let docRef = database.document("user/\(user.uid)")
             docRef.updateData(["notification": sender.isOn])
+        } else {
+            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
         }
     }
 }

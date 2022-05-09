@@ -7,28 +7,22 @@
 
 import Foundation
 import UIKit
-import FirebaseAuth
 import FirebaseFirestoreSwift
 import FMPhotoPicker
+import STTextView
 
 class EditDiaryPageViewController: UIViewController {
     var diary: Diary?
     var image: UIImage?
+    var delegate: DispatchDiary?
     @IBOutlet weak var backBtn: UILabel!
     @IBOutlet weak var completeBtn: UILabel!
     @IBOutlet weak var imageViewLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var diaryContentTextView: UITextView!
-    let placeholderText = "내용을 입력해주세요."
-    private let titleMaxLength: Int = 50
+    @IBOutlet weak var diaryContentTextView: STTextView!
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "bgColor")
-        diaryContentTextView.text = placeholderText
-        diaryContentTextView.textColor = .systemGray
-        diaryContentTextView.delegate = self
-        // MARK: 첫 영문자 소문자로 시작
-        diaryContentTextView.autocapitalizationType = .none
         let imgButtonClicked: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(pickImage(_:)))
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(imgButtonClicked)
@@ -46,13 +40,8 @@ class EditDiaryPageViewController: UIViewController {
             imageViewLabel.isHidden = true
         }
         if let diary = self.diary {
-            diaryContentTextView.textColor = UIColor.label
             diaryContentTextView.text = diary.content
         }
-    }
-    override func viewDidLayoutSubviews() {
-        // MARK: to remove left padding
-        diaryContentTextView.textContainer.lineFragmentPadding = 0
     }
 }
 
@@ -77,12 +66,12 @@ extension EditDiaryPageViewController {
     @objc
     func complete(_ gesture: UITapGestureRecognizer) {
         print("@@@@@@ complete Touch")
-        if Auth.auth().currentUser?.uid != nil {
+        if AuthManager.shared.auth.currentUser?.uid != nil {
             if var diary = self.diary {
                 diary.imageExist = self.imageView.image != nil
                 diary.imageWidth = self.imageView.image?.size.width ?? 0
                 diary.imageHeight = self.imageView.image?.size.height ?? 0
-                diary.content = diaryContentTextView.textColor != UIColor.systemGray ? diaryContentTextView.text : ""
+                diary.content = self.diaryContentTextView.text ?? ""
                 if self.imageView.image == nil {
                     diary.imageUploadComplete = true
                 } else {
@@ -115,12 +104,15 @@ extension EditDiaryPageViewController {
                             }
                         }
                         print("@@@@@@@@@ update 성공")
+                        self.delegate?.update(self, Input: diary)
                         self.presentingViewController?.dismiss(animated: true)
                     case .failure(let error):
                         print("업데이트 실패 토스트 : \(error)")
                     }
                 })
             }
+        } else {
+            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
         }
     }
     @objc
@@ -159,37 +151,5 @@ extension EditDiaryPageViewController: FMPhotoPickerViewControllerDelegate {
         self.dismiss(animated: true, completion: nil)
         imageView.image = photos[0]
         imageViewLabel.isHidden = true
-    }
-}
-
-extension EditDiaryPageViewController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if self.view.window != nil {
-            if textView.textColor == UIColor.systemGray {
-                textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
-            }
-        }
-    }
-    func textViewDidChangeSelection(_ textView: UITextView) {
-        if self.view.window != nil {
-            if textView.textColor == UIColor.systemGray {
-                textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
-            }
-        }
-    }
-    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        let currentText: String = textView.text
-        let updatedText = (currentText as NSString).replacingCharacters(in: range, with: text)
-        if updatedText.isEmpty {
-            textView.text = placeholderText
-            textView.textColor = .systemGray
-            textView.selectedTextRange = textView.textRange(from: textView.beginningOfDocument, to: textView.beginningOfDocument)
-        } else if textView.textColor == UIColor.systemGray && !text.isEmpty {
-            textView.textColor = UIColor.label
-            textView.text = text
-        } else {
-            return true
-        }
-        return false
     }
 }

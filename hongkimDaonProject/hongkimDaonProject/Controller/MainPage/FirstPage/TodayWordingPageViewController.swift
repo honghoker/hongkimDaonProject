@@ -2,9 +2,7 @@ import UIKit
 import FirebaseStorage
 import Kingfisher
 import RealmSwift
-import FirebaseFirestore
 import FirebaseMessaging
-import FirebaseAuth
 
 public var mainImageData = Data()
 public var mainUploadTime = 0
@@ -12,7 +10,7 @@ public var mainUploadTime = 0
 class TodayWordingPageViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     var realm: Realm!
-    let database = Firestore.firestore()
+    let database = DatabaseManager.shared.fireStore
     var imageUploadTime: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +19,7 @@ class TodayWordingPageViewController: UIViewController {
             if let error = error {
                 print("Error fetching FCM registration token: \(error)")
             } else if let token = token {
-                if let user = Auth.auth().currentUser {
+                if let user = AuthManager.shared.auth.currentUser {
                     self.database.document("user/\(user.uid)").getDocument {snaphot, error in
                         if let error = error {
                             print("DEBUG: \(error.localizedDescription)")
@@ -33,6 +31,8 @@ class TodayWordingPageViewController: UIViewController {
                             self.database.document("user/\(user.uid)").updateData(["fcmToken": token])
                         }
                     }
+                } else {
+                    self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
                 }
                 print("FCM registration token: \(token)")
             }

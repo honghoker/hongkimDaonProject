@@ -4,7 +4,7 @@ import FirebaseFirestore
 import Lottie
 
 class StartPageViewController: UIViewController {
-    let database = Firestore.firestore()
+    let database = DatabaseManager.shared.fireStore
     var animationView: AnimationView = {
         let lottieView = AnimationView(name: "lottieFile")
         lottieView.frame = CGRect(x: 0, y: 0, width: 400, height: 400)
