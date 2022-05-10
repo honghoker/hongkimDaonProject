@@ -45,7 +45,7 @@ extension AllWordingPageViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
         dateFormatter.dateFormat = "yyyy-MM"
-        let nowMonthString = dateFormatter.string(from: now)
+//        let nowMonthString = dateFormatter.string(from: now)
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
 //        let nowMonthDate: Date = dateFormatter.date(from: nowMonthString)!
         dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
@@ -78,7 +78,7 @@ extension AllWordingPageViewController {
             guard let realmImageId = list.last?.uploadTime else { return }
             if nowDayDate.millisecondsSince1970 == realmImageId {
                 completion(true)
-            } else if Int(nowDayDate.millisecondsSince1970) - realmImageId > (7 * 86400000) {
+            } else if Int(nowDayDate.millisecondsSince1970) - realmImageId >= (7 * 86400000) {
                 try? realm.write {
                     realm.deleteAll()
                 }
@@ -101,31 +101,50 @@ extension AllWordingPageViewController {
                 }
             } else {
                 guard let realmImageId = list.last?.uploadTime else { return }
-                for _ in 0..<((Int(nowDayDate.millisecondsSince1970) - realmImageId) / 86400000) {
-                    print("sunghun")
-                    let realmFirstData = list.first
-                    try! realm.write {
-                        realm.delete(realmFirstData!)
-                    }
-                }
-                self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(nowDayDate.millisecondsSince1970) - (Int(nowDayDate.millisecondsSince1970) - realmImageId)).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
-                    if error != nil {
-                        print("Error getting documents: \(String(describing: error))")
-                    } else {
-                        for document in (snapshot?.documents)! {
-                            guard let uploadTime = document.data()["uploadTime"] else { return }
-                            guard let imageUrl = document.data()["imageUrl"] else { return }
-                            let daon = RealmDaon()
-                            daon.imageData = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
-                            daon.uploadTime = Int(String(describing: uploadTime)) ?? 0
-                            try? self.realm.write {
-                                self.realm.add(daon)
+                if list.count != 7 {
+                    print("????")
+                    self.database.collection("daon").whereField("uploadTime", isGreaterThan: realmImageId).limit(to: (Int(nowDayDate.millisecondsSince1970) - realmImageId) / 86400000) .getDocuments { (snapshot, error) in
+                        if error != nil {
+                            print("Error getting documents: \(String(describing: error))")
+                        } else {
+                            for document in (snapshot?.documents)! {
+                                guard let uploadTime = document.data()["uploadTime"] else { return }
+                                guard let imageUrl = document.data()["imageUrl"] else { return }
+                                let daon = RealmDaon()
+                                daon.imageData = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
+                                daon.uploadTime = Int(String(describing: uploadTime)) ?? 0
+                                try? self.realm.write {
+                                    self.realm.add(daon)
+                                }
                             }
+                            completion(true)
                         }
-                        completion(true)
+                    }
+                } else {
+                    for _ in 0..<((Int(nowDayDate.millisecondsSince1970) - realmImageId) / 86400000) {
+                        let realmFirstData = list.first
+                        try! realm.write {
+                            realm.delete(realmFirstData!)
+                        }
+                    }
+                    self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(nowDayDate.millisecondsSince1970) - (Int(nowDayDate.millisecondsSince1970) - realmImageId)).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
+                        if error != nil {
+                            print("Error getting documents: \(String(describing: error))")
+                        } else {
+                            for document in (snapshot?.documents)! {
+                                guard let uploadTime = document.data()["uploadTime"] else { return }
+                                guard let imageUrl = document.data()["imageUrl"] else { return }
+                                let daon = RealmDaon()
+                                daon.imageData = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
+                                daon.uploadTime = Int(String(describing: uploadTime)) ?? 0
+                                try? self.realm.write {
+                                    self.realm.add(daon)
+                                }
+                            }
+                            completion(true)
+                        }
                     }
                 }
-
             }
         }
     }
