@@ -6,15 +6,18 @@ import FirebaseStorage
 class AlphaMainPageViewController: TabmanViewController {
     private var viewControllers: Array<UIViewController> = []
     let isDark = UserDefaults.standard.bool(forKey: "darkModeState")
-    var tintColor = UIColor.lightGray
-    var selectedTintColor = UIColor.darkGray
+    var tintColor = UIColor.darkGray
+    var selectedTintColor = UIColor(red: 213/255, green: 182/255, blue: 124/255, alpha: 1)
     var uploadTime: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        if isDark == true {
-            tintColor = UIColor.darkGray
-            selectedTintColor = UIColor.lightGray
-        }
+//        if isDark == true {
+//            tintColor = UIColor.darkGray
+//            selectedTintColor = UIColor(red: 213/255, green: 182/255, blue: 124/255, alpha: 1)
+//        } else {
+//            tintColor = UIColor.darkGray
+//            selectedTintColor = UIColor(red: 213/255, green: 182/255, blue: 124/255, alpha: 1)
+//        }
         setUI()
     }
     // MARK: set UI
