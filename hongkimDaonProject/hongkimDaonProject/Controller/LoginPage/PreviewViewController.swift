@@ -17,7 +17,14 @@ class PreviewViewController: UIViewController {
         getRecntDaon()
     }
     func getRecntDaon() {
-        DatabaseManager.shared.fireStore.collection("daon").order(by: "uploadTime", descending: true).limit(to: 1).getDocuments { snapshot, error in
+        let now = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let nowDayString = dateFormatter.string(from: now)
+        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
+        let nowDayDate: Date = dateFormatter.date(from: nowDayString)!
+        DatabaseManager.shared.fireStore.collection("daon").whereField("uploadTime", isLessThan: nowDayDate.millisecondsSince1970 + 86400000).order(by: "uploadTime", descending: true).limit(to: 1).getDocuments { snapshot, error in
             guard error == nil else {
                 return
             }

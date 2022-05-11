@@ -23,26 +23,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dps-SX-E9C">
-                                <rect key="frame" x="36" y="541" width="125" height="1"/>
-                                <color key="backgroundColor" systemColor="labelColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="v0i-Ns-JaS"/>
-                                </constraints>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SNS 로그인" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0GZ-Re-pDT">
-                                <rect key="frame" x="177.5" y="536" width="59.5" height="12"/>
-                                <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="12"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F2Y-VE-JeX">
-                                <rect key="frame" x="252.5" y="541" width="125.5" height="1"/>
-                                <color key="backgroundColor" systemColor="labelColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="1" id="msF-ud-Na4"/>
-                                </constraints>
-                            </view>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SMy-E3-TAq">
                                 <rect key="frame" x="157" y="184" width="100" height="100"/>
                                 <constraints>
@@ -57,7 +37,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="48" translatesAutoresizingMaskIntoConstraints="NO" id="695-PK-dRc">
-                                <rect key="frame" x="135" y="598" width="144" height="48"/>
+                                <rect key="frame" x="135" y="710" width="144" height="48"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="DHz-jJ-gDM">
                                         <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
@@ -89,27 +69,47 @@
                                     <color key="titleColor" systemColor="systemGrayColor"/>
                                 </state>
                             </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="099-BF-Gi0">
+                                <rect key="frame" x="32" y="658" width="350" height="12"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0GO-rh-CMP">
+                                        <rect key="frame" x="0.0" y="5.5" width="110" height="1"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="bSl-ua-g4Q"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SNS 로그인" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lc-91-8WV">
+                                        <rect key="frame" x="120" y="0.0" width="110" height="12"/>
+                                        <fontDescription key="fontDescription" name="JejuMyeongjoOTF" family="JejuMyeongjoOTF" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ofp-dt-YNp">
+                                        <rect key="frame" x="240" y="5.5" width="110" height="1"/>
+                                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="1" id="3m4-Od-jqt"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="bgColor"/>
                         <constraints>
                             <constraint firstItem="SMy-E3-TAq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4F1-Mi-wBG"/>
                             <constraint firstItem="695-PK-dRc" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4UI-EB-7R5"/>
-                            <constraint firstItem="695-PK-dRc" firstAttribute="top" secondItem="dps-SX-E9C" secondAttribute="bottom" constant="56" id="5f2-vb-4ll"/>
-                            <constraint firstItem="dps-SX-E9C" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="16" id="Dce-1c-7xc"/>
-                            <constraint firstItem="0GZ-Re-pDT" firstAttribute="top" secondItem="9o4-kt-nxv" secondAttribute="bottom" constant="160" id="Isa-25-lEM"/>
-                            <constraint firstItem="F2Y-VE-JeX" firstAttribute="leading" secondItem="0GZ-Re-pDT" secondAttribute="trailing" constant="15.5" id="Jcs-8z-cV9"/>
-                            <constraint firstItem="dps-SX-E9C" firstAttribute="top" secondItem="9o4-kt-nxv" secondAttribute="bottom" constant="165" id="KMt-ut-etS"/>
-                            <constraint firstItem="F2Y-VE-JeX" firstAttribute="top" secondItem="9o4-kt-nxv" secondAttribute="bottom" constant="165" id="coA-ZP-VpG"/>
-                            <constraint firstItem="695-PK-dRc" firstAttribute="top" secondItem="F2Y-VE-JeX" secondAttribute="bottom" constant="56" id="csc-84-5Ic"/>
+                            <constraint firstItem="099-BF-Gi0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="32" id="JV4-P3-OOE"/>
                             <constraint firstItem="2Pi-wh-YyA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dlA-UO-ybt"/>
                             <constraint firstItem="9o4-kt-nxv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dpX-sw-AZT"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="F2Y-VE-JeX" secondAttribute="trailing" constant="16" id="eQx-W9-Sax"/>
-                            <constraint firstItem="0GZ-Re-pDT" firstAttribute="leading" secondItem="dps-SX-E9C" secondAttribute="trailing" constant="16.5" id="emo-Yd-Lw5"/>
+                            <constraint firstItem="695-PK-dRc" firstAttribute="top" secondItem="099-BF-Gi0" secondAttribute="bottom" constant="40" id="g6l-Cc-9zN"/>
+                            <constraint firstItem="099-BF-Gi0" firstAttribute="top" relation="greaterThanOrEqual" secondItem="9o4-kt-nxv" secondAttribute="bottom" constant="40" id="ggV-CO-sov"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="X2d-5k-cPi" secondAttribute="bottom" constant="50" id="gzq-Bc-0Cs"/>
                             <constraint firstItem="9o4-kt-nxv" firstAttribute="top" secondItem="2Pi-wh-YyA" secondAttribute="bottom" constant="24" id="hKu-eE-zPf"/>
                             <constraint firstItem="X2d-5k-cPi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="hd1-GX-OT2"/>
-                            <constraint firstItem="0GZ-Re-pDT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="v1H-6M-12G"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="099-BF-Gi0" secondAttribute="trailing" constant="32" id="mGF-d0-E8a"/>
+                            <constraint firstItem="X2d-5k-cPi" firstAttribute="top" secondItem="695-PK-dRc" secondAttribute="bottom" constant="30" id="qjW-GR-eFW"/>
                             <constraint firstItem="2Pi-wh-YyA" firstAttribute="top" secondItem="SMy-E3-TAq" secondAttribute="bottom" constant="12" id="wUG-dL-McY"/>
                             <constraint firstItem="SMy-E3-TAq" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="140" id="zOO-Ao-agt"/>
                         </constraints>
@@ -130,9 +130,6 @@
         <namedColor name="bgColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGrayColor">
             <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
