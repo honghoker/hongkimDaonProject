@@ -138,37 +138,28 @@ extension AllWordingPageViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "allWordingCellId", for: indexPath) as? AllWordingCell else {
             return UITableViewCell()
         }
-        cell.backgroundColor = UIColor(named: "bgColor")
         let dateFormatter = DateFormatter()
         let realmDayDate = Date(timeIntervalSince1970: (Double(Int(imageId)) / 1000.0))
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let nowDayString = dateFormatter.string(from: realmDayDate)
         cell.dayLabel.text = String(describing: nowDayString)
-        cell.dayLabel.textColor = .white
-        cell.dayLabel.backgroundColor = .none
-        cell.dayLabel.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
-        cell.contentMode = .scaleAspectFit
-        cell.directionalLayoutMargins = .zero
-        cell.layoutMargins = .zero
-        cell.contentView.directionalLayoutMargins = .zero
-        cell.contentView.layoutMargins = .zero
-        cell.allImageView.image = nil
         if imageData.isEmpty {
             cell.allImageView.kf.indicatorType = .activity
-            let processor = ResizingImageProcessor(referenceSize: CGSize(width: self.view.frame.width, height: self.view.frame.height))
             let url = URL(string: imageUrl as! String)
-            cell.allImageView.kf.setImage(with: url, options: [.processor(processor)])
+            cell.allImageView.kf.setImage(with: url, options: nil)
             self.realm.writeAsync {
                 let realmDaon = RealmDaon()
                 realmDaon.uploadTime = imageId
-                realmDaon.imageData = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
+                let data = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
+                realmDaon.imageData = data
+                self.daonArray[indexPath.row].imageData = data
                 realmDaon.imageUrl = imageUrl
                 self.realm.add(realmDaon, update: .modified)
             }
         } else {
-            DispatchQueue.main.async {
-                if cell.allImageView.image == nil {
+            if cell.allImageView.image == nil {
+                DispatchQueue.main.async {
                     cell.allImageView.image = UIImage(data: imageData)
                 }
             }
@@ -177,11 +168,12 @@ extension AllWordingPageViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 클릭한 셀의 이벤트 처리
-        tableView.deselectRow(at: indexPath, animated: true)
+        print("@@@@@@@@@@ touch")
         mainImageData = daonArray[indexPath.row].imageData
         if mainImageData.isEmpty {
             return
         }
+        tableView.deselectRow(at: indexPath, animated: true)
         mainUploadTime = daonArray[indexPath.row].uploadTime
         let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
         guard let mainVC = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
@@ -193,5 +185,8 @@ extension AllWordingPageViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return daonArray.count
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
     }
 }
