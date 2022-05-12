@@ -11,13 +11,22 @@ class AllWordingPageViewController: UIViewController {
     var daonArray: Array<RealmDaon>! = []
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.setUI()
         realm = try? Realm()
-        LoadingIndicator.showLoading()
-        todayImageCacheSet { complete in
+        todayImageCacheSet { snapshot in
+            if let snapshot = snapshot {
+                for daonSnapshot in (snapshot.documents) {
+                    let realmDaon = RealmDaon()
+                    realmDaon.imageUrl = daonSnapshot.get("imageUrl") as! String
+                    realmDaon.uploadTime = Int(String(describing: daonSnapshot.get("uploadTime")!)) ?? 0
+                    try? self.realm.write {
+                        self.realm.add(realmDaon)
+                    }
+                }
+            }
             let result = self.realm.objects(RealmDaon.self)
             self.daonArray = Array(result)
-            self.setUI()
-            LoadingIndicator.hideLoading()
+            self.tableView.reloadData()
         }
     }
     // MARK: set UI
@@ -38,7 +47,7 @@ class AllWordingPageViewController: UIViewController {
 }
 
 extension AllWordingPageViewController {
-    func todayImageCacheSet(completion: @escaping (Bool) -> Void) {
+    func todayImageCacheSet(completion: @escaping (QuerySnapshot?) -> Void) {
         realm = try? Realm()
         let list = realm.objects(RealmDaon.self)
         let now = Date()
@@ -61,23 +70,15 @@ extension AllWordingPageViewController {
                 if error != nil {
                     print("Error getting documents: \(String(describing: error))")
                 } else {
-                    for document in (snapshot?.documents)! {
-                        guard let uploadTime = document.data()["uploadTime"] else { return }
-                        guard let imageUrl = document.data()["imageUrl"] else { return }
-                        let daon = RealmDaon()
-                        daon.imageData = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
-                        daon.uploadTime = Int(String(describing: uploadTime)) ?? 0
-                        try? self.realm.write {
-                            self.realm.add(daon)
-                        }
+                    if let snapshot = snapshot {
+                        completion(snapshot)
                     }
-                    completion(true)
                 }
             }
         } else {
             guard let realmImageId = list.last?.uploadTime else { return }
             if nowDayDate.millisecondsSince1970 == realmImageId {
-                completion(true)
+                completion(nil)
             } else if Int(nowDayDate.millisecondsSince1970) - realmImageId >= (7 * 86400000) {
                 try? realm.write {
                     realm.deleteAll()
@@ -86,17 +87,9 @@ extension AllWordingPageViewController {
                     if error != nil {
                         print("Error getting documents: \(String(describing: error))")
                     } else {
-                        for document in (snapshot?.documents)! {
-                            guard let uploadTime = document.data()["uploadTime"] else { return }
-                            guard let imageUrl = document.data()["imageUrl"] else { return }
-                            let daon = RealmDaon()
-                            daon.imageData = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
-                            daon.uploadTime = Int(String(describing: uploadTime)) ?? 0
-                            try? self.realm.write {
-                                self.realm.add(daon)
-                            }
+                        if let snapshot = snapshot {
+                            completion(snapshot)
                         }
-                        completion(true)
                     }
                 }
             } else {
@@ -107,17 +100,9 @@ extension AllWordingPageViewController {
                         if error != nil {
                             print("Error getting documents: \(String(describing: error))")
                         } else {
-                            for document in (snapshot?.documents)! {
-                                guard let uploadTime = document.data()["uploadTime"] else { return }
-                                guard let imageUrl = document.data()["imageUrl"] else { return }
-                                let daon = RealmDaon()
-                                daon.imageData = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
-                                daon.uploadTime = Int(String(describing: uploadTime)) ?? 0
-                                try? self.realm.write {
-                                    self.realm.add(daon)
-                                }
+                            if let snapshot = snapshot {
+                                completion(snapshot)
                             }
-                            completion(true)
                         }
                     }
                 } else {
@@ -131,17 +116,9 @@ extension AllWordingPageViewController {
                         if error != nil {
                             print("Error getting documents: \(String(describing: error))")
                         } else {
-                            for document in (snapshot?.documents)! {
-                                guard let uploadTime = document.data()["uploadTime"] else { return }
-                                guard let imageUrl = document.data()["imageUrl"] else { return }
-                                let daon = RealmDaon()
-                                daon.imageData = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
-                                daon.uploadTime = Int(String(describing: uploadTime)) ?? 0
-                                try? self.realm.write {
-                                    self.realm.add(daon)
-                                }
+                            if let snapshot = snapshot {
+                                completion(snapshot)
                             }
-                            completion(true)
                         }
                     }
                 }
@@ -157,11 +134,11 @@ extension AllWordingPageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let imageData = daonArray[indexPath.row].imageData
         let imageId = daonArray[indexPath.row].uploadTime
+        let imageUrl = daonArray[indexPath.row].imageUrl
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "allWordingCellId", for: indexPath) as? AllWordingCell else {
             return UITableViewCell()
         }
         cell.backgroundColor = UIColor(named: "bgColor")
-        cell.allImageView.image = UIImage(data: imageData)
         let dateFormatter = DateFormatter()
         let realmDayDate = Date(timeIntervalSince1970: (Double(Int(imageId)) / 1000.0))
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
@@ -176,12 +153,35 @@ extension AllWordingPageViewController: UITableViewDataSource {
         cell.layoutMargins = .zero
         cell.contentView.directionalLayoutMargins = .zero
         cell.contentView.layoutMargins = .zero
+        cell.allImageView.image = nil
+        if imageData.isEmpty {
+            cell.allImageView.kf.indicatorType = .activity
+            let processor = ResizingImageProcessor(referenceSize: CGSize(width: self.view.frame.width, height: self.view.frame.height))
+            let url = URL(string: imageUrl as! String)
+            cell.allImageView.kf.setImage(with: url, options: [.processor(processor)])
+            self.realm.writeAsync {
+                let realmDaon = RealmDaon()
+                realmDaon.uploadTime = imageId
+                realmDaon.imageData = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
+                realmDaon.imageUrl = imageUrl
+                self.realm.add(realmDaon, update: .modified)
+            }
+        } else {
+            DispatchQueue.main.async {
+                if cell.allImageView.image == nil {
+                    cell.allImageView.image = UIImage(data: imageData)
+                }
+            }
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // 클릭한 셀의 이벤트 처리
         tableView.deselectRow(at: indexPath, animated: true)
         mainImageData = daonArray[indexPath.row].imageData
+        if mainImageData.isEmpty {
+            return
+        }
         mainUploadTime = daonArray[indexPath.row].uploadTime
         let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
         guard let mainVC = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
