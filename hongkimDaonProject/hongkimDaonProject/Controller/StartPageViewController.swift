@@ -13,9 +13,8 @@ class StartPageViewController: UIViewController {
     }()
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("@@@@@@@@@@@@@@ startPage viewDidLoad")
+        self.view.backgroundColor = UIColor(named: "bgColor")
         animationView.center = CGPoint(x: view.frame.size.width  / 2, y: view.frame.size.height / 2.3)
-//                animationView.center = view.center
         animationView.loopMode = .playOnce
         view.addSubview(animationView)
         animationView.play {(finish) in
@@ -42,33 +41,6 @@ class StartPageViewController: UIViewController {
                 self.showLoginViewController()
             }
         }
-    }
-    // 일단 요거 지우지말고 대기
-    override func viewDidAppear(_ animated: Bool) {
-        //        if let user = Auth.auth().currentUser {
-        //            print("view user \(user.uid)")
-        //            let docRef = self.database.document("user/\(user.uid)")
-        //            docRef.getDocument { snapshot, error in
-        //                if let error = error {
-        //                    print("DEBUG: \(error.localizedDescription)")
-        //                    return
-        //                }
-        //                guard let exist = snapshot?.exists else {return}
-        //                if exist == true {
-        //                    sleep(1)
-        //                    self.animationView.stop()
-        //                    self.showMainViewController()
-        //                } else {
-        //                    sleep(1)
-        //                    self.animationView.stop()
-        //                    self.showLoginViewController()
-        //                }
-        //            }
-        //        } else {
-        //            sleep(1)
-        //            self.animationView.stop()
-        //            self.showLoginViewController()
-        //        }
     }
 }
 

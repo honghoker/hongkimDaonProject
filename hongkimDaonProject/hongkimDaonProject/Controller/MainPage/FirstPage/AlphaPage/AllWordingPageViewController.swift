@@ -1,33 +1,16 @@
 import UIKit
 import FirebaseStorage
-import RealmSwift
 import Kingfisher
 import FirebaseFirestore
 
 class AllWordingPageViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
-    var realm: Realm!
     let database = DatabaseManager.shared.fireStore
-    var daonArray: Array<RealmDaon>! = []
+    var daonArray: [Daon] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setUI()
-        realm = try? Realm()
-        todayImageCacheSet { snapshot in
-            if let snapshot = snapshot {
-                for daonSnapshot in (snapshot.documents) {
-                    let realmDaon = RealmDaon()
-                    realmDaon.imageUrl = daonSnapshot.get("imageUrl") as! String
-                    realmDaon.uploadTime = Int(String(describing: daonSnapshot.get("uploadTime")!)) ?? 0
-                    try? self.realm.write {
-                        self.realm.add(realmDaon)
-                    }
-                }
-            }
-            let result = self.realm.objects(RealmDaon.self)
-            self.daonArray = Array(result)
-            self.tableView.reloadData()
-        }
+        todayImageCacheSet()
     }
     // MARK: set UI
     func setUI() {
@@ -47,80 +30,23 @@ class AllWordingPageViewController: UIViewController {
 }
 
 extension AllWordingPageViewController {
-    func todayImageCacheSet(completion: @escaping (QuerySnapshot?) -> Void) {
-        realm = try? Realm()
-        let list = realm.objects(RealmDaon.self)
+    func todayImageCacheSet() {
         let now = Date()
         let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
-        dateFormatter.dateFormat = "yyyy-MM"
-//        let nowMonthString = dateFormatter.string(from: now)
-        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-//        let nowMonthDate: Date = dateFormatter.date(from: nowMonthString)!
         dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let nowDayString = dateFormatter.string(from: now)
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         let nowDayDate: Date = dateFormatter.date(from: nowDayString)!
-        print("nowDayDate \(nowDayDate)")
-        print("nowDayDate.millisecondsSince1970 \(nowDayDate.millisecondsSince1970)")
-        if list.count == .zero {
-            // empty -> store 접근 -> date.millisecondsSince1970 이거보다 큰 것들 다 가져와서 db 저장
-            self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(nowDayDate.millisecondsSince1970) - 604800000).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
-                if error != nil {
-                    print("Error getting documents: \(String(describing: error))")
-                } else {
-                    if let snapshot = snapshot {
-                        completion(snapshot)
-                    }
-                }
-            }
-        } else {
-            guard let realmImageId = list.last?.uploadTime else { return }
-            if nowDayDate.millisecondsSince1970 == realmImageId {
-                completion(nil)
-            } else if Int(nowDayDate.millisecondsSince1970) - realmImageId >= (7 * 86400000) {
-                try? realm.write {
-                    realm.deleteAll()
-                }
-                self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(nowDayDate.millisecondsSince1970) - 604800000).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
-                    if error != nil {
-                        print("Error getting documents: \(String(describing: error))")
-                    } else {
-                        if let snapshot = snapshot {
-                            completion(snapshot)
-                        }
-                    }
-                }
+        self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(nowDayDate.millisecondsSince1970) - 604800000).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
+            if error != nil {
+                print("Error getting documents: \(String(describing: error))")
             } else {
-                guard let realmImageId = list.last?.uploadTime else { return }
-                if list.count != 7 {
-                    print("????")
-                    self.database.collection("daon").whereField("uploadTime", isGreaterThan: realmImageId).limit(to: (Int(nowDayDate.millisecondsSince1970) - realmImageId) / 86400000) .getDocuments { (snapshot, error) in
-                        if error != nil {
-                            print("Error getting documents: \(String(describing: error))")
-                        } else {
-                            if let snapshot = snapshot {
-                                completion(snapshot)
-                            }
-                        }
+                if let snapshot = snapshot {
+                    self.daonArray = snapshot.documents.map { (daonSnapshot: QueryDocumentSnapshot) -> Daon in
+                        return try! daonSnapshot.data(as: Daon.self)
                     }
-                } else {
-                    for _ in 0..<((Int(nowDayDate.millisecondsSince1970) - realmImageId) / 86400000) {
-                        let realmFirstData = list.first
-                        try! realm.write {
-                            realm.delete(realmFirstData!)
-                        }
-                    }
-                    self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(nowDayDate.millisecondsSince1970) - (Int(nowDayDate.millisecondsSince1970) - realmImageId)).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
-                        if error != nil {
-                            print("Error getting documents: \(String(describing: error))")
-                        } else {
-                            if let snapshot = snapshot {
-                                completion(snapshot)
-                            }
-                        }
-                    }
+                    self.tableView.reloadData()
                 }
             }
         }
@@ -132,7 +58,6 @@ extension AllWordingPageViewController: UITableViewDelegate {
 
 extension AllWordingPageViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let imageData = daonArray[indexPath.row].imageData
         let imageId = daonArray[indexPath.row].uploadTime
         let imageUrl = daonArray[indexPath.row].imageUrl
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "allWordingCellId", for: indexPath) as? AllWordingCell else {
@@ -143,38 +68,20 @@ extension AllWordingPageViewController: UITableViewDataSource {
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let nowDayString = dateFormatter.string(from: realmDayDate)
+        cell.backgroundColor = UIColor(named: "bgColor")
         cell.dayLabel.text = String(describing: nowDayString)
-        if imageData.isEmpty {
-            cell.allImageView.kf.indicatorType = .activity
-            let url = URL(string: imageUrl as! String)
-            cell.allImageView.kf.setImage(with: url, options: nil)
-            self.realm.writeAsync {
-                let realmDaon = RealmDaon()
-                realmDaon.uploadTime = imageId
-                let data = try! Data(contentsOf: URL(string: String(describing: imageUrl))!)
-                realmDaon.imageData = data
-                self.daonArray[indexPath.row].imageData = data
-                realmDaon.imageUrl = imageUrl
-                self.realm.add(realmDaon, update: .modified)
-            }
-        } else {
-            if cell.allImageView.image == nil {
-                DispatchQueue.main.async {
-                    cell.allImageView.image = UIImage(data: imageData)
-                }
-            }
-        }
+        cell.allImageView.kf.indicatorType = .activity
+        let url = URL(string: String(describing: imageUrl))
+        cell.allImageView.kf.setImage(with: url, options: nil)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let imageUrl = daonArray[indexPath.row].imageUrl
+        let uploadTime = daonArray[indexPath.row].uploadTime
+        mainImageUrl = imageUrl
+        mainUploadTime = Int(uploadTime)
         // 클릭한 셀의 이벤트 처리
-        print("@@@@@@@@@@ touch")
-        mainImageData = daonArray[indexPath.row].imageData
-        if mainImageData.isEmpty {
-            return
-        }
         tableView.deselectRow(at: indexPath, animated: true)
-        mainUploadTime = daonArray[indexPath.row].uploadTime
         let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
         guard let mainVC = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
         // 화면 전환 애니메이션 설정

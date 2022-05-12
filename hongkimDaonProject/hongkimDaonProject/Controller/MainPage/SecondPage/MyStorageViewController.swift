@@ -36,14 +36,6 @@ class MyStorageViewController: UIViewController {
 }
 
 extension MyStorageViewController: UITableViewDelegate {
-    // MARK: 스크롤 이벤트 (load more data)
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let offsetY = scrollView.contentOffset.y
-//        let contentHeight = scrollView.contentSize.height
-//        if offsetY > contentHeight - scrollView.frame.height {
-//            self.fetch()
-//        }
-    }
 }
 
 extension MyStorageViewController: UITableViewDataSource {
@@ -56,9 +48,11 @@ extension MyStorageViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "myStorageCellId", for: indexPath) as? MyStorageCell else {
             return UITableViewCell()
         }
-        let imageData = myDaons[indexPath.row].imageData
+        let imageUrl = myDaons[indexPath.row].imageUrl
         cell.backgroundColor = UIColor(named: "bgColor")
-        cell.myStorageImageView.image = UIImage(data: imageData)
+        cell.myStorageImageView.kf.indicatorType = .activity
+        let url = URL(string: String(describing: imageUrl))
+        cell.myStorageImageView.kf.setImage(with: url, options: nil)
         cell.contentMode = .scaleAspectFit
         cell.directionalLayoutMargins = .zero
         cell.layoutMargins = .zero
@@ -70,7 +64,7 @@ extension MyStorageViewController: UITableViewDataSource {
         // 클릭한 셀의 이벤트 처리
         // 이미지 크게 보기
         tableView.deselectRow(at: indexPath, animated: true)
-        mainImageData = myDaons[indexPath.row].imageData
+        mainImageUrl = myDaons[indexPath.row].imageUrl
         mainUploadTime = myDaons[indexPath.row].uploadTime
         let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
         guard let mainVC = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }

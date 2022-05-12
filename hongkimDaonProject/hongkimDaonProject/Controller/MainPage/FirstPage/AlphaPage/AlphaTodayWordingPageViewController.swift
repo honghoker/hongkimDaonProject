@@ -25,7 +25,9 @@ class AlphaTodayWordingPageViewController: UIViewController {
         backgroundUIView.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         backgroundUIView.isUserInteractionEnabled = true
         backgroundUIView.addGestureRecognizer(imageClick)
-        imageView.image = UIImage(data: mainImageData)
+        imageView.kf.indicatorType = .activity
+        let url = URL(string: String(describing: mainImageUrl))
+        imageView.kf.setImage(with: url, options: nil)
         saveBtn.addTarget(self, action: #selector(daonStorageSave), for: .touchUpInside)
         downloadBtn.addTarget(self, action: #selector(imageDownload), for: .touchUpInside)
     }
@@ -43,7 +45,9 @@ extension AlphaTodayWordingPageViewController {
     @objc
     func imageDownload() {
         LoadingIndicator.showLoading()
-        UIImageWriteToSavedPhotosAlbum(UIImage(data: mainImageData)!, self, nil, nil)
+        let url = URL(string: String(describing: mainImageUrl))
+        let data = try? Data(contentsOf: url!)
+        UIImageWriteToSavedPhotosAlbum(UIImage(data: data!)!, self, nil, nil)
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             LoadingIndicator.hideLoading()
             self.backgroundUIView.makeToast("사진첩에 저장되었습니다", duration: 1.5, position: .center)
@@ -64,7 +68,7 @@ extension AlphaTodayWordingPageViewController {
         if list.isEmpty == true {
             let myStorage = MyStorage()
             myStorage.uploadTime = mainUploadTime
-            myStorage.imageData = mainImageData
+            myStorage.imageUrl = mainImageUrl
             myStorage.storageTime = Int(Date().millisecondsSince1970)
             try? self.realm.write {
                 self.realm.add(myStorage)
