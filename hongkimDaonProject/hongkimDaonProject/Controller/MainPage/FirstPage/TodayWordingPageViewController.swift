@@ -15,6 +15,7 @@ class TodayWordingPageViewController: UIViewController {
     var imageUploadTime: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+//        try! FileManager.default.removeItem(at:Realm.Configuration.defaultConfiguration.fileURL!)
         let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
         Messaging.messaging().token { token, error in
             if let error = error {
