@@ -22,8 +22,8 @@
 - version 1.0.2 : 이미지 url 처리방식 변경 : realm -> firestore, kingfisher ( 22.05.13 )
 
 ## [ Develop Environment ]
-Language : Swift 5.6
-iOS Deployment Target : 14.0
+Language : Swift 5.6   
+iOS Deployment Target : 14.0   
 Xcode : 13.3
 
 ## [ Technical Skills ]
