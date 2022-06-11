@@ -19,7 +19,8 @@
 ## [Update]
 - version 1.0.0 : 앱 스토어 출시 ( 22.05.10 )
 - version 1.0.1 : 로그인화면 UI 문제 해결 & 오늘의 글 미리보기 오늘자로 보여주는걸로 변경 ( 22.05.13 )
-- version 1.0.2 : 이미지 url 처리방식 변경 : realm -> firestore, kingfisher ( 22.05.13 )
+- version 1.0.2 : 이미지 url 처리방식 변경 : realm -> firestore, kingfisher ( 22.05.13 )   
+- version 1.0.3 : 앱 최적화 ( 22.06.11 )
 
 ## [ Develop Environment ]
 - Language : Swift 5.6   
