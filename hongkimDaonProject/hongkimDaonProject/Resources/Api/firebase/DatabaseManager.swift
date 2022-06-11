@@ -1,7 +1,5 @@
 import Foundation
-import FirebaseStorage
 import FirebaseFirestore
-import Accelerate
 
 final class DatabaseManager {
     static let shared = DatabaseManager()

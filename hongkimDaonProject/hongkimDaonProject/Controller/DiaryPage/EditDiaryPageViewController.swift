@@ -1,10 +1,3 @@
-//
-//  EditDiaryPageViewController.swift
-//  hongkimDaonProject
-//
-//  Created by 홍은표 on 2022/04/27.
-//
-
 import Foundation
 import UIKit
 import FirebaseFirestoreSwift

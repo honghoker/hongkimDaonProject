@@ -1,9 +1,5 @@
 import Foundation
-import GoogleSignIn
-import Firebase
 import FirebaseAuth
-import FirebaseFirestore
-import RealmSwift
 
 final class AuthManager: NSObject {
     static let shared = AuthManager()

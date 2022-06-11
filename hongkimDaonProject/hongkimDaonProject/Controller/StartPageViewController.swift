@@ -20,7 +20,6 @@ class StartPageViewController: UIViewController {
         animationView.play {(finish) in
             self.animationView.play()
             if let user = Auth.auth().currentUser {
-                print("view user \(user.uid)")
                 let docRef = self.database.document("user/\(user.uid)")
                 docRef.getDocument { snapshot, error in
                     if let error = error {

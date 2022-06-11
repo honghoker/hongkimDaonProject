@@ -1,6 +1,5 @@
 import Foundation
 import UIKit
-import Toast_Swift
 
 // MARK: date to millisecond
 extension Date {

@@ -1,7 +1,5 @@
 import Foundation
-import Firebase
 import FirebaseFirestoreSwift
-import RealmSwift
 
 struct Daon: Codable {
     let imageUrl: String

@@ -2,7 +2,6 @@ import UIKit
 import SnapKit
 import Firebase
 import FirebaseFirestore
-import CoreAudio
 import Toast_Swift
 
 protocol DispatchDiary {

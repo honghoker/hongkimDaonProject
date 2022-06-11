@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 import SnapKit
-import AuthenticationServices
 import Kingfisher
 import Toast_Swift
 
