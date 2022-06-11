@@ -27,9 +27,7 @@ class SetNotificationPageViewController: UIViewController {
             LoadingIndicator.hideLoading()
         }
     }
-//    override func viewDidLayoutSubviews() {
-//        textField.text = "변경하기"
-//    }
+
     // MARK: set UI
     func setUIAtViewDidLoad() {
         let timePicker = UIDatePicker()
@@ -57,10 +55,7 @@ class SetNotificationPageViewController: UIViewController {
     func setNotificationValue(completion: @escaping() -> Void) {
         if let user = AuthManager.shared.auth.currentUser {
             self.database.document("user/\(user.uid)").getDocument {snaphot, error in
-                if let error = error {
-                    print("DEBUG: \(error.localizedDescription)")
-                    return
-                }
+                if let error = error { return }
                 guard let userNotificationTime = snaphot?.data()?["notificationTime"] else { return }
                 guard let userSwitchValue = snaphot?.data()?["notification"] else { return }
                 self.switchBtn.isOn = userSwitchValue as! Bool

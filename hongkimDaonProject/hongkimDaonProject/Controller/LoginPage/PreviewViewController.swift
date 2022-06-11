@@ -1,10 +1,3 @@
-//
-//  PreviewViewController.swift
-//  hongkimDaonProject
-//
-//  Created by 홍은표 on 2022/05/09.
-//
-
 import UIKit
 import Kingfisher
 
@@ -24,7 +17,7 @@ class PreviewViewController: UIViewController {
         let nowDayString = dateFormatter.string(from: now)
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         let nowDayDate: Date = dateFormatter.date(from: nowDayString)!
-        DatabaseManager.shared.fireStore.collection("daon").whereField("uploadTime", isLessThan: nowDayDate.millisecondsSince1970 + 86400000).order(by: "uploadTime", descending: true).limit(to: 1).getDocuments { snapshot, error in
+        DatabaseManager.shared.fireStore.collection("daon").whereField("uploadTime", isLessThan: nowDayDate.millisecondsSince1970 + DaonConstants.dayMilliSecond).order(by: "uploadTime", descending: true).limit(to: 1).getDocuments { snapshot, error in
             guard error == nil else {
                 return
             }

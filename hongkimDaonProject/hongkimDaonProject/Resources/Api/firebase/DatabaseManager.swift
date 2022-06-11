@@ -1,10 +1,3 @@
-//
-//  DatabaseManager.swift
-//  hongkimDaonProject
-//
-//  Created by 홍은표 on 2022/04/15.
-//
-
 import Foundation
 import FirebaseStorage
 import FirebaseFirestore

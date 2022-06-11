@@ -1,12 +1,4 @@
-//
-//  SceneDelegate.swift
-//  hongkimDaonProject
-//
-//  Created by 홍은표 on 2022/04/06.
-//
-
 import UIKit
-import FirebaseDynamicLinks
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let isDark = UserDefaults.standard.bool(forKey: "darkModeState")

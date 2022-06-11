@@ -9,7 +9,6 @@ public var mainUploadTime = 0
 
 class TodayWordingPageViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
-//    var realm: Realm!
     let database = DatabaseManager.shared.fireStore
     var imageUploadTime: Int = 0
     override func viewDidLoad() {
@@ -35,7 +34,6 @@ class TodayWordingPageViewController: UIViewController {
                 } else {
                     self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
                 }
-                print("FCM registration token: \(token)")
             }
         }
         if mainImageUrl == "" {
@@ -79,12 +77,8 @@ extension TodayWordingPageViewController {
         nextView.modalPresentationStyle = .fullScreen
         self.present(nextView, animated: false, completion: nil)
     }
-    // MARK: addImage
-     @objc
-     func addImage(_ gesture: UITapGestureRecognizer) {
-         let myDaon1 = Daon(imageUrl: "https://firebasestorage.googleapis.com/v0/b/hongkimdaonproject.appspot.com/o/today%2F2022%2F04%2F1651104000000.jpg?alt=media&token=53edc93b-8898-4501-80e1-84ef29610e97", storageUser: [:], uploadTime: 1651104000000)
-         database.collection("daon").document("\(myDaon1.uploadTime)").setData(["imageUrl": myDaon1.imageUrl, "storageUser": myDaon1.storageUser, "uploadTime": myDaon1.uploadTime])
-         let myDaon2 = Daon(imageUrl: "https://firebasestorage.googleapis.com/v0/b/hongkimdaonproject.appspot.com/o/today%2F2022%2F04%2F1651190400000.jpg?alt=media&token=758490a6-f6f1-4c65-ab5d-99781a5f41b8", storageUser: [:], uploadTime: 1651190400000)
-         database.collection("daon").document("\(myDaon2.uploadTime)").setData(["imageUrl": myDaon2.imageUrl, "storageUser": myDaon2.storageUser, "uploadTime": myDaon2.uploadTime])
-     }
+    func storeImage(_ url: String, _ uploadTime: Int64) {
+        let myDaon = Daon(imageUrl: url, storageUser: [:], uploadTime: uploadTime)
+        database.collection("daon").document("\(myDaon.uploadTime)").setData(["imageUrl": myDaon.imageUrl, "storageUser": myDaon.storageUser, "uploadTime": myDaon.uploadTime])
+    }
 }

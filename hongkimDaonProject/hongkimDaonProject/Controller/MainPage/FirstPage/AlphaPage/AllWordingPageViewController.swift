@@ -38,7 +38,7 @@ extension AllWordingPageViewController {
         let nowDayString = dateFormatter.string(from: now)
         dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
         let nowDayDate: Date = dateFormatter.date(from: nowDayString)!
-        self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int(nowDayDate.millisecondsSince1970) - 604800000).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
+        self.database.collection("daon").whereField("uploadTime", isGreaterThan: Int64(nowDayDate.millisecondsSince1970) - DaonConstants.weakMilliSecond).whereField("uploadTime", isLessThanOrEqualTo: Int(nowDayDate.millisecondsSince1970)).getDocuments { (snapshot, error) in
             if error != nil {
                 print("Error getting documents: \(String(describing: error))")
             } else {

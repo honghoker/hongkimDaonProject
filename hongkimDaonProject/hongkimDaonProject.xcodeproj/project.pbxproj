@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		510C84AC2819B19F002F12D6 /* NewDetailDiaryPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 510C84AB2819B19F002F12D6 /* NewDetailDiaryPageViewController.swift */; };
-		5117C9CE28008AD90072B9B2 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9CD28008AD90072B9B2 /* StorageManager.swift */; };
 		5117C9D92803F4500072B9B2 /* SettingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9D82803F4500072B9B2 /* SettingPageViewController.swift */; };
 		5117C9DB2803F4820072B9B2 /* SettingPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5117C9DA2803F4820072B9B2 /* SettingPageView.storyboard */; };
 		5117C9E12803FE830072B9B2 /* WriteDiaryPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5117C9E02803FE830072B9B2 /* WriteDiaryPageView.storyboard */; };
@@ -27,6 +26,7 @@
 		5174FEAE280C3A2900A844CD /* MyDiaryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5174FEAD280C3A2900A844CD /* MyDiaryCell.xib */; };
 		5174FEB0280C3B2400A844CD /* MyDiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5174FEAF280C3B2400A844CD /* MyDiaryCell.swift */; };
 		51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 51795E3927FD8BA700D5C696 /* .swiftlint.yml */; };
+		519F762E2854697F00A5BEDF /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9CD28008AD90072B9B2 /* StorageManager.swift */; };
 		51CD3A3828197EC900145778 /* EditDiaryPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CD3A3728197EC900145778 /* EditDiaryPageViewController.swift */; };
 		51CD3A3A2819825300145778 /* EditDiaryPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51CD3A392819825300145778 /* EditDiaryPageView.storyboard */; };
 		51F363C2280D221B003452F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 51F363C1280D221B003452F4 /* Realm */; };
@@ -460,7 +460,7 @@
 			developmentRegion = ko;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
+				ko,
 				Base,
 			);
 			mainGroup = 5153FF1727FD7BE00096AE7A;
@@ -567,6 +567,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				519F762E2854697F00A5BEDF /* StorageManager.swift in Sources */,
 				BC6C87B82812AC3D00156D89 /* SetNotificationPageViewController.swift in Sources */,
 				BC5777482807DE0700B4E664 /* TodayWordingPageViewController.swift in Sources */,
 				5174FEAA2808DFD800A844CD /* DatabaseManager.swift in Sources */,
@@ -577,8 +578,6 @@
 				5117C9D92803F4500072B9B2 /* SettingPageViewController.swift in Sources */,
 				5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */,
 				BC4BC7CB280923EC00C755BF /* AllWordingCell.swift in Sources */,
-				5117C9CE28008AD90072B9B2 /* StorageManager.swift in Sources */,
-				5117C9CE28008AD90072B9B2 /* StorageManager.swift in Sources */,
 				51F9209B2811B132005CC6B7 /* AppController.swift in Sources */,
 				BCA410DB282248EC000C318F /* Extensions.swift in Sources */,
 				5153FF2827FD7BE00096AE7A /* LoginViewController.swift in Sources */,
@@ -749,6 +748,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_ENTITLEMENTS = hongkimDaonProject/hongkimDaonProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -783,6 +783,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = NO;
 				CODE_SIGN_ENTITLEMENTS = hongkimDaonProject/hongkimDaonProject.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;

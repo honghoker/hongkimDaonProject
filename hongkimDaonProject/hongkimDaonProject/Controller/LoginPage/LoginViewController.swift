@@ -107,10 +107,8 @@ extension LoginViewController {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         let signInConfig = GIDConfiguration.init(clientID: clientID)
         GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-            guard error == nil else {
-//                self.view.makeToast("로그인 실패", duration: 1.5, position: .bottom)
-                return
-            } // 로그인 실패
+            // 로그인 실패
+            guard error == nil else { return }
             guard let authentication = user?.authentication else { return }
             // access token 부여 받음
             let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
@@ -118,7 +116,6 @@ extension LoginViewController {
             AuthManager.shared.auth.signIn(with: credential) {_, _ in
                 // token을 넘겨주면, 성공했는지 안했는지에 대한 result값과 error값을 넘겨줌
                 if let user = AuthManager.shared.auth.currentUser {
-                    print("구글 로그인 성공 user : \(user.uid)")
                     let docRef = self.database.document("user/\(user.uid)")
                     docRef.getDocument { snapshot, error in
                         if let error = error {
@@ -172,7 +169,6 @@ extension LoginViewController {
 
 extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        print("ASAuthorization ASAuthorization ASAuthorization")
         if let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential {
             guard let nonce = currentNonce else {
                 fatalError("Invalid state: A login callback was received, but no login request was sent.")

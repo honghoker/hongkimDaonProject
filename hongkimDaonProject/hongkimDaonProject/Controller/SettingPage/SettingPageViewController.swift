@@ -99,10 +99,7 @@ extension SettingPageViewController {
                 // MARK: 전환된 화면이 보여지는 방법 설정
                 loginViewController.modalPresentationStyle = .fullScreen
                 self.present(loginViewController, animated: true, completion: nil)
-                //                GIDSignIn.sharedInstance.signOut()
-                print("@@@@@@@@ logout complete")
             } catch let signOutError as NSError {
-                print("ERROR: signOutError \(signOutError.localizedDescription)")
                 self.showToast(msg: "로그아웃이 실패했습니다.")
             }
         }))
@@ -191,7 +188,7 @@ extension SettingPageViewController {
                                         authorizationController.presentationContextProvider = self
                                         authorizationController.performRequests()
                                     default:
-                                        print("user is signed in with \(userInfo.providerID)")
+                                        print("not exist ProviderId")
                                     }
                                 }
                             }
@@ -199,7 +196,6 @@ extension SettingPageViewController {
                         self.present(alert, animated: true, completion: nil)
                     default:
                         completion(.failure(AuthErros.failedToWithdrawal))
-                        print("Error message: \(error.localizedDescription)")
                     }
                 } else {
                     self.successToWithdrawal(uid)
@@ -265,7 +261,6 @@ extension SettingPageViewController: ASAuthorizationControllerDelegate {
                             self.showToast(msg: "회원탈퇴에 실패했습니다.")
                             return
                         }
-                        print("@@@@@@@ 탈퇴 성공")
                         self.appExit()
                     }
                 }
