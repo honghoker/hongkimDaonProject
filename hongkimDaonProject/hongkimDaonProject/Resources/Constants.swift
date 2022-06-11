@@ -4,6 +4,8 @@ import UIKit
 // MARK: daon color
 struct DaonConstants {
     static let daonColor = UIColor(red: 238/255, green: 226/255, blue: 203/255, alpha: 1)
+    static let dayMilliSecond: Int64 = 86400000
+    static let weakMilliSecond: Int64 = 604800000
 }
 
 // MARK: Loading
@@ -61,27 +63,3 @@ func randomNonceString(length: Int = 32) -> String {
     }
     return result
 }
-
-// MARK: realm db 삭제
-//                try! FileManager.default.removeItem(at:Realm.Configuration.defaultConfiguration.fileURL!)
-//                print(Realm.Configuration.defaultConfiguration.fileURL!)
-
-// MARK: custom DayDate mil
-//        let dateString:String = "2022-05"
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy-MM"
-//        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-//        let date:Date = dateFormatter.date(from: dateString)!
-//        print("before date String \(date)")
-//        print("after date String \(date.adding(.month, value: 1))")
-
-// MARK: nowDayDate mil
-//        let now = Date()
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-//        let nowDayString = dateFormatter.string(from: now)
-//        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-//        let nowDayDate: Date = dateFormatter.date(from: nowDayString)!
-//        print("nowDayDate \(nowDayDate)")
-//        print("nowDayDate mil \(nowDayDate.millisecondsSince1970)")

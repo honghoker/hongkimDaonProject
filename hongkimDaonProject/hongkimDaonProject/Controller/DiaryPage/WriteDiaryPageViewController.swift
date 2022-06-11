@@ -1,10 +1,3 @@
-//
-//  WriteDiaryPageViewController.swift
-//  hongkimDaonProject
-//
-//  Created by 홍은표 on 2022/04/11.
-//
-
 import UIKit
 import FirebaseFirestoreSwift
 import FMPhotoPicker
@@ -71,8 +64,7 @@ extension WriteDiaryPageViewController {
                               imageExist: self.imageView.image != nil, imageWidth: self.imageView.image?.size.width ?? 0, imageHeight: self.imageView.image?.size.height ?? 0, imageUploadComplete: self.imageView.image == nil)
             DatabaseManager.shared.writeDiary(diary: diary) { result in
                 switch result {
-                case .success(let success):
-                    print("@@@@@@@ 일기쓰기 성공 : \(success)")
+                case .success:
                     if self.imageView.image != nil {
                         guard let image = self.imageView.image,
                               let data = image.jpegData(compressionQuality: 0.5) else {
@@ -83,21 +75,21 @@ extension WriteDiaryPageViewController {
                             case .success(let downloadUrl):
                                 DatabaseManager.shared.updateImageUrl(docId: String(writeTime), imageUrl: downloadUrl) { result in
                                     switch result {
-                                    case .success(let success):
-                                        print("@@@@@@@@@ imageUpdate 성공 : \(success)")
-                                    case .failure(let error):
-                                        print("@@@@@@@@ failedToUpdateImageUrl error : \(error)")
+                                    case .success:
+                                        print("updateImage success")
+                                    case .failure:
+                                        print("updateImage failure")
                                     }
                                 }
-                            case .failure(let error):
-                                print("@@@@@@@@@@@ Storage manager error: \(error)")
+                            case .failure:
+                                print("uploadImage error")
                             }
                         }
                     }
                     LoadingIndicator.hideLoading()
                     self.delegate?.dispatch(self, Input: diary)
                     self.presentingViewController?.dismiss(animated: true)
-                case .failure(let error):
+                case .failure:
                     LoadingIndicator.hideLoading()
                     self.view.makeToast("일기 쓰기에 실패했습니다.", duration: 1.5, position: .bottom)
                 }
@@ -135,10 +127,8 @@ extension WriteDiaryPageViewController {
 extension WriteDiaryPageViewController: FMPhotoPickerViewControllerDelegate {
     func fmImageEditorViewController(_ editor: FMImageEditorViewController, didFinishEdittingPhotoWith photo: UIImage) {
         self.dismiss(animated: true, completion: nil)
-        print("@@@@@@@@@@@@ photo : \(photo)")
     }
     func fmPhotoPickerController(_ picker: FMPhotoPickerViewController, didFinishPickingPhotoWith photos: [UIImage]) {
-        print("@@@@@@@@@@@@ photo222 : \(photos[0])")
         self.dismiss(animated: true, completion: nil)
         imageView.image = photos[0]
         imageViewLabel.isHidden = true

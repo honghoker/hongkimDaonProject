@@ -1,5 +1,4 @@
 import UIKit
-import FirebaseAuth
 import FirebaseFirestore
 import RealmSwift
 import Kingfisher

@@ -1,14 +1,6 @@
-//
-//  NewDiaryPageViewController.swift
-//  hongkimDaonProject
-//
-//  Created by 홍은표 on 2022/04/28.
-//
-
 import Foundation
 import UIKit
 import SnapKit
-import AuthenticationServices
 import Kingfisher
 import Toast_Swift
 
@@ -98,11 +90,9 @@ class NewDetailDiaryPageViewController: UIViewController {
         // MARK: Loading 시작
         DatabaseManager.shared.fireStore.collection("diary").document(docId!).addSnapshotListener { documentSnapshot, error in
             guard let document = documentSnapshot else {
-                print("Error fetching document: \(error!)")
                 return
             }
             guard document.data() != nil else {
-                print("Document data was empty.")
                 return
             }
             guard let diary: Diary = try? document.data(as: Diary.self) else { return }
@@ -151,9 +141,9 @@ class NewDetailDiaryPageViewController: UIViewController {
                     self.imageView.kf.indicatorType = .activity
                     self.imageView.kf.setImage(with: url, options: [.processor(processor)]) { result in
                         switch result {
-                        case .success(_):
+                        case .success:
                             self.imageLoadComplete = true
-                        case .failure(_):
+                        case .failure:
                             self.imageLoadComplete = false
                         }
                     }

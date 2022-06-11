@@ -11,13 +11,6 @@ class AlphaMainPageViewController: TabmanViewController {
     var uploadTime: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-//        if isDark == true {
-//            tintColor = UIColor.darkGray
-//            selectedTintColor = UIColor(red: 213/255, green: 182/255, blue: 124/255, alpha: 1)
-//        } else {
-//            tintColor = UIColor.darkGray
-//            selectedTintColor = UIColor(red: 213/255, green: 182/255, blue: 124/255, alpha: 1)
-//        }
         setUI()
     }
     // MARK: set UI

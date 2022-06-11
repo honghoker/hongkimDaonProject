@@ -2,7 +2,6 @@ import UIKit
 import SnapKit
 import Firebase
 import FirebaseFirestore
-import CoreAudio
 import Toast_Swift
 
 protocol DispatchDiary {
@@ -67,21 +66,20 @@ extension MyDiaryViewController {
             return
         }
         let uid = user.uid
-        print("uid uid uid \(uid)")
         isFetching = true
         self.fetchDiary(uid: uid) { (snapshot, error) in
             guard error == nil else {
-                print("Error when get diarys: \(error!)")
+//                print("Error when get diarys: \(error!)")
                 self.isFetching = false
                 return
             }
             guard let snapshot = snapshot else {
-                print("diary docs is null")
+//                print("diary docs is null")
                 self.isFetching = false
                 return
             }
             guard !snapshot.documents.isEmpty else {
-                print("diary docs is empty")
+//                print("diary docs is empty")
                 self.isNext = false
                 self.isFetching = false
                 return

@@ -1,10 +1,3 @@
-//
-//  EditDiaryPageViewController.swift
-//  hongkimDaonProject
-//
-//  Created by 홍은표 on 2022/04/27.
-//
-
 import Foundation
 import UIKit
 import FirebaseFirestoreSwift
@@ -74,7 +67,6 @@ extension EditDiaryPageViewController {
     }
     @objc
     func complete(_ gesture: UITapGestureRecognizer) {
-        print("@@@@@@ complete Touch")
         if AuthManager.shared.auth.currentUser?.uid != nil {
             LoadingIndicator.showLoading()
             if var diary = self.diary {
@@ -89,7 +81,7 @@ extension EditDiaryPageViewController {
                 }
                 DatabaseManager.shared.updateDiary(diary: diary, completion: {result in
                     switch result {
-                    case .success(let success):
+                    case .success:
                         // MARK: 이미지를 변경했을 경우, 삭제했을 경우
                         if self.imageView.image != self.image {
                             // MARK: 기존 이미지 삭제
@@ -103,23 +95,22 @@ extension EditDiaryPageViewController {
                                     case .success(let downloadUrl):
                                         DatabaseManager.shared.updateImageUrl(docId: String(diary.writeTime), imageUrl: downloadUrl) { result in
                                             switch result {
-                                            case .success(let success):
-                                                print("@@@@@@@@@ imageUpdate 성공 : \(success)")
-                                            case .failure(let error):
-                                                print("@@@@@@@@ failedToUpdateImageUrl error : \(error)")
+                                            case .success:
+                                                print("updateImage success")
+                                            case .failure:
+                                                print("updateImage faulure")
                                             }
                                         }
-                                    case .failure(let error):
-                                        print("@@@@@@@@@@@ Storage manager error: \(error)")
+                                    case .failure:
+                                        print("uploadImage error")
                                     }
                                 }
                             }
                         }
-                        print("@@@@@@@@@ update 성공")
                         LoadingIndicator.hideLoading()
                         self.delegate?.update(self, Input: diary)
                         self.presentingViewController?.dismiss(animated: true)
-                    case .failure(let error):
+                    case .failure:
                         LoadingIndicator.hideLoading()
                         self.view.makeToast("일기 수정이 실패했습니다.", duration: 1.5, position: .bottom)
                     }
@@ -158,10 +149,8 @@ extension EditDiaryPageViewController {
 extension EditDiaryPageViewController: FMPhotoPickerViewControllerDelegate {
     func fmImageEditorViewController(_ editor: FMImageEditorViewController, didFinishEdittingPhotoWith photo: UIImage) {
         self.dismiss(animated: true, completion: nil)
-        print("@@@@@@@@@@@@ photo : \(photo)")
     }
     func fmPhotoPickerController(_ picker: FMPhotoPickerViewController, didFinishPickingPhotoWith photos: [UIImage]) {
-        print("@@@@@@@@@@@@ photo222 : \(photos[0])")
         self.dismiss(animated: true, completion: nil)
         imageView.image = photos[0]
         imageViewLabel.isHidden = true

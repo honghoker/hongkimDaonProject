@@ -6,7 +6,6 @@ import Kingfisher
 import RealmSwift
 import Toast_Swift
 import MobileCoreServices
-import FirebaseDynamicLinks
 
 class AlphaTodayWordingPageViewController: UIViewController {
     @IBOutlet weak var downloadBtn: UIButton!
