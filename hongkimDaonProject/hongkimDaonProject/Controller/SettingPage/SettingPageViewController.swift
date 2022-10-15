@@ -99,7 +99,7 @@ extension SettingPageViewController {
                 // MARK: 전환된 화면이 보여지는 방법 설정
                 loginViewController.modalPresentationStyle = .fullScreen
                 self.present(loginViewController, animated: true, completion: nil)
-            } catch let signOutError as NSError {
+            } catch _ as NSError {
                 self.showToast(msg: "로그아웃이 실패했습니다.")
             }
         }))
@@ -137,73 +137,57 @@ extension SettingPageViewController {
         }))
         self.present(alert, animated: true, completion: nil)
     }
-    func withdrawal(completion: @escaping (Result<String, Error>) -> Void) {
-        if let currentUser = AuthManager.shared.auth.currentUser {
-            let uid = currentUser.uid
-            currentUser.delete { error in
-                if let error = error as? NSError {
-                    switch AuthErrorCode(rawValue: error.code) {
-                    case .requiresRecentLogin:
-                        let alert = UIAlertController(title: "사용자 정보가 만료되었습니다.",
-                                                      message: "탈퇴하려는 사용자의 계정으로 다시 로그인해주세요.", preferredStyle: UIAlertController.Style.alert)
-                        alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
-                        }))
-                        alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { _ in
-                            if currentUser.providerData.isEmpty != true {
-                                for userInfo in currentUser.providerData {
-                                    switch userInfo.providerID {
-                                    case "google.com":
-                                        guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-                                        let signInConfig = GIDConfiguration.init(clientID: clientID)
-                                        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-                                            guard error == nil else {
-                                                completion(.failure(AuthErros.failedToSignIn))
-                                                return
-                                            }
-                                            guard let authentication = user?.authentication else { return }
-                                            if currentUser.email == user?.profile?.email && currentUser.displayName == user?.profile?.name {
-                                                let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
-                                                currentUser.reauthenticate(with: credential) { result, error in
-                                                    guard error == nil else {
-                                                        completion(.failure(AuthErros.failedToWithdrawal))
-                                                        return
-                                                    }
-                                                    currentUser.delete { error in
-                                                        guard error == nil else {
-                                                            completion(.failure(AuthErros.failedToWithdrawal))
-                                                            return
-                                                        }
-                                                        self.successToWithdrawal(uid)
-                                                        completion(.success(""))
-                                                    }
-                                                }
-                                            } else {
-                                                completion(.failure(AuthErros.notEqualUser))
-                                            }
-                                        }
-                                    case "apple.com":
-                                        let request = self.createAppleIDRequest()
-                                        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-                                        authorizationController.delegate = self
-                                        authorizationController.presentationContextProvider = self
-                                        authorizationController.performRequests()
-                                    default:
-                                        print("not exist ProviderId")
+    func withdrawal(completion: @escaping (Result<Void, Error>) -> Void) {
+        guard let currentUser = AuthManager.shared.auth.currentUser else { return completion(.failure(AuthErros.currentUserNotExist)) }
+        currentUser.delete { error in
+            guard let error = error as? NSError else {
+                self.successToWithdrawal(currentUser.uid)
+                return completion(.success(()))
+            }
+            switch AuthErrorCode(rawValue: error.code) {
+            case .requiresRecentLogin:
+                let alert = UIAlertController(title: "사용자 정보가 만료되었습니다.",
+                                              message: "탈퇴하려는 사용자의 계정으로 다시 로그인해주세요.", preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
+                }))
+                alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { _ in
+                    guard !currentUser.providerData.isEmpty else { return completion(.failure(AuthErros.failedToWithdrawal)) }
+                    for userInfo in currentUser.providerData {
+                        switch userInfo.providerID {
+                        case "google.com":
+                            guard let clientID = FirebaseApp.app()?.options.clientID else { return completion(.failure(AuthErros.failedToWithdrawal)) }
+                            let signInConfig = GIDConfiguration.init(clientID: clientID)
+                            GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+                                guard error == nil else { return completion(.failure(AuthErros.failedToSignIn)) }
+                                guard let authentication = user?.authentication else { return completion(.failure(AuthErros.failedToWithdrawal)) }
+                                guard currentUser.email == user?.profile?.email && currentUser.displayName == user?.profile?.name else {
+                                    return completion(.failure(AuthErros.notEqualUser))
+                                }
+                                let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
+                                currentUser.reauthenticate(with: credential) { _, error in
+                                    guard error == nil else { return completion(.failure(AuthErros.failedToWithdrawal)) }
+                                    currentUser.delete { error in
+                                        guard error == nil else { return completion(.failure(AuthErros.failedToWithdrawal)) }
+                                        self.successToWithdrawal(currentUser.uid)
+                                        completion(.success(()))
                                     }
                                 }
                             }
-                        }))
-                        self.present(alert, animated: true, completion: nil)
-                    default:
-                        completion(.failure(AuthErros.failedToWithdrawal))
+                        case "apple.com":
+                            let request = self.createAppleIDRequest()
+                            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+                            authorizationController.delegate = self
+                            authorizationController.presentationContextProvider = self
+                            authorizationController.performRequests()
+                        default:
+                            print("not exist ProviderId")
+                        }
                     }
-                } else {
-                    self.successToWithdrawal(uid)
-                    completion(.success(""))
-                }
+                }))
+                self.present(alert, animated: true, completion: nil)
+            default:
+                completion(.failure(AuthErros.failedToWithdrawal))
             }
-        } else {
-            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
         }
     }
     private func successToWithdrawal(_ uid: String) {
