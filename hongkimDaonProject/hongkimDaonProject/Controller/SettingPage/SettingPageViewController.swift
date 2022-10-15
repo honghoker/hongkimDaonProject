@@ -65,7 +65,7 @@ extension SettingPageViewController {
         present(alert, animated: true, completion: nil)
     }
     @objc
-    func showToast(msg: String) {
+    func showToast(msg: String?) {
         self.view.makeToast(msg, duration: 1.5, position: .bottom)
     }
     @objc
@@ -120,25 +120,15 @@ extension SettingPageViewController {
                     // MARK: 탈퇴 성공 시 앱 종료
                     self.appExit()
                 case .failure(let error):
-                    switch error as? AuthErros {
-                    case .failedToSignIn:
-                        self.showToast(msg: "로그인에 실패했습니다.")
-                    case .currentUserNotExist:
-                        self.showToast(msg: "사용자 정보를 가져오는데 실패했습니다.")
-                    case .notEqualUser:
-                        self.showToast(msg: "회원탈퇴가 실패했습니다.\n현재 로그인한 계정과 다른 계정입니다.")
-                    case .failedToWithdrawal:
-                        self.showToast(msg: "회원탈퇴에 실패했습니다.")
-                    default:
-                        self.showToast(msg: "회원탈퇴에 실패했습니다.")
-                    }
+                    guard let error = error as? AuthErrors else { return self.showToast(msg: "회원탈퇴에 실패했습니다.") }
+                    self.showToast(msg: error.errorDescription)
                 }
             }
         }))
         self.present(alert, animated: true, completion: nil)
     }
     func withdrawal(completion: @escaping (Result<Void, Error>) -> Void) {
-        guard let currentUser = AuthManager.shared.auth.currentUser else { return completion(.failure(AuthErros.currentUserNotExist)) }
+        guard let currentUser = AuthManager.shared.auth.currentUser else { return completion(.failure(AuthErrors.currentUserNotExist)) }
         currentUser.delete { error in
             guard let error = error as? NSError else {
                 self.successToWithdrawal(currentUser.uid)
@@ -151,23 +141,23 @@ extension SettingPageViewController {
                 alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
                 }))
                 alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { _ in
-                    guard !currentUser.providerData.isEmpty else { return completion(.failure(AuthErros.failedToWithdrawal)) }
+                    guard !currentUser.providerData.isEmpty else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
                     for userInfo in currentUser.providerData {
                         switch userInfo.providerID {
                         case "google.com":
-                            guard let clientID = FirebaseApp.app()?.options.clientID else { return completion(.failure(AuthErros.failedToWithdrawal)) }
+                            guard let clientID = FirebaseApp.app()?.options.clientID else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
                             let signInConfig = GIDConfiguration.init(clientID: clientID)
                             GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-                                guard error == nil else { return completion(.failure(AuthErros.failedToSignIn)) }
-                                guard let authentication = user?.authentication else { return completion(.failure(AuthErros.failedToWithdrawal)) }
+                                guard error == nil else { return completion(.failure(AuthErrors.failedToSignIn)) }
+                                guard let authentication = user?.authentication else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
                                 guard currentUser.email == user?.profile?.email && currentUser.displayName == user?.profile?.name else {
-                                    return completion(.failure(AuthErros.notEqualUser))
+                                    return completion(.failure(AuthErrors.notEqualUser))
                                 }
                                 let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
                                 currentUser.reauthenticate(with: credential) { _, error in
-                                    guard error == nil else { return completion(.failure(AuthErros.failedToWithdrawal)) }
+                                    guard error == nil else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
                                     currentUser.delete { error in
-                                        guard error == nil else { return completion(.failure(AuthErros.failedToWithdrawal)) }
+                                        guard error == nil else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
                                         self.successToWithdrawal(currentUser.uid)
                                         completion(.success(()))
                                     }
@@ -186,7 +176,7 @@ extension SettingPageViewController {
                 }))
                 self.present(alert, animated: true, completion: nil)
             default:
-                completion(.failure(AuthErros.failedToWithdrawal))
+                completion(.failure(AuthErrors.failedToWithdrawal))
             }
         }
     }
