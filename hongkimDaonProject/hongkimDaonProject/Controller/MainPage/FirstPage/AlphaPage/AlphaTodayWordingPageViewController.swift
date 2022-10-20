@@ -45,12 +45,28 @@ extension AlphaTodayWordingPageViewController {
     func imageDownload() {
         LoadingIndicator.showLoading()
         let url = URL(string: String(describing: mainImageUrl))
-        let data = try? Data(contentsOf: url!)
-        UIImageWriteToSavedPhotosAlbum(UIImage(data: data!)!, self, nil, nil)
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            LoadingIndicator.hideLoading()
-            self.backgroundUIView.makeToast("사진첩에 저장되었습니다", duration: 1.5, position: .center)
-        }
+        URLSession.shared.dataTask(with: url!) { [weak self] data, response, error in
+            guard let data = data,
+                let response = response as? HTTPURLResponse,
+                error == nil
+            else {
+                print("network error:", error ?? "Unknown error")
+                return
+            }
+            guard 200..<300 ~= response.statusCode else {
+                print("invalid status code, expected 2xx, received", response.statusCode)
+                return
+            }
+            guard let image = UIImage(data: data) else {
+                print("Not valid image")
+                return
+            }
+            UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
+            DispatchQueue.main.async {
+                LoadingIndicator.hideLoading()
+                self?.backgroundUIView.makeToast("사진첩에 저장되었습니다", duration: 1.5, position: .center)
+            }
+        }.resume()
     }
     @objc
     func daonStorageSave() {
