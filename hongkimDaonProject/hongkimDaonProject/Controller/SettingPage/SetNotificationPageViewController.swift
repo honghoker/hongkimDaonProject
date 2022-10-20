@@ -54,12 +54,12 @@ class SetNotificationPageViewController: UIViewController {
     // MARK: set 알람시간
     func setNotificationValue(completion: @escaping() -> Void) {
         if let user = AuthManager.shared.auth.currentUser {
-            self.database.document("user/\(user.uid)").getDocument {snaphot, error in
-                if let error = error { return }
+            self.database.document("user/\(user.uid)").getDocument { [weak self] (snaphot, error) in
+                guard error == nil else { return }
                 guard let userNotificationTime = snaphot?.data()?["notificationTime"] else { return }
                 guard let userSwitchValue = snaphot?.data()?["notification"] else { return }
-                self.switchBtn.isOn = userSwitchValue as! Bool
-                self.textLabel.text = String(describing: userNotificationTime)
+                self?.switchBtn.isOn = userSwitchValue as! Bool
+                self?.textLabel.text = String(describing: userNotificationTime)
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     completion()
                 }

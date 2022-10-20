@@ -87,7 +87,6 @@ extension WriteDiaryPageViewController {
                         }
                     }
                     LoadingIndicator.hideLoading()
-//                    guard let self = self else { return }
                     self?.delegate?.dispatch(Input: diary)
                     self?.presentingViewController?.dismiss(animated: true)
                 case .failure:
