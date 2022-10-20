@@ -114,14 +114,17 @@ extension SettingPageViewController {
         alert.addAction(UIAlertAction(title: "탈퇴",
                                       style: UIAlertAction.Style.default,
                                       handler: {(_: UIAlertAction!) in
-            self.withdrawal { result in
+            self.withdrawal { [weak self] result in
                 switch result {
                 case .success:
                     // MARK: 탈퇴 성공 시 앱 종료
-                    self.appExit()
+                    self?.appExit()
                 case .failure(let error):
-                    guard let error = error as? AuthErrors else { return self.showToast(msg: "회원탈퇴에 실패했습니다.") }
-                    self.showToast(msg: error.errorDescription)
+                    guard let error = error as? AuthErrors else {
+                        self?.showToast(msg: "회원탈퇴에 실패했습니다.")
+                        return
+                    }
+                    self?.showToast(msg: error.errorDescription)
                 }
             }
         }))

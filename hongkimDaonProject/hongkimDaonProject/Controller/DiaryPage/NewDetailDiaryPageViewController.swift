@@ -205,18 +205,19 @@ extension NewDetailDiaryPageViewController {
                                       message: "", preferredStyle: UIAlertController.Style.alert)
         alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
         }))
-        alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { _ in
-            if self.uploadCheck() == true {
+        alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { [weak self] _ in
+            if self?.uploadCheck() == true {
                 LoadingIndicator.showLoading()
-                DatabaseManager.shared.fireStore.collection("diary").document(self.docId!).delete { result in
+                guard let docId = self?.docId else { return }
+                DatabaseManager.shared.fireStore.collection("diary").document(docId).delete { [weak self] result in
                     guard result == nil else {
-                        self.view.makeToast("일기 삭제에 실패했습니다.", duration: 1.5, position: .bottom)
+                        self?.view.makeToast("일기 삭제에 실패했습니다.", duration: 1.5, position: .bottom)
                         LoadingIndicator.hideLoading()
                         return
                     }
                     LoadingIndicator.hideLoading()
-                    self.delegate?.delete(self, Delete: self.docId)
-                    self.presentingViewController?.dismiss(animated: true, completion: nil)
+                    self?.delegate?.delete(Delete: self?.docId)
+                    self?.presentingViewController?.dismiss(animated: true, completion: nil)
                 }
             }
         }))
@@ -248,13 +249,13 @@ extension NewDetailDiaryPageViewController: UIScrollViewDelegate {
 }
 
 extension NewDetailDiaryPageViewController: DispatchDiary {
-    func update(_ vc: UIViewController, Input value: Diary?) {
+    func update(Input value: Diary?) {
         if let diary = value {
-            self.delegate?.update(self, Input: diary)
+            self.delegate?.update(Input: diary)
         }
     }
-    func delete(_ vc: UIViewController, Delete id: String?) {}
-    func dispatch(_ vc: UIViewController, Input value: Diary?) {}
+    func delete(Delete id: String?) {}
+    func dispatch(Input value: Diary?) {}
 }
 
 extension NewDetailDiaryPageViewController: UIGestureRecognizerDelegate {

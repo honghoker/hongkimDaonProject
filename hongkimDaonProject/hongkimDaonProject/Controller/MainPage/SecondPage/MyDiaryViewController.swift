@@ -4,10 +4,10 @@ import Firebase
 import FirebaseFirestore
 import Toast_Swift
 
-protocol DispatchDiary {
-    func dispatch(_ vc: UIViewController, Input value: Diary?)
-    func update(_ vc: UIViewController, Input value: Diary?)
-    func delete(_ vc: UIViewController, Delete id: String?)
+protocol DispatchDiary: AnyObject {
+    func dispatch(Input value: Diary?)
+    func update(Input value: Diary?)
+    func delete(Delete id: String?)
 }
 
 class MyDiaryViewController: UIViewController {
@@ -67,33 +67,37 @@ extension MyDiaryViewController {
         }
         let uid = user.uid
         isFetching = true
-        self.fetchDiary(uid: uid) { (snapshot, error) in
+        self.fetchDiary(uid: uid) { [weak self] (snapshot, error) in
             guard error == nil else {
 //                print("Error when get diarys: \(error!)")
-                self.isFetching = false
+                self?.isFetching = false
                 return
             }
             guard let snapshot = snapshot else {
 //                print("diary docs is null")
-                self.isFetching = false
+                self?.isFetching = false
                 return
             }
             guard !snapshot.documents.isEmpty else {
 //                print("diary docs is empty")
-                self.isNext = false
-                self.isFetching = false
+                self?.isNext = false
+                self?.isFetching = false
                 return
             }
             let newDiarys = snapshot.documents.map({ (diarySnapshot: QueryDocumentSnapshot) -> Diary in
                 return try! diarySnapshot.data(as: Diary.self)
             })
-            if self.limit > newDiarys.count { self.isNext = false }
-            self.lastCurrentPageDoc = snapshot.documents.last
-            self.myDiarys.append(contentsOf: newDiarys)
-            DispatchQueue.main.async {
-                self.diaryTableView.reloadData()
+            if let limit = self?.limit {
+                if limit > newDiarys.count {
+                    self?.isNext = false
+                }
             }
-            self.isFetching = false
+            self?.lastCurrentPageDoc = snapshot.documents.last
+            self?.myDiarys.append(contentsOf: newDiarys)
+            DispatchQueue.main.async {
+                self?.diaryTableView.reloadData()
+            }
+            self?.isFetching = false
         }
     }
     func fetchDiary(uid: String, completed: @escaping (QuerySnapshot?, Error?) -> Void) {
@@ -139,7 +143,7 @@ extension MyDiaryViewController {
 }
 
 extension MyDiaryViewController: DispatchDiary {
-    func update(_ vc: UIViewController, Input value: Diary?) {
+    func update(Input value: Diary?) {
         if let diary = value {
             if let index = self.myDiarys.firstIndex(where: {
                 $0.writeTime == Int64(diary.writeTime)}) {
@@ -150,7 +154,7 @@ extension MyDiaryViewController: DispatchDiary {
             }
         }
     }
-    func delete(_ vc: UIViewController, Delete value: String?) {
+    func delete(Delete value: String?) {
         if let writeTime = value {
             if let index = self.myDiarys.firstIndex(where: {
                 $0.writeTime == Int64(writeTime)}) {
@@ -161,7 +165,7 @@ extension MyDiaryViewController: DispatchDiary {
             }
         }
     }
-    func dispatch(_ vc: UIViewController, Input value: Diary?) {
+    func dispatch(Input value: Diary?) {
         if let diary = value {
             self.myDiarys.insert(diary, at: 0)
             DispatchQueue.main.async {

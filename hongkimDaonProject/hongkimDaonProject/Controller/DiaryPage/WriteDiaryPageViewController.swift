@@ -5,7 +5,7 @@ import SnapKit
 import STTextView
 
 class WriteDiaryPageViewController: UIViewController {
-    var delegate: DispatchDiary?
+    weak var delegate: DispatchDiary?
     @IBOutlet weak var imageViewLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var backBtn: UILabel!
@@ -62,15 +62,15 @@ extension WriteDiaryPageViewController {
             let content = diaryContentTextView.text ?? ""
             let diary = Diary(id: nil, uid: uid, imageUrl: "", content: content, writeTime: writeTime,
                               imageExist: self.imageView.image != nil, imageWidth: self.imageView.image?.size.width ?? 0, imageHeight: self.imageView.image?.size.height ?? 0, imageUploadComplete: self.imageView.image == nil)
-            DatabaseManager.shared.writeDiary(diary: diary) { result in
+            DatabaseManager.shared.writeDiary(diary: diary) { [weak self] result in
                 switch result {
                 case .success:
-                    if self.imageView.image != nil {
-                        guard let image = self.imageView.image,
+                    if self?.imageView.image != nil {
+                        guard let image = self?.imageView.image,
                               let data = image.jpegData(compressionQuality: 0.5) else {
                             return
                         }
-                        StorageManager.shared.uploadImage(with: data, filePath: "diary", fileName: String(writeTime)) { result in
+                        StorageManager.shared.uploadImage(with: data, filePath: "diary", fileName: String(writeTime)) { [weak self] result in
                             switch result {
                             case .success(let downloadUrl):
                                 DatabaseManager.shared.updateImageUrl(docId: String(writeTime), imageUrl: downloadUrl) { result in
@@ -87,11 +87,12 @@ extension WriteDiaryPageViewController {
                         }
                     }
                     LoadingIndicator.hideLoading()
-                    self.delegate?.dispatch(self, Input: diary)
-                    self.presentingViewController?.dismiss(animated: true)
+//                    guard let self = self else { return }
+                    self?.delegate?.dispatch(Input: diary)
+                    self?.presentingViewController?.dismiss(animated: true)
                 case .failure:
                     LoadingIndicator.hideLoading()
-                    self.view.makeToast("일기 쓰기에 실패했습니다.", duration: 1.5, position: .bottom)
+                    self?.view.makeToast("일기 쓰기에 실패했습니다.", duration: 1.5, position: .bottom)
                 }
             }
         } else {

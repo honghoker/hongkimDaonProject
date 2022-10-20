@@ -79,18 +79,18 @@ extension EditDiaryPageViewController {
                 } else {
                     diary.imageUploadComplete = self.imageView.image == self.image
                 }
-                DatabaseManager.shared.updateDiary(diary: diary, completion: {result in
+                DatabaseManager.shared.updateDiary(diary: diary, completion: { [weak self] result in
                     switch result {
                     case .success:
                         // MARK: 이미지를 변경했을 경우, 삭제했을 경우
-                        if self.imageView.image != self.image {
+                        if self?.imageView.image != self?.image {
                             // MARK: 기존 이미지 삭제
-                            if self.image != nil {
+                            if self?.image != nil {
                                 StorageManager.shared.deleteImage(downloadURL: diary.imageUrl)
                             }
                             // MARK: 이미지 변경 시
-                            if let image = self.imageView.image, let data = image.jpegData(compressionQuality: 0.5) {
-                                StorageManager.shared.uploadImage(with: data, filePath: "diary", fileName: String(diary.writeTime)) { result in
+                            if let image = self?.imageView.image, let data = image.jpegData(compressionQuality: 0.5) {
+                                StorageManager.shared.uploadImage(with: data, filePath: "diary", fileName: String(diary.writeTime)) { [weak self] result in
                                     switch result {
                                     case .success(let downloadUrl):
                                         DatabaseManager.shared.updateImageUrl(docId: String(diary.writeTime), imageUrl: downloadUrl) { result in
@@ -108,11 +108,12 @@ extension EditDiaryPageViewController {
                             }
                         }
                         LoadingIndicator.hideLoading()
-                        self.delegate?.update(self, Input: diary)
+                        guard let self = self else { return }
+                        self.delegate?.update(Input: diary)
                         self.presentingViewController?.dismiss(animated: true)
                     case .failure:
                         LoadingIndicator.hideLoading()
-                        self.view.makeToast("일기 수정이 실패했습니다.", duration: 1.5, position: .bottom)
+                        self?.view.makeToast("일기 수정이 실패했습니다.", duration: 1.5, position: .bottom)
                     }
                 })
             }

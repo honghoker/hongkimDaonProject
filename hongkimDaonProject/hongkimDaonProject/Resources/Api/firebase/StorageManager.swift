@@ -19,7 +19,7 @@ final class StorageManager {
                 completion(.failure(StorageErrors.failedToUpload))
                 return
             }
-            strongSelf.storage.reference().child("\(filePath)/\(fileName)").downloadURL { url, error in
+            strongSelf.storage.reference().child("\(filePath)/\(fileName)").downloadURL { [weak self] url, error in
                 guard let url = url else {
                     print("Failed to get download url")
                     completion(.failure(StorageErrors.failedToGetDownloadUrl))
