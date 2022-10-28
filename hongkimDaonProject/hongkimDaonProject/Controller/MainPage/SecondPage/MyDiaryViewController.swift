@@ -211,8 +211,7 @@ extension MyDiaryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // MARK: 클릭한 셀의 이벤트 처리
         tableView.deselectRow(at: indexPath, animated: true)
-        let storyboard: UIStoryboard = UIStoryboard(name: "DetailDiaryView", bundle: nil)
-        guard let DetailDiaryVC = storyboard.instantiateViewController(withIdentifier: "NewDetailDiaryPageViewController") as? NewDetailDiaryPageViewController else { return }
+        let DetailDiaryVC = DetailDiaryPageViewController()
         DetailDiaryVC.delegate = self
         // MARK: 화면 전환 애니메이션 설정
         DetailDiaryVC.modalTransitionStyle = .crossDissolve

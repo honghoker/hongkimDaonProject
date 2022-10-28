@@ -1,23 +1,41 @@
-import Foundation
 import UIKit
 import SnapKit
 import Kingfisher
 import Toast_Swift
 
-class NewDetailDiaryPageViewController: UIViewController {
+class DetailDiaryPageViewController: UIViewController {
     var docId: String?
     var diary: Diary?
-    var delegate: DispatchDiary?
+    weak var delegate: DispatchDiary?
     var imageLoadComplete: Bool = false
     var scrolldirection: Bool = false
-    let toolBar = UIToolbar()
-    let scrollView = UIScrollView()
-    let contentsView = UIView()
+    lazy var toolBar: UIToolbar = {
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 35))
+        toolBar.setBackgroundImage(UIImage(),
+                                   forToolbarPosition: UIBarPosition.any,
+                                   barMetrics: UIBarMetrics.default)
+        toolBar.setShadowImage(UIImage(),
+                               forToolbarPosition: UIBarPosition.any)
+        toolBar.tintColor = .systemGray
+        toolBar.clipsToBounds = true
+        let toolbarEditItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(tabEditBtn))
+        let toolbarRemoveItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(tabRemoveBtn))
+        toolBar.setItems([.flexibleSpace(), toolbarEditItem, toolbarRemoveItem], animated: true)
+        return toolBar
+    }()
+    lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
     lazy var backBtn: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "chevron.backward"), for: .normal)
         button.tintColor = .systemGray
         return button
+    }()
+    lazy var contentView: UIView = {
+        let contentView = UIView()
+        return contentView
     }()
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -39,117 +57,143 @@ class NewDetailDiaryPageViewController: UIViewController {
         label.lineBreakStrategy = .hangulWordPriority
         return label
     }()
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.view.backgroundColor = UIColor(named: "bgColor")
-        self.view.addSubview(self.backBtn)
-        self.backBtn.snp.makeConstraints {
+        addView()
+        setLayout()
+        setDelegate()
+        configureVC()
+        configureEvent()
+        getDiary()
+    }
+    func addView() {
+        view.addSubview(backBtn)
+        view.addSubview(scrollView)
+        view.addSubview(toolBar)
+        scrollView.addSubview(contentView)
+        contentView.addSubview(writeTimeLabel)
+        contentView.addSubview(imageView)
+        contentView.addSubview(contentLabel)
+    }
+    func setLayout() {
+        backBtn.snp.makeConstraints {
             $0.width.height.equalTo(24)
-            $0.top.equalTo(self.view.safeAreaLayoutGuide).offset(16)
+            $0.top.equalTo(view.safeAreaLayoutGuide).offset(16)
             $0.leading.equalToSuperview().offset(16)
         }
-        self.backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
-        self.view.addSubview(self.scrollView)
-        self.view.addSubview(self.toolBar)
-        self.toolBar.snp.makeConstraints {
+        toolBar.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
         }
-        // MARK: toolBar 배경 transparent
-        self.toolBar.setBackgroundImage(UIImage(),
-                                        forToolbarPosition: UIBarPosition.any,
-                                        barMetrics: UIBarMetrics.default)
-        self.toolBar.setShadowImage(UIImage(),
-                                    forToolbarPosition: UIBarPosition.any)
-        self.toolBar.tintColor = .systemGray
-        self.toolBar.clipsToBounds = true
-        let toolbarEditItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(tabEditBtn))
-        let toolbarRemoveItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(tabRemoveBtn))
-        self.toolBar.setItems([.flexibleSpace(), toolbarEditItem, toolbarRemoveItem], animated: true)
-        self.scrollView.snp.makeConstraints {
-            $0.top.equalTo(self.backBtn.snp.bottom).offset(16)
+        scrollView.snp.makeConstraints {
+            $0.top.equalTo(backBtn.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
-        self.scrollView.addSubview(contentsView)
-        self.scrollView.delegate = self
-        self.contentsView.snp.makeConstraints {
+        contentView.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-16)
             $0.width.equalToSuperview()
         }
-        self.contentsView.addSubview(self.writeTimeLabel)
-        self.contentsView.addSubview(self.imageView)
-        self.contentsView.addSubview(self.contentLabel)
-        // MARK: Firestore diary data 가져오기
-        getDiary()
+        writeTimeLabel.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(16)
+            $0.leading.equalToSuperview().offset(16)
+        }
+        imageView.snp.makeConstraints {
+            $0.top.equalTo(writeTimeLabel.snp.bottom).offset(0)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(0)
+        }
+        contentLabel.snp.makeConstraints {
+            $0.top.equalTo(imageView.snp.bottom).offset(32)
+            $0.leading.equalToSuperview().offset(16)
+            $0.trailing.equalToSuperview().offset(-16)
+            $0.bottom.equalToSuperview()
+        }
     }
+    func setDelegate() {
+        self.scrollView.delegate = self
+    }
+    func configureVC() {
+        view.backgroundColor = UIColor(named: "bgColor")
+    }
+    func configureEvent() {
+        self.backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
+    }
+    // MARK: - millisecondes -> "# 년.월.일" 형식으로 표시
+    func getWriteTimeConvertToDate(_ time: Int64) -> String {
+        let myDateFormatter = DateFormatter()
+        myDateFormatter.dateFormat = "# yyyy.MM.dd"
+        myDateFormatter.locale = Locale(identifier: "ko_KR")
+        let convertNowStr = myDateFormatter.string(from: Date(milliseconds: time))
+        return convertNowStr
+    }
+    // MARK: - label 행간 조절
+    func getLabelLineSpacingAttributed(_ str: String, _ spacing: CGFloat) -> NSAttributedString {
+        let attrString = NSMutableAttributedString(string: str)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = spacing
+        attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
+        return attrString
+    }
+    // MARK: Firestore diary data 가져오기
     func getDiary() {
-        // MARK: Loading 시작
-        DatabaseManager.shared.fireStore.collection("diary").document(docId!).addSnapshotListener { documentSnapshot, error in
+        DatabaseManager.shared.fireStore.collection("diary").document(docId!).addSnapshotListener { [weak self] documentSnapshot, error in
             guard let document = documentSnapshot else {
                 return
             }
             guard document.data() != nil else {
                 return
             }
-            guard let diary: Diary = try? document.data(as: Diary.self) else { return }
-            self.diary = diary
-            let myDateFormatter = DateFormatter()
-            myDateFormatter.dateFormat = "# yyyy.MM.dd"
-            myDateFormatter.locale = Locale(identifier: "ko_KR")
-            let convertNowStr = myDateFormatter.string(from: Date(milliseconds: diary.writeTime))
-            self.writeTimeLabel.text = convertNowStr
-            self.writeTimeLabel.snp.makeConstraints {
-                $0.top.equalTo(self.scrollView.snp.top).offset(16)
-                $0.leading.equalToSuperview().offset(16)
+            guard let diary: Diary = try? document.data(as: Diary.self) else {
+                return
             }
-            // label 행간 조절
-            let attrString = NSMutableAttributedString(string: diary.content)
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = 10
-            attrString.addAttribute(NSAttributedString.Key.paragraphStyle, value: paragraphStyle, range: NSMakeRange(0, attrString.length))
-            self.contentLabel.attributedText = attrString
+            self?.diary = diary
+            self?.writeTimeLabel.text = self?.getWriteTimeConvertToDate(diary.writeTime)
+            self?.contentLabel.attributedText = self?.getLabelLineSpacingAttributed(diary.content, 10.0)
+            
             if diary.imageExist == false {
-                self.contentLabel.snp.remakeConstraints {
-                    $0.top.equalTo(self.writeTimeLabel.snp.bottom).offset(32)
-                    $0.leading.equalToSuperview().offset(16)
-                    $0.trailing.equalToSuperview().offset(-16)
-                    $0.bottom.equalToSuperview()
+                self?.imageLoadComplete = true
+                guard let self else { return }
+                self.imageView.snp.remakeConstraints {
+                    $0.top.equalTo(self.writeTimeLabel.snp.bottom).offset(0)
+                    $0.leading.trailing.equalToSuperview()
+                    $0.height.equalTo(0)
                 }
-                self.imageLoadComplete = true
             } else {
                 let ratio = diary.imageHeight / diary.imageWidth
-                let height = self.view.frame.width * ratio
-                self.imageView.snp.remakeConstraints {
-                    $0.top.equalTo(self.writeTimeLabel.snp.bottom).offset(32)
-                    $0.left.right.equalToSuperview()
-                    $0.height.equalTo(height)
-                }
-                self.contentLabel.snp.remakeConstraints {
-                    $0.top.equalTo(self.imageView.snp.bottom).offset(32)
-                    $0.leading.equalToSuperview().offset(16)
-                    $0.trailing.equalToSuperview().offset(-16)
-                    $0.bottom.equalToSuperview()
-                }
-                // MARK: 이미지 리사이징
-                let processor = ResizingImageProcessor(referenceSize: CGSize(width: self.view.frame.width, height: height))
+                guard let width = self?.view.frame.width else { return }
+                let height = width * ratio
+                if let self {
+                    self.imageView.snp.remakeConstraints {
+                        $0.top.equalTo(self.writeTimeLabel.snp.bottom).offset(32)
+                        $0.leading.trailing.equalToSuperview()
+                        $0.height.equalTo(height)
+                    }
+                } else { return }
+                
+                // MARK: 이미지 다운샘플링
+                let processor = DownsamplingImageProcessor(size: CGSize(width: width, height: height))
                 if diary.imageUploadComplete == true {
                     let url = URL(string: diary.imageUrl)
-                    self.imageView.kf.indicatorType = .activity
-                    self.imageView.kf.setImage(with: url, options: [.processor(processor)]) { result in
+                    self?.imageView.kf.indicatorType = .activity
+                    self?.imageView.kf.setImage(
+                        with: url,
+                        options: [
+                            .processor(processor),
+                            .scaleFactor(UIScreen.main.scale),
+                            .cacheOriginalImage]
+                    ) { result in
                         switch result {
                         case .success:
-                            self.imageLoadComplete = true
+                            self?.imageLoadComplete = true
                         case .failure:
-                            self.imageLoadComplete = false
+                            self?.imageLoadComplete = false
                         }
                     }
                 } else {
-                    self.imageLoadComplete = false
-                    // MARK: 이미지 업로드 중
+                    self?.imageLoadComplete = false
+                    // MARK: 이미지 업로드 중일 때 표시
                     DispatchQueue.global().async { [weak self] in
                         DispatchQueue.main.async {
                             self?.imageView.contentMode = .center
@@ -161,8 +205,7 @@ class NewDetailDiaryPageViewController: UIViewController {
         }
     }
 }
-
-extension NewDetailDiaryPageViewController {
+extension DetailDiaryPageViewController {
     @objc
     func back() {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
@@ -185,11 +228,11 @@ extension NewDetailDiaryPageViewController {
     func uploadCheck() -> Bool {
         if let diary = self.diary {
             if diary.imageUploadComplete == false {
-                // MARK: 이미지 저장이 아직 덜 된거 처리
+                // MARK: 이미지 저장 중일때 예외처리
                 self.view.makeToast("이미지 업로드 중입니다. 잠시 후 시도해주세요.")
                 return false
             } else if self.imageLoadComplete == false {
-                // MARK: 이미지 불러오기가 아직 덜 된거 처리
+                // MARK: 이미지 불러오기가 아직 덜 됐을 때 예외처리
                 self.view.makeToast("이미지 로딩 중입니다. 잠시 후 시도해주세요.")
                 return false
             } else {
@@ -224,8 +267,8 @@ extension NewDetailDiaryPageViewController {
         self.present(alert, animated: true, completion: nil)
     }
 }
-
-extension NewDetailDiaryPageViewController: UIScrollViewDelegate {
+extension DetailDiaryPageViewController: UIScrollViewDelegate {
+    // MARK: - 스크롤 방향에 따라 toolBar hide & show
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let translation = scrollView.panGestureRecognizer.translation(in: scrollView.superview)
         if translation.y > 0 {
@@ -247,8 +290,7 @@ extension NewDetailDiaryPageViewController: UIScrollViewDelegate {
         }
     }
 }
-
-extension NewDetailDiaryPageViewController: DispatchDiary {
+extension DetailDiaryPageViewController: DispatchDiary {
     func update(Input value: Diary?) {
         if let diary = value {
             self.delegate?.update(Input: diary)
@@ -257,8 +299,7 @@ extension NewDetailDiaryPageViewController: DispatchDiary {
     func delete(Delete id: String?) {}
     func dispatch(Input value: Diary?) {}
 }
-
-extension NewDetailDiaryPageViewController: UIGestureRecognizerDelegate {
+extension DetailDiaryPageViewController: UIGestureRecognizerDelegate {
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer.isEqual(navigationController?.interactivePopGestureRecognizer) {
             navigationController?.popViewController(animated: true)
