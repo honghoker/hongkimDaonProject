@@ -8,7 +8,7 @@ import Toast_Swift
 class EditDiaryPageViewController: UIViewController {
     var diary: Diary?
     var image: UIImage?
-    var delegate: DispatchDiary?
+    weak var delegate: DispatchDiary?
     @IBOutlet weak var backBtn: UILabel!
     @IBOutlet weak var completeBtn: UILabel!
     @IBOutlet weak var imageViewLabel: UILabel!
