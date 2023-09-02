@@ -60,7 +60,6 @@
 		BCA9C4D02803E6BC0017EC87 /* MyStorageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9C4CF2803E6BC0017EC87 /* MyStorageCell.swift */; };
 		BCA9C4D22803E84C0017EC87 /* MyStorageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */; };
 		BCD34461280FC3CC00D34EE5 /* MyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD34460280FC3CC00D34EE5 /* MyStorage.swift */; };
-		CC6576549A2D44437F8B7E24 /* Pods_hongkimDaonProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -107,9 +106,6 @@
 		51F363C5280E01A6003452F4 /* Daon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daon.swift; sourceTree = "<group>"; };
 		51F920982811A617005CC6B7 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		51F9209A2811B132005CC6B7 /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
-		7F7D6921C9B889176CDFE59F /* Pods-hongkimDaonProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.debug.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.debug.xcconfig"; sourceTree = "<group>"; };
-		95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_hongkimDaonProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		BB26D9613EEAC686E23807B9 /* Pods-hongkimDaonProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-hongkimDaonProject.release.xcconfig"; path = "Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject.release.xcconfig"; sourceTree = "<group>"; };
 		BC070199280449ED00139415 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BC2199FA28167BD100FE66A3 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		BC2199FC28167BD100FE66A3 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
@@ -144,7 +140,6 @@
 			files = (
 				51F363C4280D221B003452F4 /* RealmSwift in Frameworks */,
 				51F363C2280D221B003452F4 /* Realm in Frameworks */,
-				CC6576549A2D44437F8B7E24 /* Pods_hongkimDaonProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -154,7 +149,6 @@
 		292A023BD65F6B567259BE21 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				95AFA305FC88A316EB18E124 /* Pods_hongkimDaonProject.framework */,
 				BC2199FA28167BD100FE66A3 /* WidgetKit.framework */,
 				BC2199FC28167BD100FE66A3 /* SwiftUI.framework */,
 			);
@@ -318,8 +312,6 @@
 		9A1881279FCA213A835AFC8F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				7F7D6921C9B889176CDFE59F /* Pods-hongkimDaonProject.debug.xcconfig */,
-				BB26D9613EEAC686E23807B9 /* Pods-hongkimDaonProject.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -430,12 +422,10 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5153FF3427FD7BE00096AE7A /* Build configuration list for PBXNativeTarget "hongkimDaonProject" */;
 			buildPhases = (
-				2EE1C9504942936C2199DB42 /* [CP] Check Pods Manifest.lock */,
 				51795E3627FD896900D5C696 /* SwiftLint Script */,
 				5153FF1C27FD7BE00096AE7A /* Sources */,
 				5153FF1D27FD7BE00096AE7A /* Frameworks */,
 				5153FF1E27FD7BE00096AE7A /* Resources */,
-				4BE70DF9EFFD94FC004EF977 /* [CP] Embed Pods Frameworks */,
 				BC219A0728167BD200FE66A3 /* Embed App Extensions */,
 			);
 			buildRules = (
@@ -476,7 +466,7 @@
 			);
 			mainGroup = 5153FF1727FD7BE00096AE7A;
 			packageReferences = (
-				51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift.git" */,
 			);
 			productRefGroup = 5153FF2127FD7BE00096AE7A /* Products */;
 			projectDirPath = "";
@@ -513,45 +503,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2EE1C9504942936C2199DB42 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-hongkimDaonProject-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		4BE70DF9EFFD94FC004EF977 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-hongkimDaonProject/Pods-hongkimDaonProject-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		51795E3627FD896900D5C696 /* SwiftLint Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -756,7 +707,6 @@
 		};
 		5153FF3527FD7BE00096AE7A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7F7D6921C9B889176CDFE59F /* Pods-hongkimDaonProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -791,7 +741,6 @@
 		};
 		5153FF3627FD7BE00096AE7A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BB26D9613EEAC686E23807B9 /* Pods-hongkimDaonProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -848,7 +797,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
+		51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift.git" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -861,12 +810,12 @@
 /* Begin XCSwiftPackageProductDependency section */
 		51F363C1280D221B003452F4 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
 			productName = Realm;
 		};
 		51F363C3280D221B003452F4 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			package = 51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
