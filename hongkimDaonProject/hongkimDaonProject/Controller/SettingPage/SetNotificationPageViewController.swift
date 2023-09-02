@@ -1,7 +1,6 @@
 import UIKit
 import SnapKit
 import FirebaseFirestore
-import Toast_Swift
 
 class SetNotificationPageViewController: UIViewController {
     @IBOutlet weak var switchBtn: UISwitch!
@@ -65,7 +64,7 @@ class SetNotificationPageViewController: UIViewController {
                 }
             }
         } else {
-            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
+//            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
         }
     }
 }
@@ -79,13 +78,13 @@ extension SetNotificationPageViewController {
                 let docRef = database.document("user/\(user.uid)")
                 docRef.updateData(["notificationTime": timeIntValue]) { result in
                     guard result == nil else {
-                        self.view.makeToast("알림시간 변경이 실패했습니다.", duration: 1.5, position: .center)
+//                        self.view.makeToast("알림시간 변경이 실패했습니다.", duration: 1.5, position: .center)
                         return
                     }
-                    self.view.makeToast("알림시간이 변경되었습니다", duration: 1.5, position: .center)
+//                    self.view.makeToast("알림시간이 변경되었습니다", duration: 1.5, position: .center)
                 }
             } else {
-                self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
+//                self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
             }
         }
     }
@@ -106,7 +105,7 @@ extension SetNotificationPageViewController {
             let docRef = database.document("user/\(user.uid)")
             docRef.updateData(["notification": sender.isOn])
         } else {
-            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
+//            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
         }
     }
 }

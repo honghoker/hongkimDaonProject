@@ -1,9 +1,8 @@
 import UIKit
 import Firebase
-import GoogleSignIn
+//import GoogleSignIn
 import AuthenticationServices
 import CryptoKit
-import Toast_Swift
 import RealmSwift
 
 class SettingPageViewController: UIViewController {
@@ -66,7 +65,7 @@ extension SettingPageViewController {
     }
     @objc
     func showToast(msg: String?) {
-        self.view.makeToast(msg, duration: 1.5, position: .bottom)
+//        self.view.makeToast(msg, duration: 1.5, position: .bottom)
     }
     @objc
     func onTapSetNotification(_ gesture: UITapGestureRecognizer) {
@@ -132,56 +131,56 @@ extension SettingPageViewController {
     }
     func withdrawal(completion: @escaping (Result<Void, Error>) -> Void) {
         guard let currentUser = AuthManager.shared.auth.currentUser else { return completion(.failure(AuthErrors.currentUserNotExist)) }
-        currentUser.delete { error in
-            guard let error = error as? NSError else {
-                self.successToWithdrawal(currentUser.uid)
-                return completion(.success(()))
-            }
-            switch AuthErrorCode(rawValue: error.code) {
-            case .requiresRecentLogin:
-                let alert = UIAlertController(title: "사용자 정보가 만료되었습니다.",
-                                              message: "탈퇴하려는 사용자의 계정으로 다시 로그인해주세요.", preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
-                }))
-                alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { _ in
-                    guard !currentUser.providerData.isEmpty else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
-                    for userInfo in currentUser.providerData {
-                        switch userInfo.providerID {
-                        case "google.com":
-                            guard let clientID = FirebaseApp.app()?.options.clientID else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
-                            let signInConfig = GIDConfiguration.init(clientID: clientID)
-                            GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-                                guard error == nil else { return completion(.failure(AuthErrors.failedToSignIn)) }
-                                guard let authentication = user?.authentication else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
-                                guard currentUser.email == user?.profile?.email && currentUser.displayName == user?.profile?.name else {
-                                    return completion(.failure(AuthErrors.notEqualUser))
-                                }
-                                let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
-                                currentUser.reauthenticate(with: credential) { _, error in
-                                    guard error == nil else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
-                                    currentUser.delete { error in
-                                        guard error == nil else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
-                                        self.successToWithdrawal(currentUser.uid)
-                                        completion(.success(()))
-                                    }
-                                }
-                            }
-                        case "apple.com":
-                            let request = self.createAppleIDRequest()
-                            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-                            authorizationController.delegate = self
-                            authorizationController.presentationContextProvider = self
-                            authorizationController.performRequests()
-                        default:
-                            print("not exist ProviderId")
-                        }
-                    }
-                }))
-                self.present(alert, animated: true, completion: nil)
-            default:
-                completion(.failure(AuthErrors.failedToWithdrawal))
-            }
-        }
+//        currentUser.delete { error in
+//            guard let error = error as? NSError else {
+//                self.successToWithdrawal(currentUser.uid)
+//                return completion(.success(()))
+//            }
+//            switch AuthErrorCode(rawValue: error.code) {
+//            case .requiresRecentLogin:
+//                let alert = UIAlertController(title: "사용자 정보가 만료되었습니다.",
+//                                              message: "탈퇴하려는 사용자의 계정으로 다시 로그인해주세요.", preferredStyle: UIAlertController.Style.alert)
+//                alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
+//                }))
+//                alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { _ in
+//                    guard !currentUser.providerData.isEmpty else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
+//                    for userInfo in currentUser.providerData {
+//                        switch userInfo.providerID {
+//                        case "google.com":
+//                            guard let clientID = FirebaseApp.app()?.options.clientID else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
+//                            let signInConfig = GIDConfiguration.init(clientID: clientID)
+//                            GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+//                                guard error == nil else { return completion(.failure(AuthErrors.failedToSignIn)) }
+//                                guard let authentication = user?.authentication else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
+//                                guard currentUser.email == user?.profile?.email && currentUser.displayName == user?.profile?.name else {
+//                                    return completion(.failure(AuthErrors.notEqualUser))
+//                                }
+//                                let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
+//                                currentUser.reauthenticate(with: credential) { _, error in
+//                                    guard error == nil else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
+//                                    currentUser.delete { error in
+//                                        guard error == nil else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
+//                                        self.successToWithdrawal(currentUser.uid)
+//                                        completion(.success(()))
+//                                    }
+//                                }
+//                            }
+//                        case "apple.com":
+//                            let request = self.createAppleIDRequest()
+//                            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+//                            authorizationController.delegate = self
+//                            authorizationController.presentationContextProvider = self
+//                            authorizationController.performRequests()
+//                        default:
+//                            print("not exist ProviderId")
+//                        }
+//                    }
+//                }))
+//                self.present(alert, animated: true, completion: nil)
+//            default:
+//                completion(.failure(AuthErrors.failedToWithdrawal))
+//            }
+//        }
     }
     private func successToWithdrawal(_ uid: String) {
         // MARK: realm 데이터 삭제

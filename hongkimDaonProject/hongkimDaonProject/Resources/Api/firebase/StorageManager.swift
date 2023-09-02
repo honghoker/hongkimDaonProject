@@ -1,4 +1,5 @@
 import Foundation
+import UIKit
 import FirebaseStorage
 
 final class StorageManager {
@@ -31,11 +32,19 @@ final class StorageManager {
             }
         })
     }
-    public func deleteImage(fileName: String, filePath: String) {
-        storage.reference().child("\(filePath)/\(fileName)").delete()
+    public func deleteImage(fileName: String, filePath: String) async {
+        do {
+            try await storage.reference().child("\(filePath)/\(fileName)").delete()
+        } catch {
+            
+        }
     }
-    public func deleteImage(downloadURL: String) {
-        storage.reference(forURL: downloadURL).delete()
+    public func deleteImage(downloadURL: String) async {
+        do {
+            try await storage.reference(forURL: downloadURL).delete()
+        } catch {
+            
+        }
     }
     public func downloadImage(url: URL, completion: @escaping (UIImage?) -> Void) {
         let reference = storage.reference(forURL: url.absoluteString)

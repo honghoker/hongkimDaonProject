@@ -1,7 +1,7 @@
 import UIKit
 import SnapKit
 import Kingfisher
-import Toast_Swift
+import FirebaseFirestoreSwift
 
 class DetailDiaryPageViewController: UIViewController {
     var docId: String?
@@ -229,11 +229,11 @@ extension DetailDiaryPageViewController {
         if let diary = self.diary {
             if diary.imageUploadComplete == false {
                 // MARK: 이미지 저장 중일때 예외처리
-                self.view.makeToast("이미지 업로드 중입니다. 잠시 후 시도해주세요.")
+//                self.view.makeToast("이미지 업로드 중입니다. 잠시 후 시도해주세요.")
                 return false
             } else if self.imageLoadComplete == false {
                 // MARK: 이미지 불러오기가 아직 덜 됐을 때 예외처리
-                self.view.makeToast("이미지 로딩 중입니다. 잠시 후 시도해주세요.")
+//                self.view.makeToast("이미지 로딩 중입니다. 잠시 후 시도해주세요.")
                 return false
             } else {
                 return true
@@ -254,7 +254,7 @@ extension DetailDiaryPageViewController {
                 guard let docId = self?.docId else { return }
                 DatabaseManager.shared.fireStore.collection("diary").document(docId).delete { [weak self] result in
                     guard result == nil else {
-                        self?.view.makeToast("일기 삭제에 실패했습니다.", duration: 1.5, position: .bottom)
+//                        self?.view.makeToast("일기 삭제에 실패했습니다.", duration: 1.5, position: .bottom)
                         LoadingIndicator.hideLoading()
                         return
                     }

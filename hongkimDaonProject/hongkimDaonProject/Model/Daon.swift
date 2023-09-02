@@ -1,5 +1,4 @@
 import Foundation
-import FirebaseFirestoreSwift
 
 struct Daon: Codable {
     let imageUrl: String

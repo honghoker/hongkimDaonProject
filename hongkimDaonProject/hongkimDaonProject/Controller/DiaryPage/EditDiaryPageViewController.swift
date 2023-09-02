@@ -1,9 +1,9 @@
 import Foundation
 import UIKit
-import FirebaseFirestoreSwift
+import FirebaseFirestore
 import FMPhotoPicker
 import STTextView
-import Toast_Swift
+//import Toast_Swift
 
 class EditDiaryPageViewController: UIViewController {
     var diary: Diary?
@@ -86,7 +86,7 @@ extension EditDiaryPageViewController {
                         if self?.imageView.image != self?.image {
                             // MARK: 기존 이미지 삭제
                             if self?.image != nil {
-                                StorageManager.shared.deleteImage(downloadURL: diary.imageUrl)
+//                                StorageManager.shared.deleteImage(downloadURL: diary.imageUrl)
                             }
                             // MARK: 이미지 변경 시
                             if let image = self?.imageView.image, let data = image.jpegData(compressionQuality: 0.5) {
@@ -113,12 +113,12 @@ extension EditDiaryPageViewController {
                         self.presentingViewController?.dismiss(animated: true)
                     case .failure:
                         LoadingIndicator.hideLoading()
-                        self?.view.makeToast("일기 수정이 실패했습니다.", duration: 1.5, position: .bottom)
+//                        self?.view.makeToast("일기 수정이 실패했습니다.", duration: 1.5, position: .bottom)
                     }
                 })
             }
         } else {
-            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
+//            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
         }
     }
     @objc
@@ -168,7 +168,7 @@ extension EditDiaryPageViewController: UITextViewDelegate {
             }
         }
         guard textView.text!.count < self.textViewMaxLength else {
-            self.view.makeToast("5,000자까지 입력할 수 있습니다.", duration: 1.5, position: .bottom)
+//            self.view.makeToast("5,000자까지 입력할 수 있습니다.", duration: 1.5, position: .bottom)
             return false
         }
         return true

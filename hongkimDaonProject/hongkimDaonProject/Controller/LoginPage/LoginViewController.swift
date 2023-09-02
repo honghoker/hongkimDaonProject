@@ -1,6 +1,6 @@
 import UIKit
 import Firebase
-import GoogleSignIn
+//import GoogleSignIn
 import AuthenticationServices
 import CryptoKit
 import FirebaseMessaging
@@ -105,37 +105,37 @@ extension LoginViewController {
     @objc
     func tapGoogleBtn(_ gesture: UITapGestureRecognizer) {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-        let signInConfig = GIDConfiguration.init(clientID: clientID)
-        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-            // 로그인 실패
-            guard error == nil else { return }
-            guard let authentication = user?.authentication else { return }
-            // access token 부여 받음
-            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
-            // 파베 인증정보 등록
-            AuthManager.shared.auth.signIn(with: credential) {_, _ in
-                // token을 넘겨주면, 성공했는지 안했는지에 대한 result값과 error값을 넘겨줌
-                if let user = AuthManager.shared.auth.currentUser {
-                    let docRef = self.database.document("user/\(user.uid)")
-                    docRef.getDocument { snapshot, error in
-                        if let error = error {
-                            print("DEBUG: \(error.localizedDescription)")
-                            return
-                        }
-                        guard let exist = snapshot?.exists else {return}
-                        if exist == true {
-                            self.showMainViewController()
-                        } else {
-                            let formatter = DateFormatter()
-                            formatter.locale = Locale(identifier: "ko_KR")
-                            formatter.dateFormat = "HH:mm"
-                            let demmyUserData: User = User(uid: user.uid, joinTime: Int(Date().millisecondsSince1970), platForm: "google", notification: true, notificationTime: formatter.string(from: Date()), fcmToken: self.userFcmToken)
-                            self.writeUserData(userData: demmyUserData)
-                        }
-                    }
-                }
-            }
-        }
+//        let signInConfig = GIDConfiguration.init(clientID: clientID)
+//        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+//            // 로그인 실패
+//            guard error == nil else { return }
+//            guard let authentication = user?.authentication else { return }
+//            // access token 부여 받음
+//            let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
+//            // 파베 인증정보 등록
+//            AuthManager.shared.auth.signIn(with: credential) {_, _ in
+//                // token을 넘겨주면, 성공했는지 안했는지에 대한 result값과 error값을 넘겨줌
+//                if let user = AuthManager.shared.auth.currentUser {
+//                    let docRef = self.database.document("user/\(user.uid)")
+//                    docRef.getDocument { snapshot, error in
+//                        if let error = error {
+//                            print("DEBUG: \(error.localizedDescription)")
+//                            return
+//                        }
+//                        guard let exist = snapshot?.exists else {return}
+//                        if exist == true {
+//                            self.showMainViewController()
+//                        } else {
+//                            let formatter = DateFormatter()
+//                            formatter.locale = Locale(identifier: "ko_KR")
+//                            formatter.dateFormat = "HH:mm"
+//                            let demmyUserData: User = User(uid: user.uid, joinTime: Int(Date().millisecondsSince1970), platForm: "google", notification: true, notificationTime: formatter.string(from: Date()), fcmToken: self.userFcmToken)
+//                            self.writeUserData(userData: demmyUserData)
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
     @objc
     func tapAppleBtn(_ gesture: UITapGestureRecognizer) {

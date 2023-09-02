@@ -1,8 +1,8 @@
 import Foundation
-import FirebaseFirestoreSwift
+import FirebaseFirestore
 
 struct Diary: Codable, Identifiable {
-    @DocumentID var id: String?
+    var id: String? = UUID().uuidString
     let uid: String
     var imageUrl: String
     var content: String

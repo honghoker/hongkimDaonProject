@@ -4,7 +4,7 @@ import FirebaseAuth
 import FirebaseStorage
 import Kingfisher
 import RealmSwift
-import Toast_Swift
+//import Toast_Swift
 import MobileCoreServices
 
 class AlphaTodayWordingPageViewController: UIViewController {
@@ -64,7 +64,7 @@ extension AlphaTodayWordingPageViewController {
             UIImageWriteToSavedPhotosAlbum(image, self, nil, nil)
             DispatchQueue.main.async {
                 LoadingIndicator.hideLoading()
-                self?.backgroundUIView.makeToast("사진첩에 저장되었습니다", duration: 1.5, position: .center)
+//                self?.backgroundUIView.makeToast("사진첩에 저장되었습니다", duration: 1.5, position: .center)
             }
         }.resume()
     }
@@ -88,12 +88,12 @@ extension AlphaTodayWordingPageViewController {
             try? self.realm.write {
                 self.realm.add(myStorage)
             }
-            self.backgroundUIView.makeToast("보관함에 추가되었습니다", duration: 1.5, position: .center)
+//            self.backgroundUIView.makeToast("보관함에 추가되었습니다", duration: 1.5, position: .center)
         } else {
             try? realm.write {
                 realm.delete(list)
             }
-            self.backgroundUIView.makeToast("보관함에서 삭제되었습니다", duration: 1.5, position: .center)
+//            self.backgroundUIView.makeToast("보관함에서 삭제되었습니다", duration: 1.5, position: .center)
         }
     }
 }

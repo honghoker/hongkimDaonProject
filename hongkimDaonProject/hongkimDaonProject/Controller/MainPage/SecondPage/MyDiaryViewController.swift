@@ -2,7 +2,7 @@ import UIKit
 import SnapKit
 import Firebase
 import FirebaseFirestore
-import Toast_Swift
+//import Toast_Swift
 
 protocol DispatchDiary: AnyObject {
     func dispatch(Input value: Diary?)
@@ -62,7 +62,7 @@ extension MyDiaryViewController {
             return
         }
         guard let user = AuthManager.shared.auth.currentUser else {
-            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
+//            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
             return
         }
         let uid = user.uid
@@ -125,7 +125,7 @@ extension MyDiaryViewController {
             let current = Calendar.current
             if current.isDateInToday(Date(milliseconds: self.myDiarys[0].writeTime)) == true {
                 // MARK: 오늘이면
-                self.view.makeToast("이미 오늘의 일기를 작성했습니다.")
+//                self.view.makeToast("이미 오늘의 일기를 작성했습니다.")
             } else {
                 // MARK: 오늘이 아니면 일기 작성
                 moveToWriteDiaryPage()

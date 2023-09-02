@@ -1,5 +1,5 @@
 import UIKit
-import FirebaseFirestoreSwift
+import FirebaseFirestore
 import FMPhotoPicker
 import SnapKit
 import STTextView
@@ -91,11 +91,11 @@ extension WriteDiaryPageViewController {
                     self?.presentingViewController?.dismiss(animated: true)
                 case .failure:
                     LoadingIndicator.hideLoading()
-                    self?.view.makeToast("일기 쓰기에 실패했습니다.", duration: 1.5, position: .bottom)
+//                    self?.view.makeToast("일기 쓰기에 실패했습니다.", duration: 1.5, position: .bottom)
                 }
             }
         } else {
-            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
+//            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
         }
     }
     @objc
@@ -145,7 +145,7 @@ extension WriteDiaryPageViewController: UITextViewDelegate {
             }
         }
         guard textView.text!.count < self.textViewMaxLength else {
-            self.view.makeToast("5,000자까지 입력할 수 있습니다.", duration: 1.5, position: .bottom)
+//            self.view.makeToast("5,000자까지 입력할 수 있습니다.", duration: 1.5, position: .bottom)
             return false
         }
         return true

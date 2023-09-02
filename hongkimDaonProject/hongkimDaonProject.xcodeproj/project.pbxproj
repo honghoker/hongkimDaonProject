@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		511635EC2AA321A000521F71 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 511635EB2AA321A000521F71 /* SnapKit */; };
+		511635EF2AA321C300521F71 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 511635EE2AA321C300521F71 /* Tabman */; };
+		511635F22AA321EA00521F71 /* FMPhotoPicker in Frameworks */ = {isa = PBXBuildFile; productRef = 511635F12AA321EA00521F71 /* FMPhotoPicker */; };
+		511635F52AA3221200521F71 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 511635F42AA3221200521F71 /* Kingfisher */; };
+		511635F82AA3226900521F71 /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 511635F72AA3226900521F71 /* IQKeyboardManagerSwift */; };
+		511635FE2AA322E100521F71 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 511635FD2AA322E100521F71 /* Lottie */; };
+		511636012AA3235100521F71 /* STTextView in Frameworks */ = {isa = PBXBuildFile; productRef = 511636002AA3235100521F71 /* STTextView */; };
+		511636042AA3276200521F71 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 511636032AA3276200521F71 /* FirebaseAnalytics */; };
+		511636062AA3276200521F71 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 511636052AA3276200521F71 /* FirebaseAuth */; };
+		511636082AA3276200521F71 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 511636072AA3276200521F71 /* FirebaseFirestore */; };
+		5116360A2AA3276200521F71 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 511636092AA3276200521F71 /* FirebaseFirestoreSwift */; };
+		5116360C2AA3276200521F71 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 5116360B2AA3276200521F71 /* FirebaseMessaging */; };
+		5116360E2AA3276200521F71 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = 5116360D2AA3276200521F71 /* FirebaseRemoteConfig */; };
+		511636102AA3276200521F71 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 5116360F2AA3276200521F71 /* FirebaseStorage */; };
+		511636132AA32B7300521F71 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 511636122AA32B7300521F71 /* RxCocoa */; };
+		511636152AA32B7300521F71 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 511636142AA32B7300521F71 /* RxSwift */; };
 		5117C9D92803F4500072B9B2 /* SettingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9D82803F4500072B9B2 /* SettingPageViewController.swift */; };
 		5117C9DB2803F4820072B9B2 /* SettingPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5117C9DA2803F4820072B9B2 /* SettingPageView.storyboard */; };
 		5117C9E12803FE830072B9B2 /* WriteDiaryPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5117C9E02803FE830072B9B2 /* WriteDiaryPageView.storyboard */; };
@@ -138,8 +154,24 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				511636152AA32B7300521F71 /* RxSwift in Frameworks */,
+				511635F52AA3221200521F71 /* Kingfisher in Frameworks */,
+				511636012AA3235100521F71 /* STTextView in Frameworks */,
+				5116360C2AA3276200521F71 /* FirebaseMessaging in Frameworks */,
 				51F363C4280D221B003452F4 /* RealmSwift in Frameworks */,
 				51F363C2280D221B003452F4 /* Realm in Frameworks */,
+				511636102AA3276200521F71 /* FirebaseStorage in Frameworks */,
+				511635FE2AA322E100521F71 /* Lottie in Frameworks */,
+				511636082AA3276200521F71 /* FirebaseFirestore in Frameworks */,
+				511635F22AA321EA00521F71 /* FMPhotoPicker in Frameworks */,
+				511636132AA32B7300521F71 /* RxCocoa in Frameworks */,
+				5116360A2AA3276200521F71 /* FirebaseFirestoreSwift in Frameworks */,
+				5116360E2AA3276200521F71 /* FirebaseRemoteConfig in Frameworks */,
+				511635EF2AA321C300521F71 /* Tabman in Frameworks */,
+				511636062AA3276200521F71 /* FirebaseAuth in Frameworks */,
+				511635F82AA3226900521F71 /* IQKeyboardManagerSwift in Frameworks */,
+				511636042AA3276200521F71 /* FirebaseAnalytics in Frameworks */,
+				511635EC2AA321A000521F71 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,7 +257,6 @@
 				51795E3927FD8BA700D5C696 /* .swiftlint.yml */,
 				5153FF2227FD7BE00096AE7A /* hongkimDaonProject */,
 				5153FF2127FD7BE00096AE7A /* Products */,
-				9A1881279FCA213A835AFC8F /* Pods */,
 				292A023BD65F6B567259BE21 /* Frameworks */,
 			);
 			sourceTree = "<group>";
@@ -307,13 +338,6 @@
 				516944502800142600462016 /* JejuMyeongjoOTF.otf */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		9A1881279FCA213A835AFC8F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		BC4BC7C9280923CD00C755BF /* Cells */ = {
@@ -422,7 +446,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5153FF3427FD7BE00096AE7A /* Build configuration list for PBXNativeTarget "hongkimDaonProject" */;
 			buildPhases = (
-				51795E3627FD896900D5C696 /* SwiftLint Script */,
 				5153FF1C27FD7BE00096AE7A /* Sources */,
 				5153FF1D27FD7BE00096AE7A /* Frameworks */,
 				5153FF1E27FD7BE00096AE7A /* Resources */,
@@ -436,6 +459,22 @@
 			packageProductDependencies = (
 				51F363C1280D221B003452F4 /* Realm */,
 				51F363C3280D221B003452F4 /* RealmSwift */,
+				511635EB2AA321A000521F71 /* SnapKit */,
+				511635EE2AA321C300521F71 /* Tabman */,
+				511635F12AA321EA00521F71 /* FMPhotoPicker */,
+				511635F42AA3221200521F71 /* Kingfisher */,
+				511635F72AA3226900521F71 /* IQKeyboardManagerSwift */,
+				511635FD2AA322E100521F71 /* Lottie */,
+				511636002AA3235100521F71 /* STTextView */,
+				511636032AA3276200521F71 /* FirebaseAnalytics */,
+				511636052AA3276200521F71 /* FirebaseAuth */,
+				511636072AA3276200521F71 /* FirebaseFirestore */,
+				511636092AA3276200521F71 /* FirebaseFirestoreSwift */,
+				5116360B2AA3276200521F71 /* FirebaseMessaging */,
+				5116360D2AA3276200521F71 /* FirebaseRemoteConfig */,
+				5116360F2AA3276200521F71 /* FirebaseStorage */,
+				511636122AA32B7300521F71 /* RxCocoa */,
+				511636142AA32B7300521F71 /* RxSwift */,
 			);
 			productName = hongkimDaonProject;
 			productReference = 5153FF2027FD7BE00096AE7A /* hongkimDaonProject.app */;
@@ -466,7 +505,16 @@
 			);
 			mainGroup = 5153FF1727FD7BE00096AE7A;
 			packageReferences = (
-				51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift.git" */,
+				51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				511635EA2AA321A000521F71 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				511635ED2AA321C300521F71 /* XCRemoteSwiftPackageReference "Tabman" */,
+				511635F02AA321EA00521F71 /* XCRemoteSwiftPackageReference "FMPhotoPicker" */,
+				511635F32AA3221200521F71 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				511635F62AA3226900521F71 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				511635FC2AA322E100521F71 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				511635FF2AA3235100521F71 /* XCRemoteSwiftPackageReference "STTextView" */,
+				511636022AA3276200521F71 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				511636112AA32B7300521F71 /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 5153FF2127FD7BE00096AE7A /* Products */;
 			projectDirPath = "";
@@ -501,27 +549,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		51795E3627FD896900D5C696 /* SwiftLint Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "SwiftLint Script";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		5153FF1C27FD7BE00096AE7A /* Sources */ = {
@@ -797,7 +824,79 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift.git" */ = {
+		511635EA2AA321A000521F71 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = revision;
+				revision = f222cbdf325885926566172f6f5f06af95473158;
+			};
+		};
+		511635ED2AA321C300521F71 /* XCRemoteSwiftPackageReference "Tabman" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uias/Tabman.git";
+			requirement = {
+				kind = revision;
+				revision = e32c0d821b03566ed966753f941113883f268da0;
+			};
+		};
+		511635F02AA321EA00521F71 /* XCRemoteSwiftPackageReference "FMPhotoPicker" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/congnd/FMPhotoPicker.git";
+			requirement = {
+				kind = revision;
+				revision = fccd843f042b12570bf0daa549b917792362784d;
+			};
+		};
+		511635F32AA3221200521F71 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = revision;
+				revision = b6f62758f21a8c03cd64f4009c037cfa580a256e;
+			};
+		};
+		511635F62AA3226900521F71 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = revision;
+				revision = 1e442766a41e2948df25559eb03ab752c6d3aad0;
+			};
+		};
+		511635FC2AA322E100521F71 /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = revision;
+				revision = d6feea26a370019b4d3a85f5984cb95a2734776f;
+			};
+		};
+		511635FF2AA3235100521F71 /* XCRemoteSwiftPackageReference "STTextView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onl1ner/STTextView.git";
+			requirement = {
+				kind = revision;
+				revision = f414d0e74d7862a601549774f58307017c1f5cb4;
+			};
+		};
+		511636022AA3276200521F71 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = revision;
+				revision = 2bfe6abe1014aafe5cf28401708f7d39f9926a76;
+			};
+		};
+		511636112AA32B7300521F71 /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = revision;
+				revision = 9dcaa4b333db437b0fbfaf453fad29069044a8b4;
+			};
+		};
+		51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/realm-swift.git";
 			requirement = {
@@ -808,14 +907,94 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		511635EB2AA321A000521F71 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511635EA2AA321A000521F71 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		511635EE2AA321C300521F71 /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511635ED2AA321C300521F71 /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
+		};
+		511635F12AA321EA00521F71 /* FMPhotoPicker */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511635F02AA321EA00521F71 /* XCRemoteSwiftPackageReference "FMPhotoPicker" */;
+			productName = FMPhotoPicker;
+		};
+		511635F42AA3221200521F71 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511635F32AA3221200521F71 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		511635F72AA3226900521F71 /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511635F62AA3226900521F71 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+		511635FD2AA322E100521F71 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511635FC2AA322E100521F71 /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
+		};
+		511636002AA3235100521F71 /* STTextView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511635FF2AA3235100521F71 /* XCRemoteSwiftPackageReference "STTextView" */;
+			productName = STTextView;
+		};
+		511636032AA3276200521F71 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511636022AA3276200521F71 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		511636052AA3276200521F71 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511636022AA3276200521F71 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		511636072AA3276200521F71 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511636022AA3276200521F71 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		511636092AA3276200521F71 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511636022AA3276200521F71 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+		5116360B2AA3276200521F71 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511636022AA3276200521F71 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		5116360D2AA3276200521F71 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511636022AA3276200521F71 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		5116360F2AA3276200521F71 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511636022AA3276200521F71 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		511636122AA32B7300521F71 /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511636112AA32B7300521F71 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		511636142AA32B7300521F71 /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 511636112AA32B7300521F71 /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
 		51F363C1280D221B003452F4 /* Realm */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = Realm;
 		};
 		51F363C3280D221B003452F4 /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift.git" */;
+			package = 51F363C0280D221B003452F4 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
 		};
 /* End XCSwiftPackageProductDependency section */
