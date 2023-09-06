@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21678"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -260,83 +259,9 @@
             </objects>
             <point key="canvasLocation" x="-4639" y="274"/>
         </scene>
-        <!--Alpha Today Wording Page View Controller-->
-        <scene sceneID="eqO-7W-db0">
-            <objects>
-                <viewController storyboardIdentifier="AlphaTodayWordingPageViewController" id="T3o-Eq-cus" customClass="AlphaTodayWordingPageViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="JOZ-VQ-mrd"/>
-                        <viewControllerLayoutGuide type="bottom" id="6Eb-qh-UaD"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="nUo-97-vj2">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rKf-zc-jhr">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xwz-th-NaZ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="x5P-5j-Q0r">
-                                <rect key="frame" x="321" y="814" width="77" height="32"/>
-                                <subviews>
-                                    <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hXg-Sg-Kwz">
-                                        <rect key="frame" x="0.0" y="0.0" width="28.5" height="32"/>
-                                        <color key="tintColor" red="0.93438279629999998" green="0.88447171449999995" blue="0.79567110539999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal">
-                                            <imageReference key="image" image="bag" catalog="system" symbolScale="large"/>
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="default">
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                            </preferredSymbolConfiguration>
-                                        </state>
-                                    </button>
-                                    <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nl5-hR-dh9">
-                                        <rect key="frame" x="48.5" y="0.0" width="28.5" height="32"/>
-                                        <color key="tintColor" red="0.93438279629999998" green="0.88447171449999995" blue="0.79567110539999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal">
-                                            <imageReference key="image" image="square.and.arrow.down" catalog="system" symbolScale="large"/>
-                                            <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="font" scale="default">
-                                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
-                                            </preferredSymbolConfiguration>
-                                        </state>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="Xwz-th-NaZ" secondAttribute="trailing" id="5KR-xZ-UeS"/>
-                            <constraint firstAttribute="bottom" secondItem="Xwz-th-NaZ" secondAttribute="bottom" id="7cj-nK-Whp"/>
-                            <constraint firstItem="6Eb-qh-UaD" firstAttribute="top" secondItem="x5P-5j-Q0r" secondAttribute="bottom" constant="16" id="AAq-n3-RAU"/>
-                            <constraint firstItem="rKf-zc-jhr" firstAttribute="leading" secondItem="nUo-97-vj2" secondAttribute="leading" id="QGO-wd-gSf"/>
-                            <constraint firstItem="rKf-zc-jhr" firstAttribute="top" secondItem="nUo-97-vj2" secondAttribute="top" id="b1H-Ty-zp5"/>
-                            <constraint firstAttribute="trailing" secondItem="x5P-5j-Q0r" secondAttribute="trailing" constant="16" id="e5n-MF-Z4F"/>
-                            <constraint firstAttribute="trailing" secondItem="rKf-zc-jhr" secondAttribute="trailing" id="etY-dq-15z"/>
-                            <constraint firstItem="Xwz-th-NaZ" firstAttribute="top" secondItem="nUo-97-vj2" secondAttribute="top" id="hIz-V1-xgP"/>
-                            <constraint firstAttribute="bottom" secondItem="rKf-zc-jhr" secondAttribute="bottom" id="j3g-sT-kp8"/>
-                            <constraint firstItem="Xwz-th-NaZ" firstAttribute="leading" secondItem="nUo-97-vj2" secondAttribute="leading" id="zxI-zY-v0A"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="backgroundUIView" destination="Xwz-th-NaZ" id="wDD-Na-oe8"/>
-                        <outlet property="downloadBtn" destination="Nl5-hR-dh9" id="fP4-hl-LOR"/>
-                        <outlet property="imageView" destination="rKf-zc-jhr" id="itx-3c-lRk"/>
-                        <outlet property="saveBtn" destination="hXg-Sg-Kwz" id="BkQ-2Z-6Z2"/>
-                        <outlet property="stackView" destination="x5P-5j-Q0r" id="seR-Jg-hc7"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Iey-EI-a79" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-4714" y="1675"/>
-        </scene>
     </scenes>
     <resources>
-        <image name="bag" catalog="system" width="128" height="128"/>
         <image name="gearshape" catalog="system" width="128" height="123"/>
-        <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
         <namedColor name="bgColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
