@@ -191,38 +191,6 @@
             </objects>
             <point key="canvasLocation" x="-6623" y="960"/>
         </scene>
-        <!--First Main Page Container View Controller-->
-        <scene sceneID="tYv-TO-T9o">
-            <objects>
-                <viewController storyboardIdentifier="FirstMainPageContainerViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tZf-2n-sAf" customClass="FirstMainPageContainerViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="BPh-JN-1H3"/>
-                        <viewControllerLayoutGuide type="bottom" id="PzY-EL-d4f"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8c3-VN-UTo">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UCu-bC-OdQ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                                <connections>
-                                    <segue destination="fRD-ZP-igi" kind="embed" id="Qc5-kw-aFs"/>
-                                </connections>
-                            </containerView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstAttribute="trailing" secondItem="UCu-bC-OdQ" secondAttribute="trailing" id="1lx-gP-4hR"/>
-                            <constraint firstAttribute="bottom" secondItem="UCu-bC-OdQ" secondAttribute="bottom" id="XpQ-5G-XDe"/>
-                            <constraint firstItem="UCu-bC-OdQ" firstAttribute="top" secondItem="8c3-VN-UTo" secondAttribute="top" id="i7G-c1-fgP"/>
-                            <constraint firstItem="UCu-bC-OdQ" firstAttribute="leading" secondItem="8c3-VN-UTo" secondAttribute="leading" id="qkN-5t-pxe"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Sjr-Gh-QME" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-5422" y="274"/>
-        </scene>
         <!--Second Main Page View Controller-->
         <scene sceneID="RIf-LT-QDm">
             <objects>

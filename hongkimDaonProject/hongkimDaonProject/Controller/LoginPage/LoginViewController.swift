@@ -58,8 +58,7 @@ class LoginViewController: UIViewController {
 // MARK: Navigator
 extension LoginViewController {
     func showMainViewController() {
-        let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
-        guard let mainViewController = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
+		let mainViewController = FirstMainPageContainerViewController()
         // 화면 전환 애니메이션 설정
         mainViewController.modalTransitionStyle = .crossDissolve
         // 전환된 화면이 보여지는 방법 설정
@@ -94,8 +93,7 @@ extension LoginViewController {
             }
         }
         // 가입 성공 후 메인 페이지 이동
-        let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
-        guard let mainViewController = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
+		let mainViewController = FirstMainPageContainerViewController()
         // 화면 전환 애니메이션 설정
         mainViewController.modalTransitionStyle = .crossDissolve
         // 전환된 화면이 보여지는 방법 설정

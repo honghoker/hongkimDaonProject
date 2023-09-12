@@ -96,8 +96,8 @@ extension AllWordingPageViewController: UITableViewDataSource {
 		mainUploadTime = Int(uploadTime)
 		// 클릭한 셀의 이벤트 처리
 		tableView.deselectRow(at: indexPath, animated: true)
-		let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
-		guard let mainVC = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
+		
+		let mainVC = FirstMainPageContainerViewController()
 		// 화면 전환 애니메이션 설정
 		mainVC.modalTransitionStyle = .crossDissolve
 		// 전환된 화면이 보여지는 방법 설정 (fullScreen)
