@@ -10,6 +10,7 @@ class SecondMainPageViewController: TabmanViewController {
     let tabBar = TMBar.ButtonBar()
     override func viewDidLoad() {
         super.viewDidLoad()
+		self.view.backgroundColor = UIColor(named: "bgColor")
         setUI()
         self.dataSource = self
     }
@@ -47,12 +48,16 @@ class SecondMainPageViewController: TabmanViewController {
         tabBar.indicator.tintColor = selectedTintColor
         tabBar.indicator.overscrollBehavior = .bounce
         addBar(tabBar, dataSource: self, at: .top)
-        if let myDiaryViewController = storyboard?.instantiateViewController(withIdentifier: "MyDiaryViewController") as? MyDiaryViewController {
-            viewControllers.append(myDiaryViewController)
-        }
-        if let myStorageViewController = storyboard?.instantiateViewController(withIdentifier: "MyStorageViewController") as? MyStorageViewController {
-            viewControllers.append(myStorageViewController)
-        }
+		
+		viewControllers.append(MyDiaryViewController())
+		viewControllers.append(MyStorageViewController())
+		
+//        if let myDiaryViewController = storyboard?.instantiateViewController(withIdentifier: "MyDiaryViewController") as? MyDiaryViewController {
+//            viewControllers.append(myDiaryViewController)
+//        }
+//        if let myStorageViewController = storyboard?.instantiateViewController(withIdentifier: "MyStorageViewController") as? MyStorageViewController {
+//            viewControllers.append(myStorageViewController)
+//        }
     }
 }
 
