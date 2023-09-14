@@ -93,38 +93,6 @@
             </objects>
             <point key="canvasLocation" x="-5546" y="1675"/>
         </scene>
-        <!--Today Wording Page View Controller-->
-        <scene sceneID="7nZ-6C-FgM">
-            <objects>
-                <viewController storyboardIdentifier="TodayWordingPageViewController" id="gm9-6Y-Vyq" customClass="TodayWordingPageViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Ibt-oN-R8F"/>
-                        <viewControllerLayoutGuide type="bottom" id="Dgl-kp-GJs"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="qKW-dx-bgS">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="az7-Dk-nBZ">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                            </imageView>
-                        </subviews>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="az7-Dk-nBZ" firstAttribute="top" secondItem="qKW-dx-bgS" secondAttribute="top" id="nJA-Fp-XQl"/>
-                            <constraint firstItem="az7-Dk-nBZ" firstAttribute="leading" secondItem="qKW-dx-bgS" secondAttribute="leading" id="ss2-PM-PNS"/>
-                            <constraint firstAttribute="bottom" secondItem="az7-Dk-nBZ" secondAttribute="bottom" id="uhE-og-40i"/>
-                            <constraint firstItem="az7-Dk-nBZ" firstAttribute="trailing" secondItem="qKW-dx-bgS" secondAttribute="trailing" id="umA-PP-mAu"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="imageView" destination="az7-Dk-nBZ" id="bGS-yI-fjw"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="v6v-lV-TXc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-3659.420289855073" y="995.75892857142856"/>
-        </scene>
     </scenes>
     <resources>
         <namedColor name="bgColor">
