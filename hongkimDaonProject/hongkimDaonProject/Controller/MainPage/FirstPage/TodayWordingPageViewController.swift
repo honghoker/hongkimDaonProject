@@ -83,9 +83,7 @@ class TodayWordingPageViewController: UIViewController {
 extension TodayWordingPageViewController {
     @objc
     func onTapImage(_ gesture: UITapGestureRecognizer) {
-        guard let nextView = self.storyboard?.instantiateViewController(identifier: "AlphaMainPageViewController") as? AlphaMainPageViewController else {
-            return
-        }
+		let nextView = AlphaMainPageViewController()
         nextView.modalPresentationStyle = .fullScreen
         self.present(nextView, animated: false, completion: nil)
     }

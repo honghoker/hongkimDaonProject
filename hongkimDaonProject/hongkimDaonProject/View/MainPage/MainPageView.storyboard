@@ -75,24 +75,6 @@
             </objects>
             <point key="canvasLocation" x="-1465" y="273"/>
         </scene>
-        <!--Alpha Main Page View Controller-->
-        <scene sceneID="fVr-vD-mre">
-            <objects>
-                <viewController storyboardIdentifier="AlphaMainPageViewController" id="8GK-IN-WBi" customClass="AlphaMainPageViewController" customModule="hongkimDaonProject" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="r5O-nM-Han"/>
-                        <viewControllerLayoutGuide type="bottom" id="StA-wG-JqJ"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="wzg-T1-cfr">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" name="bgColor"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Mzw-SO-nYf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-5546" y="1675"/>
-        </scene>
     </scenes>
     <resources>
         <namedColor name="bgColor">

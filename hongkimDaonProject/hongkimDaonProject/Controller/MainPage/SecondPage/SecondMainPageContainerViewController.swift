@@ -5,6 +5,8 @@ class SecondMainPageContainerViewController: UIViewController {
 	let setBtn = UIButton()
 	let secondMainPageView = SecondMainPageViewController()
 	
+	// SecondMainPageViewController에 연결되어있는 뷰 2개 스토리보드 제거하고 연결해봐야할듯
+	// 스토리보드 지우고 커플앱 코드 그대로 붙여넣었는데 안뜸
 	override func viewDidLoad() {
 		super.viewDidLoad()
 		
