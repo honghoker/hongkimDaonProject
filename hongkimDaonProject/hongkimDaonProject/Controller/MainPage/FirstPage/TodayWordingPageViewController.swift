@@ -8,11 +8,23 @@ public var mainImageUrl = ""
 public var mainUploadTime = 0
 
 class TodayWordingPageViewController: UIViewController {
-    @IBOutlet weak var imageView: UIImageView!
+	let imageView = UIImageView()
+	
     let database = DatabaseManager.shared.fireStore
     var imageUploadTime: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		view.addSubview(imageView)
+		imageView.translatesAutoresizingMaskIntoConstraints = false
+		
+		NSLayoutConstraint.activate([
+			imageView.topAnchor.constraint(equalTo: view.topAnchor),
+			imageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+			imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+			imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+		])
+		
         print(Realm.Configuration.defaultConfiguration.fileURL!)
         let imageClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapImage(_:)))
         Messaging.messaging().token { token, error in
@@ -71,9 +83,7 @@ class TodayWordingPageViewController: UIViewController {
 extension TodayWordingPageViewController {
     @objc
     func onTapImage(_ gesture: UITapGestureRecognizer) {
-        guard let nextView = self.storyboard?.instantiateViewController(identifier: "AlphaMainPageViewController") as? AlphaMainPageViewController else {
-            return
-        }
+		let nextView = AlphaMainPageViewController()
         nextView.modalPresentationStyle = .fullScreen
         self.present(nextView, animated: false, completion: nil)
     }

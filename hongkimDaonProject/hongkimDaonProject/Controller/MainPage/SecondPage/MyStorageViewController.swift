@@ -65,8 +65,8 @@ extension MyStorageViewController: UITableViewDataSource {
         tableView.deselectRow(at: indexPath, animated: true)
         mainImageUrl = myDaons[indexPath.row].imageUrl
         mainUploadTime = myDaons[indexPath.row].uploadTime
-        let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
-        guard let mainVC = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
+
+		let mainVC = FirstMainPageContainerViewController()
         // 화면 전환 애니메이션 설정
         mainVC.modalTransitionStyle = .crossDissolve
         // 전환된 화면이 보여지는 방법 설정 (fullScreen)

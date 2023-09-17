@@ -53,10 +53,14 @@ extension StartPageViewController {
         self.present(loginViewController, animated: true, completion: nil)
     }
     func showMainViewController() {
-        let storyboard: UIStoryboard = UIStoryboard(name: "MainPageView", bundle: nil)
-        guard let mainViewController = storyboard.instantiateViewController(withIdentifier: "FirstMainPageContainerViewController") as? FirstMainPageContainerViewController else { return }
-        mainViewController.modalTransitionStyle = .crossDissolve
-        mainViewController.modalPresentationStyle = .fullScreen
-        self.present(mainViewController, animated: true, completion: nil)
+		
+		// 처음에는 FirstMainPageContainerViewController로 가야함
+		
+		let mainViewController = FirstMainPageContainerViewController()
+		
+//		let mainViewController = AlphaTodayWordingPageViewController()
+		mainViewController.modalTransitionStyle = .crossDissolve
+		mainViewController.modalPresentationStyle = .fullScreen
+		self.present(mainViewController, animated: true, completion: nil)
     }
 }
