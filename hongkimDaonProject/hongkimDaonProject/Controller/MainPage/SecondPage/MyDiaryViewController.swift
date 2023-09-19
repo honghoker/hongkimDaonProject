@@ -2,7 +2,6 @@ import UIKit
 import SnapKit
 import Firebase
 import FirebaseFirestore
-//import Toast_Swift
 
 protocol DispatchDiary: AnyObject {
     func dispatch(Input value: Diary?)
@@ -132,13 +131,12 @@ extension MyDiaryViewController {
             }
         }
     }
-    func moveToWriteDiaryPage() {
-        let storyboard: UIStoryboard = UIStoryboard(name: "WriteDiaryPageView", bundle: nil)
-        guard let writeDiaryPageVC = storyboard.instantiateViewController(withIdentifier: "WriteDiaryPageViewController") as? WriteDiaryPageViewController else { return }
-        writeDiaryPageVC.delegate = self
-        writeDiaryPageVC.modalPresentationStyle = .fullScreen
-        writeDiaryPageVC.modalTransitionStyle = .crossDissolve
-        self.present(writeDiaryPageVC, animated: true, completion: nil)
+    private func moveToWriteDiaryPage() {
+        let vc = WriteDiaryPageViewController()
+        vc.delegate = self
+        vc.modalPresentationStyle = .fullScreen
+        vc.modalTransitionStyle = .crossDissolve
+        present(vc, animated: true)
     }
 }
 
