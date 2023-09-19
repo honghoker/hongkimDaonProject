@@ -43,7 +43,7 @@ class WriteDiaryPageViewController: UIViewController {
         return imageView
     }()
     
-    private lazy var imageViewLabel: UILabel = {
+    private let imageViewLabel: UILabel = {
         let label = UILabel()
         label.text = "오늘 하루를 표현하는 사진 한장을 올려보세요"
         label.textColor = .black
@@ -51,7 +51,7 @@ class WriteDiaryPageViewController: UIViewController {
         return label
     }()
     
-    private lazy var scrollView: UIScrollView = {
+    private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         return scrollView
     }()
@@ -158,9 +158,9 @@ extension WriteDiaryPageViewController {
             let cancel = UIAlertAction(title: "취소", style: .default)
             [cancel, submit].forEach { alert.addAction($0) }
             alert.preferredAction = submit
-            self.present(alert, animated: true)
+            present(alert, animated: true)
         } else {
-            self.presentingViewController?.dismiss(animated: true)
+            presentingViewController?.dismiss(animated: true)
         }
     }
     @objc
@@ -253,7 +253,7 @@ extension WriteDiaryPageViewController: UITextViewDelegate {
                 return true
             }
         }
-        guard textView.text!.count < self.textViewMaxLength else {
+        guard textView.text!.count < textViewMaxLength else {
             //            self.view.makeToast("5,000자까지 입력할 수 있습니다.", duration: 1.5, position: .bottom)
             return false
         }

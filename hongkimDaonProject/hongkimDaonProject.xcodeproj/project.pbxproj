@@ -46,7 +46,6 @@
 		51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 51795E3927FD8BA700D5C696 /* .swiftlint.yml */; };
 		519F762E2854697F00A5BEDF /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9CD28008AD90072B9B2 /* StorageManager.swift */; };
 		51CD3A3828197EC900145778 /* EditDiaryPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51CD3A3728197EC900145778 /* EditDiaryPageViewController.swift */; };
-		51CD3A3A2819825300145778 /* EditDiaryPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51CD3A392819825300145778 /* EditDiaryPageView.storyboard */; };
 		51F363C2280D221B003452F4 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = 51F363C1280D221B003452F4 /* Realm */; };
 		51F363C4280D221B003452F4 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 51F363C3280D221B003452F4 /* RealmSwift */; };
 		51F363C6280E01A7003452F4 /* Daon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51F363C5280E01A6003452F4 /* Daon.swift */; };
@@ -116,7 +115,6 @@
 		5174FEAF280C3B2400A844CD /* MyDiaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDiaryCell.swift; sourceTree = "<group>"; };
 		51795E3927FD8BA700D5C696 /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		51CD3A3728197EC900145778 /* EditDiaryPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditDiaryPageViewController.swift; sourceTree = "<group>"; };
-		51CD3A392819825300145778 /* EditDiaryPageView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = EditDiaryPageView.storyboard; sourceTree = "<group>"; };
 		51F363C5280E01A6003452F4 /* Daon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Daon.swift; sourceTree = "<group>"; };
 		51F920982811A617005CC6B7 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		51F9209A2811B132005CC6B7 /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
@@ -230,14 +228,6 @@
 			path = DiaryPage;
 			sourceTree = "<group>";
 		};
-		5117C9E52803FF190072B9B2 /* DiaryPage */ = {
-			isa = PBXGroup;
-			children = (
-				51CD3A392819825300145778 /* EditDiaryPageView.storyboard */,
-			);
-			path = DiaryPage;
-			sourceTree = "<group>";
-		};
 		51195292290AB54A00D05CB8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -287,7 +277,6 @@
 		516944462800045500462016 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5117C9E52803FF190072B9B2 /* DiaryPage */,
 				5117C9D52803F38F0072B9B2 /* SettingPage */,
 				BCA9C4D82803FEA20017EC87 /* LoginPage */,
 				BCA9C4D72803FE8E0017EC87 /* MainPage */,
@@ -527,7 +516,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				51CD3A3A2819825300145778 /* EditDiaryPageView.storyboard in Resources */,
 				BC4BC7C82809236C00C755BF /* AllWordingCell.xib in Resources */,
 				516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */,
 				512AF7AA282938F200398A81 /* PreviewView.storyboard in Resources */,
