@@ -2,35 +2,112 @@ import UIKit
 import Kingfisher
 
 class PreviewViewController: UIViewController {
-    @IBOutlet weak var backBtn: UIButton!
-    @IBOutlet weak var imageView: UIImageView!
+    private lazy var backButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.init(systemName: "chevron.backward"), for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
+        return button
+    }()
+    
+    private let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.kf.indicatorType = .activity
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
-        getRecntDaon()
+        addView()
+        setLayout()
+        setupView()
+        fetchLatestImage()
     }
-    func getRecntDaon() {
-        let now = Date()
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeZone = NSTimeZone(name: "ko_KR") as TimeZone?
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let nowDayString = dateFormatter.string(from: now)
-        dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone?
-        let nowDayDate: Date = dateFormatter.date(from: nowDayString)!
-        DatabaseManager.shared.fireStore.collection("daon").whereField("uploadTime", isLessThan: nowDayDate.millisecondsSince1970 + DaonConstants.dayMilliSecond).order(by: "uploadTime", descending: true).limit(to: 1).getDocuments { snapshot, error in
-            guard error == nil else {
-                return
-            }
-            if let url = snapshot?.documents[0].get("imageUrl") {
-                self.imageView.kf.indicatorType = .activity
-                let processor = ResizingImageProcessor(referenceSize: CGSize(width: self.view.frame.width, height: self.view.frame.height))
-                let url = URL(string: url as! String)
-                self.imageView.kf.setImage(with: url, options: [.processor(processor)])
-            }
+    
+    private func addView() {
+        [
+            imageView,
+            backButton
+        ].forEach {
+            view.addSubview($0)
         }
     }
+    
+    private func setLayout() {
+        imageView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
+        
+        backButton.snp.makeConstraints {
+            $0.top.left.equalTo(view.safeAreaLayoutGuide).inset(16)
+        }
+    }
+    
+    private func setupView() {
+        view.backgroundColor = .white
+    }
+    
+    private func fetchLatestImage() {
+        guard let currentDate = getTodaysDateInKoreanTimeZone() else { return }
+        
+        fetchImageUrl(date: currentDate) { [weak self] imageUrl in
+            self?.setImage(urlString: imageUrl)
+        }
+    }
+    
+    private func getTodaysDateInKoreanTimeZone() -> Date? {
+        let now = Date()
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(identifier: "ko_KR")
+        formatter.dateFormat = "yyyy-MM-dd"
+        let nowDayString = formatter.string(from: now)
+        
+        formatter.timeZone = TimeZone(identifier: "UTC")
+        return formatter.date(from: nowDayString)
+    }
+    
+    private func fetchImageUrl(
+        date: Date,
+        completion: @escaping (String) -> ()
+    ) {
+        DatabaseManager.shared.fireStore
+            .collection("daon")
+            .whereField(
+                "uploadTime",
+                isLessThan: date.millisecondsSince1970 + DaonConstants.dayMilliSecond
+            )
+            .order(by: "uploadTime", descending: true)
+            .limit(to: 1)
+            .getDocuments { [weak self] snapshot, error in
+                if let error {
+                    self?.showToast(message: error.localizedDescription)
+                    return
+                }
+                
+                guard let imageUrl = snapshot?.documents[0].get("imageUrl") as? String else {
+                    self?.showToast(message: "")
+                    return
+                }
+                
+                completion(imageUrl)
+            }
+    }
+    
+    private func setImage(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        
+        let processor = ResizingImageProcessor(referenceSize: view.frame.size)
+        self.imageView.kf.setImage(with: url, options: [.processor(processor)])
+    }
+    
+    private func showToast(message: String) {
+        // TODO: Show Error Toast
+        debugPrint(message)
+    }
+    
     @objc
-    func back() {
-        self.presentingViewController?.dismiss(animated: true, completion: nil)
+    private func didTapBackButton() {
+        presentingViewController?.dismiss(animated: true)
     }
 }

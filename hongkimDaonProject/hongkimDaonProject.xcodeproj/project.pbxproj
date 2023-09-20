@@ -30,7 +30,6 @@
 		51195296290AB59500D05CB8 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51195295290AB59500D05CB8 /* UIImage+Ext.swift */; };
 		51195298290AB5B100D05CB8 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51195297290AB5B100D05CB8 /* UIViewController+Ext.swift */; };
 		5119529A290AB6FE00D05CB8 /* DetailDiaryPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51195299290AB6FE00D05CB8 /* DetailDiaryPageViewController.swift */; };
-		512AF7AA282938F200398A81 /* PreviewView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 512AF7A9282938F200398A81 /* PreviewView.storyboard */; };
 		512AF7AC2829393000398A81 /* PreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 512AF7AB2829393000398A81 /* PreviewViewController.swift */; };
 		5153FF2427FD7BE00096AE7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153FF2327FD7BE00096AE7A /* AppDelegate.swift */; };
 		5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153FF2527FD7BE00096AE7A /* SceneDelegate.swift */; };
@@ -98,7 +97,6 @@
 		51195295290AB59500D05CB8 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		51195297290AB5B100D05CB8 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		51195299290AB6FE00D05CB8 /* DetailDiaryPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailDiaryPageViewController.swift; sourceTree = "<group>"; };
-		512AF7A9282938F200398A81 /* PreviewView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PreviewView.storyboard; sourceTree = "<group>"; };
 		512AF7AB2829393000398A81 /* PreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewViewController.swift; sourceTree = "<group>"; };
 		5153FF2027FD7BE00096AE7A /* hongkimDaonProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = hongkimDaonProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5153FF2327FD7BE00096AE7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -382,7 +380,6 @@
 			isa = PBXGroup;
 			children = (
 				5153FF2927FD7BE00096AE7A /* LoginView.storyboard */,
-				512AF7A9282938F200398A81 /* PreviewView.storyboard */,
 			);
 			path = LoginPage;
 			sourceTree = "<group>";
@@ -518,7 +515,6 @@
 			files = (
 				BC4BC7C82809236C00C755BF /* AllWordingCell.xib in Resources */,
 				516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */,
-				512AF7AA282938F200398A81 /* PreviewView.storyboard in Resources */,
 				51795E3A27FD8BA700D5C696 /* .swiftlint.yml in Resources */,
 				5153FF3027FD7BE00096AE7A /* LaunchScreen.storyboard in Resources */,
 				BC75892528263776002DE8E1 /* lottieFile.json in Resources */,

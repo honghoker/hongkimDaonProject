@@ -74,11 +74,10 @@ extension LoginViewController {
     }
     @objc
     func showPreviewViewController() {
-        let storyboard: UIStoryboard = UIStoryboard(name: "PreviewView", bundle: nil)
-        guard let PreviewViewController = storyboard.instantiateViewController(withIdentifier: "PreviewViewController") as? PreviewViewController else { return }
-        PreviewViewController.modalTransitionStyle = .crossDissolve
-        PreviewViewController.modalPresentationStyle = .fullScreen
-        self.present(PreviewViewController, animated: true, completion: nil)
+        let vc = PreviewViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
 
