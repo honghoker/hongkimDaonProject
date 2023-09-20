@@ -10,75 +10,105 @@ protocol DispatchDiary: AnyObject {
 }
 
 class MyDiaryViewController: UIViewController {
-    @IBOutlet weak var diaryTableView: UITableView!
-    var myDiarys: [Diary] = []
+    private var myDiarys: [Diary] = []
     private var diaryCount = 0
     private var lastCurrentPageDoc: DocumentSnapshot?
     private var limit = 10
     private var isFetching = false
     private var isNext = true
-    lazy var floatingBtn: UIButton = {
-        let btn = UIButton()
-        btn.layer.backgroundColor = UIColor.white.cgColor
-        btn.layer.shadowColor = UIColor.gray.cgColor
-        btn.layer.shadowOpacity = 0.5
-        btn.layer.shadowOffset = CGSize(width: 0, height: 4)
-        btn.layer.shadowRadius = 6.0
-        btn.layer.cornerRadius = 32
-        btn.tintColor = UIColor.gray
-        btn.setImage(UIImage(systemName: "scribble"), for: .normal)
-        let config = UIImage.SymbolConfiguration(pointSize: 24)
-        btn.setPreferredSymbolConfiguration(config, forImageIn: .normal)
-        btn.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        return btn
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        
+        let myTableViewCellNib = UINib(nibName: String(describing: MyDiaryCell.self), bundle: nil)
+        tableView.register(myTableViewCellNib, forCellReuseIdentifier: "MyDiaryCell")
+        tableView.backgroundColor = UIColor(named: "bgColor")
+        tableView.rowHeight = 100
+        tableView.estimatedRowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = .none
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
     }()
+    
+    private lazy var floatingButton: UIButton = {
+        let button = UIButton()
+        button.layer.backgroundColor = UIColor.white.cgColor
+        button.layer.shadowColor = UIColor.gray.cgColor
+        button.layer.shadowOpacity = 0.5
+        button.layer.shadowOffset = CGSize(width: 0, height: 4)
+        button.layer.shadowRadius = 6.0
+        button.layer.cornerRadius = 32
+        button.tintColor = UIColor.gray
+        button.setImage(UIImage(systemName: "scribble"), for: .normal)
+        let config = UIImage.SymbolConfiguration(pointSize: 24)
+        button.setPreferredSymbolConfiguration(config, forImageIn: .normal)
+        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        button.backgroundColor = UIColor(named: "bgColor")
+        let floatingClick = UITapGestureRecognizer(target: self, action: #selector(didtapFloatingButton))
+        button.addGestureRecognizer(floatingClick)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let myTableViewCellNib = UINib(nibName: String(describing: MyDiaryCell.self), bundle: nil)
-        self.diaryTableView.backgroundColor = UIColor(named: "bgColor")
-        self.diaryTableView.register(myTableViewCellNib, forCellReuseIdentifier: "MyDiaryCell")
-        self.diaryTableView.rowHeight = 100
-        self.diaryTableView.estimatedRowHeight = UITableView.automaticDimension
-        self.diaryTableView.separatorStyle = .none
-        self.diaryTableView.delegate = self
-        self.diaryTableView.dataSource = self
-        view.addSubview(floatingBtn)
-        floatingBtn.backgroundColor = UIColor(named: "bgColor")
-        self.floatingBtn.snp.makeConstraints { (make) in
-            make.width.height.equalTo(64)
-            make.right.equalTo(diaryTableView).offset(-16)
-            make.bottom.equalTo(diaryTableView).offset(-32)
-        }
-        let floatingClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapFloatingBtn(_:)))
-        floatingBtn.addGestureRecognizer(floatingClick)
+        
+        addView()
+        setLayout()
+        setupView()
         fetch()
+    }
+    
+    private func addView() {
+        [
+            tableView,
+            floatingButton
+        ].forEach {
+            view.addSubview($0)
+        }
+    }
+    
+    private func setLayout() {
+        tableView.snp.makeConstraints {
+            $0.edges.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        floatingButton.snp.makeConstraints {
+            $0.size.equalTo(64)
+            $0.right.equalTo(tableView).offset(-16)
+            $0.bottom.equalTo(tableView).offset(-32)
+        }
+    }
+    
+    private func setupView() {
+        
     }
 }
 
 extension MyDiaryViewController {
-    @IBAction func fetch() {
+    @IBAction private func fetch() {
         guard !(isFetching == true || isNext == false) else {
             return
         }
         guard let user = AuthManager.shared.auth.currentUser else {
-//            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
+            //            self.view.makeToast("네트워크 연결을 확인해주세요.", duration: 1.5, position: .bottom)
             return
         }
         let uid = user.uid
         isFetching = true
         self.fetchDiary(uid: uid) { [weak self] (snapshot, error) in
             guard error == nil else {
-//                print("Error when get diarys: \(error!)")
+                //                print("Error when get diarys: \(error!)")
                 self?.isFetching = false
                 return
             }
             guard let snapshot = snapshot else {
-//                print("diary docs is null")
+                //                print("diary docs is null")
                 self?.isFetching = false
                 return
             }
             guard !snapshot.documents.isEmpty else {
-//                print("diary docs is empty")
+                //                print("diary docs is empty")
                 self?.isNext = false
                 self?.isFetching = false
                 return
@@ -94,12 +124,12 @@ extension MyDiaryViewController {
             self?.lastCurrentPageDoc = snapshot.documents.last
             self?.myDiarys.append(contentsOf: newDiarys)
             DispatchQueue.main.async {
-                self?.diaryTableView.reloadData()
+                self?.tableView.reloadData()
             }
             self?.isFetching = false
         }
     }
-    func fetchDiary(uid: String, completed: @escaping (QuerySnapshot?, Error?) -> Void) {
+    private func fetchDiary(uid: String, completed: @escaping (QuerySnapshot?, Error?) -> Void) {
         let diaryDB = DatabaseManager.shared.fireStore.collection("diary")
         var query: Query
         if self.myDiarys.isEmpty {
@@ -116,7 +146,7 @@ extension MyDiaryViewController {
         }
     }
     @objc
-    func tapFloatingBtn(_ gesture: UITapGestureRecognizer) {
+    func didtapFloatingButton(_ gesture: UITapGestureRecognizer) {
         if self.myDiarys.isEmpty == true {
             // MARK: 일기가 비어있으면
             moveToWriteDiaryPage()
@@ -124,7 +154,7 @@ extension MyDiaryViewController {
             let current = Calendar.current
             if current.isDateInToday(Date(milliseconds: self.myDiarys[0].writeTime)) == true {
                 // MARK: 오늘이면
-//                self.view.makeToast("이미 오늘의 일기를 작성했습니다.")
+                //                self.view.makeToast("이미 오늘의 일기를 작성했습니다.")
             } else {
                 // MARK: 오늘이 아니면 일기 작성
                 moveToWriteDiaryPage()
@@ -143,11 +173,11 @@ extension MyDiaryViewController {
 extension MyDiaryViewController: DispatchDiary {
     func update(Input value: Diary?) {
         if let diary = value {
-            if let index = self.myDiarys.firstIndex(where: {
+            if let index = myDiarys.firstIndex(where: {
                 $0.writeTime == Int64(diary.writeTime)}) {
-                self.myDiarys[index] = diary
-                DispatchQueue.main.async {
-                    self.diaryTableView.reloadData()
+                myDiarys[index] = diary
+                DispatchQueue.main.async { [weak self] in
+                    self?.tableView.reloadData()
                 }
             }
         }
@@ -157,8 +187,8 @@ extension MyDiaryViewController: DispatchDiary {
             if let index = self.myDiarys.firstIndex(where: {
                 $0.writeTime == Int64(writeTime)}) {
                 self.myDiarys.remove(at: index)
-                DispatchQueue.main.async {
-                    self.diaryTableView.reloadData()
+                DispatchQueue.main.async { [weak self] in
+                    self?.tableView.reloadData()
                 }
             }
         }
@@ -166,12 +196,11 @@ extension MyDiaryViewController: DispatchDiary {
     func dispatch(Input value: Diary?) {
         if let diary = value {
             self.myDiarys.insert(diary, at: 0)
-            DispatchQueue.main.async {
-                self.diaryTableView.reloadData()
+            DispatchQueue.main.async { [weak self] in
+                self?.tableView.reloadData()
             }
         }
     }
-
 }
 
 extension MyDiaryViewController: UITableViewDelegate {
@@ -192,7 +221,9 @@ extension MyDiaryViewController: UITableViewDataSource {
     }
     // MARK: 각 셀에 대한 설정
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = diaryTableView.dequeueReusableCell(withIdentifier: "MyDiaryCell", for: indexPath) as? MyDiaryCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: "MyDiaryCell", for: indexPath
+        ) as? MyDiaryCell else {
             return UITableViewCell()
         }
         cell.backgroundColor = UIColor(named: "bgColor")
@@ -209,13 +240,13 @@ extension MyDiaryViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // MARK: 클릭한 셀의 이벤트 처리
         tableView.deselectRow(at: indexPath, animated: true)
-        let DetailDiaryVC = DetailDiaryPageViewController()
-        DetailDiaryVC.delegate = self
+        let vc = DetailDiaryPageViewController()
+        vc.delegate = self
         // MARK: 화면 전환 애니메이션 설정
-        DetailDiaryVC.modalTransitionStyle = .crossDissolve
+        vc.modalTransitionStyle = .crossDissolve
         // MARK: 전환된 화면이 보여지는 방법 설정 (fullScreen)
-        DetailDiaryVC.docId = String(myDiarys[indexPath.row].writeTime)
-        DetailDiaryVC.modalPresentationStyle = .fullScreen
-        self.present(DetailDiaryVC, animated: true, completion: nil)
+        vc.docId = String(myDiarys[indexPath.row].writeTime)
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
 }
