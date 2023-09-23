@@ -42,7 +42,7 @@ class SetNotificationPageViewController: UIViewController {
     func setUIAtWillLayoutSubviews() {
         self.switchBtn.onTintColor = DaonConstants.daonColor
         self.backBtn.layer.borderWidth = 0.0
-        self.backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
+        self.backBtn.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
         self.saveBtn.titleLabel?.textAlignment = .center
         self.saveBtn.layer.borderWidth = 1
         self.saveBtn.layer.borderColor = UIColor.label.cgColor
@@ -89,8 +89,8 @@ extension SetNotificationPageViewController {
         }
     }
     @objc
-    func back() {
-        self.presentingViewController?.dismiss(animated: false)
+    func didTapBackButton() {
+        presentingViewController?.dismiss(animated: false)
     }
     @objc
     func timePickerValueChanged(sender: UIDatePicker) {
