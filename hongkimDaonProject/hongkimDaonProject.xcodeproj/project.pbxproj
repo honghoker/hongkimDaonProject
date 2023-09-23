@@ -33,7 +33,6 @@
 		5153FF2427FD7BE00096AE7A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153FF2327FD7BE00096AE7A /* AppDelegate.swift */; };
 		5153FF2627FD7BE00096AE7A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153FF2527FD7BE00096AE7A /* SceneDelegate.swift */; };
 		5153FF2827FD7BE00096AE7A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5153FF2727FD7BE00096AE7A /* LoginViewController.swift */; };
-		5153FF2B27FD7BE00096AE7A /* LoginView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2927FD7BE00096AE7A /* LoginView.storyboard */; };
 		5153FF2D27FD7BE00096AE7A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2C27FD7BE00096AE7A /* Assets.xcassets */; };
 		5153FF3027FD7BE00096AE7A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5153FF2E27FD7BE00096AE7A /* LaunchScreen.storyboard */; };
 		516944512800142C00462016 /* JejuMyeongjoOTF.otf in Resources */ = {isa = PBXBuildFile; fileRef = 516944502800142600462016 /* JejuMyeongjoOTF.otf */; };
@@ -100,7 +99,6 @@
 		5153FF2327FD7BE00096AE7A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5153FF2527FD7BE00096AE7A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		5153FF2727FD7BE00096AE7A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		5153FF2A27FD7BE00096AE7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LoginView.storyboard; sourceTree = "<group>"; };
 		5153FF2C27FD7BE00096AE7A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5153FF2F27FD7BE00096AE7A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5153FF3127FD7BE00096AE7A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -265,7 +263,6 @@
 		516944462800045500462016 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				BCA9C4D82803FEA20017EC87 /* LoginPage */,
 				BCA9C4D72803FE8E0017EC87 /* MainPage */,
 			);
 			path = View;
@@ -363,14 +360,6 @@
 				BC69DD4B28017D7D00A6A9F6 /* MainPageView.storyboard */,
 			);
 			path = MainPage;
-			sourceTree = "<group>";
-		};
-		BCA9C4D82803FEA20017EC87 /* LoginPage */ = {
-			isa = PBXGroup;
-			children = (
-				5153FF2927FD7BE00096AE7A /* LoginView.storyboard */,
-			);
-			path = LoginPage;
 			sourceTree = "<group>";
 		};
 		BCA9C4D92803FEB10017EC87 /* Cells */ = {
@@ -512,7 +501,6 @@
 				5153FF2D27FD7BE00096AE7A /* Assets.xcassets in Resources */,
 				BCA9C4D22803E84C0017EC87 /* MyStorageCell.xib in Resources */,
 				5174FEAE280C3A2900A844CD /* MyDiaryCell.xib in Resources */,
-				5153FF2B27FD7BE00096AE7A /* LoginView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -565,14 +553,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		5153FF2927FD7BE00096AE7A /* LoginView.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				5153FF2A27FD7BE00096AE7A /* Base */,
-			);
-			name = LoginView.storyboard;
-			sourceTree = "<group>";
-		};
 		5153FF2E27FD7BE00096AE7A /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
