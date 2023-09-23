@@ -24,7 +24,6 @@
 		511636132AA32B7300521F71 /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 511636122AA32B7300521F71 /* RxCocoa */; };
 		511636152AA32B7300521F71 /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 511636142AA32B7300521F71 /* RxSwift */; };
 		5117C9D92803F4500072B9B2 /* SettingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9D82803F4500072B9B2 /* SettingPageViewController.swift */; };
-		5117C9DB2803F4820072B9B2 /* SettingPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5117C9DA2803F4820072B9B2 /* SettingPageView.storyboard */; };
 		5117C9E42803FF070072B9B2 /* WriteDiaryPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5117C9E32803FF070072B9B2 /* WriteDiaryPageViewController.swift */; };
 		51195294290AB55E00D05CB8 /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51195293290AB55E00D05CB8 /* Date+Ext.swift */; };
 		51195296290AB59500D05CB8 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51195295290AB59500D05CB8 /* UIImage+Ext.swift */; };
@@ -91,7 +90,6 @@
 /* Begin PBXFileReference section */
 		5117C9CD28008AD90072B9B2 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 		5117C9D82803F4500072B9B2 /* SettingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingPageViewController.swift; sourceTree = "<group>"; };
-		5117C9DA2803F4820072B9B2 /* SettingPageView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SettingPageView.storyboard; sourceTree = "<group>"; };
 		5117C9E32803FF070072B9B2 /* WriteDiaryPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteDiaryPageViewController.swift; sourceTree = "<group>"; };
 		51195293290AB55E00D05CB8 /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		51195295290AB59500D05CB8 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
@@ -189,14 +187,6 @@
 			path = Api;
 			sourceTree = "<group>";
 		};
-		5117C9D52803F38F0072B9B2 /* SettingPage */ = {
-			isa = PBXGroup;
-			children = (
-				5117C9DA2803F4820072B9B2 /* SettingPageView.storyboard */,
-			);
-			path = SettingPage;
-			sourceTree = "<group>";
-		};
 		5117C9DC2803FD5A0072B9B2 /* firebase */ = {
 			isa = PBXGroup;
 			children = (
@@ -275,7 +265,6 @@
 		516944462800045500462016 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				5117C9D52803F38F0072B9B2 /* SettingPage */,
 				BCA9C4D82803FEA20017EC87 /* LoginPage */,
 				BCA9C4D72803FE8E0017EC87 /* MainPage */,
 			);
@@ -524,7 +513,6 @@
 				BCA9C4D22803E84C0017EC87 /* MyStorageCell.xib in Resources */,
 				5174FEAE280C3A2900A844CD /* MyDiaryCell.xib in Resources */,
 				5153FF2B27FD7BE00096AE7A /* LoginView.storyboard in Resources */,
-				5117C9DB2803F4820072B9B2 /* SettingPageView.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
