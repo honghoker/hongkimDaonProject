@@ -59,7 +59,6 @@
 		BC57774F2808268F00B4E664 /* AlphaMainPageContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC57774E2808268F00B4E664 /* AlphaMainPageContainerViewController.swift */; };
 		BC57775128082CB600B4E664 /* AlphaTodayWordingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC57775028082CB600B4E664 /* AlphaTodayWordingPageViewController.swift */; };
 		BC57775328082CDD00B4E664 /* AllWordingPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC57775228082CDD00B4E664 /* AllWordingPageViewController.swift */; };
-		BC69DD4C28017D7D00A6A9F6 /* MainPageView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC69DD4B28017D7D00A6A9F6 /* MainPageView.storyboard */; };
 		BC69DD4E28017DA200A6A9F6 /* SecondMainPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD4D28017DA200A6A9F6 /* SecondMainPageViewController.swift */; };
 		BC69DD542801903E00A6A9F6 /* MyDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD532801903E00A6A9F6 /* MyDiaryViewController.swift */; };
 		BC69DD572801905400A6A9F6 /* MyStorageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC69DD562801905400A6A9F6 /* MyStorageViewController.swift */; };
@@ -69,7 +68,6 @@
 		BC7C9CBA28055D4300FF28E1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7C9CB928055D4300FF28E1 /* User.swift */; };
 		BCA410D9282248DC000C318F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA410D8282248DC000C318F /* Constants.swift */; };
 		BCA9C4D02803E6BC0017EC87 /* MyStorageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA9C4CF2803E6BC0017EC87 /* MyStorageCell.swift */; };
-		BCA9C4D22803E84C0017EC87 /* MyStorageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */; };
 		BCD34461280FC3CC00D34EE5 /* MyStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCD34460280FC3CC00D34EE5 /* MyStorage.swift */; };
 /* End PBXBuildFile section */
 
@@ -125,7 +123,6 @@
 		BC57774E2808268F00B4E664 /* AlphaMainPageContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaMainPageContainerViewController.swift; sourceTree = "<group>"; };
 		BC57775028082CB600B4E664 /* AlphaTodayWordingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlphaTodayWordingPageViewController.swift; sourceTree = "<group>"; };
 		BC57775228082CDD00B4E664 /* AllWordingPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllWordingPageViewController.swift; sourceTree = "<group>"; };
-		BC69DD4B28017D7D00A6A9F6 /* MainPageView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MainPageView.storyboard; sourceTree = "<group>"; };
 		BC69DD4D28017DA200A6A9F6 /* SecondMainPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondMainPageViewController.swift; sourceTree = "<group>"; };
 		BC69DD532801903E00A6A9F6 /* MyDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyDiaryViewController.swift; sourceTree = "<group>"; };
 		BC69DD562801905400A6A9F6 /* MyStorageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageViewController.swift; sourceTree = "<group>"; };
@@ -135,7 +132,6 @@
 		BC7C9CB928055D4300FF28E1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = SOURCE_ROOT; };
 		BCA410D8282248DC000C318F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		BCA9C4CF2803E6BC0017EC87 /* MyStorageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorageCell.swift; sourceTree = "<group>"; };
-		BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MyStorageCell.xib; sourceTree = "<group>"; };
 		BCD34460280FC3CC00D34EE5 /* MyStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -357,7 +353,6 @@
 			isa = PBXGroup;
 			children = (
 				BCA9C4D92803FEB10017EC87 /* Cells */,
-				BC69DD4B28017D7D00A6A9F6 /* MainPageView.storyboard */,
 			);
 			path = MainPage;
 			sourceTree = "<group>";
@@ -365,7 +360,6 @@
 		BCA9C4D92803FEB10017EC87 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				BCA9C4D12803E84C0017EC87 /* MyStorageCell.xib */,
 				BC4BC7C72809236C00C755BF /* AllWordingCell.xib */,
 				5174FEAD280C3A2900A844CD /* MyDiaryCell.xib */,
 			);
@@ -497,9 +491,7 @@
 				5153FF3027FD7BE00096AE7A /* LaunchScreen.storyboard in Resources */,
 				BC75892528263776002DE8E1 /* lottieFile.json in Resources */,
 				BC07019A280449ED00139415 /* GoogleService-Info.plist in Resources */,
-				BC69DD4C28017D7D00A6A9F6 /* MainPageView.storyboard in Resources */,
 				5153FF2D27FD7BE00096AE7A /* Assets.xcassets in Resources */,
-				BCA9C4D22803E84C0017EC87 /* MyStorageCell.xib in Resources */,
 				5174FEAE280C3A2900A844CD /* MyDiaryCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -698,7 +690,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "일기작성 시 사진 등록을 하기 위한 권한 요청";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = MainPageView;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
@@ -732,7 +724,7 @@
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "일기작성 시 사진 등록을 하기 위한 권한 요청";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = MainPageView;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UIUserInterfaceStyle = Light;

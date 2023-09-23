@@ -4,59 +4,76 @@ import RealmSwift
 import Kingfisher
 
 class MyStorageViewController: UIViewController {
-    @IBOutlet weak var storageTableView: UITableView!
-    var myDaons: Array<MyStorage>!
-    var realm: Realm!
+    private var myDaons = [MyStorage]()
     private var diaryCount = 0
     private var lastCurrentPageDoc: DocumentSnapshot?
     private var limit = 10
     private var isFetching = false
     private var isNext = true
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView()
+        let cellNib = UINib(nibName: String(describing: MyStorageCell.self), bundle: nil)
+        tableView.backgroundColor = UIColor(named: "bgColor")
+        tableView.register(MyStorageCell.self, forCellReuseIdentifier: MyStorageCell.identifier)
+        tableView.separatorInset = .zero
+        tableView.directionalLayoutMargins = .zero
+        tableView.layoutMargins = .zero
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.separatorStyle = .none
+        tableView.delegate = self
+        tableView.dataSource = self
+        return tableView
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        realm = try? Realm()
-        let result = realm.objects(MyStorage.self).sorted(byKeyPath: "storageTime", ascending: false)
-        myDaons = Array(result)
-        setUI()
+        addView()
+        setLayout()
+        setupView()
+        fetchStoragedDaon()
     }
-    // MARK: set UI
-    func setUI() {
-        let storageTableViewCellNib = UINib(nibName: String(describing: MyStorageCell.self), bundle: nil)
-        self.storageTableView.backgroundColor = UIColor(named: "bgColor")
-        self.storageTableView.register(storageTableViewCellNib, forCellReuseIdentifier: "myStorageCellId")
-        self.storageTableView.separatorInset = .zero
-        self.storageTableView.directionalLayoutMargins = .zero
-        self.storageTableView.layoutMargins = .zero
-        self.storageTableView.rowHeight = UITableView.automaticDimension
-        self.storageTableView.separatorStyle = .none
-        self.storageTableView.delegate = self
-        self.storageTableView.dataSource = self
+    
+    private func addView() {
+        view.addSubview(tableView)
+    }
+    
+    private func setLayout() {
+        tableView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaInsets)
+            $0.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+    }
+    
+    private func setupView() {
+        
+    }
+    
+    private func fetchStoragedDaon() {
+        do {
+            let realm = try Realm()
+            let result = realm.objects(MyStorage.self).sorted(byKeyPath: "storageTime", ascending: false)
+            myDaons = Array(result)
+        } catch {
+            debugPrint("fetch Storage Error: \(error.localizedDescription)")
+        }
     }
 }
 
-extension MyStorageViewController: UITableViewDelegate {
-}
-
-extension MyStorageViewController: UITableViewDataSource {
-    // MARK: 테이블 뷰 셀의 갯수
+extension MyStorageViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.myDaons.count
+        return myDaons.count
     }
-    // MARK: 각 셀에 대한 설정
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "myStorageCellId", for: indexPath) as? MyStorageCell else {
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: "myStorageCellId",
+            for: indexPath
+        ) as? MyStorageCell else {
             return UITableViewCell()
         }
         let imageUrl = myDaons[indexPath.row].imageUrl
-        cell.backgroundColor = UIColor(named: "bgColor")
-        cell.myStorageImageView.kf.indicatorType = .activity
-        let url = URL(string: String(describing: imageUrl))
-        cell.myStorageImageView.kf.setImage(with: url, options: nil)
-        cell.contentMode = .scaleAspectFit
-        cell.directionalLayoutMargins = .zero
-        cell.layoutMargins = .zero
-        cell.contentView.directionalLayoutMargins = .zero
-        cell.contentView.layoutMargins = .zero
+        cell.setImage(urlString: imageUrl)
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -71,6 +88,6 @@ extension MyStorageViewController: UITableViewDataSource {
         mainVC.modalTransitionStyle = .crossDissolve
         // 전환된 화면이 보여지는 방법 설정 (fullScreen)
         mainVC.modalPresentationStyle = .fullScreen
-        self.present(mainVC, animated: true, completion: nil)
+        present(mainVC, animated: true)
     }
 }

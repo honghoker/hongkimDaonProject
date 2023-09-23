@@ -4,15 +4,15 @@ import Pageboy
 
 class SecondMainPageViewController: TabmanViewController {
     private var viewControllers: Array<UIViewController> = []
-    let isDark = UserDefaults.standard.bool(forKey: "darkModeState")
-    var tintColor = UserDefaults.standard.bool(forKey: "darkModeState") == true ? UIColor.darkGray : UIColor.lightGray
-    var selectedTintColor = UserDefaults.standard.bool(forKey: "darkModeState") == true ? UIColor.lightGray : UIColor.darkGray
-    let tabBar = TMBar.ButtonBar()
+    private let isDark = UserDefaults.standard.bool(forKey: "darkModeState")
+    private var tintColor = UserDefaults.standard.bool(forKey: "darkModeState") == true ? UIColor.darkGray : UIColor.lightGray
+    private var selectedTintColor = UserDefaults.standard.bool(forKey: "darkModeState") == true ? UIColor.lightGray : UIColor.darkGray
+    private let tabBar = TMBar.ButtonBar()
     override func viewDidLoad() {
         super.viewDidLoad()
 		self.view.backgroundColor = UIColor(named: "bgColor")
         setUI()
-        self.dataSource = self
+        dataSource = self
     }
     override func viewWillAppear(_ animated: Bool) {
         if UserDefaults.standard.bool(forKey: "darkModeState") == true {
@@ -48,16 +48,9 @@ class SecondMainPageViewController: TabmanViewController {
         tabBar.indicator.tintColor = selectedTintColor
         tabBar.indicator.overscrollBehavior = .bounce
         addBar(tabBar, dataSource: self, at: .top)
-		
-		viewControllers.append(MyDiaryViewController())
-		viewControllers.append(MyStorageViewController())
-		
-//        if let myDiaryViewController = storyboard?.instantiateViewController(withIdentifier: "MyDiaryViewController") as? MyDiaryViewController {
-//            viewControllers.append(myDiaryViewController)
-//        }
-//        if let myStorageViewController = storyboard?.instantiateViewController(withIdentifier: "MyStorageViewController") as? MyStorageViewController {
-//            viewControllers.append(myStorageViewController)
-//        }
+
+        viewControllers.append(MyDiaryViewController())
+        viewControllers.append(MyStorageViewController())
     }
 }
 
