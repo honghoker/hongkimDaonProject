@@ -6,117 +6,190 @@ import CryptoKit
 import RealmSwift
 
 class SettingPageViewController: UIViewController {
-    let defaults = UserDefaults.standard
-    @IBOutlet weak var backBtn: UIButton!
-    @IBOutlet weak var notificationConfigBtn: UILabel!
-    @IBOutlet weak var logoutBtn: UILabel!
-    @IBOutlet weak var withdrawalBtn: UILabel!
-    @IBOutlet weak var setDarkModeBtn: UILabel!
     private var currentNonce: String?
+    
+    private lazy var backButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.init(systemName: "chevron.backward"), for: .normal)
+        button.tintColor = .systemGray
+        button.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
+        return button
+    }()
+    
+    private let stackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 50
+        stackView.alignment = .center
+        return stackView
+    }()
+    
+    private lazy var notificationConfigButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(didTapNotificationButton), for: .touchUpInside)
+        button.setTitle("알림 설정", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
+        return button
+    }()
+    
+    private lazy var darkModeButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(didTapDarkModeButton), for: .touchUpInside)
+        button.setTitle("다크모드 설정", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
+        return button
+    }()
+    
+    private lazy var logoutButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(didTapLogout), for: .touchUpInside)
+        button.setTitle("로그아웃", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
+        return button
+    }()
+    
+    private lazy var withdrawalButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(didTapWithdrawal), for: .touchUpInside)
+        button.setTitle("회원 탈퇴", for: .normal)
+        // FIXME: Color - 247 152 149, #f79895
+        button.setTitleColor(.label, for: .normal)
+        button.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
+        return button
+    }()
+    
+    private let divider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .systemGray3
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor(named: "bgColor")
+        
+        addView()
+        setLayout()
+        setupView()
     }
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
-        let logoutBtnClicked: UITapGestureRecognizer =  UITapGestureRecognizer(target: self, action: #selector(logout(_:)))
-        logoutBtn.isUserInteractionEnabled = true
-        logoutBtn.addGestureRecognizer(logoutBtnClicked)
-        let withdrawalBtnClicked: UITapGestureRecognizer =  UITapGestureRecognizer(target: self, action: #selector(withdrawal(_:)))
-        withdrawalBtn.isUserInteractionEnabled = true
-        withdrawalBtn.addGestureRecognizer(withdrawalBtnClicked)
-        let setNotificationClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapSetNotification(_:)))
-        notificationConfigBtn.isUserInteractionEnabled = true
-        notificationConfigBtn.addGestureRecognizer(setNotificationClick)
-        let setDarkModeClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(onTapDarkModeClick(_:)))
-        setDarkModeBtn.isUserInteractionEnabled = true
-        setDarkModeBtn.addGestureRecognizer(setDarkModeClick)
+    
+    private func addView() {
+        [
+            backButton,
+            stackView
+        ].forEach {
+            view.addSubview($0)
+        }
+        
+        [
+            notificationConfigButton,
+            darkModeButton,
+            divider,
+            logoutButton,
+            withdrawalButton
+        ].forEach {
+            stackView.addArrangedSubview($0)
+        }
+    }
+    
+    private func setLayout() {
+        backButton.snp.makeConstraints {
+            $0.top.left.equalTo(view.safeAreaLayoutGuide).inset(16)
+        }
+        divider.snp.makeConstraints {
+            $0.width.equalTo(10)
+            $0.height.equalTo(1)
+        }
+        stackView.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+    }
+    
+    private func setupView() {
+        view.backgroundColor = UIColor(named: "bgColor")
     }
 }
 
 extension SettingPageViewController {
     @objc
-    func onTapDarkModeClick(_ gesture: UITapGestureRecognizer) {
-        let alert = UIAlertController(title: .none, message: .none, preferredStyle: .actionSheet)
-        let lightMode = UIAlertAction(title: "주간모드", style: .default) {(action) in
-            if let window = UIApplication.shared.windows.first {
-                if #available(iOS 13.0, *) {
-                    window.overrideUserInterfaceStyle = .light
-                    self.defaults.set(false, forKey: "darkModeState")
-                }
-            }
-        }
-        let darkMode = UIAlertAction(title: "야간모드", style: .default) {(action) in
-            if let window = UIApplication.shared.windows.first {
-                if #available(iOS 13.0, *) {
-                    window.overrideUserInterfaceStyle = .dark
-                    self.defaults.set(true, forKey: "darkModeState")
-                }
-            }
-        }
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel) {(action) in
-            print("cancel")
-        }
-        alert.addAction(lightMode)
-        alert.addAction(darkMode)
-        alert.addAction(cancelAction)
-        present(alert, animated: true, completion: nil)
-    }
-    @objc
-    func showToast(msg: String?) {
-//        self.view.makeToast(msg, duration: 1.5, position: .bottom)
-    }
-    @objc
-    func onTapSetNotification(_ gesture: UITapGestureRecognizer) {
-        guard let nextView = self.storyboard?.instantiateViewController(identifier: "SetNotificationPageViewController") as? SetNotificationPageViewController else {
+    private func didTapDarkModeButton(_ gesture: UITapGestureRecognizer) {
+        guard
+            let windowScene = UIApplication.shared.connectedScenes.first(where: {
+                $0.activationState == .foregroundActive
+            }) as? UIWindowScene,
+            let window = windowScene.windows.first(where: { $0.isKeyWindow })
+        else {
             return
         }
-        nextView.modalPresentationStyle = .fullScreen
-        self.present(nextView, animated: false, completion: nil)
+        
+        let alert = UIAlertController(title: .none, message: .none, preferredStyle: .actionSheet)
+        let lightMode = UIAlertAction(title: "주간모드", style: .default) { _ in
+            window.overrideUserInterfaceStyle = .light
+            UserDefaults.standard.set(false, forKey: "darkModeState")
+        }
+        let darkMode = UIAlertAction(title: "야간모드", style: .default) { _ in
+            window.overrideUserInterfaceStyle = .dark
+            UserDefaults.standard.set(true, forKey: "darkModeState")
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+        
+        [lightMode, darkMode, cancel].forEach { alert.addAction($0) }
+        present(alert, animated: true)
     }
+    
     @objc
-    func back() {
-        self.presentingViewController?.dismiss(animated: true)
+    private func showToast(msg: String?) {
+        //        self.view.makeToast(msg, duration: 1.5, position: .bottom)
     }
+    
     @objc
-    func logout(_ gesture: UITapGestureRecognizer) {
-        let alert = UIAlertController(title: "로그아웃 하시겠습니까?", message: "", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
-            // Cancel Action
-        }))
-        alert.addAction(UIAlertAction(title: "확인",
-                                      style: UIAlertAction.Style.default,
-                                      handler: {(_: UIAlertAction!) in
+    private func didTapNotificationButton(_ gesture: UITapGestureRecognizer) {
+        let vc = SetNotificationPageViewController()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: false)
+    }
+    
+    @objc
+    private func didTapBackButton() {
+        presentingViewController?.dismiss(animated: true)
+    }
+    
+    @objc
+    private func didTapLogout(_ gesture: UITapGestureRecognizer) {
+        let alert = UIAlertController(title: "로그아웃 하시겠습니까?", message: "", preferredStyle: .alert)
+        let cancel = UIAlertAction(title: "취소", style: .default)
+        let confirm = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
             do {
                 let firebaseAuth = AuthManager.shared.auth
                 try firebaseAuth.signOut()
-                let storyboard: UIStoryboard = UIStoryboard(name: "LoginView", bundle: nil)
-                guard let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
-                // MARK: 화면 전환 애니메이션 설정
-                loginViewController.modalTransitionStyle = .crossDissolve
-                // MARK: 전환된 화면이 보여지는 방법 설정
-                loginViewController.modalPresentationStyle = .fullScreen
-                self.present(loginViewController, animated: true, completion: nil)
+                
+                let vc = LoginViewController()
+                vc.modalTransitionStyle = .crossDissolve
+                vc.modalPresentationStyle = .fullScreen
+                self?.present(vc, animated: true)
             } catch _ as NSError {
-                self.showToast(msg: "로그아웃이 실패했습니다.")
+                self?.showToast(msg: "로그아웃이 실패했습니다.")
             }
-        }))
-        self.present(alert, animated: true, completion: nil)
+        }
+        [cancel, confirm].forEach { alert.addAction($0) }
+        alert.preferredAction = confirm
+        present(alert, animated: true)
     }
+    
     @objc
-    func withdrawal(_ gesture: UITapGestureRecognizer) {
-        let alert = UIAlertController(title: "회원탈퇴 하시겠습니까?",
-                                      message: "[탈퇴 시 주의사항]\n나의 일기, 나의 보관함에 저장된 데이터가 모두 사라지며 복구가 불가능합니다", preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
-        }))
-        alert.addAction(UIAlertAction(title: "탈퇴",
-                                      style: UIAlertAction.Style.default,
-                                      handler: {(_: UIAlertAction!) in
-            self.withdrawal { [weak self] result in
+    private func didTapWithdrawal(_ gesture: UITapGestureRecognizer) {
+        let alert = UIAlertController(
+            title: "회원탈퇴 하시겠습니까?",
+            message: "[탈퇴 시 주의사항]\n나의 일기, 나의 보관함에 저장된 데이터가 모두 사라지며 복구가 불가능합니다",
+            preferredStyle: .alert
+        )
+        
+        let withdrawal = UIAlertAction(title: "탈퇴", style: .default) { [weak self] _ in
+            self?.withdrawal { result in
                 switch result {
                 case .success:
-                    // MARK: 탈퇴 성공 시 앱 종료
                     self?.appExit()
                 case .failure(let error):
                     guard let error = error as? AuthErrors else {
@@ -126,68 +199,74 @@ extension SettingPageViewController {
                     self?.showToast(msg: error.errorDescription)
                 }
             }
-        }))
-        self.present(alert, animated: true, completion: nil)
+        }
+        let cancel = UIAlertAction(title: "취소", style: .default)
+        
+        [cancel, withdrawal].forEach { alert.addAction($0) }
+        alert.preferredAction = withdrawal
+        present(alert, animated: true)
     }
-    func withdrawal(completion: @escaping (Result<Void, Error>) -> Void) {
+    
+    private func withdrawal(completion: @escaping (Result<Void, Error>) -> Void) {
         guard let currentUser = AuthManager.shared.auth.currentUser else { return completion(.failure(AuthErrors.currentUserNotExist)) }
-//        currentUser.delete { error in
-//            guard let error = error as? NSError else {
-//                self.successToWithdrawal(currentUser.uid)
-//                return completion(.success(()))
-//            }
-//            switch AuthErrorCode(rawValue: error.code) {
-//            case .requiresRecentLogin:
-//                let alert = UIAlertController(title: "사용자 정보가 만료되었습니다.",
-//                                              message: "탈퇴하려는 사용자의 계정으로 다시 로그인해주세요.", preferredStyle: UIAlertController.Style.alert)
-//                alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
-//                }))
-//                alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { _ in
-//                    guard !currentUser.providerData.isEmpty else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
-//                    for userInfo in currentUser.providerData {
-//                        switch userInfo.providerID {
-//                        case "google.com":
-//                            guard let clientID = FirebaseApp.app()?.options.clientID else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
-//                            let signInConfig = GIDConfiguration.init(clientID: clientID)
-//                            GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
-//                                guard error == nil else { return completion(.failure(AuthErrors.failedToSignIn)) }
-//                                guard let authentication = user?.authentication else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
-//                                guard currentUser.email == user?.profile?.email && currentUser.displayName == user?.profile?.name else {
-//                                    return completion(.failure(AuthErrors.notEqualUser))
-//                                }
-//                                let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
-//                                currentUser.reauthenticate(with: credential) { _, error in
-//                                    guard error == nil else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
-//                                    currentUser.delete { error in
-//                                        guard error == nil else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
-//                                        self.successToWithdrawal(currentUser.uid)
-//                                        completion(.success(()))
-//                                    }
-//                                }
-//                            }
-//                        case "apple.com":
-//                            let request = self.createAppleIDRequest()
-//                            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-//                            authorizationController.delegate = self
-//                            authorizationController.presentationContextProvider = self
-//                            authorizationController.performRequests()
-//                        default:
-//                            print("not exist ProviderId")
-//                        }
-//                    }
-//                }))
-//                self.present(alert, animated: true, completion: nil)
-//            default:
-//                completion(.failure(AuthErrors.failedToWithdrawal))
-//            }
-//        }
+        //        currentUser.delete { error in
+        //            guard let error = error as? NSError else {
+        //                self.successToWithdrawal(currentUser.uid)
+        //                return completion(.success(()))
+        //            }
+        //            switch AuthErrorCode(rawValue: error.code) {
+        //            case .requiresRecentLogin:
+        //                let alert = UIAlertController(title: "사용자 정보가 만료되었습니다.",
+        //                                              message: "탈퇴하려는 사용자의 계정으로 다시 로그인해주세요.", preferredStyle: UIAlertController.Style.alert)
+        //                alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
+        //                }))
+        //                alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { _ in
+        //                    guard !currentUser.providerData.isEmpty else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
+        //                    for userInfo in currentUser.providerData {
+        //                        switch userInfo.providerID {
+        //                        case "google.com":
+        //                            guard let clientID = FirebaseApp.app()?.options.clientID else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
+        //                            let signInConfig = GIDConfiguration.init(clientID: clientID)
+        //                            GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
+        //                                guard error == nil else { return completion(.failure(AuthErrors.failedToSignIn)) }
+        //                                guard let authentication = user?.authentication else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
+        //                                guard currentUser.email == user?.profile?.email && currentUser.displayName == user?.profile?.name else {
+        //                                    return completion(.failure(AuthErrors.notEqualUser))
+        //                                }
+        //                                let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken!, accessToken: authentication.accessToken)
+        //                                currentUser.reauthenticate(with: credential) { _, error in
+        //                                    guard error == nil else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
+        //                                    currentUser.delete { error in
+        //                                        guard error == nil else { return completion(.failure(AuthErrors.failedToWithdrawal)) }
+        //                                        self.successToWithdrawal(currentUser.uid)
+        //                                        completion(.success(()))
+        //                                    }
+        //                                }
+        //                            }
+        //                        case "apple.com":
+        //                            let request = self.createAppleIDRequest()
+        //                            let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        //                            authorizationController.delegate = self
+        //                            authorizationController.presentationContextProvider = self
+        //                            authorizationController.performRequests()
+        //                        default:
+        //                            print("not exist ProviderId")
+        //                        }
+        //                    }
+        //                }))
+        //                self.present(alert, animated: true, completion: nil)
+        //            default:
+        //                completion(.failure(AuthErrors.failedToWithdrawal))
+        //            }
+        //        }
     }
+    
     private func successToWithdrawal(_ uid: String) {
         // MARK: realm 데이터 삭제
         try? FileManager.default.removeItem(at: Realm.Configuration.defaultConfiguration.fileURL!)
     }
-    @available(iOS 13, *)
-    func createAppleIDRequest() -> ASAuthorizationAppleIDRequest {
+        
+    private func createAppleIDRequest() -> ASAuthorizationAppleIDRequest {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         // 애플로그인은 사용자에게서 2가지 정보를 요구함
@@ -197,7 +276,7 @@ extension SettingPageViewController {
         currentNonce = nonce
         return request
     }
-    @available(iOS 13, *)
+    
     private func sha256(_ input: String) -> String {
         let inputData = Data(input.utf8)
         let hashedData = SHA256.hash(data: inputData)
@@ -206,6 +285,7 @@ extension SettingPageViewController {
         }.joined()
         return hashString
     }
+    
     private func appExit() {
         UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { exit(0) }
@@ -230,14 +310,14 @@ extension SettingPageViewController: ASAuthorizationControllerDelegate {
                                                       idToken: idTokenString,
                                                       rawNonce: nonce)
             if let currentUser = AuthManager.shared.auth.currentUser {
-                currentUser.reauthenticate(with: credential) { (authResult, error) in
+                currentUser.reauthenticate(with: credential) { [weak self] (authResult, error) in
                     guard error == nil else { return }
                     currentUser.delete { error in
                         guard error == nil else {
-                            self.showToast(msg: "회원탈퇴에 실패했습니다.")
+                            self?.showToast(msg: "회원탈퇴에 실패했습니다.")
                             return
                         }
-                        self.appExit()
+                        self?.appExit()
                     }
                 }
             }

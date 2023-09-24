@@ -46,11 +46,10 @@ class StartPageViewController: UIViewController {
 // MARK: Navigator
 extension StartPageViewController {
     func showLoginViewController() {
-        let storyboard: UIStoryboard = UIStoryboard(name: "LoginView", bundle: nil)
-        guard let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
-        loginViewController.modalTransitionStyle = .crossDissolve
-        loginViewController.modalPresentationStyle = .fullScreen
-        self.present(loginViewController, animated: true, completion: nil)
+        let vc = LoginViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     func showMainViewController() {
 		

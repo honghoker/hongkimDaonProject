@@ -3,64 +3,177 @@ import SnapKit
 import FirebaseFirestore
 
 class SetNotificationPageViewController: UIViewController {
-    @IBOutlet weak var switchBtn: UISwitch!
-    @IBOutlet weak var saveBtn: UIButton!
-    @IBOutlet weak var backBtn: UIButton!
-    @IBOutlet weak var textLabel: UILabel!
-    @IBOutlet weak var textField: UITextField!
-    let database = Firestore.firestore()
-    lazy var timeIntValue: String = ""
+    
+    private let database = Firestore.firestore()
+    private var timeIntValue: String = ""
+    
+    private let verticalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 32
+        return stackView
+    }()
+    
+    private let notificationStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        return stackView
+    }()
+ 
+    private let notificationLabel: UILabel = {
+        let label = UILabel()
+        label.text = "알림 받기"
+        label.font = UIFont(name: "JejuMyeongjoOTF", size: 16)
+        label.textColor = .label
+        return label
+    }()
+    
+    private lazy var notificationSwitch: UISwitch = {
+        let view = UISwitch()
+        view.addTarget(self, action: #selector(switchChanged), for: .valueChanged)
+        view.onTintColor = DaonConstants.daonColor
+        return view
+    }()
+    
+    private lazy var saveButton: UIButton = {
+        let button = UIButton()
+        button.addTarget(self, action: #selector(didTapSaveButton), for: .touchUpInside)
+        button.setTitle("저장", for: .normal)
+        button.setTitleColor(.label, for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.label.cgColor
+        button.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
+        return button
+    }()
+    
+    private lazy var backButton: UIButton = {
+        let button = UIButton()
+        button.setImage(.init(systemName: "chevron.backward"), for: .normal)
+        button.tintColor = .systemGray
+        button.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
+        return button
+    }()
+    
+    private let timeStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .equalSpacing
+        return stackView
+    }()
+    
+    private let timeTextLabel: UILabel = {
+        let label = UILabel()
+        label.text = "00:00"
+        label.textColor = .label
+        label.font = UIFont(name: "JejuMyeongjoOTF", size: 18)
+        return label
+    }()
+    
+    // FIXME: Button으로 변경 필요
+    private lazy var timeChangeButton: UITextField = {
+        let textField = UITextField()
+        textField.text = "변경하기"
+        textField.textColor = .label
+        textField.tintColor = .clear
+        textField.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
+        textField.inputView = timePicker
+        return textField
+    }()
+    
+    private lazy var timePicker: UIDatePicker = {
+        let picker = UIDatePicker()
+        picker.datePickerMode = .time
+        picker.minuteInterval = 10
+        picker.preferredDatePickerStyle = .wheels
+        picker.addTarget(self, action: #selector(timePickerValueChanged), for: .valueChanged)
+        picker.frame.size = CGSize(width: 0, height: 250)
+        return picker
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupHideKeyboardOnTap()
-        setNotificationValue {
-            LoadingIndicator.hideLoading()
-        }
-        setUIAtViewDidLoad()
+        addView()
+        setLayout()
+        setupView()
+        
+        setupHideKeyboardOnTap()
     }
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        setUIAtWillLayoutSubviews()
-        LoadingIndicator.showLoading()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-            LoadingIndicator.hideLoading()
-        }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        // FIXME: viewDidLoad로 이동, loading Indicator 표시안되는 문제 수정 필요
+        fetchNotificationSetting()
     }
 
-    // MARK: set UI
-    func setUIAtViewDidLoad() {
-        let timePicker = UIDatePicker()
-        timePicker.datePickerMode = .time
-        timePicker.minuteInterval = 10
-        timePicker.preferredDatePickerStyle = .wheels
-        timePicker.addTarget(self, action: #selector(timePickerValueChanged(sender:)), for: UIControl.Event.valueChanged)
-        timePicker.frame.size = CGSize(width: 0, height: 250)
-        self.switchBtn.onTintColor = DaonConstants.daonColor
-        self.textField.tintColor = .clear
-        self.textField.inputView = timePicker
+    private func addView() {
+        [
+            notificationLabel,
+            notificationSwitch
+        ].forEach {
+            notificationStackView.addArrangedSubview($0)
+        }
+        
+        [
+            timeTextLabel,
+            timeChangeButton
+        ].forEach {
+            timeStackView.addArrangedSubview($0)
+        }
+        
+        [
+            notificationStackView,
+            timeStackView,
+            saveButton
+        ].forEach {
+            verticalStackView.addArrangedSubview($0)
+        }
+        
+        [
+            backButton,
+            verticalStackView
+        ].forEach {
+            view.addSubview($0)
+        }
     }
-    func setUIAtWillLayoutSubviews() {
-        self.switchBtn.onTintColor = DaonConstants.daonColor
-        self.backBtn.layer.borderWidth = 0.0
-        self.backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
-        self.saveBtn.titleLabel?.textAlignment = .center
-        self.saveBtn.layer.borderWidth = 1
-        self.saveBtn.layer.borderColor = UIColor.label.cgColor
-        self.saveBtn.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 14)
-        self.saveBtn.addTarget(self, action: #selector(onTapSaveBtn), for: .touchUpInside)
-        self.textField.text = "변경하기"
+    
+    private func setLayout() {
+        backButton.snp.makeConstraints {
+            $0.top.left.equalTo(view.safeAreaLayoutGuide).inset(16)
+        }
+        
+        saveButton.snp.makeConstraints {
+            $0.height.equalTo(50)
+        }
+        
+        verticalStackView.snp.makeConstraints {
+            $0.top.equalTo(backButton.snp.bottom).offset(60)
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(32)
+        }
     }
-    // MARK: set 알람시간
-    func setNotificationValue(completion: @escaping() -> Void) {
+    
+    private func setupView() {
+        view.backgroundColor = UIColor(named: "bgColor")
+    }
+    
+    private func fetchNotificationSetting() {
         if let user = AuthManager.shared.auth.currentUser {
-            self.database.document("user/\(user.uid)").getDocument { [weak self] (snaphot, error) in
+            LoadingIndicator.showLoading()
+            
+            database.document("user/\(user.uid)").getDocument { [weak self] (snaphot, error) in
                 guard error == nil else { return }
-                guard let userNotificationTime = snaphot?.data()?["notificationTime"] else { return }
-                guard let userSwitchValue = snaphot?.data()?["notification"] else { return }
-                self?.switchBtn.isOn = userSwitchValue as! Bool
-                self?.textLabel.text = String(describing: userNotificationTime)
+                
+                guard
+                    let userNotificationTime = snaphot?.data()?["notificationTime"] as? String,
+                    let userSwitchValue = snaphot?.data()?["notification"] as? Bool
+                else {
+                    return
+                }
+                
+                self?.notificationSwitch.isOn = userSwitchValue
+                self?.timeTextLabel.text = userNotificationTime
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    completion()
+                    LoadingIndicator.hideLoading()
                 }
             }
         } else {
@@ -69,10 +182,10 @@ class SetNotificationPageViewController: UIViewController {
     }
 }
 
-// MARK: btns action
+// MARK: Actions
+
 extension SetNotificationPageViewController {
-    @objc
-    func onTapSaveBtn() {
+    @objc private func didTapSaveButton() {
         if timeIntValue != "" {
             if let user = AuthManager.shared.auth.currentUser {
                 let docRef = database.document("user/\(user.uid)")
@@ -88,19 +201,20 @@ extension SetNotificationPageViewController {
             }
         }
     }
-    @objc
-    func back() {
-        self.presentingViewController?.dismiss(animated: false)
+    
+    @objc private func didTapBackButton() {
+        presentingViewController?.dismiss(animated: false)
     }
-    @objc
-    func timePickerValueChanged(sender: UIDatePicker) {
+    
+    @objc private func timePickerValueChanged(sender: UIDatePicker) {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.dateFormat = "HH:mm"
-        textLabel.text = formatter.string(from: sender.date)
+        timeTextLabel.text = formatter.string(from: sender.date)
         timeIntValue = formatter.string(from: sender.date)
     }
-    @IBAction func switchChanged(_ sender: UISwitch) {
+    
+    @objc private func switchChanged(_ sender: UISwitch) {
         if let user = AuthManager.shared.auth.currentUser {
             let docRef = database.document("user/\(user.uid)")
             docRef.updateData(["notification": sender.isOn])

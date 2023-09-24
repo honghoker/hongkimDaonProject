@@ -23,18 +23,18 @@ final class AppController {
         checkLoginIn()
     }
     @objc private func checkLoginIn() {
-        if let user = AuthManager.shared.auth.currentUser { // <- Firebase Auth
+        if let _ = AuthManager.shared.auth.currentUser { // <- Firebase Auth
             setHome()
         } else {
             routeToLogin()
         }
     }
     private func setHome() {
-        let homeVC = FirstMainPageContainerViewController()
-        rootViewController = UINavigationController(rootViewController: homeVC)
+        let vc = FirstMainPageContainerViewController()
+        rootViewController = UINavigationController(rootViewController: vc)
     }
     private func routeToLogin() {
-        let loginVC = LoginViewController()
-        rootViewController = UINavigationController(rootViewController: loginVC)
+        let vc = LoginViewController()
+        rootViewController = UINavigationController(rootViewController: vc)
     }
 }

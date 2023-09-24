@@ -1,7 +1,6 @@
 import UIKit
 
 class SecondMainPageContainerViewController: UIViewController {
-	
 	let setBtn = UIButton()
 	let secondMainPageView = SecondMainPageViewController()
 	
@@ -40,13 +39,11 @@ class SecondMainPageContainerViewController: UIViewController {
 	
 	@objc
 	func setBtnTap() {
-		print("tap")
-		//        let storyboard: UIStoryboard = UIStoryboard(name: "SettingPageView", bundle: nil)
-		//        guard let SettingPageVC = storyboard.instantiateViewController(withIdentifier: "SettingPageViewController") as? SettingPageViewController else { return }
-		//        // 화면 전환 애니메이션 설정
-		//        SettingPageVC.modalTransitionStyle = .crossDissolve
-		//        // 전환된 화면이 보여지는 방법 설정
-		//        SettingPageVC.modalPresentationStyle = .fullScreen
-		//        self.present(SettingPageVC, animated: true, completion: nil)
+        let vc = SettingPageViewController()
+        // 화면 전환 애니메이션 설정
+        vc.modalTransitionStyle = .crossDissolve
+        // 전환된 화면이 보여지는 방법 설정
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
 	}
 }

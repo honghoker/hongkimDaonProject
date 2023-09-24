@@ -6,15 +6,99 @@ import CryptoKit
 import FirebaseMessaging
 
 class LoginViewController: UIViewController {
-    let database = DatabaseManager.shared.fireStore
-    var userFcmToken: String = ""
+    private let database = DatabaseManager.shared.fireStore
+    private var userFcmToken: String = ""
     private var currentNonce: String?
-    @IBOutlet weak var googleLoginBtn: UIImageView!
-    @IBOutlet weak var appleLoginBtn: UIImageView!
-    @IBOutlet weak var appIconImageView: UIImageView!
-    @IBOutlet weak var previewBtn: UIButton!
+    
+    private let appIconImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "loginViewAppIcon")
+        imageView.contentMode = .scaleAspectFit
+        return imageView
+    }()
+    
+    private let titleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "다온"
+        label.font = UIFont(name: "JejuMyeongjoOTF", size: 36)
+        label.textColor = .label
+        return label
+    }()
+    
+    private let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "좋은 일이 다오는,"
+        label.font = UIFont(name: "JejuMyeongjoOTF", size: 20)
+        label.textColor = .label
+        return label
+    }()
+    
+    private let dividerStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.distribution = .fillEqually
+        stackView.alignment = .center
+        stackView.spacing = 10
+        stackView.axis = .horizontal
+        return stackView
+    }()
+    
+    private let leftDivider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        return view
+    }()
+    
+    private let snsLoginLabel: UILabel = {
+        let label = UILabel()
+        label.text = "SNS 로그인"
+        label.font = UIFont(name: "JejuMyeongjoOTF", size: 12)
+        label.textColor = .label
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private let rightDivider: UIView = {
+        let view = UIView()
+        view.backgroundColor = .black
+        return view
+    }()
+    
+    private let loginButtonStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.spacing = 48
+        stackView.axis = .horizontal
+        return stackView
+    }()
+    
+    private lazy var googleLoginButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "googleLoginBtn"), for: .normal)
+        button.addTarget(self, action: #selector(didTapGoogleLoginButton), for: .touchUpInside)
+        return button
+    }()
+
+    private lazy var appleLoginButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "appleLoginBtn"), for: .normal)
+        button.addTarget(self, action: #selector(didTapAppleLoginButton), for: .touchUpInside)
+        return button
+    }()
+
+    private lazy var previewButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("오늘의 글 미리보기", for: .normal)
+        button.setTitleColor(.systemGray, for: .normal)
+        button.titleLabel?.font = UIFont(name: "JejuMyeongjoOTF", size: 12)
+        button.addTarget(self, action: #selector(didTapPreviewButton), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        addView()
+        setLayout()
+        setupView()
+        
         Messaging.messaging().token { token, error in
             if let error = error {
                 print("Error fetching FCM registration token: \(error)")
@@ -23,15 +107,14 @@ class LoginViewController: UIViewController {
                 print("FCM registration token: \(token)")
             }
         }
-        setUI()
-        appIconImageView.image = UIImage(named: "loginViewAppIcon")
     }
+    
     override func viewDidAppear(_ animated: Bool) {
         if let user = AuthManager.shared.auth.currentUser {
             let docRef = self.database.document("user/\(user.uid)")
             docRef.getDocument { snapshot, error in
                 if let error = error {
-                    print("DEBUG: \(error.localizedDescription)")
+                    debugPrint("DEBUG: \(error.localizedDescription)")
                     return
                 }
                 guard let exist = snapshot?.exists else {return}
@@ -41,17 +124,83 @@ class LoginViewController: UIViewController {
             }
         }
     }
-    func setUI() {
-        self.googleLoginBtn.image = UIImage(named: "googleLoginBtn")
-        self.googleLoginBtn.isUserInteractionEnabled = true
-        self.appleLoginBtn.image = UIImage(named: "appleLoginBtn")
-        self.appleLoginBtn.isUserInteractionEnabled = true
-        // login btn click action
-        let googleLoginClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapGoogleBtn(_:)))
-        self.googleLoginBtn.addGestureRecognizer(googleLoginClick)
-        let appleLoginClick: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapAppleBtn(_:)))
-        self.appleLoginBtn.addGestureRecognizer(appleLoginClick)
-        previewBtn.addTarget(self, action: #selector(showPreviewViewController), for: .touchUpInside)
+    
+    private func addView() {
+        [
+            leftDivider,
+            snsLoginLabel,
+            rightDivider
+        ].forEach {
+            dividerStackView.addArrangedSubview($0)
+        }
+        
+        [
+            googleLoginButton,
+            appleLoginButton
+        ].forEach {
+            loginButtonStackView.addArrangedSubview($0)
+        }
+        
+        [
+            appIconImageView,
+            subtitleLabel,
+            titleLabel,
+            dividerStackView,
+            loginButtonStackView,
+            previewButton
+        ].forEach {
+            view.addSubview($0)
+        }
+    }
+    
+    private func setLayout() {
+        appIconImageView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(140)
+            $0.centerX.equalToSuperview()
+            $0.size.equalTo(100)
+        }
+        
+        subtitleLabel.snp.makeConstraints {
+            $0.top.equalTo(appIconImageView.snp.bottom).offset(12)
+            $0.centerX.equalToSuperview()
+        }
+        
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(subtitleLabel.snp.bottom).offset(24)
+            $0.centerX.equalToSuperview()
+        }
+        
+        [leftDivider, rightDivider].forEach {
+            $0.snp.makeConstraints {
+                $0.height.equalTo(1)
+            }
+        }
+        
+        dividerStackView.snp.makeConstraints {
+            $0.top.greaterThanOrEqualTo(titleLabel.snp.bottom).offset(40)
+            $0.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(32)
+        }
+        
+        [googleLoginButton, appleLoginButton].forEach {
+            $0.snp.makeConstraints {
+                $0.size.equalTo(48)
+            }
+        }
+        
+        loginButtonStackView.snp.makeConstraints {
+            $0.top.equalTo(dividerStackView.snp.bottom).offset(40)
+            $0.centerX.equalToSuperview()
+        }
+        
+        previewButton.snp.makeConstraints {
+            $0.top.equalTo(loginButtonStackView.snp.bottom).offset(30)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalTo(view.safeAreaLayoutGuide).inset(50)
+        }
+    }
+    
+    private func setupView() {
+        view.backgroundColor = UIColor(named: "bgColor")
     }
 }
 
@@ -65,26 +214,18 @@ extension LoginViewController {
         mainViewController.modalPresentationStyle = .fullScreen
         self.present(mainViewController, animated: true, completion: nil)
     }
-    func showLoginViewController() {
-        let storyboard: UIStoryboard = UIStoryboard(name: "LoginView", bundle: nil)
-        guard let loginViewController = storyboard.instantiateViewController(withIdentifier: "LoginViewController") as? LoginViewController else { return }
-        loginViewController.modalTransitionStyle = .crossDissolve
-        loginViewController.modalPresentationStyle = .fullScreen
-        self.present(loginViewController, animated: true, completion: nil)
-    }
-    @objc
-    func showPreviewViewController() {
-        let storyboard: UIStoryboard = UIStoryboard(name: "PreviewView", bundle: nil)
-        guard let PreviewViewController = storyboard.instantiateViewController(withIdentifier: "PreviewViewController") as? PreviewViewController else { return }
-        PreviewViewController.modalTransitionStyle = .crossDissolve
-        PreviewViewController.modalPresentationStyle = .fullScreen
-        self.present(PreviewViewController, animated: true, completion: nil)
+    
+    @objc private func didTapPreviewButton() {
+        let vc = PreviewViewController()
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 }
 
 // MARK: Google, Apple Login
 extension LoginViewController {
-    func writeUserData(userData: User) {
+    private func writeUserData(userData: User) {
         let docRef = database.document("user/\(userData.uid)")
         docRef.setData(["uid": userData.uid, "joinTime": userData.joinTime, "platForm": userData.platForm, "notification": userData.notification, "notificationTime": userData.notificationTime, "fcmToken": userData.fcmToken]) { result in
             guard result == nil else {
@@ -100,8 +241,8 @@ extension LoginViewController {
         mainViewController.modalPresentationStyle = .fullScreen
         self.present(mainViewController, animated: true, completion: nil)
     }
-    @objc
-    func tapGoogleBtn(_ gesture: UITapGestureRecognizer) {
+    
+    @objc private func didTapGoogleLoginButton(_ gesture: UITapGestureRecognizer) {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
 //        let signInConfig = GIDConfiguration.init(clientID: clientID)
 //        GIDSignIn.sharedInstance.signIn(with: signInConfig, presenting: self) { user, error in
@@ -135,16 +276,15 @@ extension LoginViewController {
 //            }
 //        }
     }
-    @objc
-    func tapAppleBtn(_ gesture: UITapGestureRecognizer) {
+    @objc private func didTapAppleLoginButton(_ gesture: UITapGestureRecognizer) {
         let request = createAppleIDRequest()
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
     }
-    @available(iOS 13, *)
-    func createAppleIDRequest() -> ASAuthorizationAppleIDRequest {
+    
+    private func createAppleIDRequest() -> ASAuthorizationAppleIDRequest {
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         // 애플로그인은 사용자에게서 2가지 정보를 요구함
@@ -154,7 +294,7 @@ extension LoginViewController {
         currentNonce = nonce
         return request
     }
-    @available(iOS 13, *)
+    
     private func sha256(_ input: String) -> String {
         let inputData = Data(input.utf8)
         let hashedData = SHA256.hash(data: inputData)
@@ -210,10 +350,12 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             }
         }
     }
+    
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
         print("Sign in with Apple errored: \(error)")
     }
 }
+
 extension LoginViewController: ASAuthorizationControllerPresentationContextProviding {
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return self.view.window!

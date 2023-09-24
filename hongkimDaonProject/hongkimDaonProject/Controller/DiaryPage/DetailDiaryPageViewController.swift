@@ -18,7 +18,7 @@ class DetailDiaryPageViewController: UIViewController {
                                forToolbarPosition: UIBarPosition.any)
         toolBar.tintColor = .systemGray
         toolBar.clipsToBounds = true
-        let toolbarEditItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(tabEditBtn))
+        let toolbarEditItem = UIBarButtonItem(image: UIImage(systemName: "square.and.pencil"), style: .plain, target: self, action: #selector(didTapEditButton))
         let toolbarRemoveItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(tabRemoveBtn))
         toolBar.setItems([.flexibleSpace(), toolbarEditItem, toolbarRemoveItem], animated: true)
         return toolBar
@@ -118,7 +118,7 @@ class DetailDiaryPageViewController: UIViewController {
         view.backgroundColor = UIColor(named: "bgColor")
     }
     func configureEvent() {
-        self.backBtn.addTarget(self, action: #selector(back), for: .touchUpInside)
+        self.backBtn.addTarget(self, action: #selector(didTapBackButton), for: .touchUpInside)
     }
     // MARK: - millisecondes -> "# 년.월.일" 형식으로 표시
     func getWriteTimeConvertToDate(_ time: Int64) -> String {
@@ -207,41 +207,39 @@ class DetailDiaryPageViewController: UIViewController {
 }
 extension DetailDiaryPageViewController {
     @objc
-    func back() {
+    func didTapBackButton() {
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
+    
     @objc
-    func tabEditBtn(_ sender: Any) {
-        if uploadCheck() == true {
-            if let diary = self.diary {
-                let storyboard: UIStoryboard = UIStoryboard(name: "EditDiaryPageView", bundle: nil)
-                guard let editDiaryPageVC = storyboard.instantiateViewController(withIdentifier: "EditDiaryPageViewController") as? EditDiaryPageViewController else { return }
-                editDiaryPageVC.delegate = self
-                editDiaryPageVC.diary = diary
-                editDiaryPageVC.image = self.imageView.image
-                editDiaryPageVC.modalTransitionStyle = .crossDissolve
-                editDiaryPageVC.modalPresentationStyle = .fullScreen
-                self.present(editDiaryPageVC, animated: true, completion: nil)
-            }
-        }
+    func didTapEditButton(_ sender: Any) {
+        guard isUploaded, let diary = diary else { return }
+    
+        let vc = EditDiaryPageViewController(diary: diary, image: imageView.image)
+        vc.delegate = self
+        vc.modalTransitionStyle = .crossDissolve
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
-    func uploadCheck() -> Bool {
-        if let diary = self.diary {
-            if diary.imageUploadComplete == false {
-                // MARK: 이미지 저장 중일때 예외처리
-//                self.view.makeToast("이미지 업로드 중입니다. 잠시 후 시도해주세요.")
-                return false
-            } else if self.imageLoadComplete == false {
-                // MARK: 이미지 불러오기가 아직 덜 됐을 때 예외처리
-//                self.view.makeToast("이미지 로딩 중입니다. 잠시 후 시도해주세요.")
-                return false
-            } else {
-                return true
-            }
-        } else {
+    
+    private var isUploaded: Bool {
+        guard let diary = diary else { return false }
+        
+        // TODO: 이미지 저장 중일때 예외처리
+        if !diary.imageUploadComplete {
+            // self.view.makeToast("이미지 업로드 중입니다. 잠시 후 시도해주세요.")
             return false
         }
+        
+        // TODO: 이미지 불러오기가 아직 덜 됐을 때 예외처리
+        if !imageLoadComplete {
+            // self.view.makeToast("이미지 로딩 중입니다. 잠시 후 시도해주세요.")
+            return false
+        }
+        
+        return true
     }
+    
     @objc
     func tabRemoveBtn(_ sender: Any) {
         let alert = UIAlertController(title: "일기를 삭제하시겠습니까?",
@@ -249,12 +247,12 @@ extension DetailDiaryPageViewController {
         alert.addAction(UIAlertAction(title: "취소", style: UIAlertAction.Style.default, handler: { _ in
         }))
         alert.addAction(UIAlertAction(title: "확인", style: UIAlertAction.Style.default, handler: { [weak self] _ in
-            if self?.uploadCheck() == true {
+            if self?.isUploaded == true {
                 LoadingIndicator.showLoading()
                 guard let docId = self?.docId else { return }
                 DatabaseManager.shared.fireStore.collection("diary").document(docId).delete { [weak self] result in
                     guard result == nil else {
-//                        self?.view.makeToast("일기 삭제에 실패했습니다.", duration: 1.5, position: .bottom)
+                        //                        self?.view.makeToast("일기 삭제에 실패했습니다.", duration: 1.5, position: .bottom)
                         LoadingIndicator.hideLoading()
                         return
                     }
