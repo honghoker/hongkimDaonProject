@@ -12,7 +12,8 @@ let project = Project.makeModule(
     name: "Auth",
     product: .staticFramework,
     dependencies: [
-        
+		.SPM.FirebaseAuth,
+		.SPM.FirebaseFirestore
     ],
     sources: ["Scene/**"]
 )
