@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DesignSystem
 import SnapKit
 
 final class LogoView: UIView {
@@ -37,7 +38,7 @@ final class LogoView: UIView {
 		let label = UILabel()
 		label.text = "다온"
 		label.font = UIFont(name: "JejuMyeongjoOTF", size: 36)
-		label.textColor = .label
+		label.textColor = DesignSystemAsset.Colors.black.color
 		return label
 	}()
 	
@@ -45,22 +46,23 @@ final class LogoView: UIView {
 		let label = UILabel()
 		label.text = "좋은 일이 다오는,"
 		label.font = UIFont(name: "JejuMyeongjoOTF", size: 20)
-		label.textColor = .label
+		label.textColor = DesignSystemAsset.Colors.black.color
 		return label
 	}()
-}
-
-private extension LogoView {
 	
 	//MARK: - UI
 	
-	func addView() {
-		[appIconImageView, titleLabel, subtitleLabel].forEach {
+	private func addView() {
+		[
+			appIconImageView,
+			titleLabel,
+			subtitleLabel
+		].forEach {
 			addSubview($0)
 		}
 	}
 	
-	func setLayout() {
+	private func setLayout() {
 		appIconImageView.snp.makeConstraints {
 			$0.top.equalTo(self.safeAreaLayoutGuide).inset(140)
 			$0.centerX.equalToSuperview()

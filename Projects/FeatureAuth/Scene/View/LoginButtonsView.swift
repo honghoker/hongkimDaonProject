@@ -39,13 +39,13 @@ final class LoginButtonsView: UIView {
 	
 	private let leftDivider: UIView = {
 		let view = UIView()
-		view.backgroundColor = .black
+		view.backgroundColor = DesignSystemAsset.Colors.black.color
 		return view
 	}()
 	
 	private let rightDivider: UIView = {
 		let view = UIView()
-		view.backgroundColor = .black
+		view.backgroundColor = DesignSystemAsset.Colors.black.color
 		return view
 	}()
 	
@@ -53,7 +53,7 @@ final class LoginButtonsView: UIView {
 		let label = UILabel()
 		label.text = "SNS 로그인"
 		label.font = UIFont(name: "JejuMyeongjoOTF", size: 12)
-		label.textColor = .label
+		label.textColor = DesignSystemAsset.Colors.black.color
 		label.textAlignment = .center
 		return label
 	}()
@@ -94,27 +94,39 @@ final class LoginButtonsView: UIView {
 		button.configuration = config
 		return button
 	}()
-}
-
-//MARK: - UI
-
-private extension LoginButtonsView {
-	func addView() {
-		[leftDivider, snsLoginLabel, rightDivider].forEach {
+	
+	//MARK: - UI
+	
+	private func addView() {
+		[
+			leftDivider,
+			snsLoginLabel,
+			rightDivider
+		].forEach {
 			dividerStackView.addArrangedSubview($0)
 		}
 		
-		[googleLoginButton, appleLoginButton].forEach {
+		[
+			googleLoginButton,
+			appleLoginButton
+		].forEach {
 			loginButtonStackView.addArrangedSubview($0)
 		}
 		
-		[dividerStackView, loginButtonStackView, previewButton].forEach {
+		[
+			dividerStackView,
+			loginButtonStackView,
+			previewButton
+		].forEach {
 			addSubview($0)
 		}
 	}
 	
-	func setLayout() {
-		[leftDivider, rightDivider].forEach {
+	private func setLayout() {
+		[
+			leftDivider,
+			rightDivider
+		].forEach {
 			$0.snp.makeConstraints {
 				$0.height.equalTo(1)
 			}
