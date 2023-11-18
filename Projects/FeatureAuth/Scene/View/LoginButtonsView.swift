@@ -8,18 +8,17 @@
 
 import UIKit
 import AuthenticationServices
+import Common
 import CryptoKit
 import DesignSystem
 import SnapKit
 
-final class LoginButtonsView: UIView {
+final class LoginButtonsView: BaseView {
 	
 	//MARK: - Life Cycle
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
-		addView()
-		setLayout()
 	}
 	
 	required init?(coder: NSCoder) {
@@ -97,7 +96,7 @@ final class LoginButtonsView: UIView {
 	
 	//MARK: - UI
 	
-	private func addView() {
+	override func addView() {
 		[
 			leftDivider,
 			snsLoginLabel,
@@ -122,7 +121,7 @@ final class LoginButtonsView: UIView {
 		}
 	}
 	
-	private func setLayout() {
+	override func setLayout() {
 		[
 			leftDivider,
 			rightDivider
@@ -153,6 +152,8 @@ final class LoginButtonsView: UIView {
 			$0.bottom.equalTo(self.safeAreaLayoutGuide).inset(50)
 		}
 	}
+	
+	override func setupView() { }
 }
 
 //MARK: - Action

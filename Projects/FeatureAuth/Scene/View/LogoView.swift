@@ -7,17 +7,16 @@
 //
 
 import UIKit
+import Common
 import DesignSystem
 import SnapKit
 
-final class LogoView: UIView {
+final class LogoView: BaseView {
 	
 	//MARK: - Life Cycle
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
-		addView()
-		setLayout()
 	}
 	
 	required init?(coder: NSCoder) {
@@ -52,7 +51,7 @@ final class LogoView: UIView {
 	
 	//MARK: - UI
 	
-	private func addView() {
+	override func addView() {
 		[
 			appIconImageView,
 			titleLabel,
@@ -62,7 +61,7 @@ final class LogoView: UIView {
 		}
 	}
 	
-	private func setLayout() {
+	override func setLayout() {
 		appIconImageView.snp.makeConstraints {
 			$0.top.equalTo(self.safeAreaLayoutGuide).inset(140)
 			$0.centerX.equalToSuperview()
@@ -79,4 +78,6 @@ final class LogoView: UIView {
 			$0.centerX.equalToSuperview()
 		}
 	}
+	
+	override func setupView() { }
 }
