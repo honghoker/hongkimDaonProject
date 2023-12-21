@@ -135,7 +135,11 @@ final class LoginButtonsView: BaseView {
 			$0.horizontalEdges.equalTo(self.safeAreaLayoutGuide).inset(32)
 		}
 		
-		[googleLoginButton, appleLoginButton].forEach {
+		[
+			googleLoginButton,
+			appleLoginButton
+		]
+			.forEach {
 			$0.snp.makeConstraints {
 				$0.size.equalTo(48)
 			}
