@@ -14,7 +14,7 @@ import SnapKit
 
 public final class AuthViewController: BaseViewController {
 	
-	//MARK: - Life Cycle
+	// MARK: - Life Cycle
 	
 	public override func viewDidLoad() {
 		super.viewDidLoad()
@@ -22,12 +22,12 @@ public final class AuthViewController: BaseViewController {
 	
 	public override func viewDidAppear(_ animated: Bool) { }
 	
-	//MARK: - Views
+	// MARK: - Views
 	
 	private let logoView = LogoView()
 	private let loginButtonsView = LoginButtonsView()
 	
-	//MARK: - UI
+	// MARK: - UI
 	
 	public override func addView() {
 		[logoView, loginButtonsView].forEach {

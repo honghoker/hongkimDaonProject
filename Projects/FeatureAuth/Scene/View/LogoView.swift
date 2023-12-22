@@ -13,7 +13,7 @@ import SnapKit
 
 final class LogoView: BaseView {
 	
-	//MARK: - Life Cycle
+	// MARK: - Life Cycle
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -23,7 +23,7 @@ final class LogoView: BaseView {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	//MARK: - Views
+	// MARK: - Views
 	
 	private let appIconImageView: UIImageView = {
 		let imageView = UIImageView()
@@ -49,7 +49,7 @@ final class LogoView: BaseView {
 		return label
 	}()
 	
-	//MARK: - UI
+	// MARK: - UI
 	
 	override func addView() {
 		[

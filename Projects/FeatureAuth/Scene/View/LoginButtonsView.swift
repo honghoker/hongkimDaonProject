@@ -15,7 +15,7 @@ import SnapKit
 
 final class LoginButtonsView: BaseView {
 	
-	//MARK: - Life Cycle
+	// MARK: - Life Cycle
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -25,7 +25,7 @@ final class LoginButtonsView: BaseView {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	//MARK: - Views
+	// MARK: - Views
 	
 	private let dividerStackView: UIStackView = {
 		let stackView = UIStackView()
@@ -95,7 +95,7 @@ final class LoginButtonsView: BaseView {
 		return button
 	}()
 	
-	//MARK: - UI
+	// MARK: - UI
 	
 	override func addView() {
 		[
@@ -161,7 +161,7 @@ final class LoginButtonsView: BaseView {
 	override func setupView() { }
 }
 
-//MARK: - Action
+// MARK: - Action
 
 private extension LoginButtonsView {
 	func didTapGoogleLoginButton(_ action: UIAction) {
