@@ -161,7 +161,7 @@ final class LoginButtonsView: BaseView {
 	override func setupView() { }
 }
 
-// MARK: - Action
+//MARK: - Actions
 
 private extension LoginButtonsView {
 	func didTapGoogleLoginButton(_ action: UIAction) {
