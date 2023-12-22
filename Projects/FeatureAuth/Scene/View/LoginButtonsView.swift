@@ -51,7 +51,7 @@ final class LoginButtonsView: BaseView {
 	private let snsLoginLabel: UILabel = {
 		let label = UILabel()
 		label.text = "SNS 로그인"
-		label.font = UIFont(name: "JejuMyeongjoOTF", size: 12)
+        label.font = .caption
 		label.textColor = DesignSystemAsset.Colors.black.color
 		label.textAlignment = .center
 		return label
@@ -91,6 +91,7 @@ final class LoginButtonsView: BaseView {
 		config.title = "오늘의 글 미리보기"
 		config.baseForegroundColor = DesignSystemAsset.Colors.grey200.color
 		button.configuration = config
+        // TODO: JejuMyeongjoOTF, size: 12
 		return button
 	}()
 	

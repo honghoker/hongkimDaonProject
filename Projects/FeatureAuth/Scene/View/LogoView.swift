@@ -36,7 +36,7 @@ final class LogoView: BaseView {
 	private let titleLabel: UILabel = {
 		let label = UILabel()
 		label.text = "다온"
-		label.font = UIFont(name: "JejuMyeongjoOTF", size: 36)
+        label.font = .h1
 		label.textColor = DesignSystemAsset.Colors.black.color
 		return label
 	}()
@@ -44,7 +44,7 @@ final class LogoView: BaseView {
 	private let subtitleLabel: UILabel = {
 		let label = UILabel()
 		label.text = "좋은 일이 다오는,"
-		label.font = UIFont(name: "JejuMyeongjoOTF", size: 20)
+        label.font = .h2
 		label.textColor = DesignSystemAsset.Colors.black.color
 		return label
 	}()
