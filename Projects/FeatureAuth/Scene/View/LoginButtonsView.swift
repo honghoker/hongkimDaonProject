@@ -15,7 +15,7 @@ import SnapKit
 
 final class LoginButtonsView: BaseView {
 	
-	//MARK: - Life Cycle
+	// MARK: - Life Cycle
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -25,7 +25,7 @@ final class LoginButtonsView: BaseView {
 		fatalError("init(coder:) has not been implemented")
 	}
 	
-	//MARK: - Views
+	// MARK: - Views
 	
 	private let dividerStackView: UIStackView = {
 		let stackView = UIStackView()
@@ -51,7 +51,7 @@ final class LoginButtonsView: BaseView {
 	private let snsLoginLabel: UILabel = {
 		let label = UILabel()
 		label.text = "SNS 로그인"
-		label.font = UIFont(name: "JejuMyeongjoOTF", size: 12)
+        label.font = .caption
 		label.textColor = DesignSystemAsset.Colors.black.color
 		label.textAlignment = .center
 		return label
@@ -91,10 +91,11 @@ final class LoginButtonsView: BaseView {
 		config.title = "오늘의 글 미리보기"
 		config.baseForegroundColor = DesignSystemAsset.Colors.grey200.color
 		button.configuration = config
+        // TODO: JejuMyeongjoOTF, size: 12
 		return button
 	}()
 	
-	//MARK: - UI
+	// MARK: - UI
 	
 	override func addView() {
 		[
@@ -160,7 +161,7 @@ final class LoginButtonsView: BaseView {
 	override func setupView() { }
 }
 
-//MARK: - Action
+// MARK: - Action
 
 private extension LoginButtonsView {
 	func didTapGoogleLoginButton(_ action: UIAction) {
