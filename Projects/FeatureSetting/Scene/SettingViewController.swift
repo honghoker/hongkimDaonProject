@@ -85,10 +85,12 @@ public class SettingViewController: BaseViewController {
         backButton.snp.makeConstraints {
             $0.top.left.equalTo(view.safeAreaLayoutGuide).inset(16)
         }
+      
         divider.snp.makeConstraints {
             $0.width.equalTo(10)
             $0.height.equalTo(1)
         }
+      
         verticalStackView.snp.makeConstraints {
             $0.center.equalToSuperview()
         }
@@ -126,15 +128,19 @@ extension SettingViewController {
     private func didTapBackButton(_ action: UIAction) {
         print("didTapBackButton")
     }
+  
     private func didTapChangeDarkMode(_ action: UIAction) {
         print("didTapChangeDarkMode")
     }
+  
     private func didTapNotificationSetting(_ action: UIAction) {
         print("didTapNotificationSetting")
     }
+  
     private func didTapLogout(_ action: UIAction) {
         print("didTapLogout")
     }
+  
     private func didTapWithdrawal(_ action: UIAction) {
         print("didTapWithdrawal")
     }
